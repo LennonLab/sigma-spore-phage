@@ -1,5 +1,6 @@
 # data
 data/*_faa/
+data/hsearch_results/
 
 # History files
 .Rhistory
