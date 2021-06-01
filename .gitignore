@@ -1,6 +1,7 @@
 # data
 data/*_faa/
 data/hsearch_results/
+data/bacteria_features/
 
 # History files
 .Rhistory
