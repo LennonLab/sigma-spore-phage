@@ -1,0 +1,22 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02937            TIGR02937  151539.NP_076821.1   -            3.9e-11   33.8   0.1   4.5e-11   33.6   0.1   1.1   1   0   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02984            TIGR02984  151539.NP_076821.1   -            4.6e-08   23.8   0.0     5e-08   23.6   0.0   1.1   1   0   0   1   1   1   1 Sig-70_plancto1: RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1
+TIGR02985            TIGR02985  151539.NP_076821.1   -              5e-07   21.0   0.1   5.7e-07   20.8   0.1   1.1   1   0   0   1   1   1   1 Sig70_bacteroi1: RNA polymerase sigma-70 factor, Bacteroides expansion family 1
+TIGR03001            TIGR03001  151539.NP_076821.1   -            3.3e-06   17.5   0.1   3.8e-06   17.3   0.1   1.1   1   0   0   1   1   1   1 Sig-70_gmx1: RNA polymerase sigma-70 factor, Myxococcales family 1
+TIGR02954            TIGR02954  151539.NP_076821.1   -            3.9e-06   17.6   0.1   4.4e-06   17.5   0.1   1.1   1   0   0   1   1   1   1 Sig70_famx3: RNA polymerase sigma-70 factor, TIGR02954 family
+TIGR02393            TIGR02393  151539.NP_076821.1   -            4.4e-05   14.1   0.3   5.3e-05   13.8   0.3   1.1   1   0   0   1   1   1   1 RpoD_Cterm: RNA polymerase sigma factor RpoD
+TIGR02479            TIGR02479  151539.NP_076821.1   -              5e-05   14.0   0.1   6.8e-05   13.6   0.1   1.4   1   1   0   1   1   1   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+TIGR02980            TIGR02980  151539.NP_076821.1   -            5.5e-05   13.9   0.1   6.7e-05   13.6   0.1   1.2   1   0   0   1   1   1   1 SigBFG: RNA polymerase sigma-70 factor, sigma-B/F/G subfamily
+TIGR02989            TIGR02989  151539.NP_076821.1   -            0.00015   12.7   0.0   0.00016   12.6   0.0   1.2   1   0   0   1   1   1   1 Sig-70_gvs1: RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/NP_076821.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/NP_076821.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/NP_076821.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:06:32 2020
+# [ok]

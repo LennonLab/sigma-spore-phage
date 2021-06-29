@@ -1,0 +1,570 @@
+header,taxon,protein,sp,description,vog
+658401.YP_003084147.1 type III RNAP sigma factor [Cyanophage PSS2],658401,YP_003084147.1,Cyanophage PSS2, type III RNAP sigma factor,VOG26037
+753084.YP_004421531.1 RNA polymerase sigma factor SigF [Synechococcus phage S-CBS2],753084,YP_004421531.1,Synechococcus phage S-CBS2, RNA polymerase sigma factor SigF,VOG26037
+151538.NP_076779.1 sigma-70 family RNA polymerase sigma factor [Lactococcus phage bIL310],151538,NP_076779.1,Lactococcus phage bIL310, sigma-70 family RNA polymerase sigma factor,VOG20983
+151539.NP_076821.1 sigma-70 family RNA polymerase sigma factor [Lactococcus phage bIL312],151539,NP_076821.1,Lactococcus phage bIL312, sigma-70 family RNA polymerase sigma factor,VOG20983
+"1118063.YP_006560743.1 sigma70, RNA polymerase sigma factor, positive control factor Xpf (N-terminal region) [Staphylococcus phage SpaA1]",1118063,YP_006560743.1,Staphylococcus phage SpaA1," sigma70, RNA polymerase sigma factor, positive control factor Xpf (N-terminal region)",VOG18372
+"1118064.YP_009829866.1 sigma70, RNA polymerase sigma factor, positive control factor Xpf (N-terminal region) [Bacillus phage BceA1]",1118064,YP_009829866.1,Bacillus phage BceA1," sigma70, RNA polymerase sigma factor, positive control factor Xpf (N-terminal region)",VOG18372
+2182400.YP_009801930.1 RNA polymerase sigma factor [Microbacterium phage Paschalis],2182400,YP_009801930.1,Microbacterium phage Paschalis, RNA polymerase sigma factor,VOG16626
+2201436.YP_009802753.1 RNA polymerase sigma factor [Microbacterium phage MementoMori],2201436,YP_009802753.1,Microbacterium phage MementoMori, RNA polymerase sigma factor,VOG16626
+2201437.YP_009802853.1 hypothetical protein [Microbacterium phage Metamorphoo],2201437,YP_009802853.1,Microbacterium phage Metamorphoo, hypothetical protein,VOG16626
+2201441.YP_009803285.1 RNA polymerase sigma factor [Microbacterium phage Quhwah],2201441,YP_009803285.1,Microbacterium phage Quhwah, RNA polymerase sigma factor,VOG16626
+2201442.YP_009802953.1 RNA polymerase sigma factor [Microbacterium phage RobsFeet],2201442,YP_009802953.1,Microbacterium phage RobsFeet, RNA polymerase sigma factor,VOG16626
+2283289.YP_009807106.1 RNA polymerase sigma factor [Microbacterium phage KaiHaiDragon],2283289,YP_009807106.1,Microbacterium phage KaiHaiDragon, RNA polymerase sigma factor,VOG16626
+2530118.YP_009820323.1 RNA polymerase sigma factor [Microbacterium phage Fireman],2530118,YP_009820323.1,Microbacterium phage Fireman, RNA polymerase sigma factor,VOG16626
+1406790.YP_008771927.1 ECF subfamily RNA polymerase sigma-24 factor [Bacillus phage Slash],1406790,YP_008771927.1,Bacillus phage Slash, ECF subfamily RNA polymerase sigma-24 factor,VOG12906
+1406792.YP_008770739.1 RNA polymerase sigma factor [Bacillus phage Staley],1406792,YP_008770739.1,Bacillus phage Staley, RNA polymerase sigma factor,VOG12906
+1610832.YP_009203629.1 RNA polymerase sigma factor [Bacillus phage Stahl],1610832,YP_009203629.1,Bacillus phage Stahl, RNA polymerase sigma factor,VOG12906
+1610833.YP_009196909.1 RNA polymerase sigma factor [Bacillus phage Stills],1610833,YP_009196909.1,Bacillus phage Stills, RNA polymerase sigma factor,VOG12906
+10685.YP_002300398.1 gp28 [Bacillus virus SPO1],10685,YP_002300398.1,Bacillus virus SPO1, gp28,VOG07471
+1296655.YP_009215922.1 middle-gene-specific sigma factor [Bacillus phage JL],1296655,YP_009215922.1,Bacillus phage JL, middle-gene-specific sigma factor,VOG07471
+1296656.YP_009216142.1 hypothetical protein [Bacillus phage Shanette],1296656,YP_009216142.1,Bacillus phage Shanette, hypothetical protein,VOG07471
+1391188.YP_009099117.1 putative sigma factor [Bacillus phage CP-51],1391188,YP_009099117.1,Bacillus phage CP-51, putative sigma factor,VOG07471
+1406783.YP_008770058.1 RNA polymerase sigma factor [Bacillus phage CampHawk],1406783,YP_008770058.1,Bacillus phage CampHawk, RNA polymerase sigma factor,VOG07471
+941058.YP_007003440.1 hypothetical protein [Bacillus phage SP-10],941058,YP_007003440.1,Bacillus phage SP-10, hypothetical protein,VOG07471
+1002725.YP_004414965.1 RNA polymerase sigma factor [Shigella phage Shfl2],1002725,YP_004414965.1,Shigella phage Shfl2, RNA polymerase sigma factor,VOG05673
+1006972.YP_009168466.1 gp55 T4-like sigma factor involved in late transcription [Campylobacter virus IBB35],1006972,YP_009168466.1,Campylobacter virus IBB35, gp55 T4-like sigma factor involved in late transcription,VOG05673
+1026955.YP_004508483.1 late transcription sigma factor [Synechococcus phage S-CRM01],1026955,YP_004508483.1,Synechococcus phage S-CRM01, late transcription sigma factor,VOG05673
+1048189.YP_009806402.1 sigma factor for late transcription [Cyanophage S-TIM4],1048189,YP_009806402.1,Cyanophage S-TIM4, sigma factor for late transcription,VOG05673
+1049283.YP_006488835.1 sigma factor [Acinetobacter phage ZZ1],1049283,YP_006488835.1,Acinetobacter phage ZZ1, sigma factor,VOG05673
+1052121.YP_007004110.1 sigma factor for T4 late transcription [Escherichia phage Bp7],1052121,YP_007004110.1,Escherichia phage Bp7, sigma factor for T4 late transcription,VOG05673
+1054480.YP_007004807.1 RNA polymerase sigma factor [Escherichia phage wV7],1054480,YP_007004807.1,Escherichia phage wV7, RNA polymerase sigma factor,VOG05673
+1054834.YP_007004448.1 RNA polymerase sigma factor [Escherichia phage ime09],1054834,YP_007004448.1,Escherichia phage ime09, RNA polymerase sigma factor,VOG05673
+10665.NP_049679.1 RNA polymerase sigma factor [Escherichia virus T4 (T4)],10665,NP_049679.1,Escherichia virus T4 (T4), RNA polymerase sigma factor,VOG05673
+10693.YP_002854023.1 RNA polymerase sigma factor [Enterobacteria phage RB51],10693,YP_002854023.1,Enterobacteria phage RB51, RNA polymerase sigma factor,VOG05673
+1079998.YP_007001843.1 gp55 late sigma factor [Synechococcus phage ACG-2014c],1079998,YP_007001843.1,Synechococcus phage ACG-2014c, gp55 late sigma factor,VOG05673
+1079999.YP_007001632.1 late transcription gp55 sigma factor [Synechococcus phage metaG-MbCM1],1079999,YP_007001632.1,Synechococcus phage metaG-MbCM1, late transcription gp55 sigma factor,VOG05673
+1080800.YP_004895268.1 T4-like sigma transcription factor [Salmonella phage SFP10],1080800,YP_004895268.1,Salmonella phage SFP10, T4-like sigma transcription factor,VOG05673
+1087482.YP_007501096.1 sigma factor for late transcription [Salmonella phage vB_SenM-S16],1087482,YP_007501096.1,Salmonella phage vB_SenM-S16, sigma factor for late transcription,VOG05673
+1091052.YP_007237413.1 putative sigma factor late transcription gp55 [Dickeya virus Limestone],1091052,YP_007237413.1,Dickeya virus Limestone, putative sigma factor late transcription gp55,VOG05673
+1108865.YP_007008061.1 sigma factor for late transcription [Salmonella phage Sh19],1108865,YP_007008061.1,Salmonella phage Sh19, sigma factor for late transcription,VOG05673
+1110702.YP_004956929.1 putative sigma factor for late transcription [Campylobacter virus CPX],1110702,YP_004956929.1,Campylobacter virus CPX, putative sigma factor for late transcription,VOG05673
+1129147.YP_007348689.1 sigma factor for late transcription [Klebsiella phage KP27],1129147,YP_007348689.1,Klebsiella phage KP27, sigma factor for late transcription,VOG05673
+1141136.YP_006987343.1 sigma factor for late transcription [Cronobacter phage vB_CsaM_GAP32],1141136,YP_006987343.1,Cronobacter phage vB_CsaM_GAP32, sigma factor for late transcription,VOG05673
+1141138.YP_006986326.1 sigma factor for late transcription [Cronobacter phage vB_CsaM_GAP161],1141138,YP_006986326.1,Cronobacter phage vB_CsaM_GAP161, sigma factor for late transcription,VOG05673
+1141141.YP_006986618.1 sigma factor recognition late T4 promoter [Escherichia phage vB_EcoM_ACG-C40],1141141,YP_006986618.1,Escherichia phage vB_EcoM_ACG-C40, sigma factor recognition late T4 promoter,VOG05673
+1147094.YP_007007237.1 RNA polymerase sigma factor [Klebsiella phage vB_KleM_RaK2],1147094,YP_007007237.1,Klebsiella phage vB_KleM_RaK2, RNA polymerase sigma factor,VOG05673
+115987.NP_932402.1 RNA polymerase sigma factor [Aeromonas virus 44RR2],115987,NP_932402.1,Aeromonas virus 44RR2, RNA polymerase sigma factor,VOG05673
+115991.YP_239026.1 RNA polymerase sigma factor [Escherichia virus RB43 (RB43)],115991,YP_239026.1,Escherichia virus RB43 (RB43), RNA polymerase sigma factor,VOG05673
+115992.YP_008125262.1 sigma factor for late transcription [Vibrio phage nt-1 (nt-1)],115992,YP_008125262.1,Vibrio phage nt-1 (nt-1), sigma factor for late transcription,VOG05673
+1190451.YP_007005152.1 putative sigma factor for T4-like late transcription (T4 gp55-like) [Campylobacter virus CP21],1190451,YP_007005152.1,Campylobacter virus CP21, putative sigma factor for T4-like late transcription (T4 gp55-like),VOG05673
+1198013.YP_007010738.1 sigma factor [Aeromonas phage Aes508],1198013,YP_007010738.1,Aeromonas phage Aes508, sigma factor,VOG05673
+1198014.YP_007677765.1 RNA polymerase sigma factor [Aeromonas phage Aes012],1198014,YP_007677765.1,Aeromonas phage Aes012, RNA polymerase sigma factor,VOG05673
+1204516.YP_007010288.1 RNA polymerase sigma factor [Aeromonas phage CC2],1204516,YP_007010288.1,Aeromonas phage CC2, RNA polymerase sigma factor,VOG05673
+1204522.YP_009102539.1 RNA polymerase sigma factor [Escherichia phage ECML-134],1204522,YP_009102539.1,Escherichia phage ECML-134, RNA polymerase sigma factor,VOG05673
+1204523.YP_009101582.1 hypothetical protein [Escherichia phage ECML-4],1204523,YP_009101582.1,Escherichia phage ECML-4, hypothetical protein,VOG05673
+1204528.YP_007236163.1 hypothetical protein [Salmonella phage SKML-39],1204528,YP_007236163.1,Salmonella phage SKML-39, hypothetical protein,VOG05673
+1204530.YP_009617685.1 hypothetical protein [Salmonella phage STML-13-1],1204530,YP_009617685.1,Salmonella phage STML-13-1, hypothetical protein,VOG05673
+1204531.YP_009148048.1 RNA polymerase sigma factor for late transcription [Salmonella phage STML-198],1204531,YP_009148048.1,Salmonella phage STML-198, RNA polymerase sigma factor for late transcription,VOG05673
+1206558.YP_007235901.1 T4-like phage RNA polymerase sigma factor for late transcription [Yersinia phage phiR1-RT],1206558,YP_007235901.1,Yersinia phage phiR1-RT, T4-like phage RNA polymerase sigma factor for late transcription,VOG05673
+1206560.YP_009149307.1 RNA polymerase sigma factor [Yersinia phage phiD1],1206560,YP_009149307.1,Yersinia phage phiD1, RNA polymerase sigma factor,VOG05673
+1211280.YP_009217495.1 T4-like phage RNA polymerase sigma factor forlate transcription [Stenotrophomonas phage IME13],1211280,YP_009217495.1,Stenotrophomonas phage IME13, T4-like phage RNA polymerase sigma factor forlate transcription,VOG05673
+1222338.YP_009118726.1 Putative sigma factor for T4 late transcription [Enterobacteria phage GEC-3S],1222338,YP_009118726.1,Enterobacteria phage GEC-3S, Putative sigma factor for T4 late transcription,VOG05673
+1229752.YP_006908182.1 sigma factor for late transcription [Campylobacter phage CP30A],1229752,YP_006908182.1,Campylobacter phage CP30A, sigma factor for late transcription,VOG05673
+12353.NP_861761.1 RNA polymerase sigma factor [Escherichia phage RB69 (RB69)],12353,NP_861761.1,Escherichia phage RB69 (RB69), RNA polymerase sigma factor,VOG05673
+1262513.YP_007349087.1 sigma factor for late transcription [Serratia phage phiMAM1],1262513,YP_007349087.1,Serratia phage phiMAM1, sigma factor for late transcription,VOG05673
+1262539.YP_009006358.1 RNA polymerase sigma factor [Vibrio phage VH7D],1262539,YP_009006358.1,Vibrio phage VH7D, RNA polymerase sigma factor,VOG05673
+1273738.YP_009150844.1 RNA polymerase sigma factor [Escherichia phage PBECO4],1273738,YP_009150844.1,Escherichia phage PBECO4, RNA polymerase sigma factor,VOG05673
+1278402.YP_009779106.1 RNA polymerase sigma factor for late transcription [Cyanophage S-RIM12],1278402,YP_009779106.1,Cyanophage S-RIM12, RNA polymerase sigma factor for late transcription,VOG05673
+1278479.YP_009301643.1 RNA polymerase sigma factor for latetranscription [Cyanophage S-RIM32],1278479,YP_009301643.1,Cyanophage S-RIM32, RNA polymerase sigma factor for latetranscription,VOG05673
+1278485.YP_009783274.1 RNA polymerase sigma factor for late transcription [Cyanophage S-RIM44],1278485,YP_009783274.1,Cyanophage S-RIM44, RNA polymerase sigma factor for late transcription,VOG05673
+1283076.YP_007517965.1 sigma factor for late transcription [Pelagibacter phage HTVC008M],1283076,YP_007517965.1,Pelagibacter phage HTVC008M, sigma factor for late transcription,VOG05673
+1307804.YP_008060575.1 sigma factor for late transcription [Escherichia phage Lw1],1307804,YP_008060575.1,Escherichia phage Lw1, sigma factor for late transcription,VOG05673
+1327935.YP_009196622.1 putative RNA polymerase sigma factor [Cronobacter phage S13],1327935,YP_009196622.1,Cronobacter phage S13, putative RNA polymerase sigma factor,VOG05673
+1340810.YP_009008257.1 sigma factor [Synechococcus phage ACG-2014h],1340810,YP_009008257.1,Synechococcus phage ACG-2014h, sigma factor,VOG05673
+1340812.YP_009007984.1 sigma factor [Synechococcus phage S-MbCM100],1340812,YP_009007984.1,Synechococcus phage S-MbCM100, sigma factor,VOG05673
+1351740.YP_009153665.1 RNA polymerase sigma factor [Yersinia phage PST],1351740,YP_009153665.1,Yersinia phage PST, RNA polymerase sigma factor,VOG05673
+1357423.YP_009142961.1 sigma factor for late transcription [Sinorhizobium phage phiM12],1357423,YP_009142961.1,Sinorhizobium phage phiM12, sigma factor for late transcription,VOG05673
+1357714.YP_009098909.1 RNA polymerase sigma factor for late transcription [Caulobacter phage Cr30],1357714,YP_009098909.1,Caulobacter phage Cr30, RNA polymerase sigma factor for late transcription,VOG05673
+1391224.YP_009056654.1 sigma factor for late transcription [Escherichia phage vB_EcoM_PhAPEC2],1391224,YP_009056654.1,Escherichia phage vB_EcoM_PhAPEC2, sigma factor for late transcription,VOG05673
+1406794.YP_008771721.1 RNA polymerase sigma factor [Salmonella phage Marshall],1406794,YP_008771721.1,Salmonella phage Marshall, RNA polymerase sigma factor,VOG05673
+1406795.YP_008770930.1 RNA polymerase sigma factor [Salmonella phage Maynard],1406795,YP_008770930.1,Salmonella phage Maynard, RNA polymerase sigma factor,VOG05673
+1429794.YP_009211489.1 RNA polymerase sigma factor for late transcription [Pectobacterium bacteriophage PM2],1429794,YP_009211489.1,Pectobacterium bacteriophage PM2, RNA polymerase sigma factor for late transcription,VOG05673
+1430444.YP_009037438.1 RNA polymerase sigma factor [Escherichia phage vB_EcoM_JS09],1430444,YP_009037438.1,Escherichia phage vB_EcoM_JS09, RNA polymerase sigma factor,VOG05673
+1434323.YP_009148512.1 RNA polymerase sigma factor [Escherichia phage HY01],1434323,YP_009148512.1,Escherichia phage HY01, RNA polymerase sigma factor,VOG05673
+1445860.YP_009126263.1 sigma factor for late transcription [Salmonella phage STP4-a],1445860,YP_009126263.1,Salmonella phage STP4-a, sigma factor for late transcription,VOG05673
+1446492.YP_009030521.1 sigma factor for late transcription [Salmonella phage vB-SalM-SJ3],1446492,YP_009030521.1,Salmonella phage vB-SalM-SJ3, sigma factor for late transcription,VOG05673
+1455074.YP_009005322.1 RNA polymerase sigma factor [Enterobacter phage PG7],1455074,YP_009005322.1,Enterobacter phage PG7, RNA polymerase sigma factor,VOG05673
+1458849.YP_009021270.1 sigma factor for late transcript [Salmonella phage vB-SalM-SJ2],1458849,YP_009021270.1,Salmonella phage vB-SalM-SJ2, sigma factor for late transcript,VOG05673
+1477406.YP_009102896.1 putative sigma factor involved in late transcription [Dickeya phage RC-2014],1477406,YP_009102896.1,Dickeya phage RC-2014, putative sigma factor involved in late transcription,VOG05673
+1481112.YP_009030113.1 sigma factor for T4 late transcription [Serratia phage PS2],1481112,YP_009030113.1,Serratia phage PS2, sigma factor for T4 late transcription,VOG05673
+1493508.YP_009140691.1 late transcription sigma factor [Synechococcus phage ACG-2014b],1493508,YP_009140691.1,Synechococcus phage ACG-2014b, late transcription sigma factor,VOG05673
+1493509.YP_009133451.1 late transcription sigma factor [Synechococcus phage ACG-2014d],1493509,YP_009133451.1,Synechococcus phage ACG-2014d, late transcription sigma factor,VOG05673
+1493510.YP_009134623.1 late transcription sigma factor [Synechococcus phage ACG-2014e],1493510,YP_009134623.1,Synechococcus phage ACG-2014e, late transcription sigma factor,VOG05673
+1493511.YP_009134362.1 late transcription sigma factor [Synechococcus phage ACG-2014f],1493511,YP_009134362.1,Synechococcus phage ACG-2014f, late transcription sigma factor,VOG05673
+1493512.YP_009133677.1 late transcription sigma factor [Synechococcus phage ACG-2014g],1493512,YP_009133677.1,Synechococcus phage ACG-2014g, late transcription sigma factor,VOG05673
+1493513.YP_009140904.1 late transcription sigma factor [Synechococcus phage ACG-2014i],1493513,YP_009140904.1,Synechococcus phage ACG-2014i, late transcription sigma factor,VOG05673
+1493514.YP_009134113.1 late transcription sigma factor [Synechococcus phage ACG-2014j],1493514,YP_009134113.1,Synechococcus phage ACG-2014j, late transcription sigma factor,VOG05673
+1495285.YP_009030673.1 sigma factor [Escherichia phage vB_EcoM_112],1495285,YP_009030673.1,Escherichia phage vB_EcoM_112, sigma factor,VOG05673
+1508678.YP_009592897.1 hypothetical protein [Escherichia coli O157 typing phage 3],1508678,YP_009592897.1,Escherichia coli O157 typing phage 3, hypothetical protein,VOG05673
+1508681.YP_009593078.1 hypothetical protein [Escherichia coli O157 typing phage 6],1508681,YP_009593078.1,Escherichia coli O157 typing phage 6, hypothetical protein,VOG05673
+1527524.YP_009097653.1 sigma factor [Citrobacter phage Miller],1527524,YP_009097653.1,Citrobacter phage Miller, sigma factor,VOG05673
+1527770.YP_009099933.1 putative RNA polymerase sigma factor [Rhizobium phage vB_RleM_P10VF],1527770,YP_009099933.1,Rhizobium phage vB_RleM_P10VF, putative RNA polymerase sigma factor,VOG05673
+1540095.YP_009146498.1 sigma factor for late transcription [Citrobacter phage Moon],1540095,YP_009146498.1,Citrobacter phage Moon, sigma factor for late transcription,VOG05673
+1541686.YP_009321607.1 sigma factor [Campylobacter phage PC14],1541686,YP_009321607.1,Campylobacter phage PC14, sigma factor,VOG05673
+1541825.YP_009100610.1 late sigma transcription factor [Shigella phage Shf125875],1541825,YP_009100610.1,Shigella phage Shf125875, late sigma transcription factor,VOG05673
+1542477.YP_009213628.1 putative late sigma factor [Prochlorococcus phage P-TIM68],1542477,YP_009213628.1,Prochlorococcus phage P-TIM68, putative late sigma factor,VOG05673
+1551641.YP_009110883.1 RNA polymerase sigma factor [Shigella phage pSs-1],1551641,YP_009110883.1,Shigella phage pSs-1, RNA polymerase sigma factor,VOG05673
+1555202.YP_009102178.1 RNA polymerase sigma factor [Escherichia phage 121Q],1555202,YP_009102178.1,Escherichia phage 121Q, RNA polymerase sigma factor,VOG05673
+1564096.YP_009147586.1 sigma factor involved in late transcription [Erwinia phage phiEa2809],1564096,YP_009147586.1,Erwinia phage phiEa2809, sigma factor involved in late transcription,VOG05673
+1567026.YP_009205757.1 RNA polymerase sigma factor [Escherichia phage vb_EcoM-VR5],1567026,YP_009205757.1,Escherichia phage vb_EcoM-VR5, RNA polymerase sigma factor,VOG05673
+1567027.YP_009207243.1 RNA polymerase sigma factor [Escherichia phage vB_EcoM_VR20],1567027,YP_009207243.1,Escherichia phage vB_EcoM_VR20, RNA polymerase sigma factor,VOG05673
+1567028.YP_009209807.1 RNA polymerase sigma factor [Escherichia phage vB_EcoM_VR25],1567028,YP_009209807.1,Escherichia phage vB_EcoM_VR25, RNA polymerase sigma factor,VOG05673
+1567029.YP_009213900.1 RNA polymerase sigma factor [Escherichia phage vB_EcoM_VR26],1567029,YP_009213900.1,Escherichia phage vB_EcoM_VR26, RNA polymerase sigma factor,VOG05673
+1589265.YP_009200333.1 RNA polymerase sigma factor [Yersinia phage vB_YenM_TG1],1589265,YP_009200333.1,Yersinia phage vB_YenM_TG1, RNA polymerase sigma factor,VOG05673
+1589733.YP_009188220.1 sigma factor for late transcription [Cyanophage P-TIM40],1589733,YP_009188220.1,Cyanophage P-TIM40, sigma factor for late transcription,VOG05673
+1608310.YP_009190224.1 sigma factor for T4 late transcription [Edwardsiella phage PEi20],1608310,YP_009190224.1,Edwardsiella phage PEi20, sigma factor for T4 late transcription,VOG05673
+1610855.YP_009201300.1 RNA polymerase sigma factor [Vibrio phage ValKK3],1610855,YP_009201300.1,Vibrio phage ValKK3, RNA polymerase sigma factor,VOG05673
+1636182.YP_009189635.1 sigma factor for late transcription [Sinorhizobium phage phiM9],1636182,YP_009189635.1,Sinorhizobium phage phiM9, sigma factor for late transcription,VOG05673
+1636250.YP_009195474.1 sigma factor for late transcription [Proteus phage vB_PmiM_Pm5461],1636250,YP_009195474.1,Proteus phage vB_PmiM_Pm5461, sigma factor for late transcription,VOG05673
+1647403.YP_009601160.1 sigma factor for late transcription [Sinorhizobium phage phiM7],1647403,YP_009601160.1,Sinorhizobium phage phiM7, sigma factor for late transcription,VOG05673
+1647405.YP_009212292.1 sigma factor for late transcription [Sinorhizobium phage phiN3],1647405,YP_009212292.1,Sinorhizobium phage phiN3, sigma factor for late transcription,VOG05673
+1654891.YP_009220891.1 sigma factor involved in late transcription [Salmonella phage 38],1654891,YP_009220891.1,Salmonella phage 38, sigma factor involved in late transcription,VOG05673
+1654926.YP_009284124.1 RNA polymerase sigma factor [Escherichia phage HY03],1654926,YP_009284124.1,Escherichia phage HY03, RNA polymerase sigma factor,VOG05673
+1654928.YP_009289489.1 sigma factor for late transcription [Klebsiella phage PKO111],1654928,YP_009289489.1,Klebsiella phage PKO111, sigma factor for late transcription,VOG05673
+1655305.YP_009225195.1 RNA polymerase sigma factor [Escherichia phage APCEc01],1655305,YP_009225195.1,Escherichia phage APCEc01, RNA polymerase sigma factor,VOG05673
+1673871.YP_009202796.1 hypothetical protein [Escherichia phage QL01],1673871,YP_009202796.1,Escherichia phage QL01, hypothetical protein,VOG05673
+1673887.YP_009218682.1 RNA polymerase sigma factor for late transcription [Citrobacter phage IME-CF2],1673887,YP_009218682.1,Citrobacter phage IME-CF2, RNA polymerase sigma factor for late transcription,VOG05673
+1675602.YP_009203779.1 sigma factor for late transcription [Citrobacter phage Merlin],1675602,YP_009203779.1,Citrobacter phage Merlin, sigma factor for late transcription,VOG05673
+1675607.YP_009194295.1 sigma factor [Klebsiella phage Matisse],1675607,YP_009194295.1,Klebsiella phage Matisse, sigma factor,VOG05673
+1675608.YP_009607247.1 hypothetical protein [Klebsiella phage Miro],1675608,YP_009607247.1,Klebsiella phage Miro, hypothetical protein,VOG05673
+1682394.YP_009606966.1 RNA polymerase sigma factor [Enterobacter phage phiEap-3],1682394,YP_009606966.1,Enterobacter phage phiEap-3, RNA polymerase sigma factor,VOG05673
+1698360.YP_009190621.1 sigma factor for late transcription [Klebsiella phage JD18],1698360,YP_009190621.1,Klebsiella phage JD18, sigma factor for late transcription,VOG05673
+1701810.YP_009194869.1 sigma factor [Citrobacter phage Margaery],1701810,YP_009194869.1,Citrobacter phage Margaery, sigma factor,VOG05673
+1720494.YP_009210255.1 RNA polymerase sigma factor [Escherichia phage slur02],1720494,YP_009210255.1,Escherichia phage slur02, RNA polymerase sigma factor,VOG05673
+1720496.YP_009625183.1 RNA polymerase sigma factor [Escherichia phage slur03],1720496,YP_009625183.1,Escherichia phage slur03, RNA polymerase sigma factor,VOG05673
+1720497.YP_009625286.1 RNA polymerase sigma factor [Escherichia phage slur04],1720497,YP_009625286.1,Escherichia phage slur04, RNA polymerase sigma factor,VOG05673
+1720500.YP_009197387.1 RNA polymerase sigma factor [Escherichia phage slur07],1720500,YP_009197387.1,Escherichia phage slur07, RNA polymerase sigma factor,VOG05673
+1720504.YP_009180839.1 RNA polymerase sigma factor [Escherichia phage slur14],1720504,YP_009180839.1,Escherichia phage slur14, RNA polymerase sigma factor,VOG05673
+1785960.YP_009277201.1 hypothetical protein [Ralstonia phage RSP15],1785960,YP_009277201.1,Ralstonia phage RSP15, hypothetical protein,VOG05673
+1792242.YP_009594784.1 sigma factor for late transcription [Pectobacterium phage CBB],1792242,YP_009594784.1,Pectobacterium phage CBB, sigma factor for late transcription,VOG05673
+1815521.YP_009325116.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-WAM1],1815521,YP_009325116.1,Synechococcus phage S-WAM1, RNA polymerase sigma factor for late transcription,VOG05673
+1815522.YP_009324296.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-WAM2],1815522,YP_009324296.1,Synechococcus phage S-WAM2, RNA polymerase sigma factor for late transcription,VOG05673
+1815590.YP_009290333.1 RNA polymerase sigma factor [Escherichia phage vB_EcoM-UFV13],1815590,YP_009290333.1,Escherichia phage vB_EcoM-UFV13, RNA polymerase sigma factor,VOG05673
+1815630.YP_009595551.1 hypothetical protein [Pseudomonas phage pf16],1815630,YP_009595551.1,Pseudomonas phage pf16, hypothetical protein,VOG05673
+1815631.YP_009286421.1 sigma factor for late transcription [Salmonella phage vB_SnwM_CGG4-1],1815631,YP_009286421.1,Salmonella phage vB_SnwM_CGG4-1, sigma factor for late transcription,VOG05673
+1837867.YP_009281405.1 RNA polymerase sigma factor [Escherichia phage UFV-AREG1],1837867,YP_009281405.1,Escherichia phage UFV-AREG1, RNA polymerase sigma factor,VOG05673
+1837930.YP_009323960.1 hypothetical protein [Escherichia phage MX01],1837930,YP_009323960.1,Escherichia phage MX01, hypothetical protein,VOG05673
+1837931.YP_009323265.1 hypothetical protein [Escherichia phage WG01],1837931,YP_009323265.1,Escherichia phage WG01, hypothetical protein,VOG05673
+1852625.YP_009288735.1 RNA polymerase subunit sigma [Klebsiella phage vB_KpnM_KpV477],1852625,YP_009288735.1,Klebsiella phage vB_KpnM_KpV477, RNA polymerase subunit sigma,VOG05673
+1852628.YP_009279908.1 sigma factor for late transcription [Morganella phage vB_MmoM_MP1],1852628,YP_009279908.1,Morganella phage vB_MmoM_MP1, sigma factor for late transcription,VOG05673
+1852640.YP_009616079.1 sigma factor involved in late transcription [Serratia phage vB-Sru-IME250],1852640,YP_009616079.1,Serratia phage vB-Sru-IME250, sigma factor involved in late transcription,VOG05673
+1863007.YP_009288434.1 RNA polymerase sigma factor [Shigella phage SHBML-50-1],1863007,YP_009288434.1,Shigella phage SHBML-50-1, RNA polymerase sigma factor,VOG05673
+1863008.YP_009277707.1 RNA polymerase sigma factor [Shigella phage SHFML-11],1863008,YP_009277707.1,Shigella phage SHFML-11, RNA polymerase sigma factor,VOG05673
+1863009.YP_009279059.1 RNA polymerase sigma factor [Shigella phage SHFML-26],1863009,YP_009279059.1,Shigella phage SHFML-26, RNA polymerase sigma factor,VOG05673
+1863011.YP_009289221.1 RNA polymerase sigma factor for late transcription [Shigella phage SHSML-52-1],1863011,YP_009289221.1,Shigella phage SHSML-52-1, RNA polymerase sigma factor for late transcription,VOG05673
+1868169.YP_009283912.1 sigma factor involved in late transcription [Salmonella phage GG32],1868169,YP_009283912.1,Salmonella phage GG32, sigma factor involved in late transcription,VOG05673
+1868654.YP_009293294.1 sigma factor [Salmonella phage vB-SalM-PM10],1868654,YP_009293294.1,Salmonella phage vB-SalM-PM10, sigma factor,VOG05673
+1871313.YP_009285588.1 sigma factor [Citrobacter phage vB_CfrM_CfP1],1871313,YP_009285588.1,Citrobacter phage vB_CfrM_CfP1, sigma factor,VOG05673
+1873954.YP_009831348.1 sigma factor for late transcription [Cronobacter phage vB_CsaM_leE],1873954,YP_009831348.1,Cronobacter phage vB_CsaM_leE, sigma factor for late transcription,VOG05673
+1880822.YP_009626287.1 T4-like phage RNA polymerase sigma factor for late transcription [Klebsiella phage PMBT1],1880822,YP_009626287.1,Klebsiella phage PMBT1, T4-like phage RNA polymerase sigma factor for late transcription,VOG05673
+1883365.YP_009321030.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-CAM22],1883365,YP_009321030.1,Synechococcus phage S-CAM22, RNA polymerase sigma factor for late transcription,VOG05673
+1883366.YP_009321412.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-CAM3],1883366,YP_009321412.1,Synechococcus phage S-CAM3, RNA polymerase sigma factor for late transcription,VOG05673
+1883367.YP_009320571.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-CAM4],1883367,YP_009320571.1,Synechococcus phage S-CAM4, RNA polymerase sigma factor for late transcription,VOG05673
+1883368.YP_009323086.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-CAM7],1883368,YP_009323086.1,Synechococcus phage S-CAM7, RNA polymerase sigma factor for late transcription,VOG05673
+1883369.YP_009322553.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-CAM9],1883369,YP_009322553.1,Synechococcus phage S-CAM9, RNA polymerase sigma factor for late transcription,VOG05673
+1885242.YP_009831068.1 sigma factor for late transcription [Cronobacter phage vB_CsaM_leB],1885242,YP_009831068.1,Cronobacter phage vB_CsaM_leB, sigma factor for late transcription,VOG05673
+1897742.YP_009875928.1 sigma factor involved in late transcription [Salmonella phage ST-W77],1897742,YP_009875928.1,Salmonella phage ST-W77, sigma factor involved in late transcription,VOG05673
+1904491.YP_009597179.1 putative sigma factor for late transcription [Campylobacter phage vB_CjeM_Los1],1904491,YP_009597179.1,Campylobacter phage vB_CjeM_Los1, putative sigma factor for late transcription,VOG05673
+1914209.YP_002854400.1 RNA polymerase sigma factor [Escherichia virus RB14],1914209,YP_002854400.1,Escherichia virus RB14, RNA polymerase sigma factor,VOG05673
+1958914.YP_009876541.1 sigma factor for late transcription [Salmonella phage BSP101],1958914,YP_009876541.1,Salmonella phage BSP101, sigma factor for late transcription,VOG05673
+1962671.YP_009599739.1 sigma factor for late transcription [Serratia phage BF],1962671,YP_009599739.1,Serratia phage BF, sigma factor for late transcription,VOG05673
+1978922.YP_009832989.1 sigma factor for late transcription [Aeromonas phage phiA8-29],1978922,YP_009832989.1,Aeromonas phage phiA8-29, sigma factor for late transcription,VOG05673
+1981499.YP_009602009.1 sigma factor [Escherichia phage ECD7],1981499,YP_009602009.1,Escherichia phage ECD7, sigma factor,VOG05673
+1987159.YP_004957797.1 gp55 sigma factor for late transcription [Escherichia virus CBA120],1987159,YP_004957797.1,Escherichia virus CBA120, gp55 sigma factor for late transcription,VOG05673
+1987993.YP_004327474.1 Gp55 sigma factor for late transcription [Salmonella virus ViI],1987993,YP_004327474.1,Salmonella virus ViI, Gp55 sigma factor for late transcription,VOG05673
+2005047.YP_009608337.1 RNA polymerase sigma factor [Escherichia phage ST0],2005047,YP_009608337.1,Escherichia phage ST0, RNA polymerase sigma factor,VOG05673
+2006941.YP_009609387.1 sigma factor for late transcription [Serratia phage CHI14],2006941,YP_009609387.1,Serratia phage CHI14, sigma factor for late transcription,VOG05673
+2010329.YP_009609705.1 hypothetical protein [Acidovorax phage ACP17],2010329,YP_009609705.1,Acidovorax phage ACP17, hypothetical protein,VOG05673
+2023996.YP_009791298.1 late transcription sigma factor [Synechococcus phage Bellamy],2023996,YP_009791298.1,Synechococcus phage Bellamy, late transcription sigma factor,VOG05673
+2024208.YP_009834328.1 thioredoxin [Aeromonas phage AS-zj],2024208,YP_009834328.1,Aeromonas phage AS-zj, thioredoxin,VOG05673
+2024264.YP_009612359.1 hypothetical protein [Agrobacterium phage Atu_ph07],2024264,YP_009612359.1,Agrobacterium phage Atu_ph07, hypothetical protein,VOG05673
+2024308.YP_009618877.1 RNA polymerase sigma factor [Shigella phage Sf21],2024308,YP_009618877.1,Shigella phage Sf21, RNA polymerase sigma factor,VOG05673
+2024309.YP_009619273.1 RNA polymerase sigma factor [Shigella phage Sf24],2024309,YP_009619273.1,Shigella phage Sf24, RNA polymerase sigma factor,VOG05673
+2024320.YP_009614988.1 RNA polymerase sigma factor [Shigella phage Sf22],2024320,YP_009614988.1,Shigella phage Sf22, RNA polymerase sigma factor,VOG05673
+2025818.YP_009877705.1 sigma factor for late transcription [Salmonella phage SP1],2025818,YP_009877705.1,Salmonella phage SP1, sigma factor for late transcription,VOG05673
+2026082.YP_009613141.1 RNA polymerase sigma factor [Aeromonas phage AS-gz],2026082,YP_009613141.1,Aeromonas phage AS-gz, RNA polymerase sigma factor,VOG05673
+2026113.YP_009834959.1 RNA polymerase sigma factor [Aeromonas phage AS-sw],2026113,YP_009834959.1,Aeromonas phage AS-sw, RNA polymerase sigma factor,VOG05673
+2041413.YP_009615540.1 RNA polymerase sigma factor [Salmonella phage Melville],2041413,YP_009615540.1,Salmonella phage Melville, RNA polymerase sigma factor,VOG05673
+2052742.YP_009623847.1 hypothetical protein [Yersinia phage fHe-Yen9-04],2052742,YP_009623847.1,Yersinia phage fHe-Yen9-04, hypothetical protein,VOG05673
+2053671.YP_009879516.1 sigma factor [Escherichia phage FEC14],2053671,YP_009879516.1,Escherichia phage FEC14, sigma factor,VOG05673
+2054272.YP_009796235.1 transcription sigma factor [Klebsiella phage May],2054272,YP_009796235.1,Klebsiella phage May, transcription sigma factor,VOG05673
+2054273.YP_009796457.1 transcription sigma factor [Klebsiella phage Menlow],2054273,YP_009796457.1,Klebsiella phage Menlow, transcription sigma factor,VOG05673
+2054274.YP_009879742.1 transcription sigma factor [Salmonella phage Mutine],2054274,YP_009879742.1,Salmonella phage Mutine, transcription sigma factor,VOG05673
+2070028.YP_009836761.1 RNA polymerase sigma factor for late transcription [Klebsiella phage vB_Kpn_F48],2070028,YP_009836761.1,Klebsiella phage vB_Kpn_F48, RNA polymerase sigma factor for late transcription,VOG05673
+2070200.YP_009880179.1 putative sigma factor for late transcription [Escherichia phage EP75],2070200,YP_009880179.1,Escherichia phage EP75, putative sigma factor for late transcription,VOG05673
+2079262.YP_009798968.1 RNA polymerase sigma factor [Klebsiella virus vB_KpnM_KpS110],2079262,YP_009798968.1,Klebsiella virus vB_KpnM_KpS110, RNA polymerase sigma factor,VOG05673
+2099338.YP_009837684.1 sigma factor [Erwinia phage vB_EamM-Bue1],2099338,YP_009837684.1,Erwinia phage vB_EamM-Bue1, sigma factor,VOG05673
+2137745.YP_009877076.1 Gp55 T4-like sigma factor involved in late transcription [Enterobacter phage EspM4VN],2137745,YP_009877076.1,Enterobacter phage EspM4VN, Gp55 T4-like sigma factor involved in late transcription,VOG05673
+2169687.YP_008532104.1 sigma factor for late transcription [Klebsiella virus 0507KN21],2169687,YP_008532104.1,Klebsiella virus 0507KN21, sigma factor for late transcription,VOG05673
+2178927.YP_009889738.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage AM101],2178927,YP_009889738.1,Acinetobacter phage AM101, RNA polymerase sigma factor for late transcription,VOG05673
+2231347.YP_009880663.1 sigma factor for late transcription [Salmonella phage S118],2231347,YP_009880663.1,Salmonella phage S118, sigma factor for late transcription,VOG05673
+2267236.YP_009618125.1 sigma factor for late transcription [Citrobacter phage CF1 ERZ-2017],2267236,YP_009618125.1,Citrobacter phage CF1 ERZ-2017, sigma factor for late transcription,VOG05673
+2267403.YP_009838256.1 RNA polymerase binding protein [Vibrio phage YC],2267403,YP_009838256.1,Vibrio phage YC, RNA polymerase binding protein,VOG05673
+2268578.YP_009810928.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-T4],2268578,YP_009810928.1,Synechococcus phage S-T4, RNA polymerase sigma factor for late transcription,VOG05673
+2269366.YP_009880881.1 sigma factor [Acinetobacter phage vB_ApiM_fHyAci03],2269366,YP_009880881.1,Acinetobacter phage vB_ApiM_fHyAci03, sigma factor,VOG05673
+227470.NP_943911.1 RNA polymerase sigma factor [Aeromonas virus Aeh1 (Aeh1)],227470,NP_943911.1,Aeromonas virus Aeh1 (Aeh1), RNA polymerase sigma factor,VOG05673
+2301647.YP_009881404.1 sigma factor for late transcription [Salmonella phage SenALZ1],2301647,YP_009881404.1,Salmonella phage SenALZ1, sigma factor for late transcription,VOG05673
+2301648.YP_009881205.1 sigma factor for late transcription [Salmonella phage SenASZ3],2301648,YP_009881205.1,Salmonella phage SenASZ3, sigma factor for late transcription,VOG05673
+2301662.YP_009881592.1 sigma factor [Acinetobacter phage KARL-1],2301662,YP_009881592.1,Acinetobacter phage KARL-1, sigma factor,VOG05673
+233894.YP_656283.1 RNA polymerase sigma factor [Aeromonas virus 25],233894,YP_656283.1,Aeromonas virus 25, RNA polymerase sigma factor,VOG05673
+238854.YP_195148.1 Sigma factor for late transcription [Synechococcus phage S-PM2],238854,YP_195148.1,Synechococcus phage S-PM2, Sigma factor for late transcription,VOG05673
+2419752.YP_009881843.1 hypothetical protein [Salmonella phage SeSz-1],2419752,YP_009881843.1,Salmonella phage SeSz-1, hypothetical protein,VOG05673
+2419930.YP_009841979.1 putative late transcription sigma factor [Serratia phage vB_SmaA_3M],2419930,YP_009841979.1,Serratia phage vB_SmaA_3M, putative late transcription sigma factor,VOG05673
+2484640.YP_009816059.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-P4],2484640,YP_009816059.1,Synechococcus phage S-P4, RNA polymerase sigma factor for late transcription,VOG05673
+2500827.YP_009882304.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage AbTZA1],2500827,YP_009882304.1,Acinetobacter phage AbTZA1, RNA polymerase sigma factor for late transcription,VOG05673
+2508194.YP_009822590.1 hypothetical protein [Escherichia phage vB_EcoM_KWBSE43-6],2508194,YP_009822590.1,Escherichia phage vB_EcoM_KWBSE43-6, hypothetical protein,VOG05673
+2530042.YP_009882904.1 hypothetical protein [Shigella phage MK-13],2530042,YP_009882904.1,Shigella phage MK-13, hypothetical protein,VOG05673
+2555548.YP_009844374.1 hypothetical protein [Stenotrophomonas phage YB07],2555548,YP_009844374.1,Stenotrophomonas phage YB07, hypothetical protein,VOG05673
+2584487.YP_009845829.1 hypothetical protein [Vibrio phage VAP7],2584487,YP_009845829.1,Vibrio phage VAP7, hypothetical protein,VOG05673
+2587809.YP_009850249.1 RNA polymerase sigma factor [Klebsiella phage Marfa],2587809,YP_009850249.1,Klebsiella phage Marfa, RNA polymerase sigma factor,VOG05673
+2589660.YP_009883537.1 sigma factor for late transcription [Klebsiella phage Magnus],2589660,YP_009883537.1,Klebsiella phage Magnus, sigma factor for late transcription,VOG05673
+2592196.YP_009890048.1 sigma factor involved in late transcription [Salmonella phage SE14],2592196,YP_009890048.1,Salmonella phage SE14, sigma factor involved in late transcription,VOG05673
+2592220.YP_009883222.1 sigma factor involved in late transcription [Salmonella phage SS9],2592220,YP_009883222.1,Salmonella phage SS9, sigma factor involved in late transcription,VOG05673
+260149.YP_004300873.1 RNA polymerase sigma factor [Aeromonas virus 65],260149,YP_004300873.1,Aeromonas virus 65, RNA polymerase sigma factor,VOG05673
+2601678.YP_009883780.1 RNA polymerase sigma factor [Serratia phage Muldoon],2601678,YP_009883780.1,Serratia phage Muldoon, RNA polymerase sigma factor,VOG05673
+2601680.YP_009850730.1 RNA polymerase sigma factor [Stenotrophomonas phage Moby],2601680,YP_009850730.1,Stenotrophomonas phage Moby, RNA polymerase sigma factor,VOG05673
+2650877.YP_009851079.1 RNA polymerase sigma factor [Stenotrophomonas phage Mendera],2650877,YP_009851079.1,Stenotrophomonas phage Mendera, RNA polymerase sigma factor,VOG05673
+2656521.YP_009884807.1 sigma factor for late transcription [Klebsiella virus UPM 2146],2656521,YP_009884807.1,Klebsiella virus UPM 2146, sigma factor for late transcription,VOG05673
+2666257.YP_009885292.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage Konradin],2666257,YP_009885292.1,Acinetobacter phage Konradin, RNA polymerase sigma factor for late transcription,VOG05673
+2686289.YP_009886882.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage Lazarus],2686289,YP_009886882.1,Acinetobacter phage Lazarus, RNA polymerase sigma factor for late transcription,VOG05673
+2686290.YP_009886138.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage Berthold],2686290,YP_009886138.1,Acinetobacter phage Berthold, RNA polymerase sigma factor for late transcription,VOG05673
+2686303.YP_009886632.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage Kimel],2686303,YP_009886632.1,Acinetobacter phage Kimel, RNA polymerase sigma factor for late transcription,VOG05673
+2686308.YP_009886383.1 RNA polymerase sigma factor for late transcription [Acinetobacter phage Apostate],2686308,YP_009886383.1,Acinetobacter phage Apostate, RNA polymerase sigma factor for late transcription,VOG05673
+2686437.YP_009854065.1 hypothetical protein [Vibrio phage vB_VchM_Kuja],2686437,YP_009854065.1,Vibrio phage vB_VchM_Kuja, hypothetical protein,VOG05673
+268746.YP_214376.1 sigma factor for late transcription [Prochlorococcus phage P-SSM2],268746,YP_214376.1,Prochlorococcus phage P-SSM2, sigma factor for late transcription,VOG05673
+268747.YP_214679.1 sigma factor for late transcription [Prochlorococcus phage P-SSM4],268747,YP_214679.1,Prochlorococcus phage P-SSM4, sigma factor for late transcription,VOG05673
+2690230.YP_009887240.1 sigma factor [Acinetobacter phage vB_AbaM_PhT2],2690230,YP_009887240.1,Acinetobacter phage vB_AbaM_PhT2, sigma factor,VOG05673
+2696340.YP_009856059.1 sigma factor for T4 late transcription [Enterobacter phage vB_EclM_CIP9],2696340,YP_009856059.1,Enterobacter phage vB_EclM_CIP9, sigma factor for T4 late transcription,VOG05673
+2712940.YP_009889411.1 sigma factor involved in late transcription [Salmonella phage P46FS4],2712940,YP_009889411.1,Salmonella phage P46FS4, sigma factor involved in late transcription,VOG05673
+2713273.YP_009888193.1 sigma factor involved in late transcription [Salmonella phage aagejoakim],2713273,YP_009888193.1,Salmonella phage aagejoakim, sigma factor involved in late transcription,VOG05673
+2713274.YP_009887785.1 sigma factor involved in late transcription [Salmonella phage allotria],2713274,YP_009887785.1,Salmonella phage allotria, sigma factor involved in late transcription,VOG05673
+2713278.YP_009888601.1 sigma factor involved in late transcription [Salmonella phage barely],2713278,YP_009888601.1,Salmonella phage barely, sigma factor involved in late transcription,VOG05673
+2713281.YP_009887992.1 sigma factor involved in late transcription [Salmonella phage bering],2713281,YP_009887992.1,Salmonella phage bering, sigma factor involved in late transcription,VOG05673
+2713292.YP_009888395.1 sigma factor involved in late transcription [Salmonella phage dinky],2713292,YP_009888395.1,Salmonella phage dinky, sigma factor involved in late transcription,VOG05673
+2713301.YP_009887602.1 sigma factor involved in late transcription [Salmonella phage heyday],2713301,YP_009887602.1,Salmonella phage heyday, sigma factor involved in late transcription,VOG05673
+2713304.YP_009889208.1 sigma factor involved in late transcription [Salmonella phage maane],2713304,YP_009889208.1,Salmonella phage maane, sigma factor involved in late transcription,VOG05673
+2713306.YP_009888800.1 sigma factor involved in late transcription [Salmonella phage moki],2713306,YP_009888800.1,Salmonella phage moki, sigma factor involved in late transcription,VOG05673
+2713310.YP_009889009.1 sigma factor involved in late transcription [Salmonella phage pertopsoe],2713310,YP_009889009.1,Salmonella phage pertopsoe, sigma factor involved in late transcription,VOG05673
+2713314.YP_009887411.1 sigma factor involved in late transcription [Salmonella phage rabagast],2713314,YP_009887411.1,Salmonella phage rabagast, sigma factor involved in late transcription,VOG05673
+279006.YP_004300680.1 gp55 RNA polymerase sigma factor [Acinetobacter virus 133],279006,YP_004300680.1,Acinetobacter virus 133, gp55 RNA polymerase sigma factor,VOG05673
+293178.YP_001595192.1 RNA polymerase sigma factor [Escherichia phage JS98],293178,YP_001595192.1,Escherichia phage JS98, RNA polymerase sigma factor,VOG05673
+31533.YP_009098450.1 RNA polymerase sigma factor [Escherichia phage RB3],31533,YP_009098450.1,Escherichia phage RB3, RNA polymerase sigma factor,VOG05673
+321023.YP_238775.1 RNA polymerase sigma factor [Aeromonas virus 31],321023,YP_238775.1,Aeromonas virus 31, RNA polymerase sigma factor,VOG05673
+329381.YP_003858349.1 gp55 Sigma factor for late transcription [Escherichia virus RB16],329381,YP_003858349.1,Escherichia virus RB16, gp55 Sigma factor for late transcription,VOG05673
+36339.YP_009167437.1 RNA polymerase sigma factor [Enterobacteria phage RB68],36339,YP_009167437.1,Enterobacteria phage RB68, RNA polymerase sigma factor,VOG05673
+382359.YP_717814.2 RNA polymerase sigma factor [Synechococcus phage syn9],382359,YP_717814.2,Synechococcus phage syn9, RNA polymerase sigma factor,VOG05673
+444859.YP_004323037.1 sigma factor for late transcription [Synechococcus phage S-SM1],444859,YP_004323037.1,Synechococcus phage S-SM1, sigma factor for late transcription,VOG05673
+444860.YP_004322282.1 sigma factor for late transcription [Synechococcus phage S-SM2],444860,YP_004322282.1,Synechococcus phage S-SM2, sigma factor for late transcription,VOG05673
+444861.YP_004324502.1 sigma factor for late transcription [Prochlorococcus phage Syn1],444861,YP_004324502.1,Prochlorococcus phage Syn1, sigma factor for late transcription,VOG05673
+444862.YP_004323278.1 sigma factor for late transcription [Prochlorococcus phage P-RSM4],444862,YP_004323278.1,Prochlorococcus phage P-RSM4, sigma factor for late transcription,VOG05673
+444878.YP_004323741.1 sigma factor for late transcription [Prochlorococcus phage Syn33],444878,YP_004323741.1,Prochlorococcus phage Syn33, sigma factor for late transcription,VOG05673
+445683.YP_004322799.1 sigma factor for late transcription [Synechococcus phage S-ShM2],445683,YP_004322799.1,Synechococcus phage S-ShM2, sigma factor for late transcription,VOG05673
+445684.YP_004323964.1 sigma factor for late transcription [Synechococcus phage Syn19],445684,YP_004323964.1,Synechococcus phage Syn19, sigma factor for late transcription,VOG05673
+445685.YP_004324741.1 sigma factor for late transcription [Synechococcus phage S-SSM5],445685,YP_004324741.1,Synechococcus phage S-SSM5, sigma factor for late transcription,VOG05673
+445686.YP_004324208.1 sigma factor for late transcription [Synechococcus phage S-SSM7],445686,YP_004324208.1,Synechococcus phage S-SSM7, sigma factor for late transcription,VOG05673
+445688.YP_004324965.1 sigma factor for late transcription [Prochlorococcus phage P-SSM7],445688,YP_004324965.1,Prochlorococcus phage P-SSM7, sigma factor for late transcription,VOG05673
+445696.YP_004323498.1 sigma factor for late transcription [Prochlorococcus phage P-HM2],445696,YP_004323498.1,Prochlorococcus phage P-HM2, sigma factor for late transcription,VOG05673
+445700.YP_004322554.1 sigma factor for late transcription [Prochlorococcus phage P-HM1],445700,YP_004322554.1,Prochlorococcus phage P-HM1, sigma factor for late transcription,VOG05673
+448384.YP_001469386.1 gp55 Sigma factor for T4 late transcription [Escherichia phage Phi1],448384,YP_001469386.1,Escherichia phage Phi1, gp55 Sigma factor for T4 late transcription,VOG05673
+45406.YP_803007.1 RNA polymerase sigma factor [Escherichia virus RB32],45406,YP_803007.1,Escherichia virus RB32, RNA polymerase sigma factor,VOG05673
+454798.YP_009140240.1 hypothetical protein [Salmonella phage Det7],454798,YP_009140240.1,Salmonella phage Det7, hypothetical protein,VOG05673
+50948.NP_891614.1 RNA polymerase sigma factor [Escherichia phage RB49 (RB49)],50948,NP_891614.1,Escherichia phage RB49 (RB49), RNA polymerase sigma factor,VOG05673
+536444.YP_007877723.1 hypothetical protein [Cyanophage P-RSM1],536444,YP_007877723.1,Cyanophage P-RSM1, hypothetical protein,VOG05673
+536453.YP_008129962.1 hypothetical protein [Prochlorococcus phage P-SSM3],536453,YP_008129962.1,Prochlorococcus phage P-SSM3, hypothetical protein,VOG05673
+536466.YP_007677283.1 late transcription sigma factor [Synechococcus phage S-SSM4],536466,YP_007677283.1,Synechococcus phage S-SSM4, late transcription sigma factor,VOG05673
+536474.YP_007877930.1 hypothetical protein [Cyanophage Syn30],536474,YP_007877930.1,Cyanophage Syn30, hypothetical protein,VOG05673
+555387.YP_003097329.1 T4-like late sigma factor [Synechococcus phage S-RSM4],555387,YP_003097329.1,Synechococcus phage S-RSM4, T4-like late sigma factor,VOG05673
+576789.YP_002922116.1 RNA polymerase sigma factor [Escherichia phage JSE],576789,YP_002922116.1,Escherichia phage JSE, RNA polymerase sigma factor,VOG05673
+576790.YP_002922411.1 RNA polymerase sigma factor [Escherichia phage JS10],576790,YP_002922411.1,Escherichia phage JS10, RNA polymerase sigma factor,VOG05673
+637730.YP_003358596.1 Gp55 T4-like sigma factor involved in late transcription [Shigella phage Ag3],637730,YP_003358596.1,Shigella phage Ag3, Gp55 T4-like sigma factor involved in late transcription,VOG05673
+645664.YP_003934688.1 sigma factor for T4 late transcription [Shigella phage SP18],645664,YP_003934688.1,Shigella phage SP18, sigma factor for T4 late transcription,VOG05673
+665032.YP_003359079.1 gp55 sigma factor for T4 late transcription [Delftia phage PhiW-14],665032,YP_003359079.1,Delftia phage PhiW-14, gp55 sigma factor for T4 late transcription,VOG05673
+66711.YP_009167877.1 RNA polymerase sigma factor [Escherichia phage AR1],66711,YP_009167877.1,Escherichia phage AR1, RNA polymerase sigma factor,VOG05673
+687803.YP_009302218.1 RNA polymerase sigma factor for late transcription [Cyanophage S-RIM50],687803,YP_009302218.1,Cyanophage S-RIM50, RNA polymerase sigma factor for late transcription,VOG05673
+69609.YP_009102271.1 RNA polymerase sigma factor [Enterobacteria phage RB27],69609,YP_009102271.1,Enterobacteria phage RB27, RNA polymerase sigma factor,VOG05673
+697227.YP_003734211.1 gp55 sigma factor for T4 late transcription [Enterobacteria phage IME08],697227,YP_003734211.1,Enterobacteria phage IME08, gp55 sigma factor for T4 late transcription,VOG05673
+700939.YP_004063748.1 gp55 RNA polymerase sigma factor [Escherichia phage vB_EcoM_VR7],700939,YP_004063748.1,Escherichia phage vB_EcoM_VR7, gp55 RNA polymerase sigma factor,VOG05673
+707757.YP_003579922.1 RNA polymerase sigma factor [Klebsiella phage KP15],707757,YP_003579922.1,Klebsiella phage KP15, RNA polymerase sigma factor,VOG05673
+709484.YP_004009915.1 gp55 sigma factor for T4 late transcription [Enterobacter phage CC31],709484,YP_004009915.1,Enterobacter phage CC31, gp55 sigma factor for T4 late transcription,VOG05673
+722417.YP_009169182.1 hypothetical protein [Campylobacter virus CP220],722417,YP_009169182.1,Campylobacter virus CP220, hypothetical protein,VOG05673
+722418.YP_009168984.1 hypothetical protein [Campylobacter virus CPt10],722418,YP_009168984.1,Campylobacter virus CPt10, hypothetical protein,VOG05673
+75320.NP_899312.1 RNA polymerase sigma factor [Vibrio phage KVP40],75320,NP_899312.1,Vibrio phage KVP40, RNA polymerase sigma factor,VOG05673
+754037.YP_007673093.1 sigma factor for late transcription [Synechococcus phage S-CAM1],754037,YP_007673093.1,Synechococcus phage S-CAM1, sigma factor for late transcription,VOG05673
+754038.YP_008125651.1 hypothetical protein [Synechococcus phage S-CAM8],754038,YP_008125651.1,Synechococcus phage S-CAM8, hypothetical protein,VOG05673
+754039.YP_008126434.1 hypothetical protein [Synechococcus phage S-IOM18],754039,YP_008126434.1,Synechococcus phage S-IOM18, hypothetical protein,VOG05673
+754042.YP_007674494.1 sigma factor for late transcription [Synechococcus phage S-SKS1],754042,YP_007674494.1,Synechococcus phage S-SKS1, sigma factor for late transcription,VOG05673
+756278.YP_009783037.1 RNA polymerase sigma factor for late transcription [Synechococcus phage S-RIM8],756278,YP_009783037.1,Synechococcus phage S-RIM8, RNA polymerase sigma factor for late transcription,VOG05673
+760732.YP_004009727.1 gp55 sigma factor [Acinetobacter phage Acj61],760732,YP_004009727.1,Acinetobacter phage Acj61, gp55 sigma factor,VOG05673
+760939.YP_004010254.1 gp55 sigma factor [Acinetobacter phage Acj9],760939,YP_004010254.1,Acinetobacter phage Acj9, gp55 sigma factor,VOG05673
+762660.YP_004009472.1 gp55 sigma factor [Acinetobacter phage Ac42],762660,YP_004009472.1,Acinetobacter phage Ac42, gp55 sigma factor,VOG05673
+869662.YP_007675594.1 hypothetical protein [Synechococcus phage S-RIM2 R1_1999],869662,YP_007675594.1,Synechococcus phage S-RIM2 R1_1999, hypothetical protein,VOG05673
+869724.YP_007518209.1 gp55 [Synechococcus phage S-RIM8 A.HR1],869724,YP_007518209.1,Synechococcus phage S-RIM8 A.HR1, gp55,VOG05673
+879628.YP_003969248.1 sigma factor [Aeromonas phage phiAS4],879628,YP_003969248.1,Aeromonas phage phiAS4, sigma factor,VOG05673
+879630.YP_003969448.1 sigma factor for T4 late transcription [Aeromonas phage phiAS5],879630,YP_003969448.1,Aeromonas phage phiAS5, sigma factor for T4 late transcription,VOG05673
+889956.YP_007673956.1 late transcription sigma factor [Prochlorococcus phage MED4-213],889956,YP_007673956.1,Prochlorococcus phage MED4-213, late transcription sigma factor,VOG05673
+926067.YP_009011456.1 gp55 sigma factor for late transcription [Aeromonas phage PX29],926067,YP_009011456.1,Aeromonas phage PX29, gp55 sigma factor for late transcription,VOG05673
+926589.YP_007002740.1 sigma factor for late transcription [Escherichia phage PhaxI],926589,YP_007002740.1,Escherichia phage PhaxI, sigma factor for late transcription,VOG05673
+929832.YP_007675119.1 hypothetical protein [Cyanophage P-RSM6],929832,YP_007675119.1,Cyanophage P-RSM6, hypothetical protein,VOG05673
+934027.YP_004421673.1 gp55 Sigma factor for T4 late transcription [Campylobacter virus NCTC12673],934027,YP_004421673.1,Campylobacter virus NCTC12673, gp55 Sigma factor for T4 late transcription,VOG05673
+990550.YP_009623330.1 hypothetical protein [Campylobacter virus CP81],990550,YP_009623330.1,Campylobacter virus CP81, hypothetical protein,VOG05673
+1406790.YP_008772001.1 RNA polymerase sigma factor [Bacillus phage Slash],1406790,YP_008772001.1,Bacillus phage Slash, RNA polymerase sigma factor,VOG00048
+1406792.YP_008770814.1 RNA polymerase sigma 70 factor [Bacillus phage Staley],1406792,YP_008770814.1,Bacillus phage Staley, RNA polymerase sigma 70 factor,VOG00048
+1610832.YP_009203702.1 RNA polymerase sigma factor [Bacillus phage Stahl],1610832,YP_009203702.1,Bacillus phage Stahl, RNA polymerase sigma factor,VOG00048
+1610833.YP_009196983.1 RNA polymerase sigma factor [Bacillus phage Stills],1610833,YP_009196983.1,Bacillus phage Stills, RNA polymerase sigma factor,VOG00048
+1776293.YP_009274876.1 sporulation sigma factor SigF [Bacillus phage Eldridge],1776293,YP_009274876.1,Bacillus phage Eldridge, sporulation sigma factor SigF,VOG00048
+2593638.YP_009850160.1 RNA polymerase sigma factor [Bacillus phage vB_BmeM-Goe8],2593638,YP_009850160.1,Bacillus phage vB_BmeM-Goe8, RNA polymerase sigma factor,VOG00048
+1161935.YP_007010532.1 RNA polymerase sigma factor [Salinivibrio phage CW02],1161935,YP_007010532.1,Salinivibrio phage CW02, RNA polymerase sigma factor,VOG00048
+1622234.YP_009168428.1 putative sigma factor [Citrobacter phage CVT22],1622234,YP_009168428.1,Citrobacter phage CVT22, putative sigma factor,VOG00048
+1784982.YP_009304524.1 RNA polymerase sigma factor [Pseudomonas phage O4],1784982,YP_009304524.1,Pseudomonas phage O4, RNA polymerase sigma factor,VOG00048
+347327.YP_001294605.1 hypothetical protein ORF012 [Pseudomonas phage PA11],347327,YP_001294605.1,Pseudomonas phage PA11, hypothetical protein ORF012,VOG00048
+2065199.YP_009622104.1 helix-turn-helix DNA binding protein [Microbacterium phage Dismas],2065199,YP_009622104.1,Microbacterium phage Dismas, helix-turn-helix DNA binding protein,VOG00048
+2201444.YP_009803165.1 RNA polymerase sigma factor [Microbacterium phage Zeta1847],2201444,YP_009803165.1,Microbacterium phage Zeta1847, RNA polymerase sigma factor,VOG00048
+2250289.YP_009806822.1 RNA polymerase sigma factor [Microbacterium phage Eden],2250289,YP_009806822.1,Microbacterium phage Eden, RNA polymerase sigma factor,VOG00048
+2419955.YP_009815387.1 RNA polymerase [Arthrobacter phage DrManhattan],2419955,YP_009815387.1,Arthrobacter phage DrManhattan, RNA polymerase,VOG00048
+2419970.YP_009815662.1 RNA polymerase [Arthrobacter phage Yang],2419970,YP_009815662.1,Arthrobacter phage Yang, RNA polymerase,VOG00048
+2419971.YP_009815177.1 RNA polymerase sigma factor [Microbacterium phage Armstrong],2419971,YP_009815177.1,Microbacterium phage Armstrong, RNA polymerase sigma factor,VOG00048
+2488780.YP_009817077.1 RNA polymerase [Arthrobacter phage Liebe],2488780,YP_009817077.1,Arthrobacter phage Liebe, RNA polymerase,VOG00048
+1493511.YP_009134404.1 subfamily RNA polymerase sigma-70 subunit [Synechococcus phage ACG-2014f],1493511,YP_009134404.1,Synechococcus phage ACG-2014f, subfamily RNA polymerase sigma-70 subunit,VOG00048
+2053653.YP_009816500.1 RNA polymerase sigma factor [Synechococcus phage S-CBWM1],2053653,YP_009816500.1,Synechococcus phage S-CBWM1, RNA polymerase sigma factor,VOG00048
+1691954.YP_009199135.1 putative RNA polymerase sigma factor [Brevibacillus phage Jenst],1691954,YP_009199135.1,Brevibacillus phage Jenst, putative RNA polymerase sigma factor,VOG00048
+1084719.YP_009015380.1 gp69 [Bacillus virus G],1084719,YP_009015380.1,Bacillus virus G, gp69,VOG00048
+1118063.YP_006560728.1 sigma-70 family RNA polymerase sigma factor [Staphylococcus phage SpaA1],1118063,YP_006560728.1,Staphylococcus phage SpaA1, sigma-70 family RNA polymerase sigma factor,VOG00048
+1118064.YP_009829851.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage BceA1],1118064,YP_009829851.1,Bacillus phage BceA1, sigma-70 family RNA polymerase sigma factor,VOG00048
+1124578.YP_007004340.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage phIS3501],1124578,YP_007004340.1,Bacillus phage phIS3501, sigma-70 family RNA polymerase sigma factor,VOG00048
+1194641.YP_006488705.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage BtCS33],1194641,YP_006488705.1,Bacillus phage BtCS33, sigma-70 family RNA polymerase sigma factor,VOG00048
+1357713.YP_009009184.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage phiCM3],1357713,YP_009009184.1,Bacillus phage phiCM3, sigma-70 family RNA polymerase sigma factor,VOG00048
+1007127.YP_008873651.1 putative sigma factor [Staphylococcus phage Sb1],1007127,YP_008873651.1,Staphylococcus phage Sb1, putative sigma factor,VOG00048
+1041526.YP_008854276.1 putative sigma factor [Staphylococcus phage S25-3],1041526,YP_008854276.1,Staphylococcus phage S25-3, putative sigma factor,VOG00048
+1041527.YP_008854100.1 putative sigma factor [Staphylococcus phage S25-4],1041527,YP_008854100.1,Staphylococcus phage S25-4, putative sigma factor,VOG00048
+10685.YP_002300430.1 gp34 [Bacillus virus SPO1],10685,YP_002300430.1,Bacillus virus SPO1, gp34,VOG00048
+1126950.YP_006907988.1 putative sigma factor [Bacillus phage BCP78],1126950,YP_006907988.1,Bacillus phage BCP78, putative sigma factor,VOG00048
+1129192.YP_009149728.1 putative sigma factor [Bacillus phage BCP8-2],1129192,YP_009149728.1,Bacillus phage BCP8-2, putative sigma factor,VOG00048
+1136731.YP_006907735.1 hypothetical protein [Bacillus phage BPS13],1136731,YP_006907735.1,Bacillus phage BPS13, hypothetical protein,VOG00048
+1141133.YP_006908410.1 putative RNA polymerase sigma factor [Bacillus phage B4],1141133,YP_006908410.1,Bacillus phage B4, putative RNA polymerase sigma factor,VOG00048
+1168744.YP_007676802.1 putative sigma factor [Listeria phage vB_LmoM_AG20],1168744,YP_007676802.1,Listeria phage vB_LmoM_AG20, putative sigma factor,VOG00048
+1173764.YP_009042951.1 hypothetical protein [Listeria phage LP-048],1173764,YP_009042951.1,Listeria phage LP-048, hypothetical protein,VOG00048
+1173766.YP_008240123.1 hypothetical protein [Listeria phage LP-125],1173766,YP_008240123.1,Listeria phage LP-125, hypothetical protein,VOG00048
+1195072.YP_007677062.1 putative sigma factor [Bacillus phage vB_BceM_Bc431v3],1195072,YP_007677062.1,Bacillus phage vB_BceM_Bc431v3, putative sigma factor,VOG00048
+1200862.YP_009275849.1 sigma factor [Staphylococcus phage Stau2],1200862,YP_009275849.1,Staphylococcus phage Stau2, sigma factor,VOG00048
+1204533.YP_007349329.1 hypothetical protein [Bacillus phage phiAGATE],1204533,YP_007349329.1,Bacillus phage phiAGATE, hypothetical protein,VOG00048
+1204543.YP_007005555.1 hypothetical protein [Staphylococcus virus SA11],1204543,YP_007005555.1,Staphylococcus virus SA11, hypothetical protein,VOG00048
+1235660.YP_007677573.1 sigma factor [Staphylococcus phage vB_SauM_Romulus],1235660,YP_007677573.1,Staphylococcus phage vB_SauM_Romulus, sigma factor,VOG00048
+1239383.YP_007112938.1 sigma factor [Staphylococcus phage JD007],1239383,YP_007112938.1,Staphylococcus phage JD007, sigma factor,VOG00048
+1277886.YP_009003061.1 putative sigma factor [Bacillus phage BPS10C],1277886,YP_009003061.1,Bacillus phage BPS10C, putative sigma factor,VOG00048
+1285382.YP_009625809.1 hypothetical protein [Bacillus phage SIOphi],1285382,YP_009625809.1,Bacillus phage SIOphi, hypothetical protein,VOG00048
+1296655.YP_009215953.1 sigma factor [Bacillus phage JL],1296655,YP_009215953.1,Bacillus phage JL, sigma factor,VOG00048
+1296656.YP_009216173.1 sigma factor [Bacillus phage Shanette],1296656,YP_009216173.1,Bacillus phage Shanette, sigma factor,VOG00048
+1340769.YP_009600998.1 putative sigma factor [Staphylococcus phage phiIBB-SEP1],1340769,YP_009600998.1,Staphylococcus phage phiIBB-SEP1, putative sigma factor,VOG00048
+1382932.YP_008430954.1 RNA polymerase sigma factor [Bacillus phage Troll],1382932,YP_008430954.1,Bacillus phage Troll, RNA polymerase sigma factor,VOG00048
+1391188.YP_009099149.1 putative sigma factor [Bacillus phage CP-51],1391188,YP_009099149.1,Bacillus phage CP-51, putative sigma factor,VOG00048
+1406781.YP_008771190.1 RNA polymerase sigma factor [Bacillus phage BigBertha],1406781,YP_008771190.1,Bacillus phage BigBertha, RNA polymerase sigma factor,VOG00048
+1406783.YP_008770092.1 RNA polymerase sigma factor [Bacillus phage CampHawk],1406783,YP_008770092.1,Bacillus phage CampHawk, RNA polymerase sigma factor,VOG00048
+1406785.YP_008771504.1 RNA polymerase sigma factor [Bacillus phage Grass],1406785,YP_008771504.1,Bacillus phage Grass, RNA polymerase sigma factor,VOG00048
+1406791.YP_008770388.1 RNA polymerase sigma factor [Bacillus phage Spock],1406791,YP_008770388.1,Bacillus phage Spock, RNA polymerase sigma factor,VOG00048
+1445810.YP_009226967.1 hypothetical protein [Bacillus phage Bp8p-C],1445810,YP_009226967.1,Bacillus phage Bp8p-C, hypothetical protein,VOG00048
+1450142.YP_009006802.1 RNA polymerase sigma factor [Staphylococcus phage phiSA12],1450142,YP_009006802.1,Staphylococcus phage phiSA12, RNA polymerase sigma factor,VOG00048
+1458853.YP_009592690.1 hypothetical protein [Listeria phage LP-064],1458853,YP_009592690.1,Listeria phage LP-064, hypothetical protein,VOG00048
+1486397.YP_009616268.1 hypothetical protein [Listeria phage LMTA-34],1486397,YP_009616268.1,Listeria phage LMTA-34, hypothetical protein,VOG00048
+1486413.YP_009055745.1 hypothetical protein [Listeria phage LMTA-148],1486413,YP_009055745.1,Listeria phage LMTA-148, hypothetical protein,VOG00048
+1486421.YP_009043150.1 hypothetical protein [Listeria phage LMSP-25],1486421,YP_009043150.1,Listeria phage LMSP-25, hypothetical protein,VOG00048
+1486422.YP_009043406.1 hypothetical protein [Listeria phage List-36],1486422,YP_009043406.1,Listeria phage List-36, hypothetical protein,VOG00048
+1486657.YP_009037083.1 RNA polymerase sigma factor sigma-28 [Bacillus phage CAM003],1486657,YP_009037083.1,Bacillus phage CAM003, RNA polymerase sigma factor sigma-28,VOG00048
+1486658.YP_009035701.1 hypothetical protein [Bacillus phage Evoli],1486658,YP_009035701.1,Bacillus phage Evoli, hypothetical protein,VOG00048
+1486659.YP_009036624.1 RNA polymerase sigma factor sigma-28 [Bacillus phage Hakuna],1486659,YP_009036624.1,Bacillus phage Hakuna, RNA polymerase sigma factor sigma-28,VOG00048
+1486660.YP_009035374.1 RNA polymerase sigma factor sigma-28 [Bacillus phage Hoody T],1486660,YP_009035374.1,Bacillus phage Hoody T, RNA polymerase sigma factor sigma-28,VOG00048
+1486661.YP_009036248.1 RNA polymerase sigma factor sigma-28 [Bacillus phage Megatron],1486661,YP_009036248.1,Bacillus phage Megatron, RNA polymerase sigma factor sigma-28,VOG00048
+1486662.YP_009055929.1 RNA polymerase sigma factor [Bacillus phage Riley],1486662,YP_009055929.1,Bacillus phage Riley, RNA polymerase sigma factor,VOG00048
+1498168.YP_009147040.1 putative sigma factor [Enterococcus phage ECP3],1498168,YP_009147040.1,Enterococcus phage ECP3, putative sigma factor,VOG00048
+1498212.YP_009149167.1 putative RNA polymerase sigma factor [Bacillus phage JBP901],1498212,YP_009149167.1,Bacillus phage JBP901, putative RNA polymerase sigma factor,VOG00048
+1524910.YP_009098073.1 putative sigma factor [Staphylococcus phage MCE-2014],1524910,YP_009098073.1,Staphylococcus phage MCE-2014, putative sigma factor,VOG00048
+1526408.YP_009099385.1 putative sigma factor [Staphylococcus phage P108],1526408,YP_009099385.1,Staphylococcus phage P108, putative sigma factor,VOG00048
+1527469.YP_009056383.1 RNA polymerase sigma factor [Bacillus phage Bobb],1527469,YP_009056383.1,Bacillus phage Bobb, RNA polymerase sigma factor,VOG00048
+1540090.YP_009151070.1 RNA polymerase sigma factor [Bacillus phage Mater],1540090,YP_009151070.1,Bacillus phage Mater, RNA polymerase sigma factor,VOG00048
+1540091.YP_009151693.1 RNA polymerase sigma factor [Bacillus phage Moonbeam],1540091,YP_009151693.1,Bacillus phage Moonbeam, RNA polymerase sigma factor,VOG00048
+1567484.YP_009222342.1 hypothetical protein [Lactobacillus phage LfeInf],1567484,YP_009222342.1,Lactobacillus phage LfeInf, hypothetical protein,VOG00048
+1572703.YP_009195970.1 putative sigma factor [Staphylococcus phage phiIPLA-RODI],1572703,YP_009195970.1,Staphylococcus phage phiIPLA-RODI, putative sigma factor,VOG00048
+1572704.YP_009214532.1 sigma factor [Staphylococcus phage phiIPLA-C1C],1572704,YP_009214532.1,Staphylococcus phage phiIPLA-C1C, sigma factor,VOG00048
+1597976.YP_009218381.2 hypothetical protein [Enterococcus phage EFDG1],1597976,YP_009218381.2,Enterococcus phage EFDG1, hypothetical protein,VOG00048
+1640885.YP_009513933.1 hypothetical protein [Enterococcus phage EFLK1],1640885,YP_009513933.1,Enterococcus phage EFLK1, hypothetical protein,VOG00048
+1690456.YP_009206960.1 RNA polymerase sigma factor [Bacillus phage TsarBomba],1690456,YP_009206960.1,Bacillus phage TsarBomba, RNA polymerase sigma factor,VOG00048
+1698451.YP_009206524.1 RNA polymerase sigma factor [Bacillus phage AvesoBmore],1698451,YP_009206524.1,Bacillus phage AvesoBmore, RNA polymerase sigma factor,VOG00048
+1776293.YP_009274835.1 RNA polymerase sigma factor [Bacillus phage Eldridge],1776293,YP_009274835.1,Bacillus phage Eldridge, RNA polymerase sigma factor,VOG00048
+1792245.YP_009285446.1 hypothetical protein [Bacillus phage Deep Blue],1792245,YP_009285446.1,Bacillus phage Deep Blue, hypothetical protein,VOG00048
+1796992.YP_009275337.1 RNA polymerase sigma factor-like protein [Bacillus phage Shbh1],1796992,YP_009275337.1,Bacillus phage Shbh1, RNA polymerase sigma factor-like protein,VOG00048
+1805948.YP_009278201.1 sigma factor [Bacillus phage DIGNKC],1805948,YP_009278201.1,Bacillus phage DIGNKC, sigma factor,VOG00048
+1805950.YP_009287061.1 sigma factor [Bacillus phage Nemo],1805950,YP_009287061.1,Bacillus phage Nemo, sigma factor,VOG00048
+1805951.YP_009282577.1 sigma factor [Bacillus phage Nigalana],1805951,YP_009282577.1,Bacillus phage Nigalana, sigma factor,VOG00048
+1805952.YP_009284509.1 sigma factor [Bacillus phage NotTheCreek],1805952,YP_009284509.1,Bacillus phage NotTheCreek, sigma factor,VOG00048
+1805953.YP_009290042.1 sigma factor [Bacillus phage Phrodo],1805953,YP_009290042.1,Bacillus phage Phrodo, sigma factor,VOG00048
+1805954.YP_009280984.1 sigma factor [Bacillus phage SageFayge],1805954,YP_009280984.1,Bacillus phage SageFayge, sigma factor,VOG00048
+1805956.YP_009291759.1 sigma factor [Bacillus phage Zuko],1805956,YP_009291759.1,Bacillus phage Zuko, sigma factor,VOG00048
+1837830.YP_009282131.1 RNA polymerase sigma factor [Bacillus phage SalinJah],1837830,YP_009282131.1,Bacillus phage SalinJah, RNA polymerase sigma factor,VOG00048
+1852564.YP_009280555.1 RNA polymerase sigma factor sigma-28 [Bacillus phage Belinda],1852564,YP_009280555.1,Bacillus phage Belinda, RNA polymerase sigma factor sigma-28,VOG00048
+1868844.YP_009786305.1 sigma factor [Staphylococcus phage vB_SscM-1],1868844,YP_009786305.1,Staphylococcus phage vB_SscM-1, sigma factor,VOG00048
+1873998.YP_009279351.1 RNA polymerase sigma factor [Bacillus phage Kida],1873998,YP_009279351.1,Bacillus phage Kida, RNA polymerase sigma factor,VOG00048
+1873999.YP_009285127.1 sigma factor [Bacillus phage DirtyBetty],1873999,YP_009285127.1,Bacillus phage DirtyBetty, sigma factor,VOG00048
+1926594.YP_009788338.1 putative RNA polymerase sigma factor [Enterococcus phage EFP01],1926594,YP_009788338.1,Enterococcus phage EFP01, putative RNA polymerase sigma factor,VOG00048
+1933063.YP_009832112.1 RNA polymerase sigma factor [Bacillus phage vB_BsuM-Goe3],1933063,YP_009832112.1,Bacillus phage vB_BsuM-Goe3, RNA polymerase sigma factor,VOG00048
+1985178.YP_009626704.1 hypothetical protein [Bacillus virus BM15],1985178,YP_009626704.1,Bacillus virus BM15, hypothetical protein,VOG00048
+2059850.YP_009818180.1 putative sigma factor [Lactobacillus phage Lpa804],2059850,YP_009818180.1,Lactobacillus phage Lpa804, putative sigma factor,VOG00048
+207656.YP_008318397.1 putative late sigma factor [Bacillus phage phiNIT1],207656,YP_008318397.1,Bacillus phage phiNIT1, putative late sigma factor,VOG00048
+2079429.YP_009798107.1 sigma factor [Lactobacillus phage Bacchae],2079429,YP_009798107.1,Lactobacillus phage Bacchae, sigma factor,VOG00048
+2079433.YP_009798418.1 sigma factor [Lactobacillus phage Semele],2079433,YP_009798418.1,Lactobacillus phage Semele, sigma factor,VOG00048
+2126724.YP_009799998.1 hypothetical protein [Staphylococcus phage phiSA_BS2],2126724,YP_009799998.1,Staphylococcus phage phiSA_BS2, hypothetical protein,VOG00048
+2126734.YP_009799579.1 hypothetical protein [Staphylococcus phage phiSA_BS1],2126734,YP_009799579.1,Staphylococcus phage phiSA_BS1, hypothetical protein,VOG00048
+221915.YP_009041371.1 putative sigma factor [Staphylococcus virus K],221915,YP_009041371.1,Staphylococcus virus K, putative sigma factor,VOG00048
+2283013.YP_009840610.1 putative RNA polymerase sigma factor 1 [Bacillus phage BSP38],2283013,YP_009840610.1,Bacillus phage BSP38, putative RNA polymerase sigma factor 1,VOG00048
+2315483.YP_009814287.1 sigma factor [Lactobacillus phage Iacchus],2315483,YP_009814287.1,Lactobacillus phage Iacchus, sigma factor,VOG00048
+2315485.YP_009814457.1 sigma factor [Lactobacillus phage Bromius],2315485,YP_009814457.1,Lactobacillus phage Bromius, sigma factor,VOG00048
+2315766.YP_009814869.1 hypothetical protein [Enterococcus phage EfV12-phi1],2315766,YP_009814869.1,Enterococcus phage EfV12-phi1, hypothetical protein,VOG00048
+2510941.YP_009844328.1 RNA polymerase sigma factor [Lactobacillus phage SAC12B],2510941,YP_009844328.1,Lactobacillus phage SAC12B, RNA polymerase sigma factor,VOG00048
+2510942.YP_009843985.1 RNA polymerase sigma factor [Lactobacillus phage 521B],2510942,YP_009843985.1,Lactobacillus phage 521B, RNA polymerase sigma factor,VOG00048
+2510943.YP_009844105.1 RNA polymerase sigma factor [Lactobacillus phage 3-521],2510943,YP_009844105.1,Lactobacillus phage 3-521, RNA polymerase sigma factor,VOG00048
+2593638.YP_009850071.1 hypothetical protein [Bacillus phage vB_BmeM-Goe8],2593638,YP_009850071.1,Bacillus phage vB_BmeM-Goe8, hypothetical protein,VOG00048
+292029.YP_240964.1 putative sigma factor [Staphylococcus virus G1],292029,YP_240964.1,Staphylococcus virus G1, putative sigma factor,VOG00048
+307898.YP_009224564.1 putative sigma factor [Staphylococcus phage 812],307898,YP_009224564.1,Staphylococcus phage 812, putative sigma factor,VOG00048
+330395.YP_406450.1 gp74 [Listeria virus P100],330395,YP_406450.1,Listeria virus P100, gp74,VOG00048
+40523.YP_001468523.1 gp143 [Listeria virus A511],40523,YP_001468523.1,Listeria virus A511, gp143,VOG00048
+442493.YP_001504175.1 putative sigma factor [Enterococcus phage EF24C (Enterococcus faecalis bacteriophage phiEF24C)],442493,YP_001504175.1,Enterococcus phage EF24C (Enterococcus faecalis bacteriophage phiEF24C), putative sigma factor,VOG00048
+55510.YP_238615.1 ORF058 [Staphylococcus virus Twort],55510,YP_238615.1,Staphylococcus virus Twort, ORF058,VOG00048
+57477.YP_006907409.1 hypothetical protein [Bacillus phage Bastille],57477,YP_006907409.1,Bacillus phage Bastille, hypothetical protein,VOG00048
+584892.YP_009031424.1 putative RNA polymerase sigma factor [Bacillus phage Bcp1],584892,YP_009031424.1,Bacillus phage Bcp1, putative RNA polymerase sigma factor,VOG00048
+632112.YP_002790835.1 putative sigma factor [Lactobacillus virus Lb338-1],632112,YP_002790835.1,Lactobacillus virus Lb338-1, putative sigma factor,VOG00048
+760530.YP_007002270.1 putative sigma factor [Staphylococcus phage G15],760530,YP_007002270.1,Staphylococcus phage G15, putative sigma factor,VOG00048
+764595.YP_004957120.1 gp105 [Bacillus phage W.Ph],764595,YP_004957120.1,Bacillus phage W.Ph, gp105,VOG00048
+857312.YP_004301485.1 gp152 [Brochothrix phage A9],857312,YP_004301485.1,Brochothrix phage A9, gp152,VOG00048
+941058.YP_007003457.1 sigma factor [Bacillus phage SP-10],941058,YP_007003457.1,Bacillus phage SP-10, sigma factor,VOG00048
+1273739.YP_007517509.1 RNA polymerase sigma-70 factor [Bacillus virus Andromeda],1273739,YP_007517509.1,Bacillus virus Andromeda, RNA polymerase sigma-70 factor,VOG00048
+1273740.YP_007517589.1 RNA polymerase sigma-70 factor [Bacillus virus Curly],1273740,YP_007517589.1,Bacillus virus Curly, RNA polymerase sigma-70 factor,VOG00048
+1273741.YP_007517433.1 RNA polymerase sigma-70 factor [Bacillus virus Eoghan],1273741,YP_007517433.1,Bacillus virus Eoghan, RNA polymerase sigma-70 factor,VOG00048
+1273742.YP_007517663.1 RNA polymerase sigma-70 factor [Bacillus virus Finn],1273742,YP_007517663.1,Bacillus virus Finn, RNA polymerase sigma-70 factor,VOG00048
+1273744.YP_009592276.1 RNA polymerase sigma-70 factor [Bacillus virus Taylor],1273744,YP_009592276.1,Bacillus virus Taylor, RNA polymerase sigma-70 factor,VOG00048
+1305708.YP_008058960.1 sigma-70 family RNA polymerase sigma factor [Clostridium phage vB_CpeS-CP51],1305708,YP_008058960.1,Clostridium phage vB_CpeS-CP51, sigma-70 family RNA polymerase sigma factor,VOG00048
+1406782.YP_008771870.1 RNA polymerase sigma-70 factor [Bacillus virus Blastoid],1406782,YP_008771870.1,Bacillus virus Blastoid, RNA polymerase sigma-70 factor,VOG00048
+1406784.YP_008770680.1 RNA polymerase sigma factor [Bacillus virus Glittering],1406784,YP_008770680.1,Bacillus virus Glittering, RNA polymerase sigma factor,VOG00048
+1406788.YP_008770602.1 RNA polymerase sigma-70 factor [Bacillus virus Riggi],1406788,YP_008770602.1,Bacillus virus Riggi, RNA polymerase sigma-70 factor,VOG00048
+1054968.YP_004782422.1 RNA polymerase ECF sigma factor [Salmonella phage 7-11],1054968,YP_004782422.1,Salmonella phage 7-11, RNA polymerase ECF sigma factor,VOG00048
+1141137.YP_006987691.1 RNA polymerase ECF sigma factor [Cronobacter phage vB_CsaP_GAP52],1141137,YP_006987691.1,Cronobacter phage vB_CsaP_GAP52, RNA polymerase ECF sigma factor,VOG00048
+2588517.YP_009847066.1 RNA polymerase ECF sigma factor [Aeromonas phage 4_4572],2588517,YP_009847066.1,Aeromonas phage 4_4572, RNA polymerase ECF sigma factor,VOG00048
+2591030.YP_009847219.1 putative RNA polymerase ECF sigma factor [Aeromonas phage LAh_6],2591030,YP_009847219.1,Aeromonas phage LAh_6, putative RNA polymerase ECF sigma factor,VOG00048
+2591032.YP_009847442.1 putative RNA polymerase ECF sigma factor [Aeromonas phage LAh_8],2591032,YP_009847442.1,Aeromonas phage LAh_8, putative RNA polymerase ECF sigma factor,VOG00048
+2591033.YP_009847599.1 putative RNA polymerase ECF sigma factor [Aeromonas phage LAh9],2591033,YP_009847599.1,Aeromonas phage LAh9, putative RNA polymerase ECF sigma factor,VOG00048
+2699738.YP_009833492.1 RNA polymerase ECF sigma factor [Cronobacter phage vB_CsaP_009],2699738,YP_009833492.1,Cronobacter phage vB_CsaP_009, RNA polymerase ECF sigma factor,VOG00048
+2712958.YP_009857475.1 RNA polymerase sigma factor [Proteus phage Privateer],2712958,YP_009857475.1,Proteus phage Privateer, RNA polymerase sigma factor,VOG00048
+1237159.YP_006906108.1 RNA polymerase ECF sigma factor [Escherichia phage NJ01],1237159,YP_006906108.1,Escherichia phage NJ01, RNA polymerase ECF sigma factor,VOG00048
+1436889.YP_009008726.1 hypothetical protein [Escherichia phage KBNP1711],1436889,YP_009008726.1,Escherichia phage KBNP1711, hypothetical protein,VOG00048
+1519788.YP_009152883.1 RNA polymerase ECF sigma factor [Escherichia phage vB_EcoP_SU10],1519788,YP_009152883.1,Escherichia phage vB_EcoP_SU10, RNA polymerase ECF sigma factor,VOG00048
+1598146.YP_009208199.1 hypothetical protein [Escherichia phage 172-1],1598146,YP_009208199.1,Escherichia phage 172-1, hypothetical protein,VOG00048
+1604355.YP_006908882.1 hypothetical protein [Escherichia phage ECBP2],1604355,YP_006908882.1,Escherichia phage ECBP2, hypothetical protein,VOG00048
+490103.YP_001671781.1 RNA polymerase ECF sigma factor [Escherichia virus phiEco32],490103,YP_001671781.1,Escherichia virus phiEco32, RNA polymerase ECF sigma factor,VOG00048
+148943.NP_835731.1 similar to RNA polymerase ECF-type sigma factor [Rhodothermus phage RM378],148943,NP_835731.1,Rhodothermus phage RM378, similar to RNA polymerase ECF-type sigma factor,VOG00048
+1527770.YP_009099832.1 RNA polymerase sigma-70 factor [Rhizobium phage vB_RleM_P10VF],1527770,YP_009099832.1,Rhizobium phage vB_RleM_P10VF, RNA polymerase sigma-70 factor,VOG00048
+1636182.YP_009189470.1 DNA-directed RNA polymerase specialized sigma subunit [Sinorhizobium phage phiM9],1636182,YP_009189470.1,Sinorhizobium phage phiM9, DNA-directed RNA polymerase specialized sigma subunit,VOG00048
+2510464.YP_009882647.1 RNA polymerase sigma factor [Klebsiella phage ST13-OXA48phi12.1],2510464,YP_009882647.1,Klebsiella phage ST13-OXA48phi12.1, RNA polymerase sigma factor,VOG00048
+2510480.YP_009882596.1 RNA polymerase sigma factor [Klebsiella phage ST147-VIM1phi7.1],2510480,YP_009882596.1,Klebsiella phage ST147-VIM1phi7.1, RNA polymerase sigma factor,VOG00048
+1183239.YP_006383695.1 hypothetical protein [Salisaeta icosahedral phage 1 (SSIP-1)],1183239,YP_006383695.1,Salisaeta icosahedral phage 1 (SSIP-1), hypothetical protein,VOG00048
+10685.YP_002300332.1 gp2.21 [Bacillus virus SPO1],10685,YP_002300332.1,Bacillus virus SPO1, gp2.21,VOG00048
+1126950.YP_006907943.1 putative RNA polymerase sigma 28 subunit SigF [Bacillus phage BCP78],1126950,YP_006907943.1,Bacillus phage BCP78, putative RNA polymerase sigma 28 subunit SigF,VOG00048
+1126950.YP_006907944.1 putative RNA polymerase sigma 28 subunit SigG [Bacillus phage BCP78],1126950,YP_006907944.1,Bacillus phage BCP78, putative RNA polymerase sigma 28 subunit SigG,VOG00048
+"1129192.YP_009149686.1 putative RNA polymerase sigma-70 factor, sigma-B/F/G subfamily [Bacillus phage BCP8-2]",1129192,YP_009149686.1,Bacillus phage BCP8-2," putative RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",VOG00048
+1129192.YP_009149687.1 putative RNA polymerase sigma factor G [Bacillus phage BCP8-2],1129192,YP_009149687.1,Bacillus phage BCP8-2, putative RNA polymerase sigma factor G,VOG00048
+1136731.YP_006907696.1 putative RNA polymerase sigma factor [Bacillus phage BPS13],1136731,YP_006907696.1,Bacillus phage BPS13, putative RNA polymerase sigma factor,VOG00048
+1137745.YP_007006117.1 sigma factor SigF [Cyanophage S-TIM5],1137745,YP_007006117.1,Cyanophage S-TIM5, sigma factor SigF,VOG00048
+1141133.YP_006908372.1 sporulation sigma factor SigF-like protein [Bacillus phage B4],1141133,YP_006908372.1,Bacillus phage B4, sporulation sigma factor SigF-like protein,VOG00048
+1141136.YP_006987604.1 subfamily RNA polymerase sigma-70 subunit [Cronobacter phage vB_CsaM_GAP32],1141136,YP_006987604.1,Cronobacter phage vB_CsaM_GAP32, subfamily RNA polymerase sigma-70 subunit,VOG00048
+1147094.YP_007007399.1 putative RNA polymerase sigma factor [Klebsiella phage vB_KleM_RaK2],1147094,YP_007007399.1,Klebsiella phage vB_KleM_RaK2, putative RNA polymerase sigma factor,VOG00048
+"1195072.YP_007677007.1 RNA polymerase sigma-70 factor, sigma-B/F/G subfamily [Bacillus phage vB_BceM_Bc431v3]",1195072,YP_007677007.1,Bacillus phage vB_BceM_Bc431v3," RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",VOG00048
+1195072.YP_007677008.1 putative RNA polymerase sigma factor G [Bacillus phage vB_BceM_Bc431v3],1195072,YP_007677008.1,Bacillus phage vB_BceM_Bc431v3, putative RNA polymerase sigma factor G,VOG00048
+1204533.YP_007349306.1 putative RNA polymerase sigma factor SigF 2 [Bacillus phage phiAGATE],1204533,YP_007349306.1,Bacillus phage phiAGATE, putative RNA polymerase sigma factor SigF 2,VOG00048
+1204533.YP_007349307.1 putative RNA polymerase sigma factor SigF 1 [Bacillus phage phiAGATE],1204533,YP_007349307.1,Bacillus phage phiAGATE, putative RNA polymerase sigma factor SigF 1,VOG00048
+1273738.YP_009150670.1 sigma-70 family RNA polymerase sigma factor [Escherichia phage PBECO4],1273738,YP_009150670.1,Escherichia phage PBECO4, sigma-70 family RNA polymerase sigma factor,VOG00048
+1277886.YP_009003022.1 putative RNA polymerase sigma factor [Bacillus phage BPS10C],1277886,YP_009003022.1,Bacillus phage BPS10C, putative RNA polymerase sigma factor,VOG00048
+1296655.YP_009215850.1 hypothetical protein [Bacillus phage JL],1296655,YP_009215850.1,Bacillus phage JL, hypothetical protein,VOG00048
+1296656.YP_009216068.1 RNA Polymerase sigma-E factor [Bacillus phage Shanette],1296656,YP_009216068.1,Bacillus phage Shanette, RNA Polymerase sigma-E factor,VOG00048
+"1382932.YP_008430993.1 RNA polymerase, SigF-like [Bacillus phage Troll]",1382932,YP_008430993.1,Bacillus phage Troll," RNA polymerase, SigF-like",VOG00048
+1391188.YP_009099262.1 hypothetical protein [Bacillus phage CP-51],1391188,YP_009099262.1,Bacillus phage CP-51, hypothetical protein,VOG00048
+1406781.YP_008771228.1 RNA polymerase sigma factor [Bacillus phage BigBertha],1406781,YP_008771228.1,Bacillus phage BigBertha, RNA polymerase sigma factor,VOG00048
+1406783.YP_008769990.1 RNA polymerase sigma factor [Bacillus phage CampHawk],1406783,YP_008769990.1,Bacillus phage CampHawk, RNA polymerase sigma factor,VOG00048
+1406785.YP_008771532.1 RNA polymerase sigma-70 factor [Bacillus phage Grass],1406785,YP_008771532.1,Bacillus phage Grass, RNA polymerase sigma-70 factor,VOG00048
+1406786.YP_008770551.1 RNA polymerase sigma-70 factor [Bacillus phage Page],1406786,YP_008770551.1,Bacillus phage Page, RNA polymerase sigma-70 factor,VOG00048
+1406789.YP_008771361.1 RNA polymerase sigma-70 factor [Bacillus phage Pony],1406789,YP_008771361.1,Bacillus phage Pony, RNA polymerase sigma-70 factor,VOG00048
+1406790.YP_008771969.1 RNA polymerase sigma factor SigB [Bacillus phage Slash],1406790,YP_008771969.1,Bacillus phage Slash, RNA polymerase sigma factor SigB,VOG00048
+1406791.YP_008770421.1 RNA polymerase sigma factor [Bacillus phage Spock],1406791,YP_008770421.1,Bacillus phage Spock, RNA polymerase sigma factor,VOG00048
+1406792.YP_008770783.1 RNA polymerase sigma factor [Bacillus phage Staley],1406792,YP_008770783.1,Bacillus phage Staley, RNA polymerase sigma factor,VOG00048
+1445810.YP_009226946.1 putative RNA polymerase sigma factor SigF 2 [Bacillus phage Bp8p-C],1445810,YP_009226946.1,Bacillus phage Bp8p-C, putative RNA polymerase sigma factor SigF 2,VOG00048
+1445810.YP_009226947.1 putative RNA polymerase sigma factor SigF 1 [Bacillus phage Bp8p-C],1445810,YP_009226947.1,Bacillus phage Bp8p-C, putative RNA polymerase sigma factor SigF 1,VOG00048
+1486657.YP_009037113.1 RNA polymerase sigma factor [Bacillus phage CAM003],1486657,YP_009037113.1,Bacillus phage CAM003, RNA polymerase sigma factor,VOG00048
+1486658.YP_009035734.1 RNA polymerase sigma factor [Bacillus phage Evoli],1486658,YP_009035734.1,Bacillus phage Evoli, RNA polymerase sigma factor,VOG00048
+1486659.YP_009036672.1 sigF-like RNA polymerase sigma factor [Bacillus phage Hakuna],1486659,YP_009036672.1,Bacillus phage Hakuna, sigF-like RNA polymerase sigma factor,VOG00048
+1486660.YP_009035402.1 RNA polymerase sigma factor [Bacillus phage Hoody T],1486660,YP_009035402.1,Bacillus phage Hoody T, RNA polymerase sigma factor,VOG00048
+1486661.YP_009036291.1 RNA polymerase sigma factor [Bacillus phage Megatron],1486661,YP_009036291.1,Bacillus phage Megatron, RNA polymerase sigma factor,VOG00048
+1486662.YP_009055966.1 sigF-like RNA polymerase [Bacillus phage Riley],1486662,YP_009055966.1,Bacillus phage Riley, sigF-like RNA polymerase,VOG00048
+1498212.YP_009149124.1 putative RNA polymerase sigma-70 factor [Bacillus phage JBP901],1498212,YP_009149124.1,Bacillus phage JBP901, putative RNA polymerase sigma-70 factor,VOG00048
+1498212.YP_009149125.1 putative RNA polymerase sigma factor G [Bacillus phage JBP901],1498212,YP_009149125.1,Bacillus phage JBP901, putative RNA polymerase sigma factor G,VOG00048
+1527469.YP_009056357.1 RNA polymerase sigma factor [Bacillus phage Bobb],1527469,YP_009056357.1,Bacillus phage Bobb, RNA polymerase sigma factor,VOG00048
+1527469.YP_009056358.1 RNA polymerase sigma factor [Bacillus phage Bobb],1527469,YP_009056358.1,Bacillus phage Bobb, RNA polymerase sigma factor,VOG00048
+1540090.YP_009151040.1 RNA polymerase sigma factor [Bacillus phage Mater],1540090,YP_009151040.1,Bacillus phage Mater, RNA polymerase sigma factor,VOG00048
+1540091.YP_009151727.1 RNA polymerase sigma factor [Bacillus phage Moonbeam],1540091,YP_009151727.1,Bacillus phage Moonbeam, RNA polymerase sigma factor,VOG00048
+1540091.YP_009151728.1 RNA polymerase sigma factor [Bacillus phage Moonbeam],1540091,YP_009151728.1,Bacillus phage Moonbeam, RNA polymerase sigma factor,VOG00048
+1540092.YP_009151513.1 RNA polymerase sigma factor [Bacillus phage Pascal],1540092,YP_009151513.1,Bacillus phage Pascal, RNA polymerase sigma factor,VOG00048
+1540093.YP_009152845.1 RNA polymerase sigma factor [Bacillus phage Pookie],1540093,YP_009152845.1,Bacillus phage Pookie, RNA polymerase sigma factor,VOG00048
+1555202.YP_009101754.1 RNA polymerase sigma factor [Escherichia phage 121Q],1555202,YP_009101754.1,Escherichia phage 121Q, RNA polymerase sigma factor,VOG00048
+1597966.YP_009210079.1 RNA polymerase sigma factor [Bacillus phage Palmer],1597966,YP_009210079.1,Bacillus phage Palmer, RNA polymerase sigma factor,VOG00048
+1610832.YP_009203671.1 RNA polymerase sigma factor [Bacillus phage Stahl],1610832,YP_009203671.1,Bacillus phage Stahl, RNA polymerase sigma factor,VOG00048
+1610833.YP_009196951.1 RNA polymerase sigma factor [Bacillus phage Stills],1610833,YP_009196951.1,Bacillus phage Stills, RNA polymerase sigma factor,VOG00048
+1636261.YP_009196176.1 sigma-70 family RNA polymerase sigma factor [Paenibacillus phage Vegas],1636261,YP_009196176.1,Paenibacillus phage Vegas, sigma-70 family RNA polymerase sigma factor,VOG00048
+1675598.YP_009197513.1 RNA polymerase sigma factor [Bacillus phage Pavlov],1675598,YP_009197513.1,Bacillus phage Pavlov, RNA polymerase sigma factor,VOG00048
+1690456.YP_009207004.1 RNA polymerase sigma factor [Bacillus phage TsarBomba],1690456,YP_009207004.1,Bacillus phage TsarBomba, RNA polymerase sigma factor,VOG00048
+1690456.YP_009207005.1 RNA polymerase sigma factor [Bacillus phage TsarBomba],1690456,YP_009207005.1,Bacillus phage TsarBomba, RNA polymerase sigma factor,VOG00048
+1691954.YP_009199141.1 putative sporulation sigma factor [Brevibacillus phage Jenst],1691954,YP_009199141.1,Brevibacillus phage Jenst, putative sporulation sigma factor,VOG00048
+1698451.YP_009206562.1 SigF-like RNA polymerase sigma factor [Bacillus phage AvesoBmore],1698451,YP_009206562.1,Bacillus phage AvesoBmore, SigF-like RNA polymerase sigma factor,VOG00048
+1759525.YP_009830054.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage vB_BceS-MY192],1759525,YP_009830054.1,Bacillus phage vB_BceS-MY192, sigma-70 family RNA polymerase sigma factor,VOG00048
+1776293.YP_009274875.1 RNA polymerase sigma factor [Bacillus phage Eldridge],1776293,YP_009274875.1,Bacillus phage Eldridge, RNA polymerase sigma factor,VOG00048
+1792242.YP_009595053.1 subfamily RNA polymerase sigma-70 subunit [Pectobacterium phage CBB],1792242,YP_009595053.1,Pectobacterium phage CBB, subfamily RNA polymerase sigma-70 subunit,VOG00048
+1792245.YP_009285400.1 RNA polymerase sigma-70 factor sigma-B/F/G subfamily [Bacillus phage Deep Blue],1792245,YP_009285400.1,Bacillus phage Deep Blue, RNA polymerase sigma-70 factor sigma-B/F/G subfamily,VOG00048
+1792245.YP_009285401.1 RNA polymerase sigma-70 factor sigma-B/F/G subfamily [Bacillus phage Deep Blue],1792245,YP_009285401.1,Bacillus phage Deep Blue, RNA polymerase sigma-70 factor sigma-B/F/G subfamily,VOG00048
+1805948.YP_009278239.1 sigma factor [Bacillus phage DIGNKC],1805948,YP_009278239.1,Bacillus phage DIGNKC, sigma factor,VOG00048
+1805950.YP_009287107.1 sigma factor [Bacillus phage Nemo],1805950,YP_009287107.1,Bacillus phage Nemo, sigma factor,VOG00048
+1805951.YP_009282621.1 sigma factor [Bacillus phage Nigalana],1805951,YP_009282621.1,Bacillus phage Nigalana, sigma factor,VOG00048
+1805952.YP_009284554.1 sigma factor [Bacillus phage NotTheCreek],1805952,YP_009284554.1,Bacillus phage NotTheCreek, sigma factor,VOG00048
+1805953.YP_009290078.1 sigma factor [Bacillus phage Phrodo],1805953,YP_009290078.1,Bacillus phage Phrodo, sigma factor,VOG00048
+1805954.YP_009281029.1 sigma factor [Bacillus phage SageFayge],1805954,YP_009281029.1,Bacillus phage SageFayge, sigma factor,VOG00048
+1805956.YP_009291801.1 sigma factor [Bacillus phage Zuko],1805956,YP_009291801.1,Bacillus phage Zuko, sigma factor,VOG00048
+1837830.YP_009282173.1 SigF-like RNA polymerase sigma factor [Bacillus phage SalinJah],1837830,YP_009282173.1,Bacillus phage SalinJah, SigF-like RNA polymerase sigma factor,VOG00048
+1852564.YP_009280599.1 RNA polymerase sigma factor [Bacillus phage Belinda],1852564,YP_009280599.1,Bacillus phage Belinda, RNA polymerase sigma factor,VOG00048
+1868598.YP_009830772.1 putative RNA polymerase sigma subunit [Bacillus phage PfEFR-4],1868598,YP_009830772.1,Bacillus phage PfEFR-4, putative RNA polymerase sigma subunit,VOG00048
+1868599.YP_009285288.1 putative RNA polymerase sigma subunit [Bacillus phage PfEFR-5],1868599,YP_009285288.1,Bacillus phage PfEFR-5, putative RNA polymerase sigma subunit,VOG00048
+1873998.YP_009279398.1 sigma factor [Bacillus phage Kida],1873998,YP_009279398.1,Bacillus phage Kida, sigma factor,VOG00048
+1873999.YP_009285170.1 sigma factor [Bacillus phage DirtyBetty],1873999,YP_009285170.1,Bacillus phage DirtyBetty, sigma factor,VOG00048
+190478.NP_612861.1 sigma-70 family RNA polymerase sigma factor [Clostridium phage phi3626],190478,NP_612861.1,Clostridium phage phi3626, sigma-70 family RNA polymerase sigma factor,VOG00048
+1933063.YP_009832138.1 RNA polymerase sigma factor [Bacillus phage vB_BsuM-Goe3],1933063,YP_009832138.1,Bacillus phage vB_BsuM-Goe3, RNA polymerase sigma factor,VOG00048
+1962671.YP_009600003.1 subfamily RNA polymerase sigma-70 subunit [Serratia phage BF],1962671,YP_009600003.1,Serratia phage BF, subfamily RNA polymerase sigma-70 subunit,VOG00048
+1978922.YP_009832993.1 putative RNA polymerase sigma factor [Aeromonas phage phiA8-29],1978922,YP_009832993.1,Aeromonas phage phiA8-29, putative RNA polymerase sigma factor,VOG00048
+1985178.YP_009626754.1 sigma70 protein [Bacillus virus BM15],1985178,YP_009626754.1,Bacillus virus BM15, sigma70 protein,VOG00048
+1985178.YP_009626755.1 RNA polymerase sigma factor [Bacillus virus BM15],1985178,YP_009626755.1,Bacillus virus BM15, RNA polymerase sigma factor,VOG00048
+2052742.YP_009624108.1 Group 2 RNA polymerase sigma factor @ RNA polymerase sigma factor RpoD [Yersinia phage fHe-Yen9-04],2052742,YP_009624108.1,Yersinia phage fHe-Yen9-04, Group 2 RNA polymerase sigma factor @ RNA polymerase sigma factor RpoD,VOG00048
+2053653.YP_009816510.1 putative RNA polymerase sigma-70 factor [Synechococcus phage S-CBWM1],2053653,YP_009816510.1,Synechococcus phage S-CBWM1, putative RNA polymerase sigma-70 factor,VOG00048
+2059881.YP_009796816.1 RNA polymerase sigma factor [Streptomyces phage Attoomi],2059881,YP_009796816.1,Streptomyces phage Attoomi, RNA polymerase sigma factor,VOG00048
+207656.YP_008318421.1 putative sigma factor [Bacillus phage phiNIT1],207656,YP_008318421.1,Bacillus phage phiNIT1, putative sigma factor,VOG00048
+2267403.YP_009838385.1 RpoD [Vibrio phage YC],2267403,YP_009838385.1,Vibrio phage YC, RpoD,VOG00048
+2283013.YP_009840636.1 putative RNA polymerase sigma factor 2 [Bacillus phage BSP38],2283013,YP_009840636.1,Bacillus phage BSP38, putative RNA polymerase sigma factor 2,VOG00048
+2584487.YP_009845788.1 RNA polymerase sigma factor [Vibrio phage VAP7],2584487,YP_009845788.1,Vibrio phage VAP7, RNA polymerase sigma factor,VOG00048
+2593638.YP_009850103.1 RNA polymerase sigma factor [Bacillus phage vB_BmeM-Goe8],2593638,YP_009850103.1,Bacillus phage vB_BmeM-Goe8, RNA polymerase sigma factor,VOG00048
+345922.YP_512346.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage Fah],345922,YP_512346.1,Bacillus phage Fah, sigma-70 family RNA polymerase sigma factor,VOG00048
+347962.YP_338218.1 sigma-70 family RNA polymerase sigma factor [Bacillus phage Gamma],347962,YP_338218.1,Bacillus phage Gamma, sigma-70 family RNA polymerase sigma factor,VOG00048
+359961.YP_460001.1 putative RNA polymerase sigma subunit [Bacillus virus Wbeta],359961,YP_460001.1,Bacillus virus Wbeta, putative RNA polymerase sigma subunit,VOG00048
+447909.YP_001285848.1 putative DNA-directed RNA polymerase specialized sigma subunit [Geobacillus virus E2],447909,YP_001285848.1,Geobacillus virus E2, putative DNA-directed RNA polymerase specialized sigma subunit,VOG00048
+57477.YP_006907438.1 RNA polymerase sigma-F factor [Bacillus phage Bastille],57477,YP_006907438.1,Bacillus phage Bastille, RNA polymerase sigma-F factor,VOG00048
+"584892.YP_009031481.1 RNA polymerase sigma-70 factor, sigma-B/F/G subfamily [Bacillus phage Bcp1]",584892,YP_009031481.1,Bacillus phage Bcp1," RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",VOG00048
+"584892.YP_009031482.1 RNA polymerase sigma-70 factor, sigma-B/F/G subfamily [Bacillus phage Bcp1]",584892,YP_009031482.1,Bacillus phage Bcp1," RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",VOG00048
+658401.YP_003084257.1 RNAP sigma factor [Cyanophage PSS2],658401,YP_003084257.1,Cyanophage PSS2, RNAP sigma factor,VOG00048
+753084.YP_004421515.1 RNA polymerase sigma factor [Synechococcus phage S-CBS2],753084,YP_004421515.1,Synechococcus phage S-CBS2, RNA polymerase sigma factor,VOG00048
+753085.YP_004421751.1 group 2 RNA polymerase sigma factor [Synechococcus phage S-CBS3],753085,YP_004421751.1,Synechococcus phage S-CBS3, group 2 RNA polymerase sigma factor,VOG00048
+754053.YP_008129905.1 RNA polymerase sigma factor [Paenibacillus phage PG1],754053,YP_008129905.1,Paenibacillus phage PG1, RNA polymerase sigma factor,VOG00048
+764595.YP_004957160.1 gp145 [Bacillus phage W.Ph],764595,YP_004957160.1,Bacillus phage W.Ph, gp145,VOG00048
+871584.YP_003856854.1 putative RNA polymerase sigma factor [Clostridium phage phiCTP1],871584,YP_003856854.1,Clostridium phage phiCTP1, putative RNA polymerase sigma factor,VOG00048
+889953.YP_007674984.1 RNA polymerase sigma factor RpoD [Cyanophage KBS-S-2A],889953,YP_007674984.1,Cyanophage KBS-S-2A, RNA polymerase sigma factor RpoD,VOG00048
+909297.YP_004934627.1 group2 RNA polymerase sigma factor [Synechococcus phage S-CBS1],909297,YP_004934627.1,Synechococcus phage S-CBS1, group2 RNA polymerase sigma factor,VOG00048
+941058.YP_007003377.1 RNA polymerase sigma factor [Bacillus phage SP-10],941058,YP_007003377.1,Bacillus phage SP-10, RNA polymerase sigma factor,VOG00048
+59241.YP_004306957.1 RNA polymerase sigma factor [Streptococcus phage Dp-1],59241,YP_004306957.1,Streptococcus phage Dp-1, RNA polymerase sigma factor,VOG00048

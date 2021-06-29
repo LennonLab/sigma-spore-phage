@@ -1,0 +1,16 @@
+#                                                                 --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name             accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------   -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02937            TIGR02937  1391188.YP_009099149.1 -            9.2e-11   32.6   0.9   1.3e-10   32.1   0.9   1.2   1   0   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02895            TIGR02895  1391188.YP_009099149.1 -              5e-05   14.0   0.6   0.00011   12.9   0.4   1.5   1   1   0   1   1   1   1 spore_sigI: RNA polymerase sigma-I factor
+TIGR02479            TIGR02479  1391188.YP_009099149.1 -            7.4e-05   13.5   0.1   0.00013   12.7   0.1   1.4   1   1   0   1   1   1   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/YP_009099149.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009099149.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009099149.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:07:17 2020
+# [ok]

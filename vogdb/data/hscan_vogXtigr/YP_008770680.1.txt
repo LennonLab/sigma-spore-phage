@@ -1,0 +1,28 @@
+#                                                                 --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name             accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------   -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02937            TIGR02937  1406784.YP_008770680.1 -            3.3e-18   56.8   0.5   4.1e-18   56.5   0.5   1.2   1   0   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02985            TIGR02985  1406784.YP_008770680.1 -            3.6e-11   34.5   1.2   5.1e-11   34.0   1.2   1.2   1   0   0   1   1   1   1 Sig70_bacteroi1: RNA polymerase sigma-70 factor, Bacteroides expansion family 1
+TIGR02952            TIGR02952  1406784.YP_008770680.1 -            2.4e-09   28.3   1.1     5e-09   27.2   1.1   1.4   1   1   0   1   1   1   1 Sig70_famx2: RNA polymerase sigma-70 factor, TIGR02952 family
+TIGR02984            TIGR02984  1406784.YP_008770680.1 -            1.6e-08   25.3   0.9     5e-08   23.6   0.3   2.0   2   1   0   2   2   2   1 Sig-70_plancto1: RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1
+TIGR02989            TIGR02989  1406784.YP_008770680.1 -            1.8e-08   25.4   0.3     4e-08   24.3   0.3   1.5   1   1   0   1   1   1   1 Sig-70_gvs1: RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family
+TIGR02983            TIGR02983  1406784.YP_008770680.1 -            5.6e-08   23.8   0.1   9.6e-08   23.0   0.1   1.3   1   0   0   1   1   1   1 SigE-fam_strep: RNA polymerase sigma-70 factor, sigma-E family
+TIGR02950            TIGR02950  1406784.YP_008770680.1 -            7.4e-08   23.3   1.5   1.6e-07   22.2   1.5   1.5   1   1   0   1   1   1   1 SigM_subfam: RNA polymerase sigma factor, SigM family
+TIGR02941            TIGR02941  1406784.YP_008770680.1 -            1.1e-07   22.5   0.4     2e-07   21.6   0.1   1.6   2   0   0   2   2   2   1 Sigma_B: RNA polymerase sigma-B factor
+TIGR02959            TIGR02959  1406784.YP_008770680.1 -            1.7e-07   22.1   1.4   7.6e-07   20.0   1.4   1.9   1   1   0   1   1   1   1 SigZ: RNA polymerase sigma factor, SigZ family
+TIGR02980            TIGR02980  1406784.YP_008770680.1 -            1.2e-06   19.3   0.8   2.8e-06   18.1   0.1   1.8   2   0   0   2   2   2   1 SigBFG: RNA polymerase sigma-70 factor, sigma-B/F/G subfamily
+TIGR02392            TIGR02392  1406784.YP_008770680.1 -            7.8e-06   16.6   0.4     1e-05   16.2   0.4   1.1   1   0   0   1   1   1   1 rpoH_proteo: alternative sigma factor RpoH
+TIGR02850            TIGR02850  1406784.YP_008770680.1 -            1.9e-05   15.1   0.4   2.7e-05   14.6   0.4   1.2   1   0   0   1   1   1   1 spore_sigG: RNA polymerase sigma-G factor
+TIGR02479            TIGR02479  1406784.YP_008770680.1 -            2.2e-05   15.2   0.8   2.2e-05   15.2   0.8   2.3   2   1   1   3   3   3   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+TIGR02954            TIGR02954  1406784.YP_008770680.1 -            3.1e-05   14.7   0.1   5.6e-05   13.9   0.1   1.5   1   0   0   1   1   1   1 Sig70_famx3: RNA polymerase sigma-70 factor, TIGR02954 family
+TIGR02999            TIGR02999  1406784.YP_008770680.1 -            3.9e-05   14.5   0.3   6.8e-05   13.7   0.3   1.4   1   0   0   1   1   1   1 Sig-70_X6: RNA polymerase sigma factor, TIGR02999 family
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/YP_008770680.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_008770680.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_008770680.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:07:04 2020
+# [ok]

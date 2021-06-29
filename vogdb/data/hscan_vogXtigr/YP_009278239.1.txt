@@ -1,0 +1,33 @@
+#                                                                 --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name             accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------   -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02980            TIGR02980  1805948.YP_009278239.1 -            6.1e-27   85.7   0.1   8.7e-27   85.2   0.1   1.2   1   0   0   1   1   1   1 SigBFG: RNA polymerase sigma-70 factor, sigma-B/F/G subfamily
+TIGR02885            TIGR02885  1805948.YP_009278239.1 -              2e-22   71.0   0.3   2.9e-22   70.5   0.3   1.2   1   0   0   1   1   1   1 spore_sigF: RNA polymerase sigma-F factor
+TIGR02937            TIGR02937  1805948.YP_009278239.1 -            1.3e-20   64.7   0.1   9.2e-17   52.1   0.1   2.4   2   1   0   2   2   2   2 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02941            TIGR02941  1805948.YP_009278239.1 -            3.4e-18   56.9   0.2   4.9e-18   56.4   0.2   1.1   1   0   0   1   1   1   1 Sigma_B: RNA polymerase sigma-B factor
+TIGR02850            TIGR02850  1805948.YP_009278239.1 -            8.5e-18   55.6   1.7   2.7e-17   53.9   1.7   1.7   1   1   0   1   1   1   1 spore_sigG: RNA polymerase sigma-G factor
+TIGR02393            TIGR02393  1805948.YP_009278239.1 -            4.9e-12   36.8   0.0   7.7e-12   36.2   0.0   1.3   1   0   0   1   1   1   1 RpoD_Cterm: RNA polymerase sigma factor RpoD
+TIGR02479            TIGR02479  1805948.YP_009278239.1 -            6.2e-12   36.6   0.4   2.5e-11   34.6   0.3   2.0   2   1   0   2   2   2   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+TIGR02997            TIGR02997  1805948.YP_009278239.1 -            2.1e-11   34.5   0.0     3e-11   34.0   0.0   1.2   1   0   0   1   1   1   1 Sig70-cyanoRpoD: RNA polymerase sigma factor, cyanobacterial RpoD-like family
+TIGR02394            TIGR02394  1805948.YP_009278239.1 -            1.4e-10   32.0   0.2   2.2e-10   31.4   0.2   1.3   1   0   0   1   1   1   1 rpoS_proteo: RNA polymerase sigma factor RpoS
+TIGR02985            TIGR02985  1805948.YP_009278239.1 -            4.1e-10   31.1   0.5   8.1e-09   26.8   0.1   2.7   3   0   0   3   3   3   1 Sig70_bacteroi1: RNA polymerase sigma-70 factor, Bacteroides expansion family 1
+TIGR02952            TIGR02952  1805948.YP_009278239.1 -            3.5e-09   27.7   1.2   2.1e-05   15.4   0.1   2.7   2   1   0   3   3   3   2 Sig70_famx2: RNA polymerase sigma-70 factor, TIGR02952 family
+TIGR02954            TIGR02954  1805948.YP_009278239.1 -            1.2e-08   25.9   0.2   9.8e-07   19.6   0.1   2.9   3   0   0   3   3   3   1 Sig70_famx3: RNA polymerase sigma-70 factor, TIGR02954 family
+TIGR02846            TIGR02846  1805948.YP_009278239.1 -            1.3e-08   25.6   1.1   8.4e-06   16.4   0.0   2.2   1   1   1   2   2   2   2 spore_sigmaK: RNA polymerase sigma-K factor
+TIGR02948            TIGR02948  1805948.YP_009278239.1 -            1.3e-08   26.0   0.9    0.0034    8.4   0.0   3.2   3   0   0   3   3   3   3 SigW_bacill: RNA polymerase sigma-W factor
+TIGR02939            TIGR02939  1805948.YP_009278239.1 -              4e-08   24.4   0.2   2.9e-06   18.3   0.0   2.6   3   1   0   3   3   3   1 RpoE_Sigma70: RNA polymerase sigma factor RpoE
+TIGR02983            TIGR02983  1805948.YP_009278239.1 -            3.9e-07   21.1   0.0   1.9e-05   15.6   0.0   2.2   2   0   0   2   2   2   1 SigE-fam_strep: RNA polymerase sigma-70 factor, sigma-E family
+TIGR02989            TIGR02989  1805948.YP_009278239.1 -            2.3e-06   18.6   0.0   4.1e-05   14.5   0.0   2.1   2   0   0   2   2   2   1 Sig-70_gvs1: RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family
+TIGR02859            TIGR02859  1805948.YP_009278239.1 -            4.1e-06   17.3   0.6   1.3e-05   15.6   0.1   1.9   2   0   0   2   2   2   1 spore_sigH: RNA polymerase sigma-H factor
+TIGR02392            TIGR02392  1805948.YP_009278239.1 -            5.8e-06   17.0   0.6   3.6e-05   14.4   0.6   1.9   1   1   0   1   1   1   1 rpoH_proteo: alternative sigma factor RpoH
+TIGR02984            TIGR02984  1805948.YP_009278239.1 -            2.2e-05   15.0   0.1   0.00019   12.0   0.0   2.1   2   0   0   2   2   2   1 Sig-70_plancto1: RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/YP_009278239.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009278239.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009278239.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:07:40 2020
+# [ok]

@@ -1,0 +1,32 @@
+sig.group,sig.class,Bsubtilis.member,ID,AC,DE
+sig70-1,primary,sigA,RpoD_Cterm,TIGR02393,RNA polymerase sigma factor RpoD
+sig70,non-specific,"sigA,sigB,sigD,sigE,sigF,sigG,sigH,sigM,sigP,sigV,sigW,sigX,sigY,sigZ",sigma70-ECF,TIGR02937,"RNA polymerase sigma factor, sigma-70 family"
+sig70-3,sporulation,"sigB,",SigBFG,TIGR02980,"RNA polymerase sigma-70 factor, sigma-B/F/G subfamily"
+sig70-3-spo,sporulation,"sigB,sigF,sigG",Sigma_B,TIGR02941,RNA polymerase sigma-B factor
+sig70-3-fl,stationary,sigD,FliA_WhiG,TIGR02479,"RNA polymerase sigma factor, FliA/WhiG family"
+sig70-3-spo,sporulation,sigE,spore_sigmaE,TIGR02835,RNA polymerase sigma-E factor
+sig70-3-spo,sporulation,sigF,spore_sigF,TIGR02885,RNA polymerase sigma-F factor
+sig70-3-spo,sporulation,sigG,spore_sigG,TIGR02850,RNA polymerase sigma-G factor
+sig70-3-sigH,stationary,sigH,spore_sigH,TIGR02859,RNA polymerase sigma-H factor
+sig70-4,ECF,sigI,spore_sigI,TIGR02895,RNA polymerase sigma-I factor
+sig54,sigma54,sigL,rpoN_sigma,TIGR02395,RNA polymerase sigma-54 factor
+sig70-4,ECF,"sigM,sigP",SigM_subfam,TIGR02950,"RNA polymerase sigma factor, SigM family"
+sig70-4,ECF,sigW,SigW_bacill,TIGR02948,RNA polymerase sigma-W factor
+sig70-4,ECF,sigZ,SigZ,TIGR02959,"RNA polymerase sigma factor, SigZ family"
+sig70-3-HS,other,NA,rpoH_proteo,TIGR02392,alternative sigma factor RpoH
+sig70-2,other,NA,rpoS_proteo,TIGR02394,RNA polymerase sigma factor RpoS
+sig70-3-spo,sporulation,sigK,spore_sigmaK,TIGR02846,RNA polymerase sigma-K factor
+sig70-4,other,NA,RpoE_Sigma70,TIGR02939,RNA polymerase sigma factor RpoE
+sig70-lkl4,other,NA,Sig70_famx1,TIGR02943,"RNA polymerase sigma-70 factor, TIGR02943 family"
+sig70-lkl4,other,NA,SigH_actino,TIGR02947,"RNA polymerase sigma-70 factor, TIGR02947 family"
+sig70-lkl4,other,NA,Sig70_famx2,TIGR02952,"RNA polymerase sigma-70 factor, TIGR02952 family"
+sig70-lkl4,other,NA,Sig70_famx3,TIGR02954,"RNA polymerase sigma-70 factor, TIGR02954 family"
+sig70-lkl4,other,NA,SigX4,TIGR02957,"RNA polymerase sigma-70 factor, TIGR02957 family"
+sig70-lkl4,other,NA,SigX5,TIGR02960,"RNA polymerase sigma-70 factor, TIGR02960 family"
+sig70-4,other,NA,SigE-fam_strep,TIGR02983,"RNA polymerase sigma-70 factor, sigma-E family"
+sig70-lkl4,other,NA,Sig-70_plancto1,TIGR02984,"RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1"
+sig70-lkl4,other,NA,Sig70_bacteroi1,TIGR02985,"RNA polymerase sigma-70 factor, Bacteroides expansion family 1"
+sig70-lkl4,other,NA,Sig-70_gvs1,TIGR02989,"RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family"
+sig-70-2,other,NA,Sig70-cyanoRpoD,TIGR02997,"RNA polymerase sigma factor, cyanobacterial RpoD-like family"
+sig70-lkl4,other,NA,Sig-70_X6,TIGR02999,"RNA polymerase sigma factor, TIGR02999 family"
+sig70-4,other,NA,Sig-70_gmx1,TIGR03001,"RNA polymerase sigma-70 factor, Myxococcales family 1"

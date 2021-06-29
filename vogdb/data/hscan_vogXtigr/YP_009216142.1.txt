@@ -1,0 +1,17 @@
+#                                                                 --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name             accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------   -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02479            TIGR02479  1296656.YP_009216142.1 -            1.3e-07   22.5   0.3   1.3e-06   19.2   0.1   2.4   1   1   0   2   2   2   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+TIGR02937            TIGR02937  1296656.YP_009216142.1 -            2.5e-07   21.4   0.5   4.2e-07   20.7   0.5   1.5   1   1   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02859            TIGR02859  1296656.YP_009216142.1 -            1.6e-05   15.4   0.4   6.3e-05   13.4   0.0   2.0   2   1   0   2   2   2   1 spore_sigH: RNA polymerase sigma-H factor
+TIGR02941            TIGR02941  1296656.YP_009216142.1 -              9e-05   12.9   0.3    0.0015    8.9   0.0   2.1   1   1   1   2   2   2   1 Sigma_B: RNA polymerase sigma-B factor
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/YP_009216142.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009216142.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009216142.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:07:37 2020
+# [ok]

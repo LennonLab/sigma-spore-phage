@@ -1,0 +1,21 @@
+#                                                                 --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name             accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ----------   -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02937            TIGR02937  1357713.YP_009009184.1 -              4e-16   50.0   0.2     5e-16   49.7   0.2   1.1   1   0   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02479            TIGR02479  1357713.YP_009009184.1 -            1.2e-13   42.3   1.9   3.7e-10   30.8   0.1   2.1   1   1   1   2   2   2   2 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+TIGR02980            TIGR02980  1357713.YP_009009184.1 -            2.2e-09   28.2   0.1   2.4e-06   18.3   0.0   2.1   1   1   1   2   2   2   2 SigBFG: RNA polymerase sigma-70 factor, sigma-B/F/G subfamily
+TIGR02985            TIGR02985  1357713.YP_009009184.1 -            4.5e-08   24.4   1.0   1.2e-07   23.0   1.0   1.6   1   1   0   1   1   1   1 Sig70_bacteroi1: RNA polymerase sigma-70 factor, Bacteroides expansion family 1
+TIGR02846            TIGR02846  1357713.YP_009009184.1 -            7.3e-07   19.8   0.3   1.4e-06   18.9   0.3   1.5   1   1   0   1   1   1   1 spore_sigmaK: RNA polymerase sigma-K factor
+TIGR02393            TIGR02393  1357713.YP_009009184.1 -            7.3e-06   16.6   0.4    0.0007   10.1   0.3   2.1   1   1   1   2   2   2   2 RpoD_Cterm: RNA polymerase sigma factor RpoD
+TIGR02850            TIGR02850  1357713.YP_009009184.1 -            8.4e-06   16.3   0.1    0.0016    8.8   0.1   2.1   1   1   1   2   2   2   2 spore_sigG: RNA polymerase sigma-G factor
+TIGR02983            TIGR02983  1357713.YP_009009184.1 -            5.7e-05   14.0   0.0   0.00015   12.7   0.0   1.6   2   0   0   2   2   2   1 SigE-fam_strep: RNA polymerase sigma-70 factor, sigma-E family
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      vogdb/data/vog_sigma_clean/YP_009009184.1.faa.gz
+# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009009184.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009009184.1.faa.gz 
+# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
+# Date:            Tue Nov 24 13:07:09 2020
+# [ok]
