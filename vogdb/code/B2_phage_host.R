@@ -190,7 +190,7 @@ p.phylum <-
   scale_y_continuous(labels=scales::percent) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
-  facet_nested("Host Phylum" + phylum~., nest_line = TRUE)+
+  facet_nested_wrap("Host Phylum" + phylum~., nest_line = TRUE, ncol = 1)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")
 
@@ -296,7 +296,7 @@ firmi%>%
   scale_y_continuous(labels=scales::percent) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
-  facet_nested_wrap(~"Host genus (Firmicutes)" + genus.plot, scales = "fixed")+
+  facet_nested_wrap(~"Host genus (Firmicutes)" + genus.plot, scales = "fixed", nrow = 5)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")
 
@@ -387,7 +387,7 @@ p.vir <-
   scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
-  facet_nested_wrap(~"Viral Family (Bacillus host)" + viral.family, nrow = 1)+
+  facet_nested_wrap(~"Viral Family (Bacillus host)" + viral.family, nrow = 5)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")
   
@@ -423,11 +423,18 @@ d.sp%>%
 # with 2 sigmas there are other hosts
 
 #combine plots
-right_col <- plot_grid(p.genus,p.vir,labels = LETTERS[2:3],
-                      ncol = 1, rel_heights = c(3.5,1))
-plot_grid(p.phylum,right_col,
-          rel_widths = c(1, 2),
-          ncol = 2, labels = c('A', ''))+
+
+
+right_col <- 
+  plot_grid(p.vir, NULL,
+            rel_heights = c(4.5, 1),
+            ncol = 1)
+
+plot_grid(p.phylum,p.genus,right_col,
+          rel_widths = c(1.5, 3, 1.3),
+          nrow = 1, labels = LETTERS)+
   ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
-            width = 12,height = 10)
+          width = 12,height = 10)
+
+
 
