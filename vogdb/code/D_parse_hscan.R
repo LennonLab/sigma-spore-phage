@@ -48,7 +48,7 @@ hits.all <- hits.all%>%
 
 ##############
 # get 3 best hits for each protein
-# dfining best by sequence evalue()
+# defining best by sequence evalue()
 
 best3 <- hits.all%>%
   group_by(query_name)%>%
@@ -99,7 +99,7 @@ for(i in 1:nrow(best3)){
 }
 
 # these rules did the job. 
-# SigBFG was completly excluded (always had a more specific term to take over)
+# SigBFG was completely excluded (always had a more specific term to take over)
 # sigma70-ECF was retained only for proteins that had no other hit
 
 best3%>%
@@ -193,11 +193,11 @@ d.faa%>%
   ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
           width = 10,height =10)
 
-# mostly no clear 1 to 1 corespondence
+# mostly no clear 1 to 1 correspondence
 
 ############################################
 # parsing sigma factor type by 
-# number of sigma facotrs in phage
+# number of sigma factors in phage
 ###########################################
 
 # add column of sigma factor content per genome
@@ -312,6 +312,7 @@ p.phylum <-
   theme_cowplot()+
   theme(legend.position = "bottom")+
   guides(fill=guide_legend(nrow = 2))+
+  scale_fill_viridis_d()+
   coord_flip()+
   panel_border()
 
@@ -378,7 +379,7 @@ d.nsig3%>%
   geom_tile(aes(fill=tigr.hit), color="black")+
   geom_text(aes(label=spore.t), size=15)+
   theme_cowplot()+
-  # scale_fill_viridis_d()+
+  scale_fill_viridis_d()+
   facet_wrap(~n.sig, scales = "free")+
   theme(axis.text.x = element_blank())+
   ggsave2(here("vogdb/figures/","sigma_TIGR_content_firmicutes.png"),
