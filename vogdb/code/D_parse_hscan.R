@@ -1,7 +1,7 @@
 library(here)
 library(tidyverse)
 library(cowplot)
-source(here("TIGR/parse_hmmer_tbl.R"))
+source(here("vogdb/code/parse_hmmer_tbl.R"))
 
 # parse hmmserch results
 l.res <- list.files(here("vogdb/data/hscan_vogXtigr/"), full.names = T)
