@@ -175,7 +175,7 @@ d.faa <-
 
 
 ############################################
-# Do tigr hits corespond to VOG?
+# Do tigr hits correspond to VOG?
 ############################################
 d.faa%>%
   select(vog,tigr.hit,tigr.hit1,tigr.hit2,tigr.hit3 )%>%
@@ -222,26 +222,6 @@ d.faa$sig.class[d.faa$tigr.hit=="no_hit"] <- "no_hit"
 d.faa$sig.group[d.faa$tigr.hit=="no_hit"] <- "no_hit"
 
 
-###################
-# add sigma factor group classification
-# (see pfam section)
-load(here("pfam/data/phage_sigma_groups.RData"))
-#parse out protein details to combine
-d.group <- d.group%>%
-  separate(query_name,into = c("taxon","protein"),
-           sep = "\\.",remove = F,extra = "merge")%>%
-  #fix parsing for no_hit rows
-  mutate(protein=if_else(sigma.group=="no_hit",query_name,protein))%>%
-  mutate(taxon=if_else(sigma.group=="no_hit","--",taxon))
-
-# # QC
-# all(d.faa$protein %in% d.group$protein)
-# all(d.group$protein %in% d.faa$protein)
-
-d.faa <-
-  d.group%>%
-  select(protein,sigma.group)%>%
-  left_join(d.faa,.,by="protein")
 
 
 ##########################
@@ -312,7 +292,7 @@ p.phylum <-
   theme_cowplot()+
   theme(legend.position = "bottom")+
   guides(fill=guide_legend(nrow = 2))+
-  scale_fill_viridis_d()+
+  # scale_fill_viridis_d()+
   coord_flip()+
   panel_border()
 
@@ -321,35 +301,6 @@ p.phylum+
   ggsave2(here("vogdb","figures","tigr_Nsigma_HostPhylum.png"),
           width = 8,height = 8)
 
-
-#########
-# is there a pattern in pfam based group? no
-p.phylum <-
-  d.faa%>%
-  # arrange by frequency of sigma factors
-  mutate(sigma.group=fct_infreq(sigma.group))%>%
-  group_by(phylum,sigma.group)%>%
-  summarise(n=n())%>%
-  ungroup()%>%
-  mutate(phylum=str_replace(phylum,"/","\n"))%>%
-  mutate(phylum=fct_reorder(phylum,n))%>%
-  ggplot( aes(fct_rev(sigma.group),n, group = phylum)) + 
-  #line for 0
-  geom_hline(yintercept = 0, color="grey")+
-  geom_col(aes(fill=phylum)) + 
-  ylab("Phage sigma factor genes") +
-  xlab("Sigma Factor group")+
-  # facet_grid(~phylum)+
-  theme_cowplot()+
-  theme(legend.position = "bottom")+
-  guides(fill=guide_legend(nrow = 2))+
-  coord_flip()+
-  panel_border()
-
-p.phylum+
-  ggtitle("phage sigma factor group by host phylum")+
-  ggsave2(here("vogdb","figures","pfamGroup_sigma_HostPhylum.png"),
-          width = 10,height = 10)
 
 
 ###################################
@@ -385,23 +336,26 @@ d.nsig3%>%
   ggsave2(here("vogdb/figures/","sigma_TIGR_content_firmicutes.png"),
           width = 13, height = 18)
 
-###############
-d.nsig3%>%
-  # assign a positional index to each sigma factor
-  group_by(taxon)%>%
-  arrange(sigma.group)%>%
-  mutate(sig.position=row_number())%>%
-  ungroup()%>%
-  mutate(`virus name`=str_replace(`virus name`, "phage", "\u03c6"))%>%
-  mutate(`virus name`=str_replace(`virus name`, "virus", "\u03c6"))%>%
-  mutate(`virus name`=as_factor(`virus name`))%>%
-  #plot
-  ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-  geom_tile(aes(fill=sigma.group), color="black")+
-  theme_cowplot()+
-  scale_fill_viridis_d()+
-  facet_wrap(~n.sig, scales = "free")+
-  theme(axis.text.x = element_blank())+
-  ggsave2(here("vogdb/figures/","sigma_pfam_content_firmicutes.png"),
-          width = 13, height = 18)
+# save data
+save(d.faa, file = here("vogdb/data/vog_sigma_clean_tigr.RData"))
+write_csv(d.faa %>% select(-seq), file = here("vogdb/data/vog_sigma_clean_tigr.csv"))
+# ###############
+# d.nsig3%>%
+#   # assign a positional index to each sigma factor
+#   group_by(taxon)%>%
+#   # arrange(sigma.group)%>%
+#   mutate(sig.position=row_number())%>%
+#   ungroup()%>%
+#   mutate(`virus name`=str_replace(`virus name`, "phage", "\u03c6"))%>%
+#   mutate(`virus name`=str_replace(`virus name`, "virus", "\u03c6"))%>%
+#   mutate(`virus name`=as_factor(`virus name`))%>%
+#   #plot
+#   ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
+#   geom_tile(aes(fill=sigma.group), color="black")+
+#   theme_cowplot()+
+#   scale_fill_viridis_d()+
+#   facet_wrap(~n.sig, scales = "free")+
+#   theme(axis.text.x = element_blank())+
+#   ggsave2(here("vogdb/figures/","sigma_pfam_content_firmicutes.png"),
+#           width = 13, height = 18)
 
