@@ -1,6 +1,7 @@
 library(here)
 library(tidyverse)
 library(cowplot)
+library(gtools)
 
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
@@ -54,10 +55,9 @@ sig.host.v <- c("sigF","sigG")
 sig.phage.v <- c("ELDg168","ELDg169","Goe3","SP10","sigF","sigG")
 
 # record p values
-p.val.hostBG.cds <- tibble( host.gene=character(),phage.gene=character(),hg=numeric(), fisher=numeric(), chi=numeric())
+p.val.hostBG.cds <- tibble( )
+#host.gene=character(),phage.gene=character(),hg=numeric(), fisher=numeric(), chi=numeric())
 
-l.plot <- list()
-i=1
 
 for (cur.sig.host in sig.host.v){ 
   for (cur.sig.phage in sig.phage.v){
@@ -108,7 +108,8 @@ for (cur.sig.host in sig.host.v){
     
     chi <- capture.output(summary(urn))
     fisher <- signif(fisher.test(urn)$p.value,4)
-    hg <- signif(phyper(x-1, m, n, k, lower.tail = F),5)
+    hg.left <- signif(phyper(x-1, m, n, k, lower.tail =T),5) 
+    hg.right <- signif(phyper(x-1, m, n, k, lower.tail =F),5) 
     
     #save p-values
   p.val.hostBG.cds <- 
@@ -118,7 +119,8 @@ for (cur.sig.host in sig.host.v){
               phage.DEG=k,
               shared.DEG=x,
               total=m+n,
-              hg=hg,
+              hg.left=hg.left,
+              hg.right=hg.right,
               fisher=fisher,
               chi=str_extract(chi[4], "value = .*")%>%parse_number())%>%
       bind_rows(p.val.hostBG.cds,.)
@@ -128,14 +130,26 @@ for (cur.sig.host in sig.host.v){
 }
 
 
-# parmeters to plot PDF
+# parameters to plot PDF
 p.val.hostBG.cds <- 
   p.val.hostBG.cds %>% 
     mutate(M = host.DEG,
            N = total-host.DEG,
            K = phage.DEG,
            X = pmin(K,M),
-           who = paste(host.gene, phage.gene, sep = "_")) 
+           phage.gene = paste0("P[IPTG]-", phage.gene),
+           host.gene = paste0("enrich.set:", host.gene),
+           who = paste(host.gene, phage.gene, sep = "_"))
+
+
+#adjust p values (joint for left and right)
+p.val.hostBG.cds <- p.val.hostBG.cds %>% 
+  select(who, hg.left, hg.right) %>% 
+  pivot_longer(-who) %>% 
+  mutate(adj.p=p.adjust(value,  method = "BH")) %>% 
+  pivot_wider(-value, names_from = "name", values_from = "adj.p") %>% 
+  rename(adj.hg.left = hg.left, adj.hg.right = hg.right) %>% 
+  left_join(p.val.hostBG.cds, .)
 
 # calculate PDF per interaction
 max.x <- max(p.val.hostBG.cds$X)
@@ -148,24 +162,171 @@ d.hyp[, p.val.hostBG.cds$who[i]] <-
   dhyper(x = seq(max.x), m = M[i], n = N[i], k = K[i]))
 }
 
+# adjustment for panel order
+p.val.hostBG.cds <- 
+  p.val.hostBG.cds %>% 
+  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-SP10", after = 3)) %>% 
+  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-sigF", after = Inf))
+ 
+
 # plot
 p <- d.hyp %>% 
   pivot_longer(-x) %>% 
   separate(name, into = c("host.gene", "phage.gene"), sep = "_", remove = F) %>% 
-  filter(value > 1e-10) %>% 
+  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-SP10", after = 3)) %>% 
+  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-sigF", after = Inf)) %>% 
+  filter(value > 1e-8) %>% 
   ggplot(aes(x, value))+
   geom_area(fill = "grey70", color = "grey30")+
   geom_vline(data = p.val.hostBG.cds, aes(xintercept = shared.DEG),
              color = "red", size = 1)+
-  facet_wrap(host.gene ~ phage.gene, scales = "free", nrow = 2)+
+  geom_text(data = p.val.hostBG.cds, aes(x = shared.DEG, label =  stars.pval(adj.hg.right)), 
+            size = 10, y = Inf, vjust = 1, hjust = 1, color = "red")+
+  geom_text(data = p.val.hostBG.cds, aes(x = shared.DEG, label =  stars.pval(adj.hg.left)), 
+            size = 10, y = Inf, vjust = 1, hjust = 0, color = "blue")+
+  facet_wrap(phage.gene ~ host.gene, scales = "free", 
+             nrow = 2, dir = 'v', labeller = label_parsed)+
   theme_classic()+
   panel_border(color = "black")+
+  labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
+  theme(plot.caption = element_text(colour = "grey40"))+
   scale_y_continuous(expand = c(0, 0))+
-  xlab("shared DExed genes")+
-  ylab("PDF")
+  xlab("shared differentially expressed genes")+
+  ylab("hypergeometric PDF")
 
-ggsave(here("RNAseq/plots/enrichment1.png"),plot = p, width = 8, height = 6)
+p
+ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = p, width = 8, height = 4)
 
 #---------------------
 #   Are sporulation genes enriched in the sample of deferentially expressed genes?
 # the FDR corrected p-values for indicating significantly DExd genes.
+
+# sporulation genes by subtiwiki
+d6.spor.cds <- d6.spor.cds %>% 
+  mutate(sw.spore  = str_detect(replace_na(category2," "), regex("sporulation", ignore_case = T)))
+
+# record p values
+p.val.spore <- tibble( gene=character(),hg=numeric(), fisher=numeric(), chi=numeric())
+
+
+for(cur.gene in colnames(fc)[-1]){
+  # pDR110 has noe DEXed genes. so skippin it to prevent error
+  if(cur.gene=="pDR110") next
+  #prepare data to make contingency table
+  urn <- 
+    p.val%>%
+    # add data on sporulation genes
+    right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
+    # select the data for the current gene
+    select(gene,pBH=cur.gene, sw.spore)%>%
+    # remove genes for which sporulation status is unknown
+    filter(!is.na(sw.spore))%>%
+    # # remove genes that were not assigned a p-value for DE
+    # filter(!is.na(pBH))%>%
+    # change genes that were not assigned a p-value for DE to 1 (no change)
+    mutate(pBH=if_else(is.na(pBH),1,pBH))%>%
+    # define logical vector of DE based on p-value
+    mutate(de=pBH<0.05)%>%
+    # chnge logical vecotrs to meaningful strings
+    mutate(de=ifelse(de, "DExed", "unchaged"),sw.spore=ifelse(sw.spore, "spor.gene", "other"))%>%
+    # select only DE and sporulation for summary
+    select(-pBH,-gene)
+  
+  #make contingency table 
+  urn <- table(urn)[2:1,] #to control order
+  
+  # sporulation genes observed (DExed)
+  x <- urn[["spor.gene","DExed"]]
+  
+  # total sporulation genes
+  m<- rowSums(urn)[["spor.gene"]]
+  
+  # non-sporulation genes
+  n <- rowSums(urn)[["other"]]
+  
+  #number of DE genes
+  k <- colSums(urn)[["DExed"]]
+  
+  z <- 0:min(k,m)
+  
+  chi <- capture.output(summary(urn))
+  fisher <- signif(fisher.test(urn)$p.value,4)
+  hg.left <- signif(phyper(x-1, m, n, k, lower.tail =T),5) 
+  hg.right <- signif(phyper(x-1, m, n, k, lower.tail =F),5) 
+  
+  #save p-values
+  p.val.spore <- 
+    tibble( gene=cur.gene,
+            spor.genes=m,
+            DEG=k,
+            spor.DEG=x,
+            total.gene=n+m,
+            hg.left=hg.left,
+            hg.right=hg.right,
+            fisher=fisher,
+            chi=str_extract(chi[4], "value = .*")%>%parse_number())%>%
+    bind_rows(p.val.spore,.)
+  
+
+}
+
+
+
+# parameters to plot PDF
+p.val.spore <- 
+  p.val.spore %>% 
+  mutate(M = spor.genes,
+         N = total.gene-spor.genes,
+         K = DEG,
+         X = pmin(K,M),
+         gene = paste0("P[IPTG]-", gene))  
+  #adjust p values (joint for left and right)
+p.val.spore <- p.val.spore %>% 
+  select(gene, hg.left, hg.right) %>% 
+    pivot_longer(-gene) %>% 
+  mutate(adj.p=p.adjust(value,  method = "BH")) %>% 
+    pivot_wider(-value, names_from = "name", values_from = "adj.p") %>% 
+  rename(adj.hg.left = hg.left, adj.hg.right = hg.right) %>% 
+    left_join(p.val.spore, .)
+
+
+# calculate PDF per interaction
+max.x <- max(p.val.spore$X)
+d.hyp <- tibble(x= seq(max.x))
+
+for(i in 1:nrow(p.val.spore)){
+  
+  d.hyp[, p.val.spore$gene[i]] <- 
+    with(p.val.spore,
+         dhyper(x = seq(max.x), m = M[i], n = N[i], k = K[i]))
+}
+# adjustment for panel order
+p.val.spore <- 
+  p.val.spore %>% 
+    mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3))
+# plot
+p <- d.hyp %>% 
+  pivot_longer(-x, names_to = "gene") %>% 
+  filter(value > 1e-8) %>%
+  mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3)) %>% 
+  ggplot(aes(x, value))+
+  geom_area(fill = "grey70", color = "grey30")+
+  geom_vline(data = p.val.spore, aes(xintercept = spor.DEG),
+             color = "red", size = 1)+
+  geom_text(data = p.val.spore, aes(x = spor.DEG, label =  stars.pval(adj.hg.right)), 
+            size = 10, y = Inf, vjust = 1, hjust = 1, color = "red")+
+  geom_text(data = p.val.spore, aes(x = spor.DEG, label =  stars.pval(adj.hg.left)), 
+            size = 10, y = Inf, vjust = 1, hjust = 0, color = "blue")+
+  facet_wrap(~ gene, scales = "free", nrow = 3, dir = 'h', labeller = label_parsed)+
+  theme_classic()+
+  panel_border(color = "black")+
+  labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
+  theme(plot.caption = element_text(colour = "grey40"))+
+  scale_y_continuous(expand = c(0, 0))+
+  xlab("Differentially expressed sporulation genes")+
+  ylab("hypergeometric PDF")
+
+p
+ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, height = 4)
+
+#---------------------
