@@ -138,7 +138,7 @@ p.val.hostBG.cds <-
            K = phage.DEG,
            X = pmin(K,M),
            phage.gene = paste0("P[IPTG]-", phage.gene),
-           host.gene = paste0("enrich.set:", host.gene),
+           host.gene = paste0("overlap.set:", host.gene),
            who = paste(host.gene, phage.gene, sep = "_"))
 
 
