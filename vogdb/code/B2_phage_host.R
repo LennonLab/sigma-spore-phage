@@ -339,8 +339,8 @@ firmi <- firmi%>%
 
 
 # # make contingency table 
-# contin.t <- 
-#   d.sp%>%
+# contin.t <-
+#   firmi%>%
 #   #summarise sigma factors per phage
 #   group_by(tax.id,viral.family)%>%
 #   summarise(n.sig=n())%>%
@@ -363,7 +363,7 @@ n.labs <- firmi %>%
 
 
 
-p.vir <-
+d.vir <-
   firmi%>%
   filter(str_detect(genus.plot,"Bacillus"))%>%
   filter(viral.family %in% n.labs$viral.family) %>% 
@@ -380,7 +380,9 @@ p.vir <-
                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
                      TRUE ~ phylum)) %>% 
   
-  mutate(viral.family=fct_reorder(viral.family,n.genomes))%>%
+  mutate(viral.family=fct_reorder(viral.family,n.genomes))
+
+p.vir <- d.vir %>% 
   ggplot( aes(n.sigma,perc)) + 
   geom_col(fill = "green4") + 
   geom_text(data=n.labs, aes(label=lab), x=2.75,y=.9)+
@@ -432,9 +434,105 @@ right_col <-
 
 plot_grid(p.phylum,p.genus,right_col,
           rel_widths = c(1.5, 3, 1.3),
-          nrow = 1, labels = LETTERS)+
+          nrow = 1, labels = LETTERS)
   ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
           width = 12,height = 10)
 
 
+  
+###############
+# Summary plot
+###############
+  
+  # Phylum independent summary of sigma factors/genome
+  nsig_all <- d.sp%>%
+    group_by(tax.id)%>%
+    group_by(n.sigma)%>%
+    summarise(n.genomes=n())%>%
+    mutate(perc=n.genomes/sum(n.genomes))
+  
+  nsig_firmi <- d.sp%>%
+    filter(phylum=="Firmicutes") %>% 
+    group_by(tax.id)%>%
+    group_by(n.sigma)%>%
+    summarise(n.genomes=n())%>%
+    mutate(perc=n.genomes/sum(n.genomes))  
+  
+  nsig_bacil <- firmi%>%
+    filter(genus.plot=="Bacillus") %>% 
+    group_by(tax.id)%>%
+    group_by(n.sigma)%>%
+    summarise(n.genomes=n())%>%
+    mutate(perc=n.genomes/sum(n.genomes)) 
+  
+  
+  
+  nsig_all %>% 
+    ggplot(aes(n.sigma, perc))+
+    geom_col(color = "grey30", fill = "white")+
+    geom_col(data = nsig_firmi,fill = "grey", color ="black",
+             alpha=.5, width = 0.6, position = position_nudge(x=0.15))+
+    geom_col(data = nsig_bacil, fill = "black", color ="black",
+             alpha=.8, width = 0.3, position = position_nudge(x=0.3))+
+    geom_label(label = paste0("All phages: n=", sum(nsig_all$n.genomes)),
+               x=2,y=.9, color = "black", fill = "white", hjust = 0)+
+    geom_label(label = paste0("Firmicute phages: n=", sum(nsig_firmi$n.genomes)), 
+               x=2,y=.85, fill = "grey80", color = "black",hjust = 0)+
+    geom_label(label = paste0("Bacillus phages: n=", sum(nsig_bacil$n.genomes)), 
+               x=2,y=.8, fill = "grey20", color = "white",hjust = 0)+
+    scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+    ylab("Phage genomes") +
+    xlab("Sigma factors per genome")+
+    theme_classic()+
+    panel_border(color = "black")
+  # ggsave(here("vogdb","figures","nSigma_allVbacil.png"),
+  #        width = 6,height = 6)
+  
+  dplot <- 
+    bind_rows(
+      nsig_all %>% mutate(host_tax = "Bacteria"),
+      nsig_firmi %>% mutate(host_tax = "Firmicutes"),
+      nsig_bacil %>% mutate(host_tax = "Bacillus")
+     ) %>% 
+    mutate(host_tax = fct_relevel(host_tax, c("Bacteria", "Firmicutes", "Bacillus")))
 
+  p.tax <- dplot %>% 
+    ggplot(aes(n.sigma, perc, fill = host_tax))+
+    geom_col(color = "black", position = position_dodge2(padding = 0.2), width = 0.8)+
+    scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+    ylab("Phage genomes") +
+    xlab("Sigma factors per genome")+
+    theme_classic()+
+    panel_border(color = "black")+
+    # scale_fill_grey(start = 0.8,end = 0.2, name = "Host taxa")+
+    scale_fill_viridis_d( name = "Host taxa", direction = -1)+
+    theme(legend.position = c(0.75,0.8),
+          legend.key.size = unit(0.15, 'in'))
+  ggsave(filename = here("vogdb","figures","nSigma_sum.png"),
+        plot = p.tax, width = 3,height = 3)
+
+  p.vir2 <- d.vir %>% 
+    mutate(viral.family = fct_relevel(viral.family, c("Podoviridae", "Myoviridae",
+                                                  "Siphoviridae", "Herelleviridae"))) %>% 
+    ungroup() %>% 
+    select(viral.family, n.sigma, perc) %>% 
+    complete(n.sigma, viral.family, fill = list(perc=0)) %>% 
+    ggplot(aes(n.sigma, perc, fill = viral.family))+
+    geom_col(color = "black", position = position_dodge2(padding = 0.2), width = 0.8)+
+    scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+    ylab("Phage genomes") +
+    xlab("Sigma factors per genome")+
+    theme_classic()+
+    panel_border(color = "black")+
+    # scale_fill_grey(start = 0.8,end = 0.2, name = "Host taxa")+
+    scale_fill_viridis_d( name = "viral family", direction = -1)+
+    theme(legend.position = c(0.7,0.8),
+          legend.key.size = unit(0.1, 'in'))
+  
+  ggsave(filename = here("vogdb","figures","nSigma_virFam.png"),
+         plot = p.vir2, width = 3,height = 3)
+  
+  plot_grid(p.tax,p.vir2, labels = letters) %>% 
+save_plot(filename = here("vogdb","figures","nSigmaAB.png"),
+          base_width = 6 , base_height = 3)
+  

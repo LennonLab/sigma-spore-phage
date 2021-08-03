@@ -1,7 +1,7 @@
 library(tidyverse)
 library(here)
 library(cowplot)
-library(ggh4x)
+# library(ggh4x)
 
 #load data frame of phage sigma factors generated in (B)
 load(file=here("vogdb","data","vog_sigma_clean.RData"))
@@ -114,7 +114,7 @@ d.faa <- left_join(d.faa,d.sp,by=c("taxon"="tax.id"))
 # # save data
 # write.csv(here("vogdb","data","vog_sigma_clean_Whost.csv"))
 # save(d.faa,file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
-# # load(file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
+load(file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
 
 
 
@@ -133,19 +133,103 @@ length(unique(d.faa$taxon))
 #471
 
 # Phylum independent summary of sigma factors/genome
-d.sp%>%
+nsig_all <- d.sp%>%
   group_by(tax.id)%>%
   group_by(n.sigma)%>%
   summarise(n.genomes=n())%>%
-  mutate(perc=100*n.genomes/sum(n.genomes))
+  mutate(perc=n.genomes/sum(n.genomes))
+
+nsig_firmi <- d.sp%>%
+  filter(phylum=="Firmicutes") %>% 
+  group_by(tax.id)%>%
+  group_by(n.sigma)%>%
+  summarise(n.genomes=n())%>%
+  mutate(perc=n.genomes/sum(n.genomes))  
+
+
+  
+  
+nsig_all %>% 
+  ggplot(aes(n.sigma, perc))+
+  geom_col(color = "grey30", fill = "white")+
+  geom_col(data = nsig_firmi,fill = "grey", color ="black",
+           alpha=.5, width = 0.6, position = position_nudge(x=0.15))+
+  geom_col(data = nsig_bacil, fill = "black", color ="black",
+           alpha=.8, width = 0.3, position = position_nudge(x=0.3))+
+  geom_label(label = paste0("All phages: n=", sum(nsig_all$n.genomes)),
+             x=2,y=.9, color = "black", fill = "white", hjust = 0)+
+  geom_label(label = paste0("Firmicute phages: n=", sum(nsig_firmi$n.genomes)), 
+             x=2,y=.85, fill = "grey80", color = "black",hjust = 0)+
+  geom_label(label = paste0("Bacillus phages: n=", sum(nsig_bacil$n.genomes)), 
+             x=2,y=.8, fill = "grey20", color = "white",hjust = 0)+
+  scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+  ylab("Phage genomes") +
+  xlab("Sigma factors per genome")+
+  theme_classic()+
+  panel_border(color = "black")
+  ggsave(here("vogdb","figures","nSigma_allVbacil.png"),
+          width = 6,height = 6)
+
 
 # n.sigma n.genomes   perc
 # 0      2962   86.3  
 # 1       397   11.6  
 # 2        50    1.46 
 # 3        24     0.699
+  
+  
+##########################
+# Plot by genus within firmicutes
+##########################
+  
+  # extracting genus data for  firmicutes
+  firmi <- d.sp%>%
+    filter(str_detect(phylum,regex("firmicutes", ignore_case = T)))%>%
+    # filter(!str_detect(order,regex("lacto", ignore_case = T)))%>%
+    separate(family.etc, into = c("family","genus","species","strain"),sep=";")
+  
+  firmi$.species.name[is.na(firmi$genus)]
+  #   "Streptococcus phage MM1" "Clostridium phage phiCDHM11"  ... 
+  # genus is also in viral sp name as first word
+  firmi <- firmi%>%
+    mutate(genus2=str_extract(.species.name,regex(".*? ")) %>% trimws()) %>% 
+    mutate(genus = trimws(genus)) %>% 
+    mutate(genus.plot = if_else(is.na(genus), genus2, genus))
+  
+  # Phylum independent summary of sigma factors/genome
+  nsig_all <- firmi%>%
+    group_by(tax.id)%>%
+    group_by(n.sigma)%>%
+    summarise(n.genomes=n())%>%
+    mutate(perc=n.genomes/sum(n.genomes))
+  
+  nsig_bacil <- firmi%>%
+    filter(genus.plot=="Bacillus") %>% 
+    group_by(tax.id)%>%
+    group_by(n.sigma)%>%
+    summarise(n.genomes=n())%>%
+    mutate(perc=n.genomes/sum(n.genomes))  
+  
+  
+  
+  
+  nsig_all %>% 
+    ggplot(aes(n.sigma, perc))+
+    geom_col(color = "grey30", fill = "grey70")+
+    geom_col(data = nsig_bacil, fill = "black", color ="black",alpha=.8, width = 0.5)+
+    geom_label(label = paste0("All phages: n=", sum(nsig_all$n.genomes)),
+               x=2,y=.9, color = "black", fill = "grey70", hjust = 0)+
+    geom_label(label = paste0("Firmicute phages: n=", sum(nsig_bacil$n.genomes)), 
+               x=2,y=.8, fill = "grey20", color = "white",hjust = 0)+
+    scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+    ylab("Phage genomes") +
+    xlab("Sigma factors per genome")+
+    theme_classic()+
+    panel_border(color = "black")
+  ggsave(here("vogdb","figures","nSigma_firmiVbacil.png"),
+         width = 6,height = 6)
 
-
+  
 ##########################
 # Plot by phylum
 ##########################
