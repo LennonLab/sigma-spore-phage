@@ -79,7 +79,7 @@ for (cur.sig.host in sig.host.v){
       right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
       # select the data for the current genes
       select(id, fc.sig.host=cur.sig.host, fc.sig.phage=cur.sig.phage) %>%
-      left_join(d.urn, .)
+      left_join(d.urn, ., by = "id")
     
       # mark significance of change
       d.urn <- d.urn %>% 
@@ -92,11 +92,13 @@ for (cur.sig.host in sig.host.v){
       # check direction of change is the same
       d.urn <- d.urn %>% 
       mutate( host.change = case_when(!host.DExed ~ "h.unchaged",
-                                      fc.sig.host > 1 ~ "h.up",
-                                      TRUE ~ "h.down")) %>% 
+                                      fc.sig.host > 2 ~ "h.up",
+                                      fc.sig.host < 0.5 ~ "h.down",
+                                      TRUE ~ "h.unchaged")) %>% 
       mutate( phage.change = case_when(!phage.DExed ~ "p.unchaged",
                                       fc.sig.phage > 1 ~ "p.up",
-                                      TRUE ~ "p.down"))
+                                      fc.sig.phage < 0.5 ~ "p.down",
+                                      TRUE ~ "p.unchaged"))
 
  
     #make contingency table 
@@ -216,46 +218,55 @@ d6.spor.cds <- d6.spor.cds %>%
   mutate(sw.spore  = str_detect(replace_na(category2," "), regex("sporulation", ignore_case = T)))
 
 # record p values
-p.val.spore <- tibble( gene=character(),hg=numeric(), fisher=numeric(), chi=numeric())
+p.val.spore <- tibble()
 
 
 for(cur.gene in colnames(fc)[-1]){
   # pDR110 has noe DEXed genes. so skippin it to prevent error
   if(cur.gene=="pDR110") next
   #prepare data to make contingency table
-  urn <- 
+  d.urn <- 
     p.val%>%
     # add data on sporulation genes
     right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
     # select the data for the current gene
-    select(gene,pBH=cur.gene, sw.spore)%>%
+    select(id, gene,pBH=cur.gene, sw.spore) %>% 
     # remove genes for which sporulation status is unknown
-    filter(!is.na(sw.spore))%>%
-    # # remove genes that were not assigned a p-value for DE
-    # filter(!is.na(pBH))%>%
+    filter(!is.na(sw.spore))
+  
+  #add data on direction of change
+  d.urn <- fc%>%
+    # #filter only cds
+    right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
+    # select the data for the current genes
+    select(id, fc=cur.gene) %>%
+    left_join(d.urn, ., by = "id")
+  
+  d.urn <- d.urn %>% 
     # change genes that were not assigned a p-value for DE to 1 (no change)
     mutate(pBH=if_else(is.na(pBH),1,pBH))%>%
     # define logical vector of DE based on p-value
-    mutate(de=pBH<0.05)%>%
-    # chnge logical vecotrs to meaningful strings
-    mutate(de=ifelse(de, "DExed", "unchaged"),sw.spore=ifelse(sw.spore, "spor.gene", "other"))%>%
-    # select only DE and sporulation for summary
-    select(-pBH,-gene)
+    mutate(upregulated= ((pBH<0.05) & (fc > 2)) )%>%
+    # change logical vecotrs to meaningful strings
+    mutate(upregulated=ifelse(upregulated, "upregulated", "sameORdown"),
+           sw.spore=ifelse(sw.spore, "spor.gene", "other"))
   
   #make contingency table 
-  urn <- table(urn)[2:1,] #to control order
-  
-  # sporulation genes observed (DExed)
-  x <- urn[["spor.gene","DExed"]]
+  urn <- d.urn %>% 
+    select(sw.spore, upregulated) %>% 
+    table()
+
+  # sporulation genes observed (upregulated)
+  x <- urn["spor.gene","upregulated"]
   
   # total sporulation genes
-  m<- rowSums(urn)[["spor.gene"]]
+  m<- rowSums(urn)["spor.gene"]
   
   # non-sporulation genes
   n <- rowSums(urn)[["other"]]
   
-  #number of DE genes
-  k <- colSums(urn)[["DExed"]]
+  #number of upregulated genes
+  k <- colSums(urn)[["upregulated"]]
   
   z <- 0:min(k,m)
   
@@ -333,7 +344,7 @@ p <- d.hyp %>%
   labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
   theme(plot.caption = element_text(colour = "grey40"))+
   scale_y_continuous(expand = c(0, 0))+
-  xlab("Differentially expressed sporulation genes")+
+  xlab("upregulated sporulation genes")+
   ylab("hypergeometric PDF")
 
 p
