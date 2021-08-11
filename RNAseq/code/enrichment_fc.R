@@ -351,3 +351,152 @@ p
 ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, height = 4)
 
 #---------------------
+
+#   Are sigB regulated genes enriched in the sample of deferentially expressed genes?
+# the FDR corrected p-values for indicating significantly DExd genes.
+
+# Regulons by subtiwiki
+sw.regulons <- 
+  read_csv(here("RNAseq/data/annotations/SW_regulations.csv"))
+
+b.regulon <- sw.regulons %>% 
+  filter(str_detect(regulon, "SigB")) %>% 
+  pull(`locus tag`)
+
+d6.spor.cds <- d6.spor.cds %>% 
+  mutate(sigB =  locus_tag.168 %in% b.regulon)
+
+# record p values
+p.val.sigB <- tibble()
+
+
+for(cur.gene in colnames(fc)[-1]){
+  # pDR110 has noe DEXed genes. so skippin it to prevent error
+  if(cur.gene=="pDR110") next
+  #prepare data to make contingency table
+  d.urn <- 
+    p.val%>%
+    # add data on sporulation genes
+    right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
+    # select the data for the current gene
+    select(id, gene,pBH=cur.gene, sigB) %>% 
+    # remove genes for which sporulation status is unknown
+    filter(!is.na(sigB))
+  
+  #add data on direction of change
+  d.urn <- fc%>%
+    # #filter only cds
+    right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
+    # select the data for the current genes
+    select(id, fc=cur.gene) %>%
+    left_join(d.urn, ., by = "id")
+  
+  d.urn <- d.urn %>% 
+    # change genes that were not assigned a p-value for DE to 1 (no change)
+    mutate(pBH=if_else(is.na(pBH),1,pBH))%>%
+    # define logical vector of DE based on p-value
+    mutate(upregulated= ((pBH<0.05) & (fc > 2)) )%>%
+    # change logical vecotrs to meaningful strings
+    mutate(upregulated=ifelse(upregulated, "upregulated", "sameORdown"),
+           sigB=ifelse(sigB, "sigB.reg", "other"))
+  
+  #make contingency table 
+  urn <- d.urn %>% 
+    select(sigB, upregulated) %>% 
+    table()
+  
+  # sporulation genes observed (upregulated)
+  x <- urn["sigB.reg","upregulated"]
+  
+  # total sporulation genes
+  m<- rowSums(urn)["sigB.reg"]
+  
+  # non-sporulation genes
+  n <- rowSums(urn)[["other"]]
+  
+  #number of upregulated genes
+  k <- colSums(urn)[["upregulated"]]
+  
+  z <- 0:min(k,m)
+  
+  chi <- capture.output(summary(urn))
+  fisher <- signif(fisher.test(urn)$p.value,4)
+  hg.left <- signif(phyper(x-1, m, n, k, lower.tail =T),5) 
+  hg.right <- signif(phyper(x-1, m, n, k, lower.tail =F),5) 
+  
+  #save p-values
+  p.val.sigB <- 
+    tibble( gene=cur.gene,
+            sigB.reg=m,
+            DEG=k,
+            sigB.DEG=x,
+            total.gene=n+m,
+            hg.left=hg.left,
+            hg.right=hg.right,
+            fisher=fisher,
+            chi=str_extract(chi[4], "value = .*")%>%parse_number())%>%
+    bind_rows(p.val.sigB,.)
+  
+  
+}
+
+
+
+# parameters to plot PDF
+p.val.sigB <- 
+  p.val.sigB %>% 
+  mutate(M = sigB.reg,
+         N = total.gene-sigB.reg,
+         K = DEG,
+         X = pmin(K,M),
+         gene = paste0("P[IPTG]-", gene))  
+#adjust p values (joint for left and right)
+p.val.sigB <- p.val.sigB %>% 
+  select(gene, hg.left, hg.right) %>% 
+  pivot_longer(-gene) %>% 
+  mutate(adj.p=p.adjust(value,  method = "BH")) %>% 
+  pivot_wider(-value, names_from = "name", values_from = "adj.p") %>% 
+  rename(adj.hg.left = hg.left, adj.hg.right = hg.right) %>% 
+  left_join(p.val.sigB, .)
+
+
+# calculate PDF per interaction
+max.x <- max(p.val.sigB$X)
+d.hyp <- tibble(x= seq(max.x))
+
+for(i in 1:nrow(p.val.sigB)){
+  
+  d.hyp[, p.val.sigB$gene[i]] <- 
+    with(p.val.sigB,
+         dhyper(x = seq(max.x), m = M[i], n = N[i], k = K[i]))
+}
+# adjustment for panel order
+p.val.sigB <- 
+  p.val.sigB %>% 
+  mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3))
+# plot
+p <- d.hyp %>% 
+  pivot_longer(-x, names_to = "gene") %>% 
+  filter(value > 1e-8) %>%
+  mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3)) %>% 
+  ggplot(aes(x, value))+
+  geom_area(fill = "grey70", color = "grey30")+
+  geom_vline(data = p.val.sigB, aes(xintercept = sigB.DEG),
+             color = "red", size = 1)+
+  geom_text(data = p.val.sigB, aes(x = sigB.DEG, label =  stars.pval(adj.hg.right)), 
+            size = 10, y = Inf, vjust = 1, hjust = 1, color = "red")+
+  geom_text(data = p.val.sigB, aes(x = sigB.DEG, label =  stars.pval(adj.hg.left)), 
+            size = 10, y = Inf, vjust = 1, hjust = 0, color = "blue")+
+  facet_wrap(~ gene, scales = "free", nrow = 3, dir = 'h', labeller = label_parsed)+
+  theme_classic()+
+  panel_border(color = "black")+
+  labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
+  theme(plot.caption = element_text(colour = "grey40"))+
+  scale_y_continuous(expand = c(0, 0))+
+  xlab("upregulated sigB genes")+
+  ylab("hypergeometric PDF")
+
+p
+ggsave(here("RNAseq/plots/enrichment_sigB.png"),plot = p, width = 4, height = 4)
+
+#---------------------
