@@ -3,6 +3,9 @@ library(tidyverse)
 library(cowplot)
 library(gtools)
 
+
+# Import data -------------------------------------------------------------
+
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
 f <- 
@@ -28,7 +31,10 @@ fc <- d2
 rm(de,d,d2)
 
 
-#------------------
+
+# * arrange data -------------------------------------------------
+
+
 # locus tags
 # list matching delta6 locus_tags with 168:  
 
@@ -40,12 +46,15 @@ d6.spor.cds <-
   filter(str_detect(locus_tag.168,"BSU"))%>%
   filter(!str_detect(locus_tag.168,"RNA"))
 
-#------------------
+# Hypergeometric enrichment ------------------
 # The Hypergeometric Distribution   
 # Using the example given by R stats package:
 # This distribution decribes the probability of sampling, without replacment, 
 # of X white balls from a (finite) urn containing M white and K black balls. 
 # Sample size is N.
+
+# * overlap -----------------------------------------------------------------
+
 
 # The question we pose here is:
   # Are DExed genes when inducing the host sigF and sigG 
@@ -209,7 +218,7 @@ p <- d.hyp %>%
 p
 ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = p, width = 8, height = 4)
 
-#---------------------
+# * sporul.gene enrich ---------------------
 #   Are sporulation genes enriched in the sample of deferentially expressed genes?
 # the FDR corrected p-values for indicating significantly DExd genes.
 
@@ -350,7 +359,11 @@ p <- d.hyp %>%
 p
 ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, height = 4)
 
-#---------------------
+
+# * SigB enrichment ----------------------------------------------------------
+
+
+
 
 #   Are sigB regulated genes enriched in the sample of deferentially expressed genes?
 # the FDR corrected p-values for indicating significantly DExd genes.
@@ -499,4 +512,4 @@ p <- d.hyp %>%
 p
 ggsave(here("RNAseq/plots/enrichment_sigB.png"),plot = p, width = 4, height = 4)
 
-#---------------------
+# END ---------------------
