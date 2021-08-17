@@ -214,6 +214,8 @@ ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = p, width = 8, height = 
 # export analysis test results
 write_csv(p.val.hostBG.cds,
           here("RNAseq/data/overlap_enrichment.csv"))
+
+
 # * sporul.gene enrich ---------------------
 #   Are sporulation genes enriched in the sample of deferentially expressed genes?
 # the FDR corrected p-values for indicating significantly DExd genes.
@@ -235,7 +237,7 @@ for(cur.gene in colnames(fc)[-1]){
     # add data on sporulation genes
     right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
     # select the data for the current gene
-    select(id, gene,pBH=cur.gene, sw.spore) %>% 
+    select(id, gene,pBH=all_of(cur.gene), sw.spore) %>% 
     # remove genes for which sporulation status is unknown
     filter(!is.na(sw.spore))
   
@@ -313,7 +315,9 @@ p.val.spore <- p.val.spore %>%
   mutate(adj.p=p.adjust(value,  method = "BH")) %>% 
     pivot_wider(-value, names_from = "name", values_from = "adj.p") %>% 
   rename(adj.hg.left = hg.left, adj.hg.right = hg.right) %>% 
-    left_join(p.val.spore, .)
+    left_join(p.val.spore, .) %>% 
+  mutate(pnl=case_when(gene %in% c("sigF","sigG") ~ "host",
+                       TRUE ~ "phage") )
 
 
 # calculate PDF per interaction
@@ -326,15 +330,16 @@ for(i in 1:nrow(p.val.spore)){
     with(p.val.spore,
          dhyper(x = seq(max.x), m = M[i], n = N[i], k = K[i]))
 }
-# adjustment for panel order
-p.val.spore <- 
-  p.val.spore %>% 
-    mutate(gene = fct_relevel(gene, "SP10", after = 3))
+# # adjustment for panel order
+# p.val.spore <- 
+#   p.val.spore %>% 
+#     mutate(gene = fct_relevel(gene, "SP10", after = 3))
 # plot
 p <- d.hyp %>% 
   pivot_longer(-x, names_to = "gene") %>% 
   filter(value > 1e-8) %>%
-  mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3)) %>% 
+  mutate(pnl=case_when(gene %in% c("sigF","sigG") ~ "host",
+                       TRUE ~ "phage") ) %>% 
   ggplot(aes(x, value))+
   geom_area(fill = "grey70", color = "grey30")+
   geom_vline(data = p.val.spore, aes(xintercept = spor.DEG),
@@ -343,7 +348,7 @@ p <- d.hyp %>%
             size = 10, y = Inf, vjust = 1, hjust = 1, color = "red")+
   geom_text(data = p.val.spore, aes(x = spor.DEG, label =  stars.pval(adj.hg.left)), 
             size = 10, y = Inf, vjust = 1, hjust = 0, color = "blue")+
-  facet_wrap(~ gene, scales = "free", nrow = 3, dir = 'h', labeller = label_parsed)+
+  facet_wrap(~paste0(pnl,": ",gene), scales = "free", nrow = 3, dir = 'h', labeller = label_parsed)+
   theme_classic()+
   panel_border(color = "black")+
   labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
@@ -357,7 +362,7 @@ ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, heig
 
 # export analysis test results
 write_csv(p.val.spore,
-          here("RNAseq/data/sporulation_gene_enrchment.csv"))
+          here("RNAseq/data/sporulation_gene_enrichment.csv"))
 
 # * SigB enrichment ----------------------------------------------------------
 
