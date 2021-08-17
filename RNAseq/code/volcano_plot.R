@@ -97,8 +97,8 @@ p <-  d.all %>%
   panel_border(color = "black")+
   xlab("log2 fold change") + 
   ylab("-log10 adjusted p-value") +
-  theme(legend.position = "bottom")+
-  labs(color = "sporulation gene")
+  theme(legend.position = "right")+
+  labs(color = "sporulation\ngene")
 
 ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
        width = 8, height = 6)

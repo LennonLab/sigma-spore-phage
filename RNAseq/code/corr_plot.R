@@ -67,7 +67,7 @@ sig.phage.v <- c("ELDg168","ELDg169","Goe3","SP10")#,"sigF","sigG")
 
 max.fc.log2 <- max(fc[-1], na.rm = T) %>% log2() %>% round()
 min.fc.log2 <- min(fc[-1], na.rm = T) %>% log2() %>% round()
-brx <- 2^seq(from = -15, to = 15, length.out = 7)
+brx <- c(-15, -10,-5,0,5,10,15)
 
 # rsave plots
 l.plots <- list()
@@ -107,19 +107,15 @@ for (cur.sig.host in sig.host.v){
       l.plots[[plot.name]] <- 
       d.plot %>% 
         mutate(pnl = plot.name) %>% 
-        ggplot(aes(x=fc.host, y=fc.phage))+
-        geom_hline(yintercept = 1, color="grey20")+
-        geom_vline(xintercept = 1, color="grey20")+
+        ggplot(aes(x=log2(fc.host), y=log2(fc.phage)))+
+        geom_hline(yintercept = 0, color="grey20")+
+        geom_vline(xintercept = 0, color="grey20")+
         geom_abline(slope = 1, intercept = 0, linetype=2, color="lightsteelblue")+
         geom_smooth(method = 'lm', formula = 'y ~ x')+
-        geom_point(aes(color = `Differntial expression significance`), shape=21,size=1)+
-        scale_y_continuous(trans = "log2",
-                           breaks = brx,
-                           labels = label_math(.x),
+        geom_point(aes(color = `Differntial expression significance`),alpha = 0.5)+
+        scale_y_continuous(breaks = brx,
                            limits = c(min(brx), max(brx)))+
-        scale_x_continuous(trans = "log2",
-                           breaks = brx,
-                           labels = label_math(.x),
+        scale_x_continuous(breaks = brx,
                            limits = c(min(brx), max(brx)))+
 
         
@@ -129,7 +125,7 @@ for (cur.sig.host in sig.host.v){
         theme_classic(base_size = 12)+
         panel_border(color = "black")+
         scale_color_viridis_d()+
-        theme(legend.position="bottom")
+        theme(legend.position="right")
   }
 }
 
@@ -149,17 +145,16 @@ prow <- plot_grid(
   nrow = 1
 )
 
-
-
 # extract the legend from one of the plots
 legend <- get_legend(
   # create some space to the left of the legend
-  l.plots[[1]] + theme(legend.box.margin = margin( 12, 0, 0))
+  l.plots[[1]] + theme(legend.box.margin = margin(0, 0, 0, 12))+
+    labs(colour="differential\nexpression\nsignificance") 
 )
 
-# add the legend to the row we made earlier.
-p <- plot_grid(prow, legend, rel_heights = c(2, .2), ncol = 1)
-
+# add the legend to the row we made earlier. Give it one-third of 
+# the width of one plot (via rel_widths).
+p <- plot_grid(prow, legend, rel_widths = c(2, .5))
 
 ggsave(here("RNAseq/plots/correlations.png"),plot = p, width = 8, height = 4)
 
