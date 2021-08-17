@@ -80,7 +80,7 @@ for (cur.sig.host in sig.host.v){
       # #filter only cds
       right_join(., d6.spor.cds, by=c("id"="locus_tag.d6"))%>%
       # select the data for the current genes
-      select(id, p.sig.host=cur.sig.host,p.sig.phage=cur.sig.phage)
+      select(id, p.sig.host=all_of(cur.sig.host),p.sig.phage=all_of(cur.sig.phage))
       
       #add data on direction of change
     d.urn <- fc%>%
@@ -154,11 +154,13 @@ for (cur.sig.host in sig.host.v){
 # parameters to plot PDF
 p.val.hostBG.cds <- 
   p.val.hostBG.cds %>% 
+  mutate(pnl=case_when(phage.gene %in% c("sigF","sigG") ~ "host",
+                       TRUE ~ "phage") ) %>% 
     mutate(M = host.DEG,
            N = total-host.DEG,
            K = phage.DEG,
            X = pmin(K,M),
-           phage.gene = paste0("P[IPTG]-", phage.gene),
+           phage.gene = paste0(pnl,": ", phage.gene),
            host.gene = paste0("overlap.set:", host.gene),
            who = paste(host.gene, phage.gene, sep = "_"))
 
@@ -183,19 +185,10 @@ d.hyp[, p.val.hostBG.cds$who[i]] <-
   dhyper(x = seq(max.x), m = M[i], n = N[i], k = K[i]))
 }
 
-# adjustment for panel order
-p.val.hostBG.cds <- 
-  p.val.hostBG.cds %>% 
-  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-SP10", after = 3)) %>% 
-  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-sigF", after = Inf))
- 
-
 # plot
 p <- d.hyp %>% 
   pivot_longer(-x) %>% 
   separate(name, into = c("host.gene", "phage.gene"), sep = "_", remove = F) %>% 
-  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-SP10", after = 3)) %>% 
-  mutate(phage.gene = fct_relevel(phage.gene, "P[IPTG]-sigF", after = Inf)) %>% 
   filter(value > 1e-8) %>% 
   ggplot(aes(x, value))+
   geom_area(fill = "grey70", color = "grey30")+
@@ -218,6 +211,9 @@ p <- d.hyp %>%
 p
 ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = p, width = 8, height = 4)
 
+# export analysis test results
+write_csv(p.val.hostBG.cds,
+          here("RNAseq/data/overlap_enrichment.csv"))
 # * sporul.gene enrich ---------------------
 #   Are sporulation genes enriched in the sample of deferentially expressed genes?
 # the FDR corrected p-values for indicating significantly DExd genes.
@@ -309,7 +305,7 @@ p.val.spore <-
          N = total.gene-spor.genes,
          K = DEG,
          X = pmin(K,M),
-         gene = paste0("P[IPTG]-", gene))  
+         gene =  gene)  
   #adjust p values (joint for left and right)
 p.val.spore <- p.val.spore %>% 
   select(gene, hg.left, hg.right) %>% 
@@ -333,7 +329,7 @@ for(i in 1:nrow(p.val.spore)){
 # adjustment for panel order
 p.val.spore <- 
   p.val.spore %>% 
-    mutate(gene = fct_relevel(gene, "P[IPTG]-SP10", after = 3))
+    mutate(gene = fct_relevel(gene, "SP10", after = 3))
 # plot
 p <- d.hyp %>% 
   pivot_longer(-x, names_to = "gene") %>% 
@@ -359,6 +355,9 @@ p <- d.hyp %>%
 p
 ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, height = 4)
 
+# export analysis test results
+write_csv(p.val.spore,
+          here("RNAseq/data/sporulation_gene_enrchment.csv"))
 
 # * SigB enrichment ----------------------------------------------------------
 

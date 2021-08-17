@@ -1,0 +1,11 @@
+host.gene,phage.gene,host.DEG,phage.DEG,shared.DEG,total,hg.left,hg.right,pnl,M,N,K,X,who,adj.hg.left,adj.hg.right
+overlap.set:sigF,phage: ELDg168,2012,685,272,3885,1.0543e-12,1,phage,2012,1873,685,685,overlap.set:sigF_phage: ELDg168,4.2172e-12,1
+overlap.set:sigF,phage: ELDg169,2012,2530,1546,3885,1,1.6676000000000002e-57,phage,2012,1873,2530,2012,overlap.set:sigF_phage: ELDg169,1,1.1117333333333336e-56
+overlap.set:sigF,phage: Goe3,2012,24,13,3885,0.51053,0.48947,phage,2012,1873,24,24,overlap.set:sigF_phage: Goe3,0.9282363636363636,0.9282363636363636
+overlap.set:sigF,phage: SP10,2012,48,24,3885,0.34614,0.65386,phage,2012,1873,48,48,overlap.set:sigF_phage: SP10,0.7692,1
+overlap.set:sigF,host: sigG,2012,1452,1286,3885,1,2.721299999999998e-302,host,2012,1873,1452,1452,overlap.set:sigF_host: sigG,1,5.442599999999996e-301
+overlap.set:sigG,phage: ELDg168,1416,685,175,3885,9.2418e-12,1,phage,1416,2469,685,685,overlap.set:sigG_phage: ELDg168,3.0806000000000006e-11,1
+overlap.set:sigG,phage: ELDg169,1416,2530,1143,3885,1,1.212e-56,phage,1416,2469,2530,1416,overlap.set:sigG_phage: ELDg169,1,6.06e-56
+overlap.set:sigG,phage: Goe3,1416,24,12,3885,0.87823,0.12177,phage,1416,2469,24,24,overlap.set:sigG_phage: Goe3,1,0.34791428571428573
+overlap.set:sigG,phage: SP10,1416,48,21,3885,0.81836,0.18164,phage,1416,2469,48,48,overlap.set:sigG_phage: SP10,1,0.4541
+overlap.set:sigG,host: sigF,1416,2044,1266,3885,1,2.9256999999999985e-293,host,1416,2469,2044,1416,overlap.set:sigG_host: sigF,1,2.9256999999999986e-292
