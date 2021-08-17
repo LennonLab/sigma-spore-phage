@@ -57,7 +57,7 @@ d.all <-
   mutate(p=if_else(is.na(p),1,p))%>%
   filter(induced != "pDR110")
 
-# label 20 most significant genes of ech treatment
+# label 20 most significant genes of each treatment
 gene_labs <- d.all %>%
   mutate(induced = paste0("P[IPTG]-", induced)) %>% 
   filter(p<0.05) %>% 
@@ -66,29 +66,32 @@ gene_labs <- d.all %>%
 
 # sum Dexed
 gene_dexed <- d.all %>%
-  mutate(induced = paste0("P[IPTG]-", induced)) %>% 
-  mutate(induced = fct_relevel(induced, "P[IPTG]-sigF", after = Inf)) %>% 
-  mutate(induced = fct_relevel(induced, "P[IPTG]-sigG", after = Inf)) %>% 
   # define logical vector of DE based on p-value
   mutate(upreg= ((p<0.05) & (fc > 2)) )%>%
   mutate(downreg= ((p<0.05) & (fc < 0.5)) )%>%
   group_by(induced) %>%
-  summarise(up=sum(upreg), down = sum(downreg))
+  summarise(up=sum(upreg), down = sum(downreg)) %>% 
+  mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
+                       TRUE ~ "phage") )  %>% 
+  mutate(strip = paste0(pnl,": ",induced)) %>% 
+  mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2))
   
 
 p <-  d.all %>%
-  mutate(induced = paste0("P[IPTG]-", induced)) %>% 
-  mutate(induced = fct_relevel(induced, "P[IPTG]-sigF", after = Inf)) %>% 
-  mutate(induced = fct_relevel(induced, "P[IPTG]-sigG", after = Inf)) %>% 
+  mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
+                       TRUE ~ "phage") ) %>%  
+  mutate(strip = paste0(pnl,": ",induced)) %>% 
+  mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>% 
+
   ggplot(aes(log2(fc), -log10(p)))+
   geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=Inf,
-            fill = "grey80", alpha = 0.5)+
+            fill = "grey90", alpha = 0.5)+
   geom_hline(yintercept = -log10(0.05), color = "grey", linetype = 2)+
   geom_text(data = gene_dexed, aes(label = paste0("\n up=", up, "\n down=",down)), 
             x= -Inf, y=Inf, vjust= 1, hjust = 0)+
   geom_point(aes(color = sw.spore), size=1, alpha = 0.5)+
   # ggrepel::geom_text_repel(data = gene_labs, aes(label = gene), max.overlaps = 20)+
-  facet_wrap(~induced, scales = "free_y", labeller = label_parsed)+
+  facet_wrap(~strip, scales = "free_y", labeller = label_parsed)+
   scale_colour_viridis_d(direction = -1)+
   theme_classic()+
   panel_border(color = "black")+
@@ -99,5 +102,10 @@ p <-  d.all %>%
 
 ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
        width = 8, height = 6)
+
+save(p, file = here("RNAseq/plots/volcano-plot.Rdata"))
+
+
+# END ---------------------------------------------------------------------
 
          
