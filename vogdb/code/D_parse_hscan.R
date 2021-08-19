@@ -240,6 +240,7 @@ n.labs <- d.faa%>%
 
 tigr.spore=c("spore_sigmaK","spore_sigmaE","spore_sigF","spore_sigG")
 
+
 p.phylum <- 
   d.faa%>%
   # arrange by frequency of sigma factors
@@ -274,6 +275,11 @@ p <- p.phylum +
           plot = p, width = 12,height = 8)
 
   ###
+  n.gene.phylum <- d.faa%>%
+    mutate(phylum=str_remove(phylum,"/.*"))%>%
+    group_by(phylum)%>%
+    summarise(n=n(),.groups = "drop") %>% 
+    mutate(phyl.lab = paste0(phylum,"\n(n=",n,")"))
 # summarize by spore function
   d.plot <- 
     d.faa%>%
@@ -290,10 +296,11 @@ p <- p.phylum +
     mutate(perc=n/sum(n)) %>% 
     
     mutate(phylum=str_remove(phylum,"/.*"))%>%
-    mutate(phylum=fct_reorder(phylum,n))
+    mutate(phylum=fct_reorder(phylum,n)) %>% 
+    left_join(., n.gene.phylum, by = "phylum")
   
   p.phylum <- d.plot %>% 
-    ggplot(aes(x=phylum, y = perc,fill = sigma)) + 
+    ggplot(aes(x=phyl.lab, y = perc,fill = sigma)) + 
     geom_bar(position="fill", stat="identity", color = "black", width = 0.5) +
     
     xlab("Host Phylum") +
