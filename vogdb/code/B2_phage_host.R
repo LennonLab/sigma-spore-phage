@@ -194,9 +194,9 @@ p.phylum <-
   theme_classic(base_size = 13)+
   panel_border(color = "black")
 
-p.phylum+
-  ggsave2(here("vogdb","figures","sigma_HostPhylum.png"),
-          width = 4,height = 8)
+
+  ggsave2(filename = here("vogdb","figures","sigma_HostPhylum.png"),
+          plot = p.phylum, width = 4,height = 8)
 
 
 # make contingency table 
@@ -230,7 +230,7 @@ n.labs <- d.sp%>%
 
 
 
-d.sp %>%
+p.sp <-  d.sp %>%
   filter(! phylum %in% phyla_rm) %>%
   filter (!is.na(order)) %>% 
   ggplot( aes(n.sigma, group = order)) + 
@@ -242,9 +242,10 @@ d.sp %>%
   facet_wrap(~order)+
   theme_classic()+
   panel_border()+
-  ggtitle("phage sigma factor content by host order")+
+  ggtitle("phage sigma factor content by host order")
+
   ggsave2(here("vogdb","figures","sigma_HostOrder.png"),
-          width = 10,height = 6)
+          plot = p.sp, width = 10,height = 6)
 
 ##########################
 # Plot by genus within firmicutes
@@ -300,10 +301,11 @@ firmi%>%
   theme_classic(base_size = 13)+
   panel_border(color = "black")
 
-p.genus+
-  ggtitle("phage sigma factor content by host genus",
-          "Firmicute infecting phages")+
+
   ggsave2(here("vogdb","figures","sigma_HostGenus_firmicutes.png"),
+          plot = p.genus+
+            ggtitle("phage sigma factor content by host genus",
+                    "Firmicute infecting phages"),
           width = 7,height = 7)
 
 
@@ -394,14 +396,13 @@ p.vir <- d.vir %>%
   panel_border(color = "black")
   
 
-
-p.vir+
-  ggtitle("phage sigma factor content by viral family")+
   ggsave2(here("vogdb","figures","sigma_ViralFamily.png"),
+          plot = p.vir+
+            ggtitle("phage sigma factor content by viral family"),
           width = 10,height = 6)
 
 # Who are the siphoviruses with 3 sigma factors?
-d.sp%>%
+firmi%>%
   filter(viral.family=="Siphoviridae")%>%
   filter(n.sigma>2)%>%
   arrange(desc(n.sigma)) %>% 
@@ -432,11 +433,11 @@ right_col <-
             rel_heights = c(4.5, 1),
             ncol = 1)
 
-plot_grid(p.phylum,p.genus,right_col,
+p <-  plot_grid(p.phylum,p.genus,right_col,
           rel_widths = c(1.5, 3, 1.3),
           nrow = 1, labels = LETTERS)
   ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
-          width = 12,height = 10)
+          plot = p, width = 12,height = 10)
 
 
   
@@ -498,16 +499,19 @@ plot_grid(p.phylum,p.genus,right_col,
 
   p.tax <- dplot %>% 
     ggplot(aes(n.sigma, perc, fill = host_tax))+
-    geom_col(color = "black", position = position_dodge2(padding = 0.2), width = 0.8)+
+    geom_col(color = "black", position = position_dodge2(padding = 0.4), width = 0.7)+
     scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
-    ylab("Phage genomes") +
-    xlab("Sigma factors per genome")+
+    ylab("Phage Genomes") +
+    xlab("Sigma Factors per Genome")+
     theme_classic()+
     panel_border(color = "black")+
     # scale_fill_grey(start = 0.8,end = 0.2, name = "Host taxa")+
-    scale_fill_viridis_d( name = "Host taxa", direction = -1)+
-    theme(legend.position = c(0.75,0.8),
-          legend.key.size = unit(0.15, 'in'))
+    scale_fill_viridis_d( name = "Host Taxa", direction = -1)+
+    theme(legend.position = c(1,1),
+          legend.justification = c(1,1),
+          legend.background = element_blank(),
+          legend.key.size = unit(0.1, 'in'))
+          
   ggsave(filename = here("vogdb","figures","nSigma_sum.png"),
         plot = p.tax, width = 3,height = 3)
 
@@ -518,15 +522,17 @@ plot_grid(p.phylum,p.genus,right_col,
     select(viral.family, n.sigma, perc) %>% 
     complete(n.sigma, viral.family, fill = list(perc=0)) %>% 
     ggplot(aes(n.sigma, perc, fill = viral.family))+
-    geom_col(color = "black", position = position_dodge2(padding = 0.2), width = 0.8)+
+    geom_col(color = "black", position = position_dodge2(padding = 0.4), width = 0.7)+
     scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
-    ylab("Phage genomes") +
-    xlab("Sigma factors per genome")+
+    ylab("Phage Genomes") +
+    xlab("Sigma Factors per Genome")+
     theme_classic()+
     panel_border(color = "black")+
     # scale_fill_grey(start = 0.8,end = 0.2, name = "Host taxa")+
-    scale_fill_viridis_d( name = "viral family", direction = -1)+
-    theme(legend.position = c(0.7,0.8),
+    scale_fill_viridis_d( name = "Viral Family", direction = -1)+
+    theme(legend.position = c(1,1),
+          legend.justification = c(1,1),
+          legend.background = element_blank(),
           legend.key.size = unit(0.1, 'in'))
   
   ggsave(filename = here("vogdb","figures","nSigma_virFam.png"),
