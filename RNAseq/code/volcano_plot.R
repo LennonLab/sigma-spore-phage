@@ -60,7 +60,7 @@ d.all <-
 
 # label 20 most significant genes of each treatment
 gene_labs <- d.all %>%
-  mutate(induced = paste0("P[IPTG]-", induced)) %>% 
+  # mutate(induced = paste0("P[IPTG]-", induced)) %>% 
   filter(p<0.05) %>% 
   group_by(induced) %>%
   slice_max( n = 10, order_by =  fc)
@@ -74,15 +74,15 @@ gene_dexed <- d.all %>%
   summarise(up=sum(upreg), down = sum(downreg)) %>% 
   mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
                        TRUE ~ "phage") )  %>% 
-  mutate(strip = paste0(pnl,": ",induced)) %>% 
-  mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2))
+  mutate(strip = paste0(pnl,": ",induced)) 
+  # mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2))
   
 
 p <-  d.all %>%
   mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
                        TRUE ~ "phage") ) %>%  
   mutate(strip = paste0(pnl,": ",induced)) %>% 
-  mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>% 
+  # mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>% 
 
   ggplot(aes(log2(fc), -log10(p)))+
   geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=Inf,
@@ -98,11 +98,11 @@ p <-  d.all %>%
   panel_border(color = "black")+
   xlab(expression(log[2]~FC)) + 
   ylab(expression(-log[10]~P~value)) + 
-  theme(legend.position = "right",
-        legend.text = element_text(size=14),
-        legend.title = element_text(size = 14))+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size=12),
+        legend.title = element_text(size = 12))+
   labs(color = "sporulation\ngene")+
-  guides(color = guide_legend(override.aes = list(size = 4, alpha = 1)))
+  guides(color = guide_legend(nrow = 2, override.aes = list(size = 4, alpha = 1)))
 
 ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
        width = 6, height = 6)

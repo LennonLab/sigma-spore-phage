@@ -148,18 +148,18 @@ prow <- plot_grid(
 # extract the legend from one of the plots
 legend <- get_legend(
   # create some space to the left of the legend
-  l.plots[[1]] + theme(legend.box.margin = margin(12, 0, 0, 0),
+  l.plots[[1]] + theme(plot.margin = unit(c(0, 0, 0, 0), "cm"),
                        legend.position = "bottom",
-                       legend.text = element_text(size=14),
-                       legend.title = element_text(size = 14))+
+                       legend.text = element_text(size=12),
+                       legend.title = element_text(size = 12))+
     labs(colour="differential\nexpression\nsignificance") +
-    guides(color = guide_legend(nrow = 2,
+    guides(color = guide_legend(nrow = 4,
                                 override.aes = list(size = 4, alpha = 1)))
 )
 
 # add the legend to the row we made earlier. Give it one-third of 
 # the width of one plot (via rel_widths).
-p <- plot_grid(prow, legend, rel_heights =  c(2, .5), ncol = 1)
+p <- plot_grid(prow, legend, rel_heights =  c(1, .25), ncol = 1,scale = c(1,.1))
 
 ggsave(here("RNAseq/plots/correlations.png"),plot = p, width = 3, height = 6)
 
@@ -186,11 +186,19 @@ prow <- plot_grid(
 
 
 # extract the legend from one of the plots
-# use legnd from above
-  # legend <- get_legend(
-  #   # create some space to the left of the legend
-  #   l.plots[[1]] + theme(legend.box.margin = margin( 12, 0, 0))
-  # )
+
+# extract the legend from one of the plots
+legend <- get_legend(
+  # create some space to the left of the legend
+  l.plots[[1]] + theme(plot.margin = unit(c(0, 0, 0, 0), "cm"),
+                       legend.position = "bottom",
+                       legend.text = element_text(size=12),
+                       legend.title = element_text(size = 12))+
+    labs(colour="differential\nexpression\nsignificance") +
+    guides(color = guide_legend(nrow = 2,
+                                override.aes = list(size = 4, alpha = 1)))
+)
+
 
 # add the legend to the row we made earlier.
 p <- plot_grid(prow, legend, rel_heights = c(4, .4), ncol = 1)
