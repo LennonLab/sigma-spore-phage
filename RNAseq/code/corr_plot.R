@@ -67,7 +67,8 @@ sig.phage.v <- c("ELDg168","ELDg169","Goe3","SP10")#,"sigF","sigG")
 
 max.fc.log2 <- max(fc[-1], na.rm = T) %>% log2() %>% round()
 min.fc.log2 <- min(fc[-1], na.rm = T) %>% log2() %>% round()
-brx <- c(-15, -10,-5,0,5,10,15)
+# brx <- c(-15, -10,-5,0,5,10,15)
+brx <- c( -10,0,10)
 
 # rsave plots
 l.plots <- list()
@@ -88,10 +89,11 @@ for (cur.sig.host in sig.host.v){
       # define logical vector of DE based on p-value
       mutate(sig.host = sig.host <0.05)%>%
       mutate(sig.phage = sig.phage <0.05) %>% 
-      mutate(`Differntial expression significance`  =  case_when(sig.host & sig.phage ~ "both",
+      mutate(signifcance  =  case_when(sig.host & sig.phage ~ "both",
                                     sig.host ~ "host only",
                                     sig.phage ~ "phage only",
-                                    TRUE ~ "neither"))
+                                    TRUE ~ "neither")) %>% 
+      mutate(signifcance = fct_relevel(signifcance, "host only","phage only","both", "neither"))
       
       d.plot <- 
       # based on list of loci get fold-change data for this pair
@@ -103,7 +105,7 @@ for (cur.sig.host in sig.host.v){
       
       
       # plot
-      plot.name <- paste(cur.sig.phage,cur.sig.host, sep="_x_")
+      plot.name <- paste(cur.sig.phage,cur.sig.host, sep=" vs. ")
       l.plots[[plot.name]] <- 
       d.plot %>% 
         mutate(pnl = plot.name) %>% 
@@ -111,16 +113,14 @@ for (cur.sig.host in sig.host.v){
         geom_hline(yintercept = 0, color="grey20")+
         geom_vline(xintercept = 0, color="grey20")+
         geom_abline(slope = 1, intercept = 0, linetype=2, color="lightsteelblue")+
-        geom_smooth(method = 'lm', formula = 'y ~ x')+
-        geom_point(aes(color = `Differntial expression significance`),alpha = 0.5)+
+        geom_point(aes(color = signifcance),alpha = 0.5)+
+        geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
         scale_y_continuous(breaks = brx,
-                           limits = c(min(brx), max(brx)))+
+                           limits = c(min.fc.log2,max.fc.log2))+
         scale_x_continuous(breaks = brx,
-                           limits = c(min(brx), max(brx)))+
-
-        
-        ylab(paste(cur.sig.phage, "(log2 fold change)"))+
-        xlab(paste(cur.sig.host, "(log2 fold change)"))+
+                           limits = c(min.fc.log2,max.fc.log2))+
+        xlab(bquote(.(cur.sig.host)~(log[2]~FC))) +
+        ylab(bquote(.(cur.sig.phage)~(log[2]~FC))) +
         facet_wrap(~pnl)+
         theme_classic(base_size = 12)+
         panel_border(color = "black")+
@@ -142,21 +142,26 @@ prow <- plot_grid(
   align = 'vh',
   # labels = c("A", "B"),
   hjust = -1,
-  nrow = 1
+  nrow = 2
 )
 
 # extract the legend from one of the plots
 legend <- get_legend(
   # create some space to the left of the legend
-  l.plots[[1]] + theme(legend.box.margin = margin(0, 0, 0, 12))+
-    labs(colour="differential\nexpression\nsignificance") 
+  l.plots[[1]] + theme(legend.box.margin = margin(12, 0, 0, 0),
+                       legend.position = "bottom",
+                       legend.text = element_text(size=14),
+                       legend.title = element_text(size = 14))+
+    labs(colour="differential\nexpression\nsignificance") +
+    guides(color = guide_legend(nrow = 2,
+                                override.aes = list(size = 4, alpha = 1)))
 )
 
 # add the legend to the row we made earlier. Give it one-third of 
 # the width of one plot (via rel_widths).
-p <- plot_grid(prow, legend, rel_widths = c(2, .5))
+p <- plot_grid(prow, legend, rel_heights =  c(2, .5), ncol = 1)
 
-ggsave(here("RNAseq/plots/correlations.png"),plot = p, width = 8, height = 4)
+ggsave(here("RNAseq/plots/correlations.png"),plot = p, width = 3, height = 6)
 
 save(p, file = here("RNAseq/plots/correlations-plot.Rdata"))
 
@@ -181,14 +186,15 @@ prow <- plot_grid(
 
 
 # extract the legend from one of the plots
-legend <- get_legend(
-  # create some space to the left of the legend
-  l.plots[[1]] + theme(legend.box.margin = margin( 12, 0, 0))
-)
+# use legnd from above
+  # legend <- get_legend(
+  #   # create some space to the left of the legend
+  #   l.plots[[1]] + theme(legend.box.margin = margin( 12, 0, 0))
+  # )
 
 # add the legend to the row we made earlier.
-p <- plot_grid(prow, legend, rel_heights = c(4, .2), ncol = 1)
+p <- plot_grid(prow, legend, rel_heights = c(4, .4), ncol = 1)
 
 
-ggsave(here("RNAseq/plots/correlations-supl.png"),plot = p, width = 8, height = 8)
+ggsave(here("RNAseq/plots/correlations-supl.png"),plot = p, width = 6, height = 8)
 
