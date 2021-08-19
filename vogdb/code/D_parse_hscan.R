@@ -1,6 +1,7 @@
 library(here)
 library(tidyverse)
 library(cowplot)
+library(scales)
 source(here("vogdb/code/parse_hmmer_tbl.R"))
 
 # parse hmmserch results
@@ -112,7 +113,7 @@ best3%>%
   geom_label(aes(label=paste0("n=",n)), y=150)+
   coord_flip()+
   theme_cowplot()+
-  xlab("best specific TIGRFAM match")+
+  xlab("best specific TIGRFAM match")  
   ggsave2(filename = here("vogdb/figures/vogXtigr.png"),
           width = 7,height = 7)
 
@@ -141,7 +142,7 @@ best3.evalue%>%
   theme_cowplot()
 
 
-# all have an e-value lower than 1e-3 exxpet for a singlr sigH hit
+# all have an e-value lower than 1e-3 expect for a single sigH hit
 # I don't think there is a problem
 
 
@@ -267,78 +268,151 @@ p.phylum <-
   coord_flip()+
   panel_border()
 
-p.phylum+
-  ggtitle("phage sigma factor type by host phylum")+
+p <- p.phylum +
+  ggtitle("phage sigma factor type by host phylum")
   ggsave2(here("vogdb","figures","tigr_sigma_HostPhylum.png"),
-          width = 12,height = 8)
-###
-# same plot different way AND better!!
-p.phylum <-
-  d.faa%>%
-  # arrange by frequency of sigma factors
-  mutate(tigr.hit=fct_infreq(tigr.hit))%>%
-  group_by(phylum,tigr.hit)%>%
-  summarise(n=n())%>%
-  ungroup()%>%
-  mutate(phylum=str_replace(phylum,"/","\n"))%>%
-  mutate(phylum=fct_reorder(phylum,n))%>%
-  ggplot( aes(fct_rev(tigr.hit),n, group = phylum)) + 
-  #line for 0
-  geom_hline(yintercept = 0, color="grey")+
-  geom_col(aes(fill=phylum)) + 
-  ylab("Phage sigma factor genes") +
-  xlab("Sigma Factor TIGRFAM")+
-  # facet_grid(~phylum)+
-  theme_cowplot()+
-  theme(legend.position = "bottom")+
-  guides(fill=guide_legend(nrow = 2))+
-  # scale_fill_viridis_d()+
-  coord_flip()+
-  panel_border()
+          plot = p, width = 12,height = 8)
 
-p.phylum+
-  ggtitle("phage sigma factor type by host phylum")+
-  ggsave2(here("vogdb","figures","tigr_Nsigma_HostPhylum.png"),
-          width = 8,height = 8)
+  ###
+# summarize by spore function
+  d.plot <- 
+    d.faa%>%
+    #classify by spore function
+    mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+    mutate(sigma = str_remove(sigma, "spore_")) %>% 
+    mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
+    mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
+    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+             fct_rev()) %>%
+    group_by(phylum,sigma)%>%
+    summarise(n=n(), .groups = "drop") %>% 
+    group_by(phylum)%>%
+    mutate(perc=n/sum(n)) %>% 
+    
+    mutate(phylum=str_remove(phylum,"/.*"))%>%
+    mutate(phylum=fct_reorder(phylum,n))
+  
+  p.phylum <- d.plot %>% 
+    ggplot(aes(x=phylum, y = perc,fill = sigma)) + 
+    geom_bar(position="fill", stat="identity", color = "black", width = 0.5) +
+    
+    xlab("Host Phylum") +
+    ylab(NULL)+
+    guides(fill = guide_legend("Sigma\nFactor\nType", reverse = T))+
+    
+    scale_y_continuous(labels=scales::percent, position = "right") +
+    scale_fill_viridis_d(direction = -1) + 
+    theme_classic(base_size = 13)+
+    panel_border(color = "black")+
+    coord_flip()
+  
+  
+    ggsave2(here("vogdb","figures","tigr_Nsigma_HostPhylum.png"),
+            p.phylum, width = 4,height = 3)   
+    
+  
 
 
 
 ###################################
 # Focus on phages with 3 sigma factors
-d.nsig3 <- 
+d.nsig <- 
 d.faa%>%
-  filter(n.sig>0)%>%
-  filter(phylum=="Firmicutes")%>%
-  # arrange by frequency of sigma factors
-  mutate(tigr.hit=fct_infreq(tigr.hit))
-  
-tigr.spore=c("spore_sigmaK","spore_sigmaE","spore_sigF","spore_sigG")
-
-d.nsig3%>%
+  #classify by spore function
+  mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+  mutate(sigma = str_remove(sigma, "spore_")) %>% 
+  mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
+  mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
+  mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+           fct_rev()) %>% 
   # assign a positional index to each sigma factor
   group_by(taxon)%>%
   arrange(tigr.hit)%>%
   mutate(sig.position=row_number())%>%
   ungroup()%>%
-  mutate(`virus name`=str_replace(`virus name`, "phage", "\u03c6"))%>%
-  mutate(`virus name`=str_replace(`virus name`, "virus", "\u03c6"))%>%
-  mutate(`virus name`=as_factor(`virus name`))%>%
-  # Add an asterisk for sporulation factor
-  mutate(spore.t=ifelse(tigr.hit%in%tigr.spore,"\u00B7",""))%>%
+  mutate(`virus name`=str_remove(`virus name`, ".*phage "))%>%
+  mutate(`virus name`=str_remove(`virus name`, ".*virus"))%>%
+  mutate(`virus name`=as_factor(`virus name`)) %>% 
+      
+  separate(family.etc, into = c("family","genus","species","strain"),sep=";") %>% 
+  # genus is also in viral sp name as first word
+  mutate(genus2=str_extract(sp,regex(".*? ")) %>% trimws()) %>% 
+  mutate(genus = trimws(genus)) %>% 
+  mutate(genus.plot = if_else(is.na(genus), genus2, genus))
+  
+    
   #plot
+  pA <-   d.nsig %>% 
+      filter(genus.plot == "Bacillus") %>% 
+  # arrange phage by n.sigmas
+  mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
   ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-  geom_tile(aes(fill=tigr.hit), color="black")+
-  geom_text(aes(label=spore.t), size=15)+
-  theme_cowplot()+
-  scale_fill_viridis_d()+
-  facet_wrap(~n.sig, scales = "free")+
-  theme(axis.text.x = element_blank())+
-  ggsave2(here("vogdb/figures/","sigma_TIGR_content_firmicutes.png"),
-          width = 13, height = 18)
+  geom_tile(aes(fill=sigma), color="black")+
+  theme_classic()+
+  panel_border(color = "black")+
+  scale_fill_viridis_d(direction = -1)+
+  facet_grid(genus.plot~., scales = "free", space = "free")+
+    geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
+    theme(strip.background = element_blank(),
+          strip.text = element_blank(),
+          axis.title.y = element_blank())+
+    xlab("Sigma Factor Gene")+
+    guides(fill = guide_legend("Sigma\nFactor\nType", reverse = T))
+  
 
-# save data
-save(d.faa, file = here("vogdb/data/vog_sigma_clean_tigr.RData"))
-write_csv(d.faa %>% select(-seq), file = here("vogdb/data/vog_sigma_clean_tigr.csv"))
+  
+  pB <-   d.nsig %>% 
+    mutate(genus.plot = fct_infreq(genus.plot)) %>% 
+    filter(phylum == "Firmicutes") %>% 
+    filter(genus.plot != "Bacillus") %>% 
+   
+    # arrange phage by n.sigmas
+    mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
+    ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
+    geom_tile(aes(fill=sigma), color="black")+
+    theme_classic()+
+    panel_border(color = "black")+
+    scale_fill_viridis_d(direction = -1)+
+    facet_grid(genus.plot~., scales = "free", space = "free")+
+    geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
+    theme(strip.background = element_blank(),
+          strip.text = element_blank(),
+          legend.position = "none",
+          axis.title.y = element_blank())+
+    xlab("Sigma Factor Gene")+
+    xlim(NA,3)
+  
+
+p <- plot_grid(pB, pA, rel_widths = c(1,1.4))  
+  
+ggsave2(here("vogdb/figures/","sigma_TIGR_content_Firmi.png"),
+        plot = p, width = 8, height = 11.5)
+
+
+# 
+# pC <-   d.nsig %>% 
+#   filter(phylum != "Firmicutes") %>% 
+#   # arrange phage by n.sigmas
+#   mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
+#   ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
+#   geom_tile(aes(fill=sigma), color="black")+
+#   theme_classic()+
+#   panel_border(color = "black")+
+#   scale_fill_viridis_d(direction = -1)+
+#   facet_grid(phylum~., scales = "free", space = "free")+
+#   geom_text(aes(label = phylum), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
+#   theme(strip.background = element_blank(),
+#         strip.text = element_blank(),
+#         axis.title.y = element_blank())+
+#   xlab("Sigma Factor Gene")+
+#   guides(fill = guide_legend("Sigma\nFactor\nType", reverse = T))
+# 
+# pC
+# Save data ---------------------------------------------------------------
+  
+  save(d.faa, file = here("vogdb/data/vog_sigma_clean_tigr.RData"))
+
+  write_csv(d.faa %>% select(-seq), file = here("vogdb/data/vog_sigma_clean_tigr.csv"))
 # ###############
 # d.nsig3%>%
 #   # assign a positional index to each sigma factor
@@ -358,4 +432,7 @@ write_csv(d.faa %>% select(-seq), file = here("vogdb/data/vog_sigma_clean_tigr.c
 #   theme(axis.text.x = element_blank())+
 #   ggsave2(here("vogdb/figures/","sigma_pfam_content_firmicutes.png"),
 #           width = 13, height = 18)
+
+
+
 
