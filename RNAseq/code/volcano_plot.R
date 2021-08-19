@@ -1,5 +1,4 @@
 library(here)
-library(renv)
 library(tidyverse)
 library(cowplot)
 library(gtools)
