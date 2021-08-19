@@ -3,10 +3,6 @@ library(tidyverse)
 library(cowplot)
 library(gtools)
 
-# color palette
-# https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
-cbb8  <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
-           "#0072B2", "#D55E00", "#CC79A7", "#000000")
 
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
@@ -102,8 +98,6 @@ p <-  d.all %>%
   panel_border(color = "black")+
   xlab(expression(log[2]~FC)) + 
   ylab(expression(-log[10]~P~value)) + 
-  # labs(x = base::expression(log~[2]~foldchange),
-  #      y = expression("-log[10]P value"), pars) + 
   theme(legend.position = "right",
         legend.text = element_text(size=14),
         legend.title = element_text(size = 14))+
