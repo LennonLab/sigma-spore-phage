@@ -77,6 +77,9 @@ gene_dexed <- d.all %>%
   mutate(strip = paste0(pnl,": ",induced)) 
   # mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2))
   
+# triangle characters
+c.up <- sprintf("\u25B3")
+c.down <- sprintf("\u25BD")
 
 p <-  d.all %>%
   mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
@@ -88,7 +91,7 @@ p <-  d.all %>%
   geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=Inf,
             fill = "grey90", alpha = 0.5)+
   geom_hline(yintercept = -log10(0.05), color = "grey", linetype = 2)+
-  geom_text(data = gene_dexed, aes(label = paste0("\n ",up," up\n ", down, " down")), 
+  geom_text(data = gene_dexed, aes(label = paste0("\n ",c.up,up,"\n ",c.down ,down)), 
             x= -Inf, y=Inf, vjust= 1, hjust = 0, size = 3)+
   geom_point(aes(color = sw.spore), size=1, alpha = 0.8)+
   # ggrepel::geom_text_repel(data = gene_labs, aes(label = gene), max.overlaps = 20)+

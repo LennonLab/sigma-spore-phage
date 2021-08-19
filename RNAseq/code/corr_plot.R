@@ -3,6 +3,7 @@ library(tidyverse)
 library(cowplot)
 library(gtools)
 library(scales)
+library(broom)
 
 
 # Import data -------------------------------------------------------------
@@ -70,13 +71,17 @@ min.fc.log2 <- min(fc[-1], na.rm = T) %>% log2() %>% round()
 # brx <- c(-15, -10,-5,0,5,10,15)
 brx <- c( -10,0,10)
 
-# rsave plots
+# save plots
 l.plots <- list()
+#save correlations
+d.cor.test <- tibble()
 
 for (cur.sig.host in sig.host.v){ 
   for (cur.sig.phage in sig.phage.v){
     
     if(cur.sig.host == cur.sig.phage) next
+    plot.name <- paste(cur.sig.phage,cur.sig.host, sep=" vs. ")
+    
     # get loci DExed in both strains
     d.sig <- p.val%>%
       #filter only cds
@@ -103,24 +108,39 @@ for (cur.sig.host in sig.host.v){
         filter(!is.na(fc.phage)) %>% 
         left_join(d.sig, ., by="id")
       
+      #test correlation
+      d.cor.test <- 
+        cor.test(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "pearson") %>%
+        tidy() %>% 
+        mutate(pair = plot.name) %>% 
+        relocate(pair) %>% 
+        bind_rows(d.cor.test,.)
+      
+      # get r for plot
+      r <- cor(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "pearson") %>% 
+        signif(3) %>% 
+        paste("\n  r =",.)
       
       # plot
-      plot.name <- paste(cur.sig.phage,cur.sig.host, sep=" vs. ")
       l.plots[[plot.name]] <- 
       d.plot %>% 
         mutate(pnl = plot.name) %>% 
         ggplot(aes(x=log2(fc.host), y=log2(fc.phage)))+
-        geom_hline(yintercept = 0, color="grey20")+
-        geom_vline(xintercept = 0, color="grey20")+
-        geom_abline(slope = 1, intercept = 0, linetype=2, color="lightsteelblue")+
+        geom_hline(yintercept = 0, color="grey40")+
+        geom_vline(xintercept = 0, color="grey40")+
+        # geom_abline(slope = 1, intercept = 0, linetype=2, color="lightsteelblue")+
         geom_point(aes(color = signifcance),alpha = 0.5)+
         geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
+        # add cor test result
+        geom_text(label = r, x = -Inf, y = Inf, hjust = 0, vjust = 1, lineheight = .5 )+
         scale_y_continuous(breaks = brx,
                            limits = c(min.fc.log2,max.fc.log2))+
         scale_x_continuous(breaks = brx,
                            limits = c(min.fc.log2,max.fc.log2))+
+        
         xlab(bquote(.(cur.sig.host)~(log[2]~FC))) +
         ylab(bquote(.(cur.sig.phage)~(log[2]~FC))) +
+        
         facet_wrap(~pnl)+
         theme_classic(base_size = 12)+
         panel_border(color = "black")+
@@ -129,6 +149,12 @@ for (cur.sig.host in sig.host.v){
   }
 }
 
+# adjust correlation p value for multiple testing
+d.cor.test <- d.cor.test %>% 
+  mutate(adj.p.BH = p.adjust(p.value, method = "BH")) %>% 
+  relocate(adj.p.BH, .after = "p.value")
+
+write_csv(d.cor.test, here("RNAseq/data/FC_pearson.csv"))
 
 # main figure -------------------------------------------------------------
 
@@ -205,4 +231,5 @@ p <- plot_grid(prow, legend, rel_heights = c(4, .4), ncol = 1)
 
 
 ggsave(here("RNAseq/plots/correlations-supl.png"),plot = p, width = 6, height = 8)
+
 
