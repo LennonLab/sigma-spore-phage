@@ -1,7 +1,13 @@
 library(here)
+library(renv)
 library(tidyverse)
 library(cowplot)
 library(gtools)
+
+# color palette
+# https://stackoverflow.com/questions/57153428/r-plot-color-combinations-that-are-colorblind-accessible
+cbb8  <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
+           "#0072B2", "#D55E00", "#CC79A7", "#000000")
 
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
@@ -50,7 +56,7 @@ d.all <-
   full_join(fc, p.val, by = "id", suffix = c("_fc", "_p")) %>% 
   # filter only cds
   right_join(., d6.spor.cds, by=c("id"="locus_tag.d6")) %>% 
-  pivot_longer(cols = (ends_with("_fc") |ends_with("_p"))) %>% 
+  pivot_longer(cols = (ends_with("_fc") | ends_with("_p"))) %>% 
   separate(name, into = c("induced","val")) %>% 
   pivot_wider(names_from = "val", values_from = "value" ) %>% 
   # change genes that were not assigned a p-value for DE to 1 (no change)
@@ -87,21 +93,26 @@ p <-  d.all %>%
   geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=Inf,
             fill = "grey90", alpha = 0.5)+
   geom_hline(yintercept = -log10(0.05), color = "grey", linetype = 2)+
-  geom_text(data = gene_dexed, aes(label = paste0("\n up=", up, "\n down=",down)), 
-            x= -Inf, y=Inf, vjust= 1, hjust = 0)+
-  geom_point(aes(color = sw.spore), size=1, alpha = 0.5)+
+  geom_text(data = gene_dexed, aes(label = paste0("\n ",up," up\n ", down, " down")), 
+            x= -Inf, y=Inf, vjust= 1, hjust = 0, size = 3)+
+  geom_point(aes(color = sw.spore), size=1, alpha = 0.8)+
   # ggrepel::geom_text_repel(data = gene_labs, aes(label = gene), max.overlaps = 20)+
-  facet_wrap(~strip, scales = "free_y", labeller = label_parsed)+
+  facet_wrap(~strip, scales = "free_y", ncol = 2)+
   scale_colour_viridis_d(direction = -1)+
   theme_classic()+
   panel_border(color = "black")+
-  xlab("log2 fold change") + 
-  ylab("-log10 adjusted p-value") +
-  theme(legend.position = "right")+
-  labs(color = "sporulation\ngene")
+  xlab(expression(log[2]~FC)) + 
+  ylab(expression(-log[10]~P~value)) + 
+  # labs(x = base::expression(log~[2]~foldchange),
+  #      y = expression("-log[10]P value"), pars) + 
+  theme(legend.position = "right",
+        legend.text = element_text(size=14),
+        legend.title = element_text(size = 14))+
+  labs(color = "sporulation\ngene")+
+  guides(color = guide_legend(override.aes = list(size = 4, alpha = 1)))
 
 ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
-       width = 8, height = 6)
+       width = 6, height = 6)
 
 save(p, file = here("RNAseq/plots/volcano-plot.Rdata"))
 
