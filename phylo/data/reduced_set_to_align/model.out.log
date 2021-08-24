@@ -1,0 +1,285 @@
+Physical cores: 24
+Logical cores:  48
+Memory:         251GB
+Extensions:     AVX
+
+WARNING: Partition DATA: Sequences YP_009818180.1-phage and YP_009798107.1-phage are identical
+Creating new checkpoint file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.ckp
+--------------------------------------------------------------------------------
+ModelTest-NG vx.y.z
+
+Input data:
+  MSA:        /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            167
+  #sites:           100
+  #patterns:        100
+  Max. thread mem:  40 MB
+
+Output:
+  Log:           /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.log
+  Starting tree: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.tree
+  Results:       /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.out
+
+Selection options:
+  # protein matrices: 19
+  # protein models:   76
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      false
+    gamma (+G):      true
+    both (+I+G):     false
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: false
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/24
+  RNG seed:         123
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+modeltest was called as follows: 
+>> /opt/conda/bin/modeltest-ng -d aa -i /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -o /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out -p 8 -r 123 -t ml -h ug 
+
+
+Partition 1/1
+
+ ----ID---  ----MODEL---- ---Time--- -Elapsed--- -------LnL------- -Alpha- -P-inv-
+
+Computation of likelihood scores completed. It took 0h:14:59
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG+G4              1    -22635.0165     46798.9496         0.0000    1.0000
+       2  LG+G4+F           20    -22603.6890     46823.7927        24.8432    0.0000
+       3  RTREV+G4+F        20    -22665.7489     46947.9125       148.9629    0.0000
+       4  VT+G4+F           20    -22731.4909     47079.3966       280.4470    0.0000
+       5  WAG+G4+F          20    -22755.5910     47127.5968       328.6472    0.0000
+       6  JTT+G4+F          20    -22798.4087     47213.2321       414.2825    0.0000
+       7  WAG+G4             1    -22843.6740     47216.2644       417.3148    0.0000
+       8  JTT-DCMUT+G4+F    20    -22801.0484     47218.5116       419.5620    0.0000
+       9  VT+G4              1    -22848.8759     47226.6682       427.7186    0.0000
+      10  RTREV+G4           1    -22855.7375     47240.3914       441.4419    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              LG+G4
+lnL:                -22635.0165
+Frequencies:        0.0791 0.0559 0.0420 0.0531 0.0129 0.0408 0.0716 0.0573 0.0224 0.0622 0.0991 0.0646 0.0230 0.0423 0.0440 0.0612 0.0533 0.0121 0.0342 0.0691
+Inv. sites prop:    -
+Gamma shape:        2.4534
+Score:              46798.9496
+Weight:             1.0000
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              1.0000
+Gamma-Inv:          -
+Frequencies:        0.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              2.4534
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        0.0586 0.0751 0.0374 0.0488 0.0070 0.0525 0.0855 0.0394 0.0205 0.0800 0.1066 0.0878 0.0282 0.0374 0.0148 0.0524 0.0452 0.0060 0.0518 0.0650 
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -d aa -m LG -f m -v 0 -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m PROTGAMMALG -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim --model LG+G4
+  > paup -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m LG+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG+G4+F           20    -22603.6890     45909.3780         0.0000    1.0000
+       2  LG+G4              1    -22635.0165     45934.0331        24.6551    0.0000
+       3  RTREV+G4+F        20    -22665.7489     46033.4978       124.1198    0.0000
+       4  VT+G4+F           20    -22731.4909     46164.9818       255.6038    0.0000
+       5  WAG+G4+F          20    -22755.5910     46213.1820       303.8040    0.0000
+       6  JTT+G4+F          20    -22798.4087     46298.8173       389.4393    0.0000
+       7  JTT-DCMUT+G4+F    20    -22801.0484     46304.0969       394.7188    0.0000
+       8  WAG+G4             1    -22843.6740     46351.3479       441.9699    0.0000
+       9  VT+G4              1    -22848.8759     46361.7517       452.3737    0.0000
+      10  RTREV+G4           1    -22855.7375     46375.4749       466.0969    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              LG+G4+F
+lnL:                -22603.6890
+Frequencies:        0.0586 0.0751 0.0374 0.0488 0.0070 0.0525 0.0855 0.0394 0.0205 0.0800 0.1066 0.0878 0.0282 0.0374 0.0148 0.0524 0.0452 0.0060 0.0518 0.0650
+Inv. sites prop:    -
+Gamma shape:        2.2000
+Score:              45909.3780
+Weight:             1.0000
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              1.0000
+Gamma-Inv:          -
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              2.2000
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        0.0586 0.0751 0.0374 0.0488 0.0070 0.0525 0.0855 0.0394 0.0205 0.0800 0.1066 0.0878 0.0282 0.0374 0.0148 0.0524 0.0452 0.0060 0.0518 0.0650 
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -d aa -m LG -f e -v 0 -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m PROTGAMMALGF -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim --model LG+G4+F
+  > paup -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m LG+G4+F
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG                 0    -23132.9983    266711.9966         0.0000    1.0000
+       2  VT                 0    -23207.2210    266860.4419       148.4453    0.0000
+       3  WAG                0    -23217.9887    266881.9774       169.9807    0.0000
+       4  BLOSUM62           0    -23272.9198    266991.8395       279.8429    0.0000
+       5  RTREV              0    -23296.7548    267039.5095       327.5129    0.0000
+       6  LG+G4              1    -22635.0165    267046.0331       334.0364    0.0000
+       7  PMB                0    -23325.9440    267097.8880       385.8914    0.0000
+       8  CPREV              0    -23335.9845    267117.9690       405.9724    0.0000
+       9  JTT                0    -23425.3251    267296.6503       584.6537    0.0000
+      10  JTT-DCMUT          0    -23432.1011    267310.2022       598.2056    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              LG
+lnL:                -23132.9983
+Frequencies:        0.0791 0.0559 0.0420 0.0531 0.0129 0.0408 0.0716 0.0573 0.0224 0.0622 0.0991 0.0646 0.0230 0.0423 0.0440 0.0612 0.0533 0.0121 0.0342 0.0691
+Inv. sites prop:    -
+Gamma shape:        -
+Score:              266711.9966
+Weight:             1.0000
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          -
+Frequencies:        -
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              2.4534
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        -
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -d aa -m LG -f m -v 0 -a 0 -c 1 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m PROTGAMMALG -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim --model LG
+  > paup -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim -m LG
+
+There are 72 different topologies
+Topologies written to /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.topos
+
+topo_id   models_count   bic_support   aic_support   aicc_support
+-----------------------------------------------------------------
+     21              1       1.00000       0.00000       0.00000
+      3              1       0.00000       1.00000       0.00000
+      7              1       0.00000       0.00000       0.00000
+      9              1       0.00000       0.00000       0.00000
+      6              1       0.00000       0.00000       0.00000
+      4              1       0.00000       0.00000       0.00000
+     19              1       0.00000       0.00000       0.00000
+     16              1       0.00000       0.00000       0.00000
+     34              1       0.00000       0.00000       0.00000
+     30              1       0.00000       0.00000       0.00000
+     36              1       0.00000       0.00000       0.00000
+      1              1       0.00000       0.00000       0.00000
+     18              1       0.00000       0.00000       0.00000
+     29              1       0.00000       0.00000       0.00000
+     24              1       0.00000       0.00000       0.00000
+     32              1       0.00000       0.00000       0.00000
+     31              1       0.00000       0.00000       0.00000
+     12              1       0.00000       0.00000       0.00000
+      2              2       0.00000       0.00000       0.00000
+      8              1       0.00000       0.00000       0.00000
+     57              1       0.00000       0.00000       1.00000
+     39              1       0.00000       0.00000       0.00000
+     17              1       0.00000       0.00000       0.00000
+     15              1       0.00000       0.00000       0.00000
+     45              1       0.00000       0.00000       0.00000
+      5              1       0.00000       0.00000       0.00000
+     70              1       0.00000       0.00000       0.00000
+     42              1       0.00000       0.00000       0.00000
+     43              1       0.00000       0.00000       0.00000
+     55              1       0.00000       0.00000       0.00000
+     25              1       0.00000       0.00000       0.00000
+     23              2       0.00000       0.00000       0.00000
+     72              1       0.00000       0.00000       0.00000
+     11              1       0.00000       0.00000       0.00000
+     66              1       0.00000       0.00000       0.00000
+     40              1       0.00000       0.00000       0.00000
+     52              1       0.00000       0.00000       0.00000
+     67              1       0.00000       0.00000       0.00000
+     37              1       0.00000       0.00000       0.00000
+     68              1       0.00000       0.00000       0.00000
+     54              1       0.00000       0.00000       0.00000
+     35              1       0.00000       0.00000       0.00000
+     13              1       0.00000       0.00000       0.00000
+     10              1       0.00000       0.00000       0.00000
+     58              1       0.00000       0.00000       0.00000
+     59              2       0.00000       0.00000       0.00000
+     60              1       0.00000       0.00000       0.00000
+     61              1       0.00000       0.00000       0.00000
+     62              1       0.00000       0.00000       0.00000
+     63              1       0.00000       0.00000       0.00000
+     64              1       0.00000       0.00000       0.00000
+     65              1       0.00000       0.00000       0.00000
+     69              1       0.00000       0.00000       0.00000
+     71              1       0.00000       0.00000       0.00000
+     33              1       0.00000       0.00000       0.00000
+     46              1       0.00000       0.00000       0.00000
+     28              1       0.00000       0.00000       0.00000
+     38              2       0.00000       0.00000       0.00000
+     27              1       0.00000       0.00000       0.00000
+     41              1       0.00000       0.00000       0.00000
+     26              1       0.00000       0.00000       0.00000
+     22              1       0.00000       0.00000       0.00000
+     44              1       0.00000       0.00000       0.00000
+     20              1       0.00000       0.00000       0.00000
+     56              1       0.00000       0.00000       0.00000
+     47              1       0.00000       0.00000       0.00000
+     48              1       0.00000       0.00000       0.00000
+     49              1       0.00000       0.00000       0.00000
+     50              1       0.00000       0.00000       0.00000
+     51              1       0.00000       0.00000       0.00000
+     53              1       0.00000       0.00000       0.00000
+     14              1       0.00000       0.00000       0.00000
+
+extended majority-rule consensus: ((YP_007677008.1-phage,(YP_009626754.1-phage,YP_009285401.1-phage)[1.00000])[1.00000],YP_009149687.1-phage,((YP_009207004.1-phage,YP_006907944.1-phage)[1.00000],((YP_009840636.1-phage,YP_009832138.1-phage)[1.00000],((((YP_008318421.1-phage,YP_008771532.1-phage)[1.00000],(((((YP_008769990.1-phage,YP_002300332.1-phage)[1.00000],(YP_009215850.1-phage,(YP_009099262.1-phage,YP_009216068.1-phage)[1.00000])[1.00000])[1.00000],(((WP_003221446.1-bacteria,(WP_003416098.1-bacteria,WP_000976948.1-bacteria)[1.00000])[1.00000],(YP_009850160.1-phage,YP_009829866.1-phage)[1.00000])[1.00000],(WP_021361826.1-bacteria,WP_000051382.1-bacteria)[1.00000])[1.00000])[1.00000],(((WP_011130162.1-bacteria,((YP_002343525.1-bacteria,WP_000602430.1-bacteria)[1.00000],(WP_004080667.1-bacteria,(NP_416432.3-bacteria,((WP_170864009.1-bacteria,(WP_025309103.1-bacteria,(WP_003435969.1-bacteria,(NP_629755.1-bacteria,(WP_014342819.1-bacteria,(WP_003245855.1-bacteria,WP_003220911.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NP_250146.1-bacteria,WP_001030417.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],((((((YP_009035402.1-phage,((YP_009278239.1-phage,(YP_009280599.1-phage,(YP_009036291.1-phage,YP_009036672.1-phage)[1.00000])[1.00000])[1.00000],(YP_004957160.1-phage,(YP_009003022.1-phage,YP_006907696.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(YP_009037113.1-phage,YP_006908372.1-phage)[1.00000])[1.00000],((YP_009285400.1-phage,(YP_007677007.1-phage,(YP_009626755.1-phage,YP_009149686.1-phage)[1.00000])[1.00000])[1.00000],(YP_009151513.1-phage,(YP_008771361.1-phage,YP_008770551.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],((((WP_100086169.1-bacteria,((YP_007517433.1-phage,(YP_007517663.1-phage,(YP_007517589.1-phage,YP_007517509.1-phage)[1.00000])[1.00000])[1.00000],(((YP_002790835.1-phage,((YP_007003457.1-phage,(YP_002300430.1-phage,(YP_009099149.1-phage,YP_009215953.1-phage)[1.00000])[1.00000])[1.00000],(YP_009844105.1-phage,(YP_009222342.1-phage,(YP_009798107.1-phage,YP_009818180.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009843985.1-phage,YP_009844328.1-phage)[1.00000])[1.00000],((((YP_009275337.1-phage,(((YP_009625809.1-phage,((YP_009840610.1-phage,YP_009832112.1-phage)[1.00000],(YP_009850071.1-phage,YP_009151070.1-phage)[1.00000])[1.00000])[1.00000],(YP_008318397.1-phage,YP_008771504.1-phage)[1.00000])[1.00000],(YP_006907988.1-phage,(YP_007677062.1-phage,(YP_009149167.1-phage,YP_009149728.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009274835.1-phage,YP_009151693.1-phage)[1.00000])[1.00000],((YP_008430954.1-phage,YP_006908410.1-phage)[1.00000],(YP_009037083.1-phage,(YP_004957120.1-phage,YP_006907735.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(YP_009226967.1-phage,YP_007349329.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009196909.1-phage,YP_008771927.1-phage)[1.00000])[1.00000],((YP_009009184.1-phage,(YP_007004340.1-phage,YP_009829851.1-phage)[1.00000])[1.00000],(YP_007003440.1-phage,(YP_009215922.1-phage,YP_002300398.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(WP_004398891.1-bacteria,((WP_003234958.1-bacteria,NP_417068.1-bacteria)[1.00000],(WP_003230521.1-bacteria,(WP_003245485.1-bacteria,(WP_003224177.1-bacteria,(WP_004398507.1-bacteria,(NP_418713.1-bacteria,WP_003243678.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_007349307.1-phage,(YP_009056358.1-phage,YP_009226947.1-phage)[1.00000])[1.00000])[1.00000],(YP_009056357.1-phage,(YP_009226946.1-phage,YP_007349306.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(NP_417918.1-bacteria,(NP_417221.1-bacteria,WP_003226225.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000],((((YP_512346.1-phage,YP_009830054.1-phage)[1.00000],(YP_009199141.1-phage,YP_009015380.1-phage)[1.00000])[1.00000],((WP_003420464.1-bacteria,(YP_007003377.1-phage,YP_009199135.1-phage)[1.00000])[1.00000],((YP_009196176.1-phage,(YP_008129905.1-phage,(WP_004081373.1-bacteria,(NP_463774.1-bacteria,(WP_000387193.1-bacteria,(WP_003225758.1-bacteria,WP_009892548.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(WP_003246715.1-bacteria,(WP_002164611.1-bacteria,NP_464421.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],((WP_011244619.1-bacteria,WP_011244805.1-bacteria)[1.00000],(NP_631334.1-bacteria,(NP_624912.1-bacteria,(NP_627288.1-bacteria,(NP_628217.1-bacteria,(NP_628216.1-bacteria,(NP_629389.1-bacteria,(NP_217803.1-bacteria,(NP_631395.1-bacteria,(NP_631369.1-bacteria,NP_630601.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009274875.1-phage,YP_009151727.1-phage)[1.00000])[1.00000],((WP_011860953.1-bacteria,((YP_009151040.1-phage,((YP_009196951.1-phage,YP_008771969.1-phage)[1.00000],(YP_009850103.1-phage,(YP_008771228.1-phage,(YP_008770421.1-phage,YP_008430993.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],((((YP_009151728.1-phage,YP_009274876.1-phage)[1.00000],(WP_003230458.1-bacteria,WP_000350729.1-bacteria)[1.00000])[1.00000],(WP_003416101.1-bacteria,(WP_000197755.1-bacteria,WP_009967190.1-bacteria)[1.00000])[1.00000])[1.00000],(YP_009196983.1-phage,(YP_008770814.1-phage,YP_008772001.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009207005.1-phage,YP_006907943.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000]);
+strict consensus: ((YP_007677008.1-phage,(YP_009626754.1-phage,YP_009285401.1-phage)[1.00000])[1.00000],YP_009149687.1-phage,((YP_009207004.1-phage,YP_006907944.1-phage)[1.00000],(YP_009151040.1-phage,WP_011860953.1-bacteria,(YP_009840636.1-phage,YP_009832138.1-phage)[1.00000],(YP_009196983.1-phage,(YP_008770814.1-phage,YP_008772001.1-phage)[1.00000])[1.00000],(WP_003230458.1-bacteria,WP_000350729.1-bacteria,(WP_003416101.1-bacteria,(WP_000197755.1-bacteria,WP_009967190.1-bacteria)[1.00000])[1.00000],(YP_009151728.1-phage,YP_009274876.1-phage)[1.00000])[1.00000],(YP_009207005.1-phage,YP_006907943.1-phage)[1.00000],((YP_009196951.1-phage,YP_008771969.1-phage)[1.00000],(YP_009850103.1-phage,(YP_008771228.1-phage,(YP_008770421.1-phage,YP_008430993.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],((YP_009274875.1-phage,YP_009151727.1-phage)[1.00000],(YP_009196176.1-phage,WP_011130162.1-bacteria,WP_004080667.1-bacteria,(YP_002343525.1-bacteria,WP_000602430.1-bacteria)[1.00000],(YP_009035402.1-phage,((YP_004957160.1-phage,(YP_009003022.1-phage,YP_006907696.1-phage)[1.00000])[1.00000],(YP_009278239.1-phage,(YP_009280599.1-phage,(YP_009036291.1-phage,YP_009036672.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(YP_009037113.1-phage,YP_006908372.1-phage)[1.00000])[1.00000],(WP_003420464.1-bacteria,(YP_007003377.1-phage,YP_009199135.1-phage)[1.00000])[1.00000],(((WP_100086169.1-bacteria,((YP_007517433.1-phage,(YP_007517663.1-phage,(YP_007517589.1-phage,YP_007517509.1-phage)[1.00000])[1.00000])[1.00000],((YP_009843985.1-phage,YP_009844328.1-phage)[1.00000],((YP_009275337.1-phage,(YP_009840610.1-phage,YP_009832112.1-phage,YP_009625809.1-phage,(YP_008318397.1-phage,YP_008771504.1-phage)[1.00000],(YP_006907988.1-phage,(YP_007677062.1-phage,(YP_009149167.1-phage,YP_009149728.1-phage)[1.00000])[1.00000])[1.00000],(YP_009850071.1-phage,YP_009151070.1-phage)[1.00000])[1.00000])[1.00000],(YP_009226967.1-phage,YP_007349329.1-phage)[1.00000],(YP_009274835.1-phage,YP_009151693.1-phage)[1.00000],((YP_008430954.1-phage,YP_006908410.1-phage)[1.00000],(YP_009037083.1-phage,(YP_004957120.1-phage,YP_006907735.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(YP_002790835.1-phage,((YP_007003457.1-phage,(YP_002300430.1-phage,(YP_009099149.1-phage,YP_009215953.1-phage)[1.00000])[1.00000])[1.00000],(YP_009844105.1-phage,(YP_009222342.1-phage,(YP_009798107.1-phage,YP_009818180.1-phage)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009196909.1-phage,YP_008771927.1-phage)[1.00000])[1.00000],((YP_009009184.1-phage,(YP_007004340.1-phage,YP_009829851.1-phage)[1.00000])[1.00000],(YP_007003440.1-phage,(YP_009215922.1-phage,YP_002300398.1-phage)[1.00000])[1.00000])[1.00000])[1.00000],(NP_416432.3-bacteria,((WP_170864009.1-bacteria,(WP_025309103.1-bacteria,(WP_003435969.1-bacteria,(NP_629755.1-bacteria,(WP_014342819.1-bacteria,(WP_003245855.1-bacteria,WP_003220911.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NP_250146.1-bacteria,WP_001030417.1-bacteria)[1.00000])[1.00000])[1.00000],(YP_007349307.1-phage,(YP_009056358.1-phage,YP_009226947.1-phage)[1.00000])[1.00000],((YP_009285400.1-phage,YP_007677007.1-phage,(YP_009626755.1-phage,YP_009149686.1-phage)[1.00000])[1.00000],(YP_009151513.1-phage,(YP_008771361.1-phage,YP_008770551.1-phage)[1.00000])[1.00000])[1.00000],(NP_418713.1-bacteria,WP_004398891.1-bacteria,WP_003243678.1-bacteria,WP_003230521.1-bacteria,WP_003245485.1-bacteria,WP_004398507.1-bacteria,WP_003224177.1-bacteria,(WP_003234958.1-bacteria,NP_417068.1-bacteria)[1.00000])[1.00000],((YP_009199141.1-phage,YP_009015380.1-phage)[1.00000],(YP_512346.1-phage,YP_009830054.1-phage)[1.00000])[1.00000],(YP_008318421.1-phage,YP_008771532.1-phage)[1.00000],(NP_417918.1-bacteria,(NP_417221.1-bacteria,WP_003226225.1-bacteria)[1.00000])[1.00000],(((YP_008769990.1-phage,YP_002300332.1-phage)[1.00000],(YP_009215850.1-phage,(YP_009099262.1-phage,YP_009216068.1-phage)[1.00000])[1.00000])[1.00000],((WP_003221446.1-bacteria,(WP_003416098.1-bacteria,WP_000976948.1-bacteria)[1.00000])[1.00000],(YP_009850160.1-phage,YP_009829866.1-phage)[1.00000],(WP_021361826.1-bacteria,WP_000051382.1-bacteria)[1.00000])[1.00000])[1.00000],(WP_003246715.1-bacteria,(WP_002164611.1-bacteria,NP_464421.1-bacteria)[1.00000])[1.00000],(YP_008129905.1-phage,(WP_004081373.1-bacteria,(NP_463774.1-bacteria,(WP_000387193.1-bacteria,(WP_003225758.1-bacteria,WP_009892548.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(YP_009056357.1-phage,YP_009226946.1-phage,YP_007349306.1-phage)[1.00000],((WP_011244619.1-bacteria,WP_011244805.1-bacteria)[1.00000],(NP_631334.1-bacteria,(NP_624912.1-bacteria,(NP_627288.1-bacteria,(NP_628217.1-bacteria,(NP_628216.1-bacteria,(NP_629389.1-bacteria,(NP_217803.1-bacteria,(NP_631395.1-bacteria,(NP_631369.1-bacteria,NP_630601.1-bacteria)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000]);
+
+Summary:
+
+Partition 1/1:
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC               LG+G4    46798.9496        1.0000
+       AIC             LG+G4+F    45909.3780        1.0000
+      AICc                  LG   266711.9966        1.0000
+
+Execution results written to /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.out
+Starting tree written to /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/model.out.tree

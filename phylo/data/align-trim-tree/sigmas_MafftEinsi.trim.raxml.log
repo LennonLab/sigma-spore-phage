@@ -1,0 +1,115 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 21-Aug-2021 22:11:04 as follows:
+
+raxml-ng --check --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/sigmas_MafftEinsi.trim --msa-format FASTA --data-type AA --model LG+G4
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1629598264
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (24 threads), thread pinning: OFF
+
+[00:00:00] Reading alignment from file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/sigmas_MafftEinsi.trim
+[00:00:00] Loaded alignment with 419 taxa and 55 sites
+
+WARNING: Sequences WP_003226225.1-bacteria and NP_464979.1-bacteria are exactly identical!
+WARNING: Sequences NP_249267.1-bacteria and NP_417539.1-bacteria are exactly identical!
+WARNING: Sequences WP_038962216.1-bacteria and WP_000372618.1-bacteria are exactly identical!
+WARNING: Sequences YP_008771927.1-phage and YP_008770739.1-phage are exactly identical!
+WARNING: Sequences YP_008771927.1-phage and YP_009203629.1-phage are exactly identical!
+WARNING: Sequences YP_002300398.1-phage and YP_008770058.1-phage are exactly identical!
+WARNING: Sequences YP_009215922.1-phage and YP_009216142.1-phage are exactly identical!
+WARNING: Sequences YP_009215922.1-phage and YP_009099117.1-phage are exactly identical!
+WARNING: Sequences YP_008770814.1-phage and YP_009203702.1-phage are exactly identical!
+WARNING: Sequences YP_009829851.1-phage and YP_006488705.1-phage are exactly identical!
+WARNING: Sequences YP_002300430.1-phage and YP_008770092.1-phage are exactly identical!
+WARNING: Sequences YP_006907988.1-phage and YP_009206960.1-phage are exactly identical!
+WARNING: Sequences YP_009149728.1-phage and YP_009626704.1-phage are exactly identical!
+WARNING: Sequences YP_009149728.1-phage and YP_009031424.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009003061.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009036624.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009036248.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009278201.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009287061.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009282577.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009284509.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009280984.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009291759.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009282131.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009280555.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009279351.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009285127.1-phage are exactly identical!
+WARNING: Sequences YP_006908410.1-phage and YP_008770388.1-phage are exactly identical!
+WARNING: Sequences YP_009215953.1-phage and YP_009216173.1-phage are exactly identical!
+WARNING: Sequences YP_008430954.1-phage and YP_008771190.1-phage are exactly identical!
+WARNING: Sequences YP_008430954.1-phage and YP_009055929.1-phage are exactly identical!
+WARNING: Sequences YP_008430954.1-phage and YP_009206524.1-phage are exactly identical!
+WARNING: Sequences YP_008430954.1-phage and YP_009290042.1-phage are exactly identical!
+WARNING: Sequences YP_009226967.1-phage and YP_009056383.1-phage are exactly identical!
+WARNING: Sequences YP_009037083.1-phage and YP_009035701.1-phage are exactly identical!
+WARNING: Sequences YP_009037083.1-phage and YP_009035374.1-phage are exactly identical!
+WARNING: Sequences YP_009037083.1-phage and YP_006907409.1-phage are exactly identical!
+WARNING: Sequences YP_009149167.1-phage and YP_009285446.1-phage are exactly identical!
+WARNING: Sequences YP_009818180.1-phage and YP_009814287.1-phage are exactly identical!
+WARNING: Sequences YP_009818180.1-phage and YP_009814457.1-phage are exactly identical!
+WARNING: Sequences YP_009798107.1-phage and YP_009798418.1-phage are exactly identical!
+WARNING: Sequences YP_007517509.1-phage and YP_008770680.1-phage are exactly identical!
+WARNING: Sequences YP_007517433.1-phage and YP_009592276.1-phage are exactly identical!
+WARNING: Sequences YP_007517433.1-phage and YP_008771870.1-phage are exactly identical!
+WARNING: Sequences YP_007517663.1-phage and YP_008770602.1-phage are exactly identical!
+WARNING: Sequences YP_009149686.1-phage and YP_009149124.1-phage are exactly identical!
+WARNING: Sequences YP_009149687.1-phage and YP_009149125.1-phage are exactly identical!
+WARNING: Sequences YP_009003022.1-phage and YP_009282173.1-phage are exactly identical!
+WARNING: Sequences YP_008430993.1-phage and YP_009055966.1-phage are exactly identical!
+WARNING: Sequences YP_008430993.1-phage and YP_009290078.1-phage are exactly identical!
+WARNING: Sequences YP_008771228.1-phage and YP_009206562.1-phage are exactly identical!
+WARNING: Sequences YP_008771361.1-phage and YP_009152845.1-phage are exactly identical!
+WARNING: Sequences YP_008771361.1-phage and YP_009210079.1-phage are exactly identical!
+WARNING: Sequences YP_008771361.1-phage and YP_009197513.1-phage are exactly identical!
+WARNING: Sequences YP_008771969.1-phage and YP_008770783.1-phage are exactly identical!
+WARNING: Sequences YP_008771969.1-phage and YP_009203671.1-phage are exactly identical!
+WARNING: Sequences YP_009037113.1-phage and YP_009035734.1-phage are exactly identical!
+WARNING: Sequences YP_009037113.1-phage and YP_006907438.1-phage are exactly identical!
+WARNING: Sequences YP_009036672.1-phage and YP_009284554.1-phage are exactly identical!
+WARNING: Sequences YP_009036672.1-phage and YP_009281029.1-phage are exactly identical!
+WARNING: Sequences YP_009036672.1-phage and YP_009279398.1-phage are exactly identical!
+WARNING: Sequences YP_009036291.1-phage and YP_009287107.1-phage are exactly identical!
+WARNING: Sequences YP_009036291.1-phage and YP_009282621.1-phage are exactly identical!
+WARNING: Sequences YP_009036291.1-phage and YP_009285170.1-phage are exactly identical!
+WARNING: Sequences YP_009830054.1-phage and YP_009830772.1-phage are exactly identical!
+WARNING: Sequences YP_009830054.1-phage and YP_009285288.1-phage are exactly identical!
+WARNING: Sequences YP_009278239.1-phage and YP_009291801.1-phage are exactly identical!
+WARNING: Sequences YP_009626754.1-phage and YP_009031481.1-phage are exactly identical!
+WARNING: Sequences YP_009626755.1-phage and YP_009031482.1-phage are exactly identical!
+WARNING: Sequences YP_512346.1-phage and YP_338218.1-phage are exactly identical!
+WARNING: Sequences YP_512346.1-phage and YP_460001.1-phage are exactly identical!
+WARNING: Duplicate sequences found: 71
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/sigmas_MafftEinsi.trim.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 55 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 55 / 55
+Gaps: 7.65 %
+Invariant sites: 1.82 %
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/sigmas_MafftEinsi.trim.raxml.log
+
+Analysis started: 21-Aug-2021 22:11:04 / finished: 21-Aug-2021 22:11:04
+
+Elapsed time: 0.157 seconds
+

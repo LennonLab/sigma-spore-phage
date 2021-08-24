@@ -1,0 +1,244 @@
+assembly,genomic_accession,product_accession,name,symbol,sp
+GCF_000007825.1,NC_004722.1,WP_000387193.1,RNA polymerase sporulation sigma factor SigH,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000869257.1,RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_002164611.1,RNA polymerase sigma factor SigB,sigB,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000824008.1,RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000840007.1,sigma-70 family RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_071740389.1,RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000675556.1,sigma-70 family RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000438330.1,sigma-70 family RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000337509.1,RNA polymerase subunit sigma-70,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000864729.1,sigma-70 family RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000197755.1,RNA polymerase sporulation sigma factor SigG,sigG,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000976948.1,RNA polymerase sporulation sigma factor SigE,sigE,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000350729.1,RNA polymerase sporulation sigma factor SigF,sigF,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000764065.1,RNA polymerase sigma factor RpoD,rpoD,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000051382.1,RNA polymerase sporulation sigma factor SigK,sigK,Bacillus_cereus_ATCC_14579
+GCF_000007825.1,NC_004722.1,WP_000391642.1,RNA polymerase sigma factor,NA,Bacillus_cereus_ATCC_14579
+GCF_000953275.1,NZ_LN614756.1,WP_003420464.1,SigB/SigF/SigG family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_009892548.1,RNA polymerase sporulation sigma factor SigH,sigH,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003435969.1,FliA/WhiG family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003439159.1,sigma-70 family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_011860953.1,RNA polymerase sporulation sigma factor SigF,sigF,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_021361826.1,sigma-70 family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003429425.1,RNA polymerase sigma factor RpoD,rpoD,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_009889336.1,sigma-70 family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003436663.1,sigma-70 family RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_032506877.1,RNA polymerase sigma factor,NA,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003416101.1,RNA polymerase sporulation sigma factor SigG,sigG,Clostridioides_difficile
+GCF_000953275.1,NZ_LN614756.1,WP_003416098.1,RNA polymerase sporulation sigma factor SigE,sigE,Clostridioides_difficile
+GCF_000196035.1,NC_003210.1,NP_463774.1,RNA polymerase factor sigma-70,sigH,Listeria_monocytogenes_EGD-e
+GCF_000196035.1,NC_003210.1,NP_463952.1,RNA polymerase factor sigma C,NA,Listeria_monocytogenes_EGD-e
+GCF_000196035.1,NC_003210.1,NP_464421.1,RNA polymerase sigma factor SigB,sigB,Listeria_monocytogenes_EGD-e
+GCF_000196035.1,NC_003210.1,NP_464979.1,RNA polymerase sigma factor RpoD,rpoD,Listeria_monocytogenes_EGD-e
+GCF_001314975.1,NZ_CP012937.1,WP_008761748.1,RNA polymerase sigma-70 factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_011108473.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_016268625.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008761066.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008767733.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008762155.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008767954.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_004308114.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008766632.1,RNA polymerase sigma factor RpoD/SigA,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008764987.1,RNA polymerase sigma-70 factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008765767.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008763441.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008766239.1,RNA polymerase sigma-70 factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008766735.1,RNA polymerase sigma-70 factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008760422.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008760363.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008764719.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008764619.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008760019.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_005681497.1,RNA polymerase sigma-70 factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008763624.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_011108357.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_062695819.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_008763658.1,RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_001314975.1,NZ_CP012937.1,WP_011108700.1,sigma-70 family RNA polymerase sigma factor,NA,Bacteroides_thetaiotaomicron
+GCF_000010505.1,NC_010729.1,WP_004583806.1,sigma-70 family RNA polymerase sigma factor,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_000010505.1,NC_010729.1,WP_021665844.1,sigma-70 family RNA polymerase sigma factor,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_000010505.1,NC_010729.1,WP_012457515.1,RNA polymerase sigma factor,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_000010505.1,NC_010729.1,WP_012457665.1,RNA polymerase sigma factor RpoD/SigA,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_000010505.1,NC_010729.1,WP_004585541.1,sigma-70 family RNA polymerase sigma factor,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_000010505.1,NC_010729.1,WP_004583457.1,RNA polymerase sigma factor,NA,Porphyromonas_gingivalis_ATCC_33277
+GCF_001457455.1,NZ_LN831026.1,WP_014301156.1,sigma-70 family RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_041740603.1,RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_014318785.1,sigma-70 family RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_014308159.1,sigma-70 family RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_021334972.1,RNA polymerase sigma factor SigE,sigE,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_003851787.1,RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_003851800.1,sigma-70 family RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_001457455.1,NZ_LN831026.1,WP_014311116.1,sigma-70 family RNA polymerase sigma factor,NA,Corynebacterium_diphtheriae
+GCF_000010065.1,NC_006576.1,WP_011378081.1,RpoD/SigA family RNA polymerase sigma factor,NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011377675.1,"RNA polymerase sigma factor, RpoD/SigA family",NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_081422183.1,RNA polymerase sigma factor RpoD,rpoD,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011243265.1,RpoD/SigA family RNA polymerase sigma factor,NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244401.1,sigma-70 family RNA polymerase sigma factor,NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244481.1,sigma-70 family RNA polymerase sigma factor,NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244555.1,RNA polymerase sigma factor SigC,sigC,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244619.1,RNA polymerase sigma factor SigF,NA,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244655.1,circadian expression RNA polymerase sigma factor SigA2,sigA2,Synechococcus_elongatus_PCC_6301
+GCF_000010065.1,NC_006576.1,WP_011244805.1,RNA polymerase sigma factor SigF,NA,Synechococcus_elongatus_PCC_6301
+GCF_000011485.1,NC_005071.1,WP_157859911.1,"RNA polymerase sigma factor, RpoD/SigA family",NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011129725.1,RpoD/SigA family RNA polymerase sigma factor,NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011129835.1,sigma-70 family RNA polymerase sigma factor,NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011130162.1,sigma-70 family RNA polymerase sigma factor,NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011130440.1,RpoD/SigA family RNA polymerase sigma factor,NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_041384505.1,RNA polymerase sigma factor RpoD,rpoD,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011131581.1,"RNA polymerase sigma factor, RpoD/SigA family",NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000011485.1,NC_005071.1,WP_011131610.1,RpoD/SigA family RNA polymerase sigma factor,NA,Prochlorococcus_marinus_str._MIT_9313
+GCF_000012685.1,NC_008095.1,WP_011550349.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026113872.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_020478156.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011552470.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011552571.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_002635080.1,DNA-binding protein,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_020478595.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_020478755.1,RNA polymerase factor sigma-32,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011553459.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011553969.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_020478333.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011554150.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011554312.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011554319.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026113989.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011554720.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026114018.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011554965.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011555174.1,RNA polymerase sigma factor RpoD,rpoD,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011555464.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026113799.1,RNA polymerase factor sigma-32,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011556153.1,RNA polymerase factor sigma-32,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026113852.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_026114044.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011557133.1,sigma-70 family RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000012685.1,NC_008095.1,WP_011557245.1,RNA polymerase sigma factor,NA,Myxococcus_xanthus_DK_1622
+GCF_000525675.1,NZ_CP002190.1,WP_025306971.1,RNA polymerase sigma factor RpoD,rpoD,Bdellovibrio_bacteriovorus_W
+GCF_000525675.1,NZ_CP002190.1,WP_025307296.1,sigma-70 family RNA polymerase sigma factor,NA,Bdellovibrio_bacteriovorus_W
+GCF_000525675.1,NZ_CP002190.1,WP_025307382.1,RNA polymerase sigma factor,NA,Bdellovibrio_bacteriovorus_W
+GCF_000525675.1,NZ_CP002190.1,WP_155250046.1,RNA polymerase sigma factor,NA,Bdellovibrio_bacteriovorus_W
+GCF_000525675.1,NZ_CP002190.1,WP_025309100.1,RNA polymerase factor sigma-32,NA,Bdellovibrio_bacteriovorus_W
+GCF_000525675.1,NZ_CP002190.1,WP_025309103.1,FliA/WhiG family RNA polymerase sigma factor,NA,Bdellovibrio_bacteriovorus_W
+GCF_000009125.1,NC_003295.1,WP_011000337.1,RNA polymerase sigma factor RpoH,rpoH,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_003264474.1,RNA polymerase sigma factor RpoE,rpoE,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_011001157.1,RNA polymerase sigma factor RpoS,rpoS,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_011002009.1,RNA polymerase sigma factor,NA,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_038962216.1,RNA polymerase sigma factor RpoD,rpoD,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_011002284.1,sigma-70 family RNA polymerase sigma factor,NA,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003295.1,WP_011002888.1,RNA polymerase sigma factor,NA,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003296.1,WP_170864009.1,RNA polymerase sigma factor FliA,NA,Ralstonia_solanacearum_GMI1000
+GCF_000009125.1,NC_003296.1,WP_011004896.1,RNA polymerase sigma factor,NA,Ralstonia_solanacearum_GMI1000
+GCF_000006745.1,NC_002505.1,WP_000184359.1,RNA polymerase sigma factor RpoH,rpoH,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_000372618.1,RNA polymerase sigma factor RpoD,rpoD,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_000116737.1,RNA polymerase sigma factor RpoS,rpoS,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_001880851.1,sigma-70 family RNA polymerase sigma factor,NA,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_001030417.1,RNA polymerase sigma factor FliA,NA,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_000483035.1,RNA polymerase sigma factor,NA,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006745.1,NC_002505.1,WP_001005346.1,RNA polymerase sigma factor RpoE,rpoE,Vibrio_cholerae_O1_biovar_El_Tor_str._N16961
+GCF_000006765.1,NC_002516.2,NP_248839.1,ECF subfamily sigma-70 factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_249067.1,RNA polymerase sigma factor RpoH,rpoH,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_249267.1,RNA polymerase sigma factor RpoD,rpoD,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_249366.1,ECF sigma factor VreI,vreI,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_249453.1,RNA polymerase sigma factor AlgU,algU,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_249991.1,ECF subfamily sigma-70 factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_250146.1,flagellar biosynthesis sigma factor FliA,fliA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_250602.1,ECF sigma factor FemI,femI,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_251116.1,extracytoplasmic-function sigma-70 factor,pvdS,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_251586.1,RNA polymerase sigma factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_251975.1,ECF subfamily sigma-70 factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_252100.1,ECF subfamily sigma-70 factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_252312.1,RNA polymerase sigma factor RpoS,rpoS,Pseudomonas_aeruginosa_PAO1
+GCF_000006765.1,NC_002516.2,NP_252588.1,RNA polymerase sigma factor,NA,Pseudomonas_aeruginosa_PAO1
+GCF_000005845.2,NC_000913.3,NP_416432.3,"RNA polymerase, sigma 28 (sigma F) factor",fliA,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000005845.2,NC_000913.3,NP_417068.1,RNA polymerase sigma E factor,rpoE,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000005845.2,NC_000913.3,NP_417221.1,"RNA polymerase, sigma S (sigma 38) factor",rpoS,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000005845.2,NC_000913.3,NP_417539.1,"RNA polymerase, sigma 70 (sigma D) factor",rpoD,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000005845.2,NC_000913.3,NP_417918.1,"RNA polymerase, sigma 32 (sigma H) factor",rpoH,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000005845.2,NC_000913.3,NP_418713.1,RNA polymerase sigma factor FecI,fecI,Escherichia_coli_str._K-12_substr._MG1655
+GCF_000971565.1,NZ_CP011246.1,WP_038490951.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011246.1,WP_003513086.1,RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011246.1,WP_003513359.1,RNA polymerase sigma factor RpoD,rpoD,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011246.1,WP_003513560.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011246.1,WP_003491840.1,RNA polymerase sigma factor RpoH,rpoH,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011247.1,WP_038493726.1,RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011247.1,WP_003511036.1,RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011247.1,WP_004432061.1,RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011247.1,WP_004431393.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011247.1,WP_025594844.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011248.1,WP_003518695.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011248.1,WP_038497025.1,RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011248.1,WP_080863981.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000971565.1,NZ_CP011248.1,WP_038497316.1,sigma-70 family RNA polymerase sigma factor,NA,Agrobacterium_tumefaciens
+GCF_000009085.1,NC_002163.1,YP_002343525.1,flagellar biosynthesis RNA polymerase sigma factor,fliA,Campylobacter_jejuni_subsp._jejuni_NCTC_11168_=_ATCC_700819
+GCF_000009085.1,NC_002163.1,YP_002344396.1,RNA polymerase sigma factor RpoD,rpoD,Campylobacter_jejuni_subsp._jejuni_NCTC_11168_=_ATCC_700819
+GCF_000008525.1,NC_000915.1,WP_161595577.1,RNA polymerase sigma factor RpoD,rpoD,Helicobacter_pylori_26695
+GCF_000008525.1,NC_000915.1,WP_000602430.1,RNA polymerase sigma factor FliA,NA,Helicobacter_pylori_26695
+GCF_000008565.1,NC_001263.1,WP_027480180.1,RNA polymerase sigma factor,NA,Deinococcus_radiodurans_R1
+GCF_000008545.1,NC_000853.1,WP_004081373.1,sigma-70 family RNA polymerase sigma factor,NA,Thermotoga_maritima_MSB8
+GCF_000008545.1,NC_000853.1,WP_004080667.1,FliA/WhiG family RNA polymerase sigma factor,NA,Thermotoga_maritima_MSB8
+GCF_000008545.1,NC_000853.1,WP_004081730.1,RNA polymerase sigma factor RpoD,rpoD,Thermotoga_maritima_MSB8
+GCF_000008545.1,NC_000853.1,WP_004082042.1,sigma-70 family RNA polymerase sigma factor,NA,Thermotoga_maritima_MSB8
+GCF_000604125.1,NZ_CP003679.1,WP_013944800.1,RNA polymerase sigma factor,NA,Treponema_pallidum_subsp._pallidum_str._Sea_81-4
+GCF_000604125.1,NZ_CP003679.1,WP_010881942.1,RNA polymerase sigma factor RpoD,rpoD,Treponema_pallidum_subsp._pallidum_str._Sea_81-4
+GCF_000604125.1,NZ_CP003679.1,WP_014342819.1,RNA polymerase sigma factor WhiG,whiG,Treponema_pallidum_subsp._pallidum_str._Sea_81-4
+GCF_000604125.1,NZ_CP003679.1,WP_010882456.1,RNA polymerase sigma factor RpoD/SigA,NA,Treponema_pallidum_subsp._pallidum_str._Sea_81-4
+GCF_000008685.2,NC_001318.1,WP_002656292.1,RNA polymerase sigma factor RpoD,rpoD,Borrelia_burgdorferi_B31
+GCF_000008685.2,NC_001318.1,WP_002557358.1,RNA polymerase sigma factor RpoS,rpoS,Borrelia_burgdorferi_B31
+GCF_000195955.2,NC_000962.3,NP_214696.1,ECF RNA polymerase sigma factor SigG,sigG,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_215249.1,ECF RNA polymerase sigma factor SigL,sigL,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_215737.1,ECF RNA polymerase sigma factor SigE,sigE,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_216585.1,ECF RNA polymerase sigma factor SigC,sigC,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_217219.1,RNA polymerase sigma factor SigA,sigA,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_217226.1,RNA polymerase sigma factor SigB,sigB,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_217739.1,ECF RNA polymerase sigma factor SigH,sigH,Mycobacterium_tuberculosis_H37Rv
+GCF_000195955.2,NC_000962.3,NP_217803.1,RNA polymerase sigma factor SigF,sigF,Mycobacterium_tuberculosis_H37Rv
+GCF_000203835.1,NC_003888.3,NP_624495.1,ECF sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_624529.1,sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_624912.1,RNA polymerase sigma factor sig8,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_625164.1,ECF family RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_625166.1,ECF family RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_625194.1,RNA polymerase principal sigma factor HrdC,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_625240.1,RNA polymerase sigma factor SigL,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_626707.1,RNA polymerase principal sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627178.1,RNA polymerase sigma factor SigL,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627288.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627416.1,RNA polymerase principal sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627533.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627654.1,ECF subfamily RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_627901.1,ECF sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_628187.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_628216.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_628217.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_628295.1,hypothetical protein,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_628323.1,ECF family RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629020.1,ECF sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629048.1,RNA polymerase factor sigma-70,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629061.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629148.1,RNA polymerase ECF sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629295.1,RNA polymerase sigma factor SigE,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629363.1,RNA polymerase sigma factor RpoE,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629389.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629755.1,RNA polymerase sigma factor WhiG,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_629943.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_630601.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_631334.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_631369.1,RNA polymerase sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003888.3,NP_631395.1,RNA polymerase secondary sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_000203835.1,NC_003903.1,NP_639689.1,ecf family sigma factor,NA,Streptomyces_coelicolor_A3(2)
+GCF_002055965.1,NZ_CP020102.1,WP_003225758.1,RNA polymerase sporulation sigma factor SigH,sigH,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003234958.1,RNA polymerase sigma factor SigW,sigW,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003246715.1,RNA polymerase sigma factor SigB,sigB,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003224177.1,RNA polymerase sigma factor SigM,sigM,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003245855.1,RNA polymerase sigma factor SigI,sigI,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003245485.1,RNA polymerase sigma factor YlaC,ylaC,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003221446.1,RNA polymerase sporulation sigma factor SigE,sigE,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_009967190.1,RNA polymerase sporulation sigma factor SigG,sigG,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003220911.1,RNA polymerase sigma-28 factor SigD,sigD,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003230521.1,RNA polymerase sigma factor SigX,sigX,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003230458.1,RNA polymerase sporulation sigma factor SigF,sigF,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003226225.1,RNA polymerase sigma factor RpoD,rpoD,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_004398507.1,RNA polymerase sigma factor SigZ,sigZ,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_004398891.1,RNA polymerase sigma factor SigV,sigV,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020102.1,WP_003243678.1,RNA polymerase sigma factor SigY,sigY,Bacillus_subtilis
+GCF_002055965.1,NZ_CP020103.1,WP_100086169.1,sigma-70 family RNA polymerase sigma factor,NA,Bacillus_subtilis
