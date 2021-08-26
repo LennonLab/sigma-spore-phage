@@ -1,0 +1,33 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 26-Aug-2021 13:07:16 as follows:
+
+raxml-ng --support --tree /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/rand-313.raxml.bestTree --bs-trees allbootstraps --prefix ML_TBE_tree --threads 2 --bs-metric tbe,fbp
+
+Analysis options:
+  run mode: Compute bipartition support (Transfer Bootstrap + Felsenstein Bootstrap)
+  start tree(s): user
+  random seed: 1629997636
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (2 threads), thread pinning: OFF
+
+Reading reference tree from file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/rand-313.raxml.bestTree
+Reference tree size: 182
+
+Reading bootstrap trees from file: allbootstraps
+Loaded 1000 trees with 182 taxa.
+
+Best ML tree with Felsenstein bootstrap (FBP) support values saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/ML_TBE_tree.raxml.supportFBP
+Best ML tree with Transfer bootstrap (TBE) support values saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/ML_TBE_tree.raxml.supportTBE
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/ML_TBE_tree.raxml.log
+
+Analysis started: 26-Aug-2021 13:07:16 / finished: 26-Aug-2021 13:07:17
+
+Elapsed time: 0.617 seconds
+

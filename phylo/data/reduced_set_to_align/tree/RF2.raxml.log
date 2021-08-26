@@ -1,0 +1,35 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 26-Aug-2021 13:01:29 as follows:
+
+raxml-ng --rfdist --tree mltrees2 --redo --prefix RF2
+
+Analysis options:
+  run mode: RF distance computation
+  start tree(s): user
+  random seed: 1629997289
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (24 threads), thread pinning: OFF
+
+WARNING: Running in REDO mode: existing checkpoints are ignored, and all result files will be overwritten!
+
+Reading input trees from file: mltrees2
+Loaded 1030 trees with 182 taxa.
+
+Average absolute RF distance in this tree set: 75.440660
+Average relative RF distance in this tree set: 0.210728
+Number of unique topologies in this tree set: 1010
+
+Pairwise RF distances saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/RF2.raxml.rfDistances
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/RF2.raxml.log
+
+Analysis started: 26-Aug-2021 13:01:29 / finished: 26-Aug-2021 13:03:42
+
+Elapsed time: 132.493 seconds
+

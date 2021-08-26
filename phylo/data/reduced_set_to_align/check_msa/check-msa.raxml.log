@@ -1,0 +1,63 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 25-Aug-2021 10:59:59 as follows:
+
+raxml-ng --check --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim --model LG+G4 --data-type AA --prefix check-msa
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1629903599
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (24 threads), thread pinning: OFF
+
+[00:00:00] Reading alignment from file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/sigmas_MafftEinsi.trim
+[00:00:00] Loaded alignment with 201 taxa and 122 sites
+
+WARNING: Sequences YP_009215922.1-phage and YP_009216142.1-phage are exactly identical!
+WARNING: Sequences YP_006907735.1-phage and YP_009282131.1-phage are exactly identical!
+WARNING: Sequences YP_006908410.1-phage and YP_008770388.1-phage are exactly identical!
+WARNING: Sequences YP_008430954.1-phage and YP_009290042.1-phage are exactly identical!
+WARNING: Sequences YP_009226967.1-phage and YP_009056383.1-phage are exactly identical!
+WARNING: Sequences YP_009037083.1-phage and YP_009035701.1-phage are exactly identical!
+WARNING: Sequences YP_009036624.1-phage and YP_009278201.1-phage are exactly identical!
+WARNING: Sequences YP_009036624.1-phage and YP_009291759.1-phage are exactly identical!
+WARNING: Sequences YP_009149167.1-phage and YP_009285446.1-phage are exactly identical!
+WARNING: Sequences YP_009818180.1-phage and YP_009798107.1-phage are exactly identical!
+WARNING: Sequences YP_009818180.1-phage and YP_009798418.1-phage are exactly identical!
+WARNING: Sequences YP_009149686.1-phage and YP_009149124.1-phage are exactly identical!
+WARNING: Sequences YP_009003022.1-phage and YP_009282173.1-phage are exactly identical!
+WARNING: Sequences YP_008771228.1-phage and YP_009206562.1-phage are exactly identical!
+WARNING: Sequences YP_008771361.1-phage and YP_009152845.1-phage are exactly identical!
+WARNING: Sequences YP_008771969.1-phage and YP_008770783.1-phage are exactly identical!
+WARNING: Sequences YP_009036291.1-phage and YP_009287107.1-phage are exactly identical!
+WARNING: Sequences YP_009036291.1-phage and YP_009285170.1-phage are exactly identical!
+WARNING: Sequences YP_009278239.1-phage and YP_009291801.1-phage are exactly identical!
+WARNING: Duplicate sequences found: 19
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/check_msa/check-msa.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 122 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 122 / 122
+Gaps: 0.77 %
+Invariant sites: 0.00 %
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/check_msa/check-msa.raxml.log
+
+Analysis started: 25-Aug-2021 10:59:59 / finished: 25-Aug-2021 10:59:59
+
+Elapsed time: 0.117 seconds
+

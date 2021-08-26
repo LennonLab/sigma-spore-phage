@@ -1,0 +1,76 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 26-Aug-2021 06:54:46 as follows:
+
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/check_msa/parse.raxml.rba --model LG+G4 --prefix bs343434 --seed 343434 --threads 2 --tree pars{5} --bs-trees 25
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): parsimony (5)
+  bootstrap replicates: 25
+  random seed: 343434
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (2 threads), thread pinning: OFF
+
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+         since the binary MSA file already contains a model definition.
+         If you want to change the model, please re-run RAxML-NG 
+         with the original PHYLIP/FASTA alignment and --redo option.
+
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/check_msa/parse.raxml.rba
+[00:00:00] Alignment comprises 182 taxa, 1 partitions and 122 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 122 / 122
+Gaps: 0.85 %
+Invariant sites: 0.00 %
+
+
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 61 / 4880
+[00:00:00] Starting bootstrapping analysis with 25 replicates.
+
+[00:02:34] Bootstrap tree #1, logLikelihood: -27871.379003
+[00:05:05] Bootstrap tree #2, logLikelihood: -27789.759330
+[00:07:07] Bootstrap tree #3, logLikelihood: -27520.346066
+[00:11:22] Bootstrap tree #4, logLikelihood: -26505.330426
+[00:15:09] Bootstrap tree #5, logLikelihood: -27172.027892
+[00:18:45] Bootstrap tree #6, logLikelihood: -27134.582815
+[00:21:16] Bootstrap tree #7, logLikelihood: -27191.959780
+[00:24:50] Bootstrap tree #8, logLikelihood: -27114.639217
+[00:27:50] Bootstrap tree #9, logLikelihood: -26865.655968
+[00:31:27] Bootstrap tree #10, logLikelihood: -27298.484706
+[00:34:01] Bootstrap tree #11, logLikelihood: -28982.993805
+[00:37:29] Bootstrap tree #12, logLikelihood: -27172.884625
+[00:40:03] Bootstrap tree #13, logLikelihood: -26702.450394
+[00:43:19] Bootstrap tree #14, logLikelihood: -28659.973003
+[00:45:18] Bootstrap tree #15, logLikelihood: -28252.672463
+[00:48:17] Bootstrap tree #16, logLikelihood: -28325.357465
+[00:50:00] Bootstrap tree #17, logLikelihood: -28581.974778
+[00:53:00] Bootstrap tree #18, logLikelihood: -26899.723593
+[00:56:01] Bootstrap tree #19, logLikelihood: -26721.146279
+[00:58:43] Bootstrap tree #20, logLikelihood: -26001.985403
+[01:00:48] Bootstrap tree #21, logLikelihood: -27162.596251
+[01:02:49] Bootstrap tree #22, logLikelihood: -26802.218810
+[01:05:25] Bootstrap tree #23, logLikelihood: -27249.214487
+[01:07:11] Bootstrap tree #24, logLikelihood: -28414.649991
+[01:10:23] Bootstrap tree #25, logLikelihood: -26665.772539
+
+Bootstrap trees saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/bootstraps/bs343434.raxml.bootstraps
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/bootstraps/bs343434.raxml.log
+
+Analysis started: 26-Aug-2021 06:54:46 / finished: 26-Aug-2021 08:05:10
+
+Elapsed time: 4223.876 seconds
+

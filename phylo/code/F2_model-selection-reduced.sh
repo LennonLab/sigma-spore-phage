@@ -13,10 +13,13 @@ srun -p interactive -N 1 --ntasks-per-node=1 --cpus-per-task=8 --time=07:59:00 -
 
 ##### Define paths #####
 PARENT=~/GitHub/spore-phage-sigma/phylo
-cd $PARENT
 
-ODIR=${PARENT}/data/reduced_set_to_align
 
+ODIR=${PARENT}/data/reduced_set_to_align/model_test
+mkdir -p $ODIR
+cd $ODIR
+
+ALN=$PARENT/data/reduced_set_to_align/sigmas_MafftEinsi.trim 
 ##### Get modeltest-NG #####
 # using Docker image
   
@@ -38,8 +41,8 @@ ODIR=${PARENT}/data/reduced_set_to_align
 
 $MSCMD \
 -d aa \
--i $ODIR/sigmas_MafftEinsi.trim \
--o $ODIR/model.out \
+-i $ALN \
+-o $ODIR/model_test \
 -p 8 \
 -r 123 \
 -t ml -h ug

@@ -34,6 +34,4 @@ cd $MAFFT
 # trim alignment
 cd $TRIMAL
 
-./trimal -in ${ODIR}/sigmas_MafftEinsi.aln -out ${ODIR}/sigmas_MafftEinsi.trim -automated1
-
-
+./trimal -in ${ODIR}/sigmas_MafftEinsi.aln -out ${ODIR}/sigmas_MafftEinsi.trim -gappyout

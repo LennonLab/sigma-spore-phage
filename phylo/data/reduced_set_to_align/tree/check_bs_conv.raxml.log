@@ -1,0 +1,52 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 26-Aug-2021 08:35:56 as follows:
+
+raxml-ng --bsconverge --bs-trees allbootstraps --prefix 1000BS --seed 2 --prefix check_bs_conv --seed 123 --threads 2 --bs-cutoff 0.03
+
+Analysis options:
+  run mode: A posteriori bootstrap convergence test
+  start tree(s): 
+  random seed: 123
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (2 threads), thread pinning: OFF
+
+Reading bootstrap trees from file: allbootstraps
+Loaded 1000 trees with 182 taxa.
+
+Performing bootstrap convergence assessment using autoMRE criterion
+
+ # trees        avg WRF       avg WRF in %       # perms: wrf <= 3.00 %     converged?  
+      50        658.516              7.649                            0        NO
+     100        795.234              4.589                            1        NO
+     150       1131.095              4.309                            4        NO
+     200       1222.623              3.483                          118        NO
+     250       1351.685              3.081                          436        NO
+     300       1666.645              3.164                          327        NO
+     350       1950.355              3.175                          302        NO
+     400       2150.088              3.062                          432        NO
+     450       2086.825              2.634                          847        NO
+     500       2341.891              2.651                          846        NO
+     550       2308.717              2.373                          964        NO
+     600       2466.140              2.323                          986        NO
+     650       2612.963              2.276                          971        NO
+     700       2879.822              2.329                          966        NO
+     750       3073.702              2.322                          970        NO
+     800       3280.873              2.322                          959        NO
+     850       3521.764              2.343                          963        NO
+     900       3630.855              2.281                          973        NO
+     950       3632.910              2.160                          992        YES
+Bootstopping test converged after 950 trees
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/reduced_set_to_align/tree/check_bs_conv.raxml.log
+
+Analysis started: 26-Aug-2021 08:35:56 / finished: 26-Aug-2021 08:40:04
+
+Elapsed time: 248.418 seconds
+

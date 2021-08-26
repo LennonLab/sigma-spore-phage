@@ -8,7 +8,7 @@ library(treeio)
 # This is done to reduce the number of sigma factor genes analyzed
 
 #import tree
-rax <- read.tree(list.files(path = here("phylo/data/align-trim-tree/"),
+rax <- read.tree(list.files(path = here("phylo/data/align-trim-tree/tree"),
                             pattern = "bestTree", full.names = T))
 
 
@@ -41,7 +41,7 @@ p <-
 ggsave(here("phylo","plots","sigma_all_unrooted.pdf"),p, height=10, width = 10)
 
 # there are two clades that can be reduced:
-# > The ECF clade - has only 3 phage sequences
+# > The ECF clade - has no phage sequences
 # > the RpoD/sigA clade - has no phage sequences
 
 # identify splitting nodes
@@ -54,8 +54,8 @@ p <-
 ggsave(here("phylo","plots","sigma_nodeNUMS_unrooted.pdf"),p, height=10, width = 10)
 
 
-ecf_base_node <- 478
-rpod_base_node <- 371
+ecf_base_node <- 522
+rpod_base_node <- 440
 
 
 # split tree by nodes found above 
@@ -65,8 +65,8 @@ ggtree(x, layout = 'equal_angle')+
   geom_tippoint(aes(color=group), size=5, shape=20, alpha = .5)
 
 
-#need to keep split == 0
-split_keep <- 0
+#need to keep split == 1
+split_keep <- 1
 
 
 # add split groups to main tree
@@ -92,7 +92,7 @@ ggsave(here("phylo","plots","sigma_TrimGroups_unrooted.pdf"),p, height=10, width
 #split by group, and add sigma of phages, B. subtilis and . E. coli from removed groups, for reference.
 d.keep <- d.rax %>% 
   filter(split == split_keep | 
-           group == "phage" |
+           #group == "phage" |
            str_detect(sp, regex("subtilis", ignore_case = T))|
            str_detect(sp, regex("Escherichia_coli", ignore_case = T)))
 
@@ -100,7 +100,12 @@ keep <- d.keep %>%
   filter(!is.na(protein.id)) %>% 
   pull(protein.id)
 
-
+#check removed
+d.rax %>% 
+  filter(! protein.id %in% keep ) %>% 
+  pull(group) %>% table()
+# 183 bacteria sequences were removed.
+# no phage sequences
 
 ##### Save results #####
 if (!dir.exists(here("phylo","data", "reduced_set_to_align"))){

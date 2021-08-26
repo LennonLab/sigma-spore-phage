@@ -15,19 +15,20 @@ srun -p interactive -N 1 --ntasks-per-node=1 --cpus-per-task=8 --time=07:59:00 -
 PARENT=~/GitHub/spore-phage-sigma/phylo
 cd $PARENT
 
-ODIR=${PARENT}/data/align-trim-tree
+ODIR=${PARENT}/data/align-trim-tree/model_test
+mkdir -p $ODIR
 
 ##### Get modeltest-NG #####
 # using Docker image
   
-  # download image
-  MSNG="$TOOLS/modeltest"
-  mkdir $MSNG
-  cd MSNG
-  singularity pull docker://nanozoo/modeltest-ng:0.1.6--06cdfc1
+  # # download image
+MSNG="$TOOLS/modeltest"
+  # mkdir $MSNG
+  # cd MSNG
+  # singularity pull docker://nanozoo/modeltest-ng:0.1.6--06cdfc1
   
   # to run from container
-  MSCMD="singularity exec $MSNG/modeltest-ng_0.1.6--06cdfc1.sif modeltest-ng"
+MSCMD="singularity exec $MSNG/modeltest-ng_0.1.6--06cdfc1.sif modeltest-ng"
   
 ##### Run modeltest-NG #####
 
@@ -39,7 +40,7 @@ ODIR=${PARENT}/data/align-trim-tree
 $MSCMD \
 -d aa \
 -i $PARENT/data/align-trim-tree/sigmas_MafftEinsi.trim \
--o $PARENT/data/align-trim-tree/model.out \
+-o $ODIR/model_test \
 -p 8 \
 -r 123 \
 -t ml -h ug
