@@ -146,10 +146,26 @@ d.sp%>%
 # 3        24     0.699
 
 
+# summarise by phylum
+d.sp%>%
+  group_by(phylum)%>%
+  mutate(has_sigma = n.sigma >0,
+         multi_sigma = n.sigma >1) %>% 
+  summarise(n=n(),
+            perc_sigma=100*sum(has_sigma)/n(),
+            perc_multi=100*sum(multi_sigma)/n())
+  
+
+d.sp%>%
+  filter(n.sigma>0) %>%
+  group_by(phylum)%>%
+  summarise(n= n(), avg_Nsig=mean(n.sigma), sd=sd(n.sigma),
+            perc_multi = sum(n.sigma>1)/n(),
+            perc_single = sum(n.sigma==1)/n())
+
 ##########################
 # Plot by phylum
 ##########################
-
 
 # filter for phyla with less than 20 phages
 phyla_rm <-  d.sp %>% 
@@ -265,7 +281,20 @@ firmi <- firmi%>%
   mutate(genus = trimws(genus)) %>% 
   mutate(genus.plot = if_else(is.na(genus), genus2, genus))
 
+firmi%>%
+  group_by(genus)%>%
+  mutate(has_sigma = n.sigma >0,
+         multi_sigma = n.sigma >1) %>% 
+  summarise(n=n(),
+            perc_sigma=100*sum(has_sigma)/n(),
+            perc_multi=100*sum(multi_sigma)/n())
 
+firmi%>%
+  filter(n.sigma>0) %>%
+  group_by(genus)%>%
+  summarise(n= n(), avg_Nsig=mean(n.sigma), sd=sd(n.sigma),
+            perc_multi = 100*sum(n.sigma>1)/n(),
+            perc_single = 100*sum(n.sigma==1)/n())
 
 # firmi %>% 
 #   select(genus, genus2) %>% 
@@ -325,8 +354,8 @@ str_count(firmi$`virus lineage`,";")%>%hist()
 # All but 1 belong to the tailed phages (Caudovirales)
 # the single exception is Salisaeta icosahedral phage 1
 # indeed this is " a tailless bacteriophage" (PMID: 22509017)
-  # tmp <- (!str_detect(d.faa$`virus lineage`,"Caudovirales"))%>%which()
-  # d.faa$`virus name`[tmp]
+  tmp <- (!str_detect(d.faa$`virus lineage`,"Caudovirales"))%>%which()
+  d.faa$`virus name`[tmp]
 # I will only look at the family level below tailed phage (order Caudovirales)
 firmi <- firmi%>%
   mutate(viral.family=str_extract(`virus lineage`,
@@ -439,6 +468,31 @@ p <-  plot_grid(p.phylum,p.genus,right_col,
   ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
           plot = p, width = 12,height = 10)
 
+
+# Viruses of all phyla ----------------------------------------------------
+  d.phage <- filter(d.sp, phage.nonphage == "phage")
+  # First I will break up the virus lineage data so
+  # the host lineage is not uniform having 2-9 levels
+  str_count(d.phage$`virus lineage`,";")%>%range()
+  str_count(d.phage$`virus lineage`,";")%>%hist()
+  # the last looks like this: 
+  # "Viruses; Duplodnaviria; Heunggongvirae; Uroviricota; 
+  # Caudoviricetes; Caudovirales; Myoviridae; Phikzvirus; unclassified Phikzvirus"
+  str_detect(d.phage$`virus lineage`, 'Caudovirales') %>% sum()
+  # All but 97 belong to the tailed phages (Caudovirales)
+  # the single exception is Salisaeta icosahedral phage 1
+  # indeed this is " a tailless bacteriophage" (PMID: 22509017)
+  tmp <- (!stringr::str_detect(d.phage$`virus lineage`,"Caudovirales"))%>%which()
+  d.faa$`virus name`[tmp]
+  d.faa$`virus lineage`[tmp]
+  # I will only look at the family level below tailed phage (order Caudovirales)
+  firmi <- firmi%>%
+    mutate(viral.family=str_extract(`virus lineage`,
+                                    regex("caudovirales;.*", ignore_case = T)))%>%
+    mutate(viral.family=str_remove(viral.family,
+                                   regex("caudovirales; ", ignore_case = T)))%>%
+    mutate(viral.family=str_remove(viral.family,
+                                   regex(";.*", ignore_case = T)))
 
   
 ###############
