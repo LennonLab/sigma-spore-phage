@@ -21,7 +21,7 @@ TRIMAL=/geode2/home/u020/danschw/Carbonate/my_tools/trimal-trimAl/source
 
 
 ##### Define paths #####
-PARENT=~/GitHub/spore-phage-sigma/phylo
+PARENT=~/GitHub/sigma-spore-phage/phylo
 ODIR=${PARENT}/data/align-trim-tree
 mkdir -p ${ODIR}
 
@@ -29,9 +29,10 @@ mkdir -p ${ODIR}
 # alignment
 cd $MAFFT
 
-./mafft-einsi  ${PARENT}/data/sigmas_to_align.faa > ${ODIR}/sigmas_MafftEinsi.aln
+./mafft-einsi  --thread 8 ${PARENT}/data/sigmas_to_align.faa > ${ODIR}/sigmas_MafftEinsi.aln 2> ${ODIR}/sigmas_MafftEinsi.log
 
 # trim alignment
 cd $TRIMAL
 
-./trimal -in ${ODIR}/sigmas_MafftEinsi.aln -out ${ODIR}/sigmas_MafftEinsi.trim -gappyout
+./trimal -in ${ODIR}/sigmas_MafftEinsi.aln -out ${ODIR}/sigmas_MafftEinsi.trim -gappyout 2> ${ODIR}/sigmas_MafftEinsi.log
+
