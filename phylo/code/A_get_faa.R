@@ -141,13 +141,41 @@ bact.fa <- read.fasta(here("phylo","data","bacterial_sigma.faa"))
 # load viral sigmas from vog HMM analysis
 load(here("vogdb/data/vog_sigma_clean_Whost.RData"))
 
-# keep only viral sigmas of bacillus phages
-phage.fa <- d.faa %>% 
-  filter(phylum == "Firmicutes") %>% 
-  filter(str_detect(family.etc, regex("bacillus", ignore_case = T)))
+# # keep only viral sigmas of bacillus phages
+phage.fa <- d.faa # %>%
+  # filter(phylum == "Firmicutes") %>%
+  # filter(str_detect(family.etc, regex("bacillus", ignore_case = T)))
+
+
+# check for duplicates ----------------------------------------------------
+
+# in phage data
+# mark sequences that are duplicates 
+phage.fa$seq.group <- phage.fa %>%   group_indices(seq)
+# get the duplicates
+phage.dups <-phage.fa %>% filter(duplicated(seq.group)) %>% 
+  relocate(seq.group, .after = sp)
+# In manual inspection of dups to be removed I found two phages that I would like to retain
+# coliphage T4 (gp55 has duplicate in Shigella phage Shfl2)
+# and Bacillus phage Bastille. (two gene have duplicate in Bacillus phage Evoli)
+# swapping them with their duplicates by placing them on top and removing duplicates
+keepers <- c("Escherichia virus T4 (T4)", "Bacillus phage Bastille")
+phage.keep  <-
+  bind_rows(phage.dups %>% filter(sp %in% keepers), 
+            phage.fa %>% filter(! duplicated(seq.group))) %>% 
+  filter(! duplicated(seq.group))
+
+# in bacterial data
+anyDuplicated(bact.fa)
+#no duplicates
+
+
+# combine bact and phage fastas --------------------------------------------
+
+
 
 # write a combined fasta with minimal header
-write.fasta(sequences = c(getSequence(bact.fa), phage.fa$seq), 
+write.fasta(sequences = c(getSequence(bact.fa), phage.keep$seq), 
             names = c(paste0(names(bact.fa),"-bacteria"),
-                      paste0(phage.fa$protein,"-phage")),
+                      paste0(phage.keep$protein,"-phage")),
             file.out = here("phylo/data/sigmas_to_align.faa"))
