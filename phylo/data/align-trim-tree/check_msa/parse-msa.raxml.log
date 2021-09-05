@@ -5,14 +5,14 @@ Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Be
 Latest version: https://github.com/amkozlov/raxml-ng
 Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
 
-RAxML-NG was called at 24-Aug-2021 17:52:16 as follows:
+RAxML-NG was called at 02-Sep-2021 21:14:50 as follows:
 
-raxml-ng --parse --msa /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy --data-type AA --model LG+G4 --prefix parse-msa
+raxml-ng --parse --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy --data-type AA --model LG+G4 --prefix parse-msa
 
 Analysis options:
   run mode: Alignment parsing and compression
   start tree(s): 
-  random seed: 1629841936
+  random seed: 1630631690
   tip-inner: OFF
   pattern compression: ON
   per-rate scalers: OFF
@@ -21,23 +21,23 @@ Analysis options:
   SIMD kernels: AVX2
   parallelization: PTHREADS (24 threads), thread pinning: OFF
 
-[00:00:00] Reading alignment from file: /N/u/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy
-[00:00:00] Loaded alignment with 384 taxa and 172 sites
+[00:00:00] Reading alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy
+[00:00:00] Loaded alignment with 608 taxa and 180 sites
 
-Alignment comprises 1 partitions and 172 patterns
+Alignment comprises 1 partitions and 180 patterns
 
 Partition 0: noname
 Model: LG+G4m
-Alignment sites / patterns: 172 / 172
-Gaps: 4.64 %
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
 Invariant sites: 0.00 %
 
 
 NOTE: Binary MSA file created: parse-msa.raxml.rba
 
-* Estimated memory requirements                : 81 MB
+* Estimated memory requirements                : 134 MB
 
-* Recommended number of threads / MPI processes: 3
+* Recommended number of threads / MPI processes: 4
 
 Please note that numbers given above are rough estimates only. 
 Actual memory consumption and parallel performance on your system may differ!
@@ -45,9 +45,9 @@ Actual memory consumption and parallel performance on your system may differ!
 Alignment can be successfully read by RAxML-NG.
 
 
-Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/spore-phage-sigma/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.log
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.log
 
-Analysis started: 24-Aug-2021 17:52:16 / finished: 24-Aug-2021 17:52:16
+Analysis started: 02-Sep-2021 21:14:50 / finished: 02-Sep-2021 21:14:50
 
-Elapsed time: 0.070 seconds
+Elapsed time: 0.124 seconds
 

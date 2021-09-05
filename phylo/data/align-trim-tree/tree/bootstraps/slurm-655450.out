@@ -1,0 +1,176 @@
+Flex 2.6.4 loaded.
+CMake version 3.8.0 loaded.
+raxmlng version 0.9.0-pthreads loaded.
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Latest version: https://github.com/amkozlov/raxml-ng
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+Latest version: https://github.com/amkozlov/raxml-ng
+
+
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 04-Sep-2021 10:30:03 as follows:
+
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs101n1 --threads 4 --seed 1101101 --tree pars{2} --bs-trees 2
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): parsimony (2)
+  bootstrap replicates: 2
+  random seed: 1101101
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+
+RAxML-NG was called at 04-Sep-2021 10:30:03 as follows:
+
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs101n2 --threads 4 --seed 2101101 --tree pars{2} --bs-trees 2
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): parsimony (2)
+  bootstrap replicates: 2
+  random seed: 2101101
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+RAxML-NG was called at 04-Sep-2021 10:30:03 as follows:
+
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs101n3 --threads 4 --seed 3101101 --tree rand{2} --bs-trees 2
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): random (2)
+  bootstrap replicates: 2
+  random seed: 3101101
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+RAxML-NG was called at 04-Sep-2021 10:30:03 as follows:
+
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs101n4 --threads 4 --seed 4101101 --tree rand{2} --bs-trees 2
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): random (2)
+  bootstrap replicates: 2
+  random seed: 4101101
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+         since the binary MSA file already contains a model definition.
+         since the binary MSA file already contains a model definition.
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+         since the binary MSA file already contains a model definition.
+         If you want to change the model, please re-run RAxML-NG 
+         If you want to change the model, please re-run RAxML-NG 
+         since the binary MSA file already contains a model definition.
+         If you want to change the model, please re-run RAxML-NG 
+         with the original PHYLIP/FASTA alignment and --redo option.
+         with the original PHYLIP/FASTA alignment and --redo option.
+         If you want to change the model, please re-run RAxML-NG 
+         with the original PHYLIP/FASTA alignment and --redo option.
+
+
+         with the original PHYLIP/FASTA alignment and --redo option.
+
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Invariant sites: 0.00 %
+
+Partition 0: noname
+Invariant sites: 0.00 %
+
+Invariant sites: 0.00 %
+
+
+Model: LG+G4m
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Invariant sites: 0.00 %
+
+
+
+
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+[00:00:00] Starting bootstrapping analysis with 2 replicates.
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+
+[00:00:00] Starting bootstrapping analysis with 2 replicates.
+[00:00:00] Starting bootstrapping analysis with 2 replicates.
+
+
+[00:00:00] Starting bootstrapping analysis with 2 replicates.
+
+[00:33:29] Bootstrap tree #1, logLikelihood: -127105.715545
+[00:34:37] Bootstrap tree #1, logLikelihood: -120898.076090
+[00:34:54] Bootstrap tree #1, logLikelihood: -118620.038101
+[00:35:21] Bootstrap tree #1, logLikelihood: -125430.033359
+slurmstepd: error: *** JOB 655450 ON c40 CANCELLED AT 2021-09-04T11:29:29 DUE TO TIME LIMIT ***

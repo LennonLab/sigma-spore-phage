@@ -1,0 +1,134 @@
+Flex 2.6.4 loaded.
+CMake version 3.8.0 loaded.
+raxmlng version 0.9.0-pthreads loaded.
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 03-Sep-2021 09:04:42 as follows:
+
+raxml-ng --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-91 --threads 4 --seed 91 --tree pars{10}
+
+Analysis options:
+  run mode: ML tree search
+  start tree(s): parsimony (10)
+  random seed: 91
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+         since the binary MSA file already contains a model definition.
+         If you want to change the model, please re-run RAxML-NG 
+         with the original PHYLIP/FASTA alignment and --redo option.
+
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Invariant sites: 0.00 %
+
+
+[00:00:00] NOTE: Resuming execution from checkpoint (logLH: -125033.36, ML trees: 8, bootstraps: 0)
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+
+Starting ML tree search with 10 distinct starting trees
+
+[00:00:00 -125033.355362] SPR radius for FAST iterations: 20 (autodetect)
+[00:00:00 -125033.355362] SLOW spr round 25 (radius: 5)
+[00:00:50 -125033.354577] SLOW spr round 26 (radius: 10)
+[00:01:45 -125030.223292] SLOW spr round 27 (radius: 5)
+[00:02:40 -125028.159763] SLOW spr round 28 (radius: 5)
+[00:03:29 -125027.521182] SLOW spr round 29 (radius: 5)
+[00:04:17 -125025.013891] SLOW spr round 30 (radius: 5)
+[00:05:03 -125025.013677] SLOW spr round 31 (radius: 10)
+[00:05:55 -125025.013675] SLOW spr round 32 (radius: 15)
+[00:07:34 -125025.013675] SLOW spr round 33 (radius: 20)
+[00:09:24 -125025.013675] SLOW spr round 34 (radius: 25)
+[00:11:39 -125025.013675] Model parameter optimization (eps = 0.100000)
+
+[00:11:39] ML tree search #9, logLikelihood: -125025.006473
+
+[00:11:40 -144748.106220] Initial branch length optimization
+[00:11:40 -127313.204140] Model parameter optimization (eps = 10.000000)
+[00:11:41 -127188.730047] AUTODETECT spr round 1 (radius: 5)
+[00:12:09 -125730.071302] AUTODETECT spr round 2 (radius: 10)
+[00:12:45 -125426.616163] AUTODETECT spr round 3 (radius: 15)
+[00:13:29 -125384.677776] AUTODETECT spr round 4 (radius: 20)
+[00:14:18 -125374.399178] AUTODETECT spr round 5 (radius: 25)
+[00:15:15 -125360.251042] SPR radius for FAST iterations: 25 (autodetect)
+[00:15:15 -125360.251042] Model parameter optimization (eps = 3.000000)
+[00:15:17 -125349.387046] FAST spr round 1 (radius: 25)
+[00:16:15 -125142.367921] FAST spr round 2 (radius: 25)
+[00:17:04 -125099.859608] FAST spr round 3 (radius: 25)
+[00:17:48 -125070.707762] FAST spr round 4 (radius: 25)
+[00:18:24 -125063.831689] FAST spr round 5 (radius: 25)
+[00:18:58 -125061.390704] FAST spr round 6 (radius: 25)
+[00:19:30 -125060.156520] FAST spr round 7 (radius: 25)
+[00:20:03 -125058.074462] FAST spr round 8 (radius: 25)
+[00:20:36 -125055.462224] FAST spr round 9 (radius: 25)
+[00:21:07 -125055.460014] Model parameter optimization (eps = 1.000000)
+[00:21:08 -125054.932786] SLOW spr round 1 (radius: 5)
+[00:21:58 -125030.758884] SLOW spr round 2 (radius: 5)
+[00:22:44 -125029.915992] SLOW spr round 3 (radius: 5)
+[00:23:31 -125029.197646] SLOW spr round 4 (radius: 5)
+[00:24:17 -125029.182551] SLOW spr round 5 (radius: 10)
+[00:25:07 -125019.939835] SLOW spr round 6 (radius: 5)
+[00:26:03 -125017.212666] SLOW spr round 7 (radius: 5)
+[00:26:53 -125017.196375] SLOW spr round 8 (radius: 10)
+[00:27:45 -125017.102475] SLOW spr round 9 (radius: 15)
+[00:29:10 -125015.630612] SLOW spr round 10 (radius: 5)
+[00:30:09 -125013.746811] SLOW spr round 11 (radius: 5)
+[00:31:01 -125013.266516] SLOW spr round 12 (radius: 5)
+[00:31:48 -125013.265315] SLOW spr round 13 (radius: 10)
+[00:32:39 -125013.265124] SLOW spr round 14 (radius: 15)
+[00:34:04 -125012.574364] SLOW spr round 15 (radius: 5)
+[00:35:01 -125011.409459] SLOW spr round 16 (radius: 5)
+[00:35:52 -125011.409311] SLOW spr round 17 (radius: 10)
+[00:36:45 -125011.409303] SLOW spr round 18 (radius: 15)
+[00:38:07 -125011.409301] SLOW spr round 19 (radius: 20)
+[00:39:54 -125011.409301] SLOW spr round 20 (radius: 25)
+[00:41:55 -125011.409301] Model parameter optimization (eps = 0.100000)
+
+[00:41:56] ML tree search #10, logLikelihood: -125010.796277
+
+
+Optimized model parameters:
+
+   Partition 0: noname
+   Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 1.711434 (ML),  weights&rates: (0.250000,0.256216) (0.250000,0.620343) (0.250000,1.060754) (0.250000,2.062687) 
+   Base frequencies (model): 0.079066 0.055941 0.041977 0.053052 0.012937 0.040767 0.071586 0.057337 0.022355 0.062157 0.099081 0.064600 0.022951 0.042302 0.044040 0.061197 0.053287 0.012066 0.034155 0.069147 
+   Substitution rates (model): 0.425093 0.276818 0.395144 2.489084 0.969894 1.038545 2.066040 0.358858 0.149830 0.395337 0.536518 1.124035 0.253701 1.177651 4.727182 2.139501 0.180717 0.218959 2.547870 0.751878 0.123954 0.534551 2.807908 0.363970 0.390192 2.426601 0.126991 0.301848 6.326067 0.484133 0.052722 0.332533 0.858151 0.578987 0.593607 0.314440 0.170887 5.076149 0.528768 1.695752 0.541712 1.437645 4.509238 0.191503 0.068427 2.145078 0.371004 0.089525 0.161787 4.008358 2.000679 0.045376 0.612025 0.083688 0.062556 0.523386 5.243870 0.844926 0.927114 0.010690 0.015076 0.282959 0.025548 0.017416 0.394456 1.240275 0.425860 0.029890 0.135107 0.037967 0.084808 0.003499 0.569265 0.640543 0.320627 0.594007 0.013266 0.893680 1.105251 0.075382 2.784478 1.143480 0.670128 1.165532 1.959291 4.128591 0.267959 4.813505 0.072854 0.582457 3.234294 1.672569 0.035855 0.624294 1.223828 1.080136 0.236199 0.257336 0.210332 0.348847 0.423881 0.044265 0.069673 1.807177 0.173735 0.018811 0.419409 0.611973 0.604545 0.077852 0.120037 0.245034 0.311484 0.008705 0.044261 0.296636 0.139538 0.089586 0.196961 1.739990 0.129836 0.268491 0.054679 0.076701 0.108882 0.366317 0.697264 0.442472 0.682139 0.508851 0.990012 0.584262 0.597054 5.306834 0.119013 4.145067 0.159069 4.273607 1.112727 0.078281 0.064105 1.033739 0.111660 0.232523 10.649107 0.137500 6.312358 2.592692 0.249060 0.182287 0.302936 0.619632 0.299648 1.702745 0.656604 0.023918 0.390322 0.748683 1.136863 0.049906 0.131932 0.185202 1.798853 0.099849 0.346960 2.020366 0.696175 0.481306 1.898718 0.094464 0.361819 0.165001 2.457121 7.803902 0.654683 1.338132 0.571468 0.095131 0.089613 0.296501 6.472279 0.248862 0.400547 0.098369 0.140825 0.245841 2.188158 3.151815 0.189510 0.249313 
+
+
+Final LogLikelihood: -125001.066915
+
+AIC score: 252430.133831 / AICc score: 3202450.133831 / BIC score: 256306.383448
+Free parameters (model + branch lengths): 1214
+
+WARNING: Number of free parameters (K=1214) is larger than alignment size (n=180).
+         This might lead to overfitting and compromise tree inference results!
+
+
+Best ML tree saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-91.raxml.bestTree
+All ML trees saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-91.raxml.mlTrees
+Optimized model saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-91.raxml.bestModel
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-91.raxml.log
+
+Analysis started: 03-Sep-2021 09:04:42 / finished: 03-Sep-2021 09:46:38
+
+Elapsed time: 2516.605 seconds (this run) / 22327.907 seconds (total with restarts)
+

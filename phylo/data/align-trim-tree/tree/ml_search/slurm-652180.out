@@ -1,0 +1,90 @@
+Flex 2.6.4 loaded.
+CMake version 3.8.0 loaded.
+raxmlng version 0.9.0-pthreads loaded.
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 02-Sep-2021 21:38:05 as follows:
+
+raxml-ng --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/rand-41 --threads 4 --seed 41 --tree pars{10}
+
+Analysis options:
+  run mode: ML tree search
+  start tree(s): parsimony (10)
+  random seed: 41
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+WARNING: The model you specified on the command line (LG+G4) will be ignored 
+         since the binary MSA file already contains a model definition.
+         If you want to change the model, please re-run RAxML-NG 
+         with the original PHYLIP/FASTA alignment and --redo option.
+
+[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 180 / 180
+Gaps: 12.00 %
+Invariant sites: 0.00 %
+
+
+[00:00:00] Generating 10 parsimony starting tree(s) with 608 taxa
+[00:00:06] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
+
+Starting ML tree search with 10 distinct starting trees
+
+[00:00:07 -144584.057533] Initial branch length optimization
+[00:00:07 -127053.022167] Model parameter optimization (eps = 10.000000)
+[00:00:08 -126939.123591] AUTODETECT spr round 1 (radius: 5)
+[00:00:36 -125676.000526] AUTODETECT spr round 2 (radius: 10)
+[00:01:11 -125419.355599] AUTODETECT spr round 3 (radius: 15)
+[00:01:55 -125337.387480] AUTODETECT spr round 4 (radius: 20)
+[00:02:50 -125337.382178] SPR radius for FAST iterations: 15 (autodetect)
+[00:02:50 -125337.382178] Model parameter optimization (eps = 3.000000)
+[00:02:51 -125336.772786] FAST spr round 1 (radius: 15)
+[00:03:40 -125157.870992] FAST spr round 2 (radius: 15)
+[00:04:22 -125140.702031] FAST spr round 3 (radius: 15)
+[00:04:58 -125138.688066] FAST spr round 4 (radius: 15)
+[00:05:33 -125133.413001] FAST spr round 5 (radius: 15)
+[00:06:05 -125133.063668] FAST spr round 6 (radius: 15)
+[00:06:38 -125132.915686] FAST spr round 7 (radius: 15)
+[00:07:09 -125132.303881] FAST spr round 8 (radius: 15)
+[00:07:43 -125125.736607] FAST spr round 9 (radius: 15)
+[00:08:15 -125122.248812] FAST spr round 10 (radius: 15)
+[00:08:46 -125121.477583] FAST spr round 11 (radius: 15)
+[00:09:17 -125121.379460] Model parameter optimization (eps = 1.000000)
+[00:09:18 -125121.376339] SLOW spr round 1 (radius: 5)
+[00:10:08 -125074.333690] SLOW spr round 2 (radius: 5)
+[00:10:56 -125064.622797] SLOW spr round 3 (radius: 5)
+[00:11:42 -125063.555780] SLOW spr round 4 (radius: 5)
+[00:12:26 -125062.880881] SLOW spr round 5 (radius: 5)
+[00:13:10 -125062.880814] SLOW spr round 6 (radius: 10)
+[00:13:59 -125061.470607] SLOW spr round 7 (radius: 5)
+[00:14:53 -125061.299725] SLOW spr round 8 (radius: 5)
+[00:15:41 -125061.299673] SLOW spr round 9 (radius: 10)
+[00:16:33 -125060.585421] SLOW spr round 10 (radius: 5)
+[00:17:27 -125058.099243] SLOW spr round 11 (radius: 5)
+[00:18:14 -125058.088760] SLOW spr round 12 (radius: 10)
+[00:19:06 -125058.088569] SLOW spr round 13 (radius: 15)
+[00:20:31 -125056.912054] SLOW spr round 14 (radius: 5)
+[00:21:25 -125056.911829] SLOW spr round 15 (radius: 10)
+[00:22:25 -125056.155506] SLOW spr round 16 (radius: 5)
+[00:23:17 -125055.978948] SLOW spr round 17 (radius: 5)
+[00:24:03 -125055.978915] SLOW spr round 18 (radius: 10)
+[00:24:54 -125055.978911] SLOW spr round 19 (radius: 15)
+[00:26:18 -125055.978910] SLOW spr round 20 (radius: 20)
+[00:27:59 -125055.978909] SLOW spr round 21 (radius: 25)
+slurmstepd: error: *** JOB 652180 ON c69 CANCELLED AT 2021-09-02T22:06:27 ***

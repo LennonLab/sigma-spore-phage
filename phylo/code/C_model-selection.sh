@@ -12,7 +12,7 @@ srun -p interactive -N 1 --ntasks-per-node=1 --cpus-per-task=8 --time=07:59:00 -
     # singularity version 3.6.4 loaded
 
 ##### Define paths #####
-PARENT=~/GitHub/spore-phage-sigma/phylo
+PARENT=~/GitHub/sigma-spore-phage/phylo
 cd $PARENT
 
 ODIR=${PARENT}/data/align-trim-tree/model_test
@@ -45,7 +45,11 @@ $MSCMD \
 -r 123 \
 -t ml -h ug
 
-# Best model according to BIC
-# ---------------------------
-# Model:              LG+G4
+#                          Model         Score        Weight
+# ----------------------------------------------------------
+#        BIC               LG+G4   257247.8571        1.0000
+#        AIC               LG+G4   253090.6272        1.0000
+#       AICc               LG+G4  3646102.6272        1.0000
+
+
 

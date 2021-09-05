@@ -1,0 +1,5 @@
+Flex 2.6.4 loaded.
+CMake version 3.8.0 loaded.
+raxmlng version 0.9.0-pthreads loaded.
+/var/spool/slurm/d/job655386/slurm_script: line 26: syntax error near unexpected token `('
+/var/spool/slurm/d/job655386/slurm_script: line 26: `for i in ($(seq 1 2));'
