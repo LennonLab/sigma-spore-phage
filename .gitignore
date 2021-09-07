@@ -1,9 +1,7 @@
 # data
-data/*_faa/
-data/hsearch_results/
-data/bacteria_features/
-*.ufboot
-
+TIGR/data/tigr_hmm/*
+TIGR/data/tigr_info/*
+phylo/data/tmp_sigma/*
 # History files
 .Rhistory
 .Rapp.history
