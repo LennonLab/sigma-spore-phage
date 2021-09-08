@@ -131,6 +131,7 @@ d.rax <- as_tibble(rax.tbe) %>%
 d.rax %>% 
   mutate(bs.label = if_else((group=="bacteria")&(str_detect(sp,"ubtilis")),
                             symbol,"")) %>% 
+  mutate(bs.label = str_replace(bs.label, "rpoD", "sigA")) %>% 
   mutate(ecf = groupOTU(d.rax,ecf.nodes) %>% pull(group)) %>% 
   as.treedata() %>% 
   ggtree(branch.length = "none")+
@@ -155,7 +156,8 @@ d.rax <- d.rax %>%
   mutate(tip.label = case_when(group == "phage" ~ sp,
                                group == "bacteria" ~ paste(sp, symbol, sep = "_"))) %>% 
   mutate(bs.label = if_else((group=="bacteria")&(str_detect(sp,"ubtilis")),
-                            symbol,"")) 
+                            symbol,"")) %>% 
+  mutate(bs.label = str_replace(bs.label, "rpoD", "sigA")) 
 
 
 # function to mark phage only monophyletic clades
@@ -219,7 +221,25 @@ d.rax <- d.rax %>%
   mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit")) 
   
 
+# >> add phage labels -----------------------------------------------------
 
+# d.rax %>%
+#   filter(str_detect(sp, "SPO1")|
+#            str_detect(sp, "SP-10")|
+#            str_detect(sp, "Goe3")|
+#            str_detect(sp, "Bcp1")|
+#            str_detect(sp, "Eldridge")|
+#            str_detect(sp, "Fah")|
+#            str_detect(sp, "Escherichia virus T4") ) %>%
+#   select(sp, protein.id, description, tigr.type) %>%
+#   arrange(sp) %>% 
+#   write_csv(here("phylo/data/label_phage_sigmas.csv"))
+
+phage_labels <- read_csv(here("phylo/data/label_phage_sigmas_edited.csv")) %>% 
+  select(protein.id, phage_lab = label)
+d.rax <- left_join(d.rax, phage_labels, by = "protein.id")
+d.rax$phage_lab  <-  str_replace_na(d.rax$phage_lab, replacement = "")
+  
 d.rax <- d.rax %>% 
   mutate(tbe = if_else(is.na(tip.label), label.tbe %>% parse_number(), NULL)) %>%
   mutate(support = case_when( #is.na(UFboot) ~ "NA",
@@ -228,20 +248,7 @@ d.rax <- d.rax %>%
                               100*tbe>= 70 ~ ">70%",
                               # 100*tbe>= 50 ~ ">50%",
                               TRUE ~ NA_character_)) %>%
-  mutate(support = fct_rev(support)) %>%
-  
-  mutate(circ1.lab = case_when(str_detect(sp, "Escherichia virus T4 ") ~ "T4",
-                               str_detect(sp, "Bcp1") ~ "Bcp1",
-                               str_detect(sp, "Fah") ~ "Fah",
-                               str_detect(sp, "SPO1") ~ "SPO1",
-                               str_detect(sp, "SP-10") ~ "SP10",
-                               str_detect(sp, "Goe3") ~ "Goe3",
-                               str_detect(sp, "Eldridge") ~ "ELD",
-                               TRUE ~ bs.label)) %>% 
-  # height for mapping phage vs bacteria
-  mutate(clade.x = case_when(clade == "phage" ~ 0,
-                             clade == "bacteria" ~ 0.02,
-                             TRUE ~ 0))
+  mutate(support = fct_rev(support))
 
   
 # Tree to identify nodes that define clades
@@ -261,74 +268,119 @@ mrca.sigA <- MRCA(d.rax, c(409,440,380)) %>% pull(node)
 mrca.gp55 <- MRCA(d.rax, c(469,566)) %>% pull(node)
 mrca.gp34 <- MRCA(d.rax, c(185,205)) %>% pull(node)
 mrca.ecf <- MRCA(d.rax, c(177,54)) %>% pull(node)
-mrca.sigBFG <- d.rax %>% 
-  filter(bs.label %in% c("sigF", "sigG", "sigB")) %>%
+mrca.sigSPORE <- d.rax %>% 
+  filter(bs.label %in% c("sigF", "sigG", "sigE")) %>%
   pull(node) %>% 
   MRCA(d.rax, .) %>% pull(node)
 
 # base tree
 p1 <-  
   as.treedata(d.rax) %>% 
-  
   ggtree(aes(color = clade), #branch.length = "none",
-         layout = "fan", open.angle=5, size=0.1)+
-  scale_color_manual(values = c("grey", "blue"), 
-                     guide = guide_legend(title = "source" ))+
-# bootstrap support
-  geom_nodepoint(aes(fill=support), colour = "transparent", size=0.5, shape = 21)+
-  scale_fill_manual(values = c("red", "pink"), na.value = NA,
-                    guide = guide_legend(override.aes = list(size=5)))
+         layout = "fan", open.angle=5, size=0.01)+
+  scale_color_manual(values = c("grey20", "blue"), 
+                     guide = guide_legend(title = "Source" ))
+
+# clade annotations
+p2 <- p1 +
+  new_scale_fill()+
+  new_scale_color()+
+  geom_cladelabel(node=mrca.ecf, label = "ECF", fontsize = 2.5,color = "grey",
+                  offset = 5, offset.text = 0.2 )+
+  geom_hilight(node = mrca.ecf, color = "grey70", fill=alpha("transparent", 0),
+               extend = 5, size=0.2) +
+  geom_cladelabel(node=mrca.gp55, label = "phage\n(gp55)", fontsize = 2.5,color = "grey",
+                  offset = 3, offset.text = 1.5)+
+  geom_hilight(node = mrca.gp55, color = "grey70", fill=alpha("transparent", 0),
+               extend = 3, size=0.2) +
+  geom_cladelabel(node=mrca.gp34, label = "phage\n(gp34)", fontsize = 2.5,color = "grey",
+                  offset = 3, offset.text = 1)+
+  geom_hilight(node = mrca.gp34, color = "grey70", fill=alpha("transparent", 0),
+               extend = 3, size=0.2) +
+  geom_cladelabel(node=mrca.sigA, label = "sigA", fontsize = 2.5,color = "grey",
+                  offset = 3, offset.text = 0.2 )+ 
+  geom_hilight(node = mrca.sigA, color = "grey70", fill=alpha("transparent", 0),
+               extend = 3, size=0.2) +
+  geom_cladelabel(node=mrca.sigSPORE, label = "sporulation\nsigma factors",fontsize = 2.5,color = "grey",
+                  offset = 4, offset.text = 0.2 )+
+geom_hilight(node = mrca.sigSPORE, color = "grey70", fill=alpha("transparent", 0),
+             extend = 4, size=0.2) 
+  
+# redraw tree on top of wedges  
+p3 <- p2 + 
+  geom_tree(aes(color = clade), layout = "fan", size = 0.05)+
+  scale_color_manual(values = c("grey20", "blue"), 
+                     guide = guide_legend(title = "Source" ))+
+  
+  # add phage labels of interest
+  geom_tiplab2(aes(label = phage_lab), color = "navyblue", size =  1, offset = 0.5)+
+  # bootstrap support
+  geom_nodepoint(aes(fill=support), colour = "transparent", size=0.1, shape = 21)+
+  scale_fill_manual(values = c("red", "pink"), na.translate = F,
+                    guide = guide_legend(override.aes = list(size=4), title = "Bootstrap (%)"))
+
  
 
-p2 <- p1 +
+p4 <- p3 +
   # circle 1 :phage vs bacteria
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             mapping=aes( fill=clade),
-             width = 0.2, color = "transparent")+
-  scale_color_manual(values = c("grey", "blue"), guide = guide_legend(title = "source" ))+
-  scale_fill_manual(values = c("grey", "blue"), guide = guide_legend(title = "source" )) +
+             mapping=aes( fill=clade, color = clade),
+             width = 0.3)+
+  scale_color_manual(values = c("grey20", "blue"), guide = guide_legend(title = "Source" ))+
+  scale_fill_manual(values = c("grey20", "blue"), guide = guide_legend(title = "Source" )) +
   
   # circle 2: Bacterial/ host taxonomy
   
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             mapping=aes( fill=host_phylum),
-             width = 0.2, color = "transparent",offset = 0.05)+
-  scale_fill_discrete(guide = guide_legend(ncol = 2))+
+             mapping=aes( fill=host_phylum, color = host_phylum),
+             width = 0.3, offset = 0.1)+
+  scale_fill_discrete(guide = guide_legend(ncol = 2, title = "Host Phyla"))+
+  scale_color_discrete(guide = guide_legend(ncol = 2, title = "Host Phyla"))+
   
   # circle 3: TIGR
   
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             width = 0.2, mapping=aes(fill=tigr.type), offset = 0.05)+
+             mapping=aes(fill=tigr.type, color=tigr.type),
+             width = 0.3, offset = 0.1)+
   # B. subtilis tip labels
   geom_fruit(geom = "geom_text", size=2,
-             mapping = aes(label=bs.label), color="grey20", offset = 0.15)+
-  scale_fill_viridis_d(guide = guide_legend(ncol = 2))
-  
+             mapping = aes(label=bs.label), color="grey20", offset = 0.2)+
+  # # phage labels
+  # geom_fruit(geom = "geom_text", size=2,
+  #            mapping = aes(label=phage_lab), color="blue")+
+  scale_fill_viridis_d(guide = guide_legend(ncol = 2, title = "TIGRfam"))+
+  scale_color_viridis_d(guide = guide_legend(ncol = 2, title = "TIGRfam"))
 
-# clade annotations 
-p3 <- p2+
-  geom_cladelabel(node=mrca.ecf, label = "ECF", fontsize = 2.5,
-                  offset = 4, offset.text = 0.2 )+
-  geom_cladelabel(node=mrca.gp55, label = "phage\n(gp55)", fontsize = 2.52,
-                  offset = 3, offset.text = 0.8)+
-  geom_cladelabel(node=mrca.gp34, label = "phage\n(gp34)", fontsize = 2.5,
-                  offset = 2, offset.text = 0.8)+
-  geom_cladelabel(node=mrca.sigA, label = "sigA", fontsize = 2.5,
-                  offset = 2.2, offset.text = 0.2 )+ 
-  geom_cladelabel(node=mrca.sigBFG, label = "sigB/F/G",fontsize = 2.5,
-                  offset = 3.5, offset.text = 0.2 )
+  
 
 
 ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
-       plot = p3,#+theme(legend.position = "none"),
+       plot = p4,#+theme(legend.position = "none"),
        height=6, width = 8)
 
+
+# export  to ppt ----------------------------------------------------------
+
+#export to pptx using officer and rvg
+library (officer)
+library(rvg)
+
+read_pptx() %>%
+  add_slide(layout = , master = "Office Theme") %>%
+  ph_with(dml(ggobj = p4+theme(legend.position = "none")),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 6, height = 6)) %>%
+  add_slide(layout = , master = "Office Theme") %>%
+  ph_with(dml(ggobj = p4),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 8, height = 6)) %>%
+  print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
 
 # trim margins ------------------------------------------------------------
 # https://yulab-smu.top/treedata-book/faq.html#circular-blank
