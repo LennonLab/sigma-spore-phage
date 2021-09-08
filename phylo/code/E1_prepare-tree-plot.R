@@ -324,21 +324,23 @@ p3 <- p2+
   geom_cladelabel(node=mrca.sigBFG, label = "sigB/F/G",fontsize = 2.5,
                   offset = 3.5, offset.text = 0.2 )
 
-ggsave(filename = here("phylo","plots","sigma_circle_rooted.png"),
+
+ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
        plot = p3,#+theme(legend.position = "none"),
-       height=9, width = 12)
+       height=6, width = 8)
 
 
 # trim margins ------------------------------------------------------------
 # https://yulab-smu.top/treedata-book/faq.html#circular-blank
 
-library(magick)
-    
-x <- image_read(here("phylo","plots","sigma_circle_rooted.png"), density=300)
-y <- image_trim(x)
-
-ggsave(filename = here("phylo","plots","sigma_circle_rooted.png"),
-       plot = image_ggplot(y),
-       height=6, width = 8)
+# library(magick)
+# library(pdftools)
+#     
+# x <- image_read_pdf(here("phylo","plots","sigma_circle_rooted.png"), density = 1200)
+# y <- image_trim(x)
+# 
+# ggsave(filename = here("phylo","plots","sigma_circle_rooted.png"),
+#        plot = image_ggplot(y),
+#        height=6, width = 8)
   
   
