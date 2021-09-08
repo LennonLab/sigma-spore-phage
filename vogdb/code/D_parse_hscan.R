@@ -284,11 +284,13 @@ p <- p.phylum +
   d.plot <- 
     d.faa%>%
     #classify by spore function
-    mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+    mutate(sigma = case_when(tigr.hit %in% tigr.spore ~ tigr.hit,
+                             tigr.hit == "no_hit" ~ "no hit",
+                             TRUE ~ "other")) %>% 
     mutate(sigma = str_remove(sigma, "spore_")) %>% 
     mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
     mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
-    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
              fct_rev()) %>%
     group_by(phylum,sigma)%>%
     summarise(n=n(), .groups = "drop") %>% 
@@ -326,11 +328,13 @@ p <- p.phylum +
 d.nsig <- 
 d.faa%>%
   #classify by spore function
-  mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+  mutate(sigma = case_when(tigr.hit %in% tigr.spore ~ tigr.hit,
+                           tigr.hit == "no_hit" ~ "no hit",
+                           TRUE ~ "other")) %>%
   mutate(sigma = str_remove(sigma, "spore_")) %>% 
   mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
   mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
-  mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+  mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
            fct_rev()) %>% 
   # assign a positional index to each sigma factor
   group_by(taxon)%>%
@@ -372,6 +376,8 @@ d.faa%>%
     mutate(genus.plot = fct_infreq(genus.plot)) %>% 
     filter(phylum == "Firmicutes") %>% 
     filter(genus.plot != "Bacillus") %>% 
+    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
+             fct_rev()) %>% 
    
     # arrange phage by n.sigmas
     mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
@@ -379,7 +385,7 @@ d.faa%>%
     geom_tile(aes(fill=sigma), color="black")+
     theme_classic()+
     panel_border(color = "black")+
-    scale_fill_viridis_d(direction = -1)+
+    scale_fill_viridis_d(direction = -1, drop = FALSE)+
     facet_grid(genus.plot~., scales = "free", space = "free")+
     geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
     theme(strip.background = element_blank(),
