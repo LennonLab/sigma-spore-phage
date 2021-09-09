@@ -1,0 +1,40 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 05-Sep-2021 00:14:52 as follows:
+
+raxml-ng --bsconverge --bs-trees allbootstraps --prefix check_bs_conv --seed 123 --threads 4 --bs-cutoff 0.03
+
+Analysis options:
+  run mode: A posteriori bootstrap convergence test
+  start tree(s): 
+  random seed: 123
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+Reading bootstrap trees from file: allbootstraps
+Loaded 500 trees with 608 taxa.
+
+Performing bootstrap convergence assessment using autoMRE criterion
+
+ # trees        avg WRF       avg WRF in %       # perms: wrf <= 3.00 %     converged?  
+      50       2159.899              7.635                            0        NO
+     100       2758.617              4.851                            0        NO
+     150       3444.038              4.010                            0        NO
+     200       4070.991              3.543                            5        NO
+     250       4371.292              3.038                          437        NO
+     300       4694.073              2.712                          913        NO
+     350       5088.441              2.514                          995        YES
+Bootstopping test converged after 350 trees
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/check_bs_conv.raxml.log
+
+Analysis started: 05-Sep-2021 00:14:52 / finished: 05-Sep-2021 00:24:32
+
+Elapsed time: 580.074 seconds
+

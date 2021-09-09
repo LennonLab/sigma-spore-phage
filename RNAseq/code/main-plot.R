@@ -14,8 +14,8 @@ pB <- p
 # bottom_row <- plot_grid(NULL,pB,NULL,
 #                         rel_widths = c(0.1,1,.1), nrow = 1)
 
-p <- plot_grid(pA, NULL, pB, labels = c("a","","b"), nrow = 1,
-          rel_widths = c(1, .02 ,0.5))
+p <- plot_grid(pB, NULL, pA, labels = c("a","","b"), nrow = 1,
+          rel_widths = c(0.5, .02 ,1))
 p <- ggdraw(p) + 
   theme(plot.background = element_rect(fill="white", color = NA))
 

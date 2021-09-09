@@ -1,0 +1,32 @@
+ID,AC,DE
+rpoH_proteo,TIGR02392,alternative sigma factor RpoH
+RpoD_Cterm,TIGR02393,RNA polymerase sigma factor RpoD
+rpoS_proteo,TIGR02394,RNA polymerase sigma factor RpoS
+rpoN_sigma,TIGR02395,RNA polymerase sigma-54 factor
+FliA_WhiG,TIGR02479,"RNA polymerase sigma factor, FliA/WhiG family"
+spore_sigmaE,TIGR02835,RNA polymerase sigma-E factor
+spore_sigmaK,TIGR02846,RNA polymerase sigma-K factor
+spore_sigG,TIGR02850,RNA polymerase sigma-G factor
+spore_sigH,TIGR02859,RNA polymerase sigma-H factor
+spore_sigF,TIGR02885,RNA polymerase sigma-F factor
+spore_sigI,TIGR02895,RNA polymerase sigma-I factor
+sigma70-ECF,TIGR02937,"RNA polymerase sigma factor, sigma-70 family"
+RpoE_Sigma70,TIGR02939,RNA polymerase sigma factor RpoE
+Sigma_B,TIGR02941,RNA polymerase sigma-B factor
+Sig70_famx1,TIGR02943,"RNA polymerase sigma-70 factor, TIGR02943 family"
+SigH_actino,TIGR02947,"RNA polymerase sigma-70 factor, TIGR02947 family"
+SigW_bacill,TIGR02948,RNA polymerase sigma-W factor
+SigM_subfam,TIGR02950,"RNA polymerase sigma factor, SigM family"
+Sig70_famx2,TIGR02952,"RNA polymerase sigma-70 factor, TIGR02952 family"
+Sig70_famx3,TIGR02954,"RNA polymerase sigma-70 factor, TIGR02954 family"
+SigX4,TIGR02957,"RNA polymerase sigma-70 factor, TIGR02957 family"
+SigZ,TIGR02959,"RNA polymerase sigma factor, SigZ family"
+SigX5,TIGR02960,"RNA polymerase sigma-70 factor, TIGR02960 family"
+SigBFG,TIGR02980,"RNA polymerase sigma-70 factor, sigma-B/F/G subfamily"
+SigE-fam_strep,TIGR02983,"RNA polymerase sigma-70 factor, sigma-E family"
+Sig-70_plancto1,TIGR02984,"RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1"
+Sig70_bacteroi1,TIGR02985,"RNA polymerase sigma-70 factor, Bacteroides expansion family 1"
+Sig-70_gvs1,TIGR02989,"RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family"
+Sig70-cyanoRpoD,TIGR02997,"RNA polymerase sigma factor, cyanobacterial RpoD-like family"
+Sig-70_X6,TIGR02999,"RNA polymerase sigma factor, TIGR02999 family"
+Sig-70_gmx1,TIGR03001,"RNA polymerase sigma-70 factor, Myxococcales family 1"

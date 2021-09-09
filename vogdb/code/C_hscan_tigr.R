@@ -6,7 +6,8 @@ library(tidyverse)
 # on which hmmer has been installed
 setwd(here())
 
-hmm <- "TIGR/tigr_sigma_hmm/sigma.fam"
+# Bacterial sigma HMM data base
+hmm <- "TIGR/data/tigr_sigma_hmm/sigma.fam"
 
 faa <- dir("vogdb/data/vog_sigma_clean", full.names = T, pattern = ".faa.gz")
 

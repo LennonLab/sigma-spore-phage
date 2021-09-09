@@ -1,4 +1,4 @@
-#setwd("/N/u/danschw/Carbonate/GitHub/spore-phage-sigma")
+#setwd("/N/u/danschw/Carbonate/GitHub/sigma-spore-phage")
 library(here)
 library(tidyverse)
 library(seqinr)
@@ -9,8 +9,9 @@ library(treeio)
 # Get duplicate list -------------------------------------------------------
 
 log <- readLines(here("phylo/data/align-trim-tree/check_msa/check-msa.raxml.log"))
+# log <- readLines(here("phylo/data/align-trim-tree/model_test/model_test.log"))
 log <- log[str_detect(log, "identical")]
-dups <- str_extract_all(log,"(YP_[0-9]*..-(phage|bacteria))", simplify = T) %>% as_tibble()
+dups <- str_extract_all(log,"(.P_[0-9]*..-(phage|bacteria))", simplify = T) %>% as_tibble()
 
 
 # Get kept sequences ------------------------------------------------------
@@ -34,9 +35,17 @@ d.removed <-
   left_join(., dups, by = c("id" = "V2")) %>% 
   rename(dup.of = V1)
   
+# swapping to have Bcp1 protein in MSA
+#Bcp1 trimmed protein is identical to a protein from Bacillus virus BM15
+pid.out <- d.removed %>% filter(str_detect(sp, "Bcp1")) %>% pull(dup.of)
+pid.in <-  d.removed %>% filter(str_detect(sp, "Bcp1")) %>% pull(id)
+
 
 # Save results ------------------------------------------------------------
+# changing the MSA directly
+phyl.in <- readLines(here("phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy"))
+phyl.out <- gsub( pid.out, pid.in, phyl.in )
+cat(phyl.out,
+    file=here("phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy"),
+    sep="\n")
 
-
-# select(d.faa, sp2 = sp, description2 = description, protein) %>% 
-#   left_join(d.phage, . ,by = c("V2" = "protein"))

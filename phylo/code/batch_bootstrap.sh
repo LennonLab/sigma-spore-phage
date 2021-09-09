@@ -11,17 +11,17 @@
 ##### load dependencies #####
 module load raxmlng
 
-##### Define paths #####
-PARENT=~/GitHub/spore-phage-sigma/phylo
-ODIR=${PARENT}/data/reduced_set_to_align/tree/bootstraps
-mkdir -p $ODIR
-ALN=$PARENT/data/reduced_set_to_align/check_msa/parse.raxml.rba
-
-
-##### run raxml-ng #####
+##### Assign vars #####
 SEED=$1$1$1
+THREADS=$2
+TREES=$3 # type{number}
+MODEL=$4
+ALN=$5
+ODIR=$6
+BOOTS=$7
 
-cd $ODIR
+##### run raxml-ng bootstrap #####
 
-raxml-ng --bootstrap --msa $ALN --model LG+G4  --prefix bs$SEED --seed $SEED --threads 2 \
---tree pars{5} --bs-trees 25
+raxml-ng --bootstrap --msa $ALN --model $MODEL  --prefix "$ODIR/bs$1" \
+--seed $SEED --threads $THREADS \
+--tree $TREES --bs-trees $BOOTS

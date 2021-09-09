@@ -114,8 +114,8 @@ best3%>%
   coord_flip()+
   theme_cowplot()+
   xlab("best specific TIGRFAM match")  
-  ggsave2(filename = here("vogdb/figures/vogXtigr.png"),
-          width = 7,height = 7)
+  # ggsave2(filename = here("vogdb/figures/vogXtigr.png"),
+  #         width = 7,height = 7)
 
 
 #looking at e-values of best hits
@@ -190,9 +190,9 @@ d.faa%>%
   scale_fill_viridis_b()+
   theme_cowplot()+
   theme(axis.text.x = element_text(angle=30,hjust = 1),
-        legend.position = "bottom")+
-  ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
-          width = 10,height =10)
+        legend.position = "bottom")
+  # ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
+  #         width = 10,height =10)
 
 # mostly no clear 1 to 1 correspondence
 
@@ -271,8 +271,8 @@ p.phylum <-
 
 p <- p.phylum +
   ggtitle("phage sigma factor type by host phylum")
-  ggsave2(here("vogdb","figures","tigr_sigma_HostPhylum.png"),
-          plot = p, width = 12,height = 8)
+  # ggsave2(here("vogdb","figures","tigr_sigma_HostPhylum.png"),
+  #         plot = p, width = 12,height = 8)
 
   ###
   n.gene.phylum <- d.faa%>%
@@ -284,11 +284,13 @@ p <- p.phylum +
   d.plot <- 
     d.faa%>%
     #classify by spore function
-    mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+    mutate(sigma = case_when(tigr.hit %in% tigr.spore ~ tigr.hit,
+                             tigr.hit == "no_hit" ~ "no hit",
+                             TRUE ~ "other")) %>% 
     mutate(sigma = str_remove(sigma, "spore_")) %>% 
     mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
     mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
-    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
              fct_rev()) %>%
     group_by(phylum,sigma)%>%
     summarise(n=n(), .groups = "drop") %>% 
@@ -326,11 +328,13 @@ p <- p.phylum +
 d.nsig <- 
 d.faa%>%
   #classify by spore function
-  mutate(sigma = if_else(tigr.hit %in% tigr.spore,tigr.hit, "other" )) %>% 
+  mutate(sigma = case_when(tigr.hit %in% tigr.spore ~ tigr.hit,
+                           tigr.hit == "no_hit" ~ "no hit",
+                           TRUE ~ "other")) %>%
   mutate(sigma = str_remove(sigma, "spore_")) %>% 
   mutate(sigma = str_replace(sigma, "sigma", "sig")) %>% 
   mutate(sigma = str_replace(sigma, "Sig", "sig")) %>% 
-  mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other") %>% 
+  mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
            fct_rev()) %>% 
   # assign a positional index to each sigma factor
   group_by(taxon)%>%
@@ -372,6 +376,8 @@ d.faa%>%
     mutate(genus.plot = fct_infreq(genus.plot)) %>% 
     filter(phylum == "Firmicutes") %>% 
     filter(genus.plot != "Bacillus") %>% 
+    mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
+             fct_rev()) %>% 
    
     # arrange phage by n.sigmas
     mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
@@ -379,7 +385,7 @@ d.faa%>%
     geom_tile(aes(fill=sigma), color="black")+
     theme_classic()+
     panel_border(color = "black")+
-    scale_fill_viridis_d(direction = -1)+
+    scale_fill_viridis_d(direction = -1, drop = FALSE)+
     facet_grid(genus.plot~., scales = "free", space = "free")+
     geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
     theme(strip.background = element_blank(),
