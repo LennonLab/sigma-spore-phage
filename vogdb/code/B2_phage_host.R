@@ -154,6 +154,20 @@ d.sp%>%
   summarise(n=n(),
             perc_sigma=100*sum(has_sigma)/n(),
             perc_multi=100*sum(multi_sigma)/n())
+
+#   phylum                                  n perc_sigma perc_multi
+#   <chr>                               <int>      <dbl>      <dbl>
+# 1 Actinobacteria                        797       1.88      0    
+# 2 Aquificae                               1       0         0    
+# 3 Bacteroidetes/Chlorobi group           76       2.63      0    
+# 4 Cyanobacteria/Melainabacteria group   102      64.7       3.92 
+# 5 Deinococcus-Thermus                     8       0         0    
+# 6 Firmicutes                            745      18.9       7.79 
+# 7 Proteobacteria                       1683      14.7       0.713
+# 8 PVC group                               6       0         0    
+# 9 Spirochaetes                            3       0         0    
+# 10 Tenericutes                             9       0         0    
+# 11 NA                                      3       0         0   
   
 
 d.sp%>%
