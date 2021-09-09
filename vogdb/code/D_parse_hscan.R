@@ -114,8 +114,8 @@ best3%>%
   coord_flip()+
   theme_cowplot()+
   xlab("best specific TIGRFAM match")  
-  ggsave2(filename = here("vogdb/figures/vogXtigr.png"),
-          width = 7,height = 7)
+  # ggsave2(filename = here("vogdb/figures/vogXtigr.png"),
+  #         width = 7,height = 7)
 
 
 #looking at e-values of best hits
@@ -190,9 +190,9 @@ d.faa%>%
   scale_fill_viridis_b()+
   theme_cowplot()+
   theme(axis.text.x = element_text(angle=30,hjust = 1),
-        legend.position = "bottom")+
-  ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
-          width = 10,height =10)
+        legend.position = "bottom")
+  # ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
+  #         width = 10,height =10)
 
 # mostly no clear 1 to 1 correspondence
 
@@ -271,8 +271,8 @@ p.phylum <-
 
 p <- p.phylum +
   ggtitle("phage sigma factor type by host phylum")
-  ggsave2(here("vogdb","figures","tigr_sigma_HostPhylum.png"),
-          plot = p, width = 12,height = 8)
+  # ggsave2(here("vogdb","figures","tigr_sigma_HostPhylum.png"),
+  #         plot = p, width = 12,height = 8)
 
   ###
   n.gene.phylum <- d.faa%>%
