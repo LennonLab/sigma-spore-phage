@@ -374,4 +374,60 @@ sum.phi%>%
          width = 3, height = 3)
 ```
 
+```{r}
+# plot of MOI dependent lysis
+init.host <- 1e8
+host.vol <- 0.1
+
+d.plot <- d %>%
+  filter(host != "blank")%>%
+  filter(dilution>=max.dilut)%>%
+  mutate(dilution = if_else(phage == "noPHI", 0, dilution)) %>% 
+  mutate(moi = (init.titer * phage.vol * dilution) /
+                              (init.host * host.vol)) %>% 
+  group_by(Time, phage, moi) %>% 
+  summarise(n = n(), m = mean(OD600), v = sd(OD600)/sqrt(n), .groups = "drop") %>% 
+   mutate(moi = as_factor(moi) %>% fct_inseq()) 
+
+# duplicate no phage data to each of the panels
+d.plot <- bind_rows(
+  filter(d.plot, phage=="noPHI") %>% mutate(phage = "wt"),
+  filter(d.plot, phage=="noPHI") %>% mutate(phage = "del120"),
+  filter(d.plot, phage!="noPHI")
+)
+
+d.plot %>% 
+  filter(Time <= 10) %>% 
+  ggplot(aes(x=Time, y=m, color=moi))+
+  geom_vline(xintercept = int.limit, color = "grey")+
+  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5)+
+  geom_line(size=1)+
+  #highlight no phage
+   geom_line(data = filter(d.plot, moi=="0" & Time <= 10), size=2)+
+  facet_wrap(~ phage)+
+  theme_classic()+
+  panel_border(color = "black")+
+   theme(panel.spacing = unit(2, "lines"))+
+  scale_color_viridis_d()+
+  guides(color = guide_legend("multiplicity\nof\ninfection"))+
+  ylab("Bacterial Density (OD600)")+
+  xlab("Time Post Infection (h)")+
+  scale_x_continuous(breaks = seq(0,10,2))
+```
+
+```{r}
+vindex%>%
+  filter(phage != "noPHI") %>% 
+  filter(dilution>=max.dilut)%>%
+  group_by(phage, log.moi)%>%
+  summarise( Virulence=mean(Vi), mn=min(Vi), mx=max(Vi), n=n())%>%
+    ggplot(aes(log.moi-1, Virulence))+
+      geom_line(size=1)+
+      geom_pointrange(aes(ymin=mn, ymax=mx ), shape=21, size=.5, fill = "white")+
+      facet_wrap(~phage, nrow=1,labeller = "label_both")+
+      theme_classic()+
+      panel_border(color="black")+
+      scale_colour_viridis_d()
+
+```
 
