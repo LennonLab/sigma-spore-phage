@@ -105,7 +105,9 @@ p <-  d.all %>%
         legend.text = element_text(size=12),
         legend.title = element_text(size = 12))+
   labs(color = "sporulation\ngene")+
-  guides(color = guide_legend(nrow = 2, override.aes = list(size = 4, alpha = 1)))
+  guides(color = guide_legend(nrow = 2, override.aes = list(size = 4, alpha = 1)))+
+  ylim(NA, 250)
+
 
 ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
        width = 6, height = 6)
