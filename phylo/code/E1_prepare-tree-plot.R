@@ -275,11 +275,15 @@ mrca.sigSPORE <- d.rax %>%
 
 # base tree
 p1 <-  
-  as.treedata(d.rax) %>% 
+  d.rax %>% 
+  mutate(host_phylum = str_replace(host_phylum, 
+                                   "Deinococcus-Thermus",
+                                   "Deinococcus\n-Thermus")) %>% 
+  as.treedata() %>% 
   ggtree(aes(color = clade), #branch.length = "none",
          layout = "fan", open.angle=5, size=0.01)+
   scale_color_manual(values = c("grey20", "blue"), 
-                     guide = guide_legend(title = "Source" ))
+                     guide = "none")
 
 # clade annotations
 p2 <- p1 +
@@ -310,14 +314,15 @@ geom_hilight(node = mrca.sigSPORE, color = "grey70", fill=alpha("transparent", 0
 p3 <- p2 + 
   geom_tree(aes(color = clade), layout = "fan", size = 0.05)+
   scale_color_manual(values = c("grey20", "blue"), 
-                     guide = guide_legend(title = "Source" ))+
+                     guide = "none")+
   
   # add phage labels of interest
   geom_tiplab2(aes(label = phage_lab), color = "navyblue", size =  1, offset = 0.5)+
   # bootstrap support
   geom_nodepoint(aes(fill=support), colour = "transparent", size=0.1, shape = 21)+
   scale_fill_manual(values = c("red", "pink"), na.translate = F,
-                    guide = guide_legend(override.aes = list(size=4), title = "Bootstrap (%)"))
+                    guide = guide_legend(override.aes = list(size=2),
+                                         nrow =  2, title = "Bootstrap (%)"))
 
  
 
@@ -328,8 +333,10 @@ p4 <- p3 +
   geom_fruit(geom = "geom_tile",
              mapping=aes( fill=clade, color = clade),
              width = 0.3)+
-  scale_color_manual(values = c("grey20", "blue"), guide = guide_legend(title = "Source" ))+
-  scale_fill_manual(values = c("grey20", "blue"), guide = guide_legend(title = "Source" )) +
+  scale_color_manual(values = c("grey20", "blue"), 
+                     guide = guide_legend(title = "C1: Source" , nrow =  2))+
+  scale_fill_manual(values = c("grey20", "blue"),
+                    guide = guide_legend(title = "C1: Source" , nrow =  2)) +
   
   # circle 2: Bacterial/ host taxonomy
   
@@ -338,8 +345,8 @@ p4 <- p3 +
   geom_fruit(geom = "geom_tile",
              mapping=aes( fill=host_phylum, color = host_phylum),
              width = 0.3, offset = 0.1)+
-  scale_fill_discrete(guide = guide_legend(ncol = 2, title = "Host Phyla"))+
-  scale_color_discrete(guide = guide_legend(ncol = 2, title = "Host Phyla"))+
+  scale_fill_discrete(guide = guide_legend(nrow =  3, title = "C2: Host Phyla"))+
+  scale_color_discrete(guide = guide_legend(nrow = 3, title = "C2: Host Phyla"))+
   
   # circle 3: TIGR
   
@@ -354,8 +361,13 @@ p4 <- p3 +
   # # phage labels
   # geom_fruit(geom = "geom_text", size=2,
   #            mapping = aes(label=phage_lab), color="blue")+
-  scale_fill_viridis_d(guide = guide_legend(ncol = 2, title = "TIGRfam"))+
-  scale_color_viridis_d(guide = guide_legend(ncol = 2, title = "TIGRfam"))
+  scale_fill_viridis_d(guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
+  scale_color_viridis_d(guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
+  theme(legend.key.height = unit(.1, "points"),
+        legend.key.width = unit(4, "points"),
+        legend.text = element_text(size = 5), 
+        legend.title= element_text(size = 5, face = "bold"),
+        legend.position = "bottom",legend.direction = "vertical")
 
   
 
@@ -364,6 +376,69 @@ ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
        plot = p4,#+theme(legend.position = "none"),
        height=6, width = 8)
 
+# zoom into sigF/G ---------------------------------------------------------
+# library(ggforce)
+p.zoom <- 
+  tree_subset(as.treedata(d.rax), node = mrca.sigSPORE, levels_back = 1) %>% 
+  
+  ggtree(aes(color = clade), size=0.01)+
+  geom_rootedge(size=0.01, rootedge = .1)+
+  scale_color_manual(values = c("grey20", "blue"), 
+                     guide = "none")+
+  geom_tiplab(aes(label = str_remove(tip.label,"_NA"), color = clade), size =  1)+
+  # geom_tiplab(aes(label = phage_lab), color = "navyblue", size =  2, offset = 1)+
+  # geom_tiplab(aes(label = bs.label), color = "red", size =  2, offset = 1 )+
+  # bootstrap support
+  geom_nodepoint(aes(fill=support), colour = "transparent", size=.5, shape = 21)+
+  scale_fill_manual(values = c("red", "pink"), na.translate = F,
+                    guide = "none")
+
+p.zoom2 <- 
+  p.zoom + 
+  # B. subtilis tip labels
+  geom_fruit(geom = "geom_text", size=2,
+             mapping = aes(label=bs.label), color="grey20", offset = 0.2)+
+  # phage labels
+  geom_fruit(geom = "geom_text", size=2,
+             mapping = aes(label=phage_lab), color="blue", offset = 0)+
+  # circle 1 :phage vs bacteria
+  new_scale_fill()+
+  new_scale_color()+
+  geom_fruit(geom = "geom_tile",
+             mapping=aes( fill=clade, color = clade),
+             width = 0.2, offset = .2)+
+  scale_color_manual(values = c("grey20", "blue"), guide = "none")+
+  scale_fill_manual(values = c("grey20", "blue"), guide = "none") +
+  
+  # circle 2: Bacterial/ host taxonomy
+  
+  new_scale_fill()+
+  new_scale_color()+
+  geom_fruit(geom = "geom_tile",
+             mapping=aes( fill=host_phylum, color = host_phylum),
+             width = 0.2, offset = .1)+
+  scale_fill_discrete(guide = "none")+
+  scale_color_discrete(guide = "none")+
+  
+  # circle 3: TIGR
+  
+  new_scale_fill()+
+  new_scale_color()+
+  geom_fruit(geom = "geom_tile",
+             mapping=aes(fill=tigr.type, color=tigr.type),
+             width = 0.2, offset = .1)+
+
+  scale_fill_viridis_d(guide = "none")+
+  scale_color_viridis_d(guide = "none")+
+  layout_rectangular()
+
+
+
+
+ggsave(filename = here("phylo","plots","zoom.pdf"),
+       plot = p.zoom2,
+       height=6, width = 4)
+  
 
 # export  to ppt ----------------------------------------------------------
 
@@ -371,15 +446,23 @@ ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
 library (officer)
 library(rvg)
 
+vertical_letter <- 
+    prop_section(page_size = page_size(width = 8.5, height = 11,
+                                       orient = "portrait"))
+
 read_pptx() %>%
-  add_slide(layout = , master = "Office Theme") %>%
+  add_slide(layout =  "Custom Slide", master = "Office Theme", ) %>%
   ph_with(dml(ggobj = p4+theme(legend.position = "none")),
           location = ph_location(type = "body",
-                                 left = 0, top = 0, width = 6, height = 6)) %>%
-  add_slide(layout = , master = "Office Theme") %>%
+                                 left = 0, top = 0, width = 5, height = 5)) %>%
+  add_slide(layout =  "Custom Slide", master = "Office Theme") %>%
   ph_with(dml(ggobj = p4),
           location = ph_location(type = "body",
                                  left = 0, top = 0, width = 8, height = 6)) %>%
+  add_slide(layout =  "Custom Slide", master = "Office Theme") %>%
+  ph_with(dml(ggobj = p.zoom2),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 3, height = 5)) %>%
   print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
 
 # trim margins ------------------------------------------------------------
