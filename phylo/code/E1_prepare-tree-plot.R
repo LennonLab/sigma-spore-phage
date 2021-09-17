@@ -379,7 +379,8 @@ ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
 # zoom into sigF/G ---------------------------------------------------------
 p.zoom <- 
   d.rax %>% 
-  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") ) %>%
+  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
+           fct_rev()) %>%
   as.treedata() %>% 
   tree_subset(node = mrca.sigSPORE, levels_back = 1) %>% 
   
@@ -434,7 +435,7 @@ p.zoom2 <-
              mapping=aes(fill=tigr.type), color="white",
              width = 0.2, offset = .1)+
 
-  scale_fill_viridis_d(guide = "none")+
+  scale_fill_viridis_d( guide = "none", drop=FALSE)+
   # scale_color_viridis_d(guide = "none")+
   layout_rectangular()
 
@@ -456,20 +457,20 @@ library(rvg)
 #     prop_section(page_size = page_size(width = 8.5, height = 11,
 #                                        orient = "portrait"))
 
-# read_pptx() %>%
-#   add_slide(layout = "Blank", master = "Office Theme" ) %>%
-#   ph_with(dml(ggobj = p4+theme(legend.position = "none")),
-#           location = ph_location(type = "body",
-#                                  left = 0, top = 0, width = 5, height = 5)) %>%
-#   add_slide(layout = "Blank", master = "Office Theme") %>%
-#   ph_with(dml(ggobj = p4),
-#           location = ph_location(type = "body",
-#                                  left = 0, top = 0, width = 8, height = 6)) %>%
-#   add_slide(layout = "Blank", master = "Office Theme") %>%
-#   ph_with(dml(ggobj = p.zoom2),
-#           location = ph_location(type = "body",
-#                                  left = 0, top = 0, width = 3, height = 5)) %>%
-#   print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
+read_pptx() %>%
+  add_slide(layout = "Blank", master = "Office Theme" ) %>%
+  ph_with(dml(ggobj = p4+theme(legend.position = "none")),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 5, height = 5)) %>%
+  add_slide(layout = "Blank", master = "Office Theme") %>%
+  ph_with(dml(ggobj = p4),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 8, height = 6)) %>%
+  add_slide(layout = "Blank", master = "Office Theme") %>%
+  ph_with(dml(ggobj = p.zoom2),
+          location = ph_location(type = "body",
+                                 left = 0, top = 0, width = 3.1, height = 5.6)) %>%
+  print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
 
 # trim margins ------------------------------------------------------------
 # https://yulab-smu.top/treedata-book/faq.html#circular-blank
