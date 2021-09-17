@@ -377,9 +377,11 @@ ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
        height=6, width = 8)
 
 # zoom into sigF/G ---------------------------------------------------------
-# library(ggforce)
 p.zoom <- 
-  tree_subset(as.treedata(d.rax), node = mrca.sigSPORE, levels_back = 1) %>% 
+  d.rax %>% 
+  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") ) %>%
+  as.treedata() %>% 
+  tree_subset(node = mrca.sigSPORE, levels_back = 1) %>% 
   
   ggtree(aes(color = clade), size=0.01)+
   geom_rootedge(size=0.01, rootedge = .1)+
@@ -389,9 +391,10 @@ p.zoom <-
   # geom_tiplab(aes(label = phage_lab), color = "navyblue", size =  2, offset = 1)+
   # geom_tiplab(aes(label = bs.label), color = "red", size =  2, offset = 1 )+
   # bootstrap support
-  geom_nodepoint(aes(fill=support), colour = "transparent", size=.5, shape = 21)+
-  scale_fill_manual(values = c("red", "pink"), na.translate = F,
-                    guide = "none")
+  geom_text(aes(x=branch, label=round(tbe*100)), vjust=-.5, color='black', size=1) 
+  # geom_nodepoint(aes(fill=support), colour = "transparent", size=.5, shape = 21)+
+  # scale_fill_manual(values = c("red", "pink"), na.translate = F,
+  #                   guide = "none")
 
 p.zoom2 <- 
   p.zoom + 
@@ -405,9 +408,10 @@ p.zoom2 <-
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             mapping=aes( fill=clade, color = clade),
+             # mapping=aes( fill=clade, color = clade),
+             mapping=aes( fill=clade), color = "white",
              width = 0.2, offset = .2)+
-  scale_color_manual(values = c("grey20", "blue"), guide = "none")+
+  # scale_color_manual(values = c("grey20", "blue"), guide = "none")+
   scale_fill_manual(values = c("grey20", "blue"), guide = "none") +
   
   # circle 2: Bacterial/ host taxonomy
@@ -415,21 +419,23 @@ p.zoom2 <-
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             mapping=aes( fill=host_phylum, color = host_phylum),
+             # mapping=aes( fill=host_phylum, color = host_phylum),
+             mapping=aes(fill=host_phylum), color="white",
              width = 0.2, offset = .1)+
   scale_fill_discrete(guide = "none")+
-  scale_color_discrete(guide = "none")+
+  # scale_color_discrete(guide = "none")+
   
   # circle 3: TIGR
   
   new_scale_fill()+
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
-             mapping=aes(fill=tigr.type, color=tigr.type),
+             # mapping=aes(fill=tigr.type, color=tigr.type),
+             mapping=aes(fill=tigr.type), color="white",
              width = 0.2, offset = .1)+
 
   scale_fill_viridis_d(guide = "none")+
-  scale_color_viridis_d(guide = "none")+
+  # scale_color_viridis_d(guide = "none")+
   layout_rectangular()
 
 
@@ -446,24 +452,24 @@ ggsave(filename = here("phylo","plots","zoom.pdf"),
 library (officer)
 library(rvg)
 
-vertical_letter <- 
-    prop_section(page_size = page_size(width = 8.5, height = 11,
-                                       orient = "portrait"))
+# vertical_letter <- 
+#     prop_section(page_size = page_size(width = 8.5, height = 11,
+#                                        orient = "portrait"))
 
-read_pptx() %>%
-  add_slide(layout =  "Custom Slide", master = "Office Theme", ) %>%
-  ph_with(dml(ggobj = p4+theme(legend.position = "none")),
-          location = ph_location(type = "body",
-                                 left = 0, top = 0, width = 5, height = 5)) %>%
-  add_slide(layout =  "Custom Slide", master = "Office Theme") %>%
-  ph_with(dml(ggobj = p4),
-          location = ph_location(type = "body",
-                                 left = 0, top = 0, width = 8, height = 6)) %>%
-  add_slide(layout =  "Custom Slide", master = "Office Theme") %>%
-  ph_with(dml(ggobj = p.zoom2),
-          location = ph_location(type = "body",
-                                 left = 0, top = 0, width = 3, height = 5)) %>%
-  print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
+# read_pptx() %>%
+#   add_slide(layout = "Blank", master = "Office Theme" ) %>%
+#   ph_with(dml(ggobj = p4+theme(legend.position = "none")),
+#           location = ph_location(type = "body",
+#                                  left = 0, top = 0, width = 5, height = 5)) %>%
+#   add_slide(layout = "Blank", master = "Office Theme") %>%
+#   ph_with(dml(ggobj = p4),
+#           location = ph_location(type = "body",
+#                                  left = 0, top = 0, width = 8, height = 6)) %>%
+#   add_slide(layout = "Blank", master = "Office Theme") %>%
+#   ph_with(dml(ggobj = p.zoom2),
+#           location = ph_location(type = "body",
+#                                  left = 0, top = 0, width = 3, height = 5)) %>%
+#   print(target = here("phylo","plots","sigma_circle_rooted.pptx"))
 
 # trim margins ------------------------------------------------------------
 # https://yulab-smu.top/treedata-book/faq.html#circular-blank
