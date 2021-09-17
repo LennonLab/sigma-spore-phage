@@ -303,21 +303,22 @@ p <- p.phylum +
   
   p.phylum <- d.plot %>% 
     ggplot(aes(x=phyl.lab, y = perc,fill = sigma)) + 
-    geom_bar(position="fill", stat="identity", color = "black", width = 0.5) +
+    geom_bar(position="fill", stat="identity", color = "transparent", size = 0,width = 0.5) +
     
     xlab("Host Phylum") +
     ylab(NULL)+
     guides(fill = guide_legend("Sigma\nFactor\nType", reverse = T))+
     
-    scale_y_continuous(labels=scales::percent, position = "right") +
+    scale_y_continuous(labels=scales::percent, position = "left") +
     scale_fill_viridis_d(direction = -1) + 
-    theme_classic(base_size = 13)+
+    theme_classic(base_size = 11)+
     panel_border(color = "black")+
     coord_flip()
   
   
     ggsave2(here("vogdb","figures","tigr_Nsigma_HostPhylum.png"),
-            p.phylum, width = 4,height = 3)   
+            p.phylum+theme(legend.position = "none"),
+            width = 4,height = 2)   
     
   
 
