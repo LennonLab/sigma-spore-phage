@@ -96,6 +96,20 @@ dup.order <- d.sp%>%
 #there is only one such phage: PRD1. This has also hosts from different orders within the gammaproteobacteria.
 # otherwise, all hosts for each phage are the same down to order
 
+# Look at host species
+dup.hosts <- 
+  d.sp %>% 
+  filter(tax.id %in% dup$tax.id) %>% 
+  # filter(phylum=="Firmicutes") %>% 
+  group_by(tax.id) %>% 
+  mutate(host.num = paste0("host_",row_number())) %>% 
+  ungroup() %>% 
+  select(tax.id, `virus name`, host.num, `host name`) %>% 
+  pivot_wider(names_from = host.num, values_from = `host name`)
+# in Firmicutes phages multiple hosts are mostly from the same species or 
+# species complex (antracis, cereus). 
+# SPbeta infects subtilis and pumilus, in same genus.
+
 #remove host duplicate
 #add host number to assist and to remember
 d.sp <- dup%>%
