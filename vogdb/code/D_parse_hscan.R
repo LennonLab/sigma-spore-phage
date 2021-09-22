@@ -311,16 +311,28 @@ p <- p.phylum +
     
     scale_y_continuous(labels=scales::percent, position = "left") +
     scale_fill_viridis_d(direction = -1) + 
-    theme_classic(base_size = 11)+
+    theme_classic(base_size = 8)+
     panel_border(color = "black")+
     coord_flip()
   
   
     ggsave2(here("vogdb","figures","tigr_Nsigma_HostPhylum.png"),
             p.phylum+theme(legend.position = "none"),
-            width = 4,height = 2)   
+            width = 4,height = 1.7)   
     
-  
+    # export  to ppt ----------------------------------------------------------
+    
+    #export to pptx using officer and rvg
+    library (officer)
+    library(rvg)
+    
+    read_pptx() %>%
+      add_slide(layout = "Blank", master = "Office Theme" ) %>%
+      ph_with(dml(ggobj = p.phylum+theme(legend.position = "none")),
+              location = ph_location(type = "body",
+                                     left = 0, top = 0, width = 4, height = 1.7)) %>%
+      print(target = here("vogdb","figures","tigr_Nsigma_HostPhylum.pptx"))
+    
 
 
 
