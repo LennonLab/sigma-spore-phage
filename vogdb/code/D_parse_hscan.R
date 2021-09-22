@@ -330,7 +330,7 @@ p <- p.phylum +
       add_slide(layout = "Blank", master = "Office Theme" ) %>%
       ph_with(dml(ggobj = p.phylum+theme(legend.position = "none")),
               location = ph_location(type = "body",
-                                     left = 0, top = 0, width = 4, height = 1.7)) %>%
+                                     left = 0, top = 0, width = 3.2, height = 1.6)) %>%
       print(target = here("vogdb","figures","tigr_Nsigma_HostPhylum.pptx"))
     
 
