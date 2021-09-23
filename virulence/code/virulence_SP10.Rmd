@@ -531,6 +531,8 @@ p.vi <- vindex%>%
 p.vi
 ```
 
+###combine plots
+
 ```{r}
 p.bottom <- plot_grid(p.vi, NULL, p.final, rel_widths = c(1,0.05,1), nrow = 1,
                       labels = c("", "d"))
@@ -543,5 +545,18 @@ p.all <-ggdraw(p.all) +
 
 ggsave(here("virulence/plots", "virulence_steps.png"), p.all,
       width = 8, height = 8)
+
+    # #export to pptx using officer and rvg
+    # library (officer)
+    # library(rvg)
+    # 
+    # read_pptx() %>%
+    #   add_slide(layout = "Blank", master = "Office Theme" ) %>%
+    #   ph_with(dml(ggobj = p.all),
+    #           location = ph_location(type = "body",
+    #                                  left = 0, top = 0,
+    #                                  width = 8, height = 8)) %>%
+    #   print(target = here("virulence/plots", "virulence_steps.pptx"))
+p.all
 ```
 

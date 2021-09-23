@@ -5,16 +5,16 @@ Virulence index
 library(here)
 ```
 
-    ## here() starts at C:/Users/danschw/Documents/GitHub/sigma-spore-phage
+    ## here() starts at C:/Users/danschw/GitHub/sigma-spore-phage
 
 ``` r
 library(tidyverse)
 ```
 
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
 
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.2     v dplyr   1.0.5
+    ## v ggplot2 3.3.3     v purrr   0.3.4
+    ## v tibble  3.1.0     v dplyr   1.0.5
     ## v tidyr   1.1.3     v stringr 1.4.0
     ## v readr   1.4.0     v forcats 0.5.1
 
@@ -517,7 +517,7 @@ t.test(Vp~phage, sum.phi)
     ## 
     ## data:  Vp by phage
     ## t = 1.2194, df = 12.886, p-value = 0.2446
-    ## alternative hypothesis: true difference in means between group del120 and group wt is not equal to 0
+    ## alternative hypothesis: true difference in means is not equal to 0
     ## 95 percent confidence interval:
     ##  -0.01609505  0.05772004
     ## sample estimates:
@@ -711,6 +711,8 @@ p.vi
 
 ![](virulence_SP10_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
+\#\#\#combine plots
+
 ``` r
 p.bottom <- plot_grid(p.vi, NULL, p.final, rel_widths = c(1,0.05,1), nrow = 1,
                       labels = c("", "d"))
@@ -723,4 +725,19 @@ p.all <-ggdraw(p.all) +
 
 ggsave(here("virulence/plots", "virulence_steps.png"), p.all,
       width = 8, height = 8)
+
+    # #export to pptx using officer and rvg
+    # library (officer)
+    # library(rvg)
+    # 
+    # read_pptx() %>%
+    #   add_slide(layout = "Blank", master = "Office Theme" ) %>%
+    #   ph_with(dml(ggobj = p.all),
+    #           location = ph_location(type = "body",
+    #                                  left = 0, top = 0,
+    #                                  width = 8, height = 8)) %>%
+    #   print(target = here("virulence/plots", "virulence_steps.pptx"))
+p.all
 ```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
