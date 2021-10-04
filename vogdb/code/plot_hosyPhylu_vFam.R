@@ -42,7 +42,7 @@ p.phylum <-  tmp %>%
   # geom_col(aes(y=w.multi, fill=viral.family), position=position_dodge(preserve = "single"))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"), alpha=1, color="black")+
   ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,1000))+
+  scale_y_log10(limits = c(1,2000))+
   xlab("Host Phylum")+
   theme_classic(base_size = 12)+
   panel_border(color = "black")+
@@ -94,18 +94,19 @@ p.both <-  tmp %>%
   # geom_col(aes(y=w.multi, fill=viral.family), position=position_dodge(preserve = "single"))+
   geom_col(aes(y=w.sigma, fill=viral.family), position=position_dodge(preserve = "single"), alpha=1, color="black")+
   ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,1000))+
+  scale_y_log10(limits = c(1,2000))+
   xlab("Viral Family")+
   theme_classic(base_size = 12)+
   panel_border(color = "black")+
   facet_wrap(~phylum, nrow = 2)+
-  coord_cartesian(expand = F)+
+  coord_flip(expand = F)+
   scale_fill_viridis_d()+
-  scale_x_discrete(limits=rev)+
-  theme(axis.text.x = element_blank(),
-        legend.position = c(0.9,0.25),
+  # scale_x_discrete(limits=rev)+
+  theme(axis.text.y = element_blank(),
+        legend.position = c(0.9,0.22),
         legend.text = element_text(size = 8),
         legend.key.height = unit(1,"mm"))+
+  # theme(legend.position = "none")+
   guides(fill =  guide_legend(title = "Viral Family", 
                               reverse = TRUE,
                               override.aes = list(alpha = 1)))
@@ -114,8 +115,8 @@ p.both <-  tmp %>%
 p.both
 
 top_row <- plot_grid(p.phylum, NULL, p.Vfam, nrow = 1,
-                     labels = c("a","","b"),rel_widths = c(1,0.1,1))
-all.3 <- plot_grid(top_row, p.both, ncol = 1, labels = c("","c"), 
+                     labels = c("A","","B"),rel_widths = c(1,0.1,1))
+all.3 <- plot_grid(top_row, p.both, ncol = 1, labels = c("","C"), 
                    rel_heights = c(1,1.5))
 
 
