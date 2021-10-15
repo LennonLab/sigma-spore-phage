@@ -14,25 +14,26 @@ library(here)
 # AC  TIGR00001
 # DE  ribosomal protein bL35
 
-# info=list.files(here("TIGR/data","tigr_info"), full.names = T)
-# # i=info[2]
-# 
-# #make df to collect results
-# tigr <- tibble()
-# 
-# for (i in info){
-#   tmp <- 
-#     read_lines(i,n_max = 3)%>%
-#     as_tibble()%>%
-#     separate(1,into = c("field","value"),sep = "  ")%>%
-#     pivot_wider(names_from = 1,values_from=2)
-#   
-#   tigr <-   bind_rows(tigr,tmp)  
-# }
-# write_csv(tigr, here("TIGR/data","tigr_info_3lines.csv"))
+## Uncomment the following block to crete "tigr_info_3lines.csv"
+  # info=list.files(here("TIGR/data","tigr_info"), full.names = T)
+  # # i=info[2]
+  # 
+  # #make df to collect results
+  # tigr <- tibble()
+  # 
+  # for (i in info){
+  #   tmp <- 
+  #     read_lines(i,n_max = 3)%>%
+  #     as_tibble()%>%
+  #     separate(1,into = c("field","value"),sep = "  ")%>%
+  #     pivot_wider(names_from = 1,values_from=2)
+  #   
+  #   tigr <-   bind_rows(tigr,tmp)  
+  # }
+  # write_csv(tigr, here("TIGR/data","tigr_info_3lines.csv"))
 tigr <- read_csv( here("TIGR/data","tigr_info_3lines.csv"))
 
-# filter out all descripritions woth sigma factor
+# filter out all descriptions with sigma factor
 tigr.sigma <- tigr%>%
   filter(str_detect(DE, pattern = regex("sigma",ignore_case = T)))%>%
   filter(str_detect(DE, pattern = regex("factor",ignore_case = T)))%>%
@@ -60,7 +61,7 @@ for(i in tigr.sigma$AC){
   
   
 }
- # make HMM database in linux CI for hmmscan
+ # make HMM database in Windows Subsystem for Linux using HMMER 3.3
 setwd(here("TIGR/data/tigr_sigma_hmm/"))
 
 #make a single file 
