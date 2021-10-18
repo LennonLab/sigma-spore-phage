@@ -4,7 +4,8 @@ library(cowplot)
 library(scales)
 source(here("vogdb/code/parse_hmmer_tbl.R"))
 
-# parse hmmserch results
+# parse hmmserch results -----------------------------------------
+
 l.res <- list.files(here("vogdb/data/hscan_vogXtigr/"), full.names = T)
 # variable to store reults
 hits.all <- tibble()
@@ -39,16 +40,9 @@ hits.all <- hits.all%>%
   separate(description,into = c("id","description"),sep = ":" )
 
 
-# need to solve the no hit rows which do not have taxon
-# #separate query name
-#   separate(query_name, 
-#            into = c("taxon","protein"),
-#            sep = "\\.",
-#            extra="merge", remove = FALSE)
 
 
-##############
-# get 3 best hits for each protein
+# get 3 best hits for each protein ---------------------
 # defining best by sequence evalue()
 
 best3 <- hits.all%>%
@@ -148,8 +142,8 @@ best3.evalue%>%
 
 
 
-################################################
-# combining vogdb and virus-host db info on proteins
+
+# combining vogdb and virus-host db info on proteins ------
 
 # load in the data made in previous script
 load(here("vogdb","data","vog_sigma_clean_Whost.RData"))
@@ -175,31 +169,10 @@ d.faa <-
   full_join(d.faa, ., by="protein")
 
 
-############################################
-# Do tigr hits correspond to VOG?
-############################################
-d.faa%>%
-  select(vog,tigr.hit,tigr.hit1,tigr.hit2,tigr.hit3 )%>%
-  pivot_longer(-vog, names_to="hit", values_to="tigr.fam")%>%
-  group_by(vog,hit,tigr.fam)%>%
-  summarise(n=n())%>%
-  filter(!is.na(tigr.fam))%>%
-  ggplot(aes(x=vog, y=tigr.fam))+
-  geom_tile(aes(fill=n))+
-  facet_wrap(~hit)+
-  scale_fill_viridis_b()+
-  theme_cowplot()+
-  theme(axis.text.x = element_text(angle=30,hjust = 1),
-        legend.position = "bottom")
-  # ggsave2(filename = here("vogdb/figures/vogXtigr_HitPlace.png"),
-  #         width = 10,height =10)
 
-# mostly no clear 1 to 1 correspondence
+# _________________----------------------------------------------
+# parsing sigma factor type by number of sigma factors in phage --------
 
-############################################
-# parsing sigma factor type by 
-# number of sigma factors in phage
-###########################################
 
 # add column of sigma factor content per genome
 n.sig <- d.faa%>%
@@ -211,8 +184,8 @@ d.faa <- n.sig%>%
   select(-`virus name`)%>%
   right_join(.,d.faa, by="taxon")
 
-###################################
-# classes of sigma factors
+# classes of sigma factors -------------------------------------
+
 sig.class <- read_csv(here("vogdb/data/tigr_Bs_sigma.csv"))
 
 d.faa <- sig.class%>%
@@ -224,10 +197,9 @@ d.faa$sig.group[d.faa$tigr.hit=="no_hit"] <- "no_hit"
 
 
 
+# _________________----------------------------------------------
+# Plot by phylum ---------------------------------------------
 
-##########################
-# Plot by phylum
-##########################
 n.labs <- d.faa%>%
   group_by(protein,phylum)%>%
   summarise(n=n())%>%
@@ -336,8 +308,8 @@ p <- p.phylum +
 
 
 
-###################################
-# Focus on phages with 3 sigma factors
+# _________________----------------------------------------------
+# Focus on phages with 3 sigma factors --------------------------
 d.nsig <- 
 d.faa%>%
   #classify by spore function
@@ -439,25 +411,6 @@ ggsave2(here("vogdb/figures/","sigma_TIGR_content_Firmi.png"),
   save(d.faa, file = here("vogdb/data/vog_sigma_clean_tigr.RData"))
 
   write_csv(d.faa %>% select(-seq), file = here("vogdb/data/vog_sigma_clean_tigr.csv"))
-# ###############
-# d.nsig3%>%
-#   # assign a positional index to each sigma factor
-#   group_by(taxon)%>%
-#   # arrange(sigma.group)%>%
-#   mutate(sig.position=row_number())%>%
-#   ungroup()%>%
-#   mutate(`virus name`=str_replace(`virus name`, "phage", "\u03c6"))%>%
-#   mutate(`virus name`=str_replace(`virus name`, "virus", "\u03c6"))%>%
-#   mutate(`virus name`=as_factor(`virus name`))%>%
-#   #plot
-#   ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-#   geom_tile(aes(fill=sigma.group), color="black")+
-#   theme_cowplot()+
-#   scale_fill_viridis_d()+
-#   facet_wrap(~n.sig, scales = "free")+
-#   theme(axis.text.x = element_blank())+
-#   ggsave2(here("vogdb/figures/","sigma_pfam_content_firmicutes.png"),
-#           width = 13, height = 18)
 
 
 

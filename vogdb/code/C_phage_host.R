@@ -19,8 +19,8 @@ vog.sp <-  read_tsv(here("vogdb","vogdb_downloads","vog.species.list"), trim_ws 
 # downloaded from ftp://ftp.genome.jp/pub/db/virushostdb/ (24/Nov/2020)
 vh.db <- read_tsv(here("vogdb","vogdb_downloads","virushostdb.tsv"))
 
-##############################################
-#  virus duplicates in VHDB data
+
+# virus duplicates in VHDB data -------------------------------------------
 # These reflect multiple hosts
 duplicated(vh.db$`virus tax id`)%>%sum() # 3461
 vh.db%>%
@@ -138,15 +138,15 @@ d.faa <- left_join(d.faa,d.sp,by=c("taxon"="tax.id"))
 
 # sigma factor gene number per phage --------------------------------------
 
-d.sp <- 
+d.sp <-
   d.faa%>%
   group_by(taxon)%>%
-  summarise(n.sigma=n()) %>% 
+  summarise(n.sigma=n()) %>%
   left_join(d.sp, ., by = c("tax.id" = "taxon"))
 
 # add 0 to phages without sigma genes
 d.sp$n.sigma[is.na(d.sp$n.sigma)] <- 0
-  
+
 #How many unique viruses have sigma factors?
 length(unique(d.faa$taxon))
 #471
@@ -159,9 +159,9 @@ d.sp%>%
   mutate(perc=100*n.genomes/sum(n.genomes))
 
 # n.sigma n.genomes   perc
-# 0      2962   86.3  
-# 1       397   11.6  
-# 2        50    1.46 
+# 0      2962   86.3
+# 1       397   11.6
+# 2        50    1.46
 # 3        24     0.699
 
 
@@ -169,25 +169,25 @@ d.sp%>%
 d.sp%>%
   group_by(phylum)%>%
   mutate(has_sigma = n.sigma >0,
-         multi_sigma = n.sigma >1) %>% 
+         multi_sigma = n.sigma >1) %>%
   summarise(n=n(),
             perc_sigma=100*sum(has_sigma)/n(),
             perc_multi=100*sum(multi_sigma)/n())
 
 #   phylum                                  n perc_sigma perc_multi
 #   <chr>                               <int>      <dbl>      <dbl>
-# 1 Actinobacteria                        797       1.88      0    
-# 2 Aquificae                               1       0         0    
-# 3 Bacteroidetes/Chlorobi group           76       2.63      0    
-# 4 Cyanobacteria/Melainabacteria group   102      64.7       3.92 
-# 5 Deinococcus-Thermus                     8       0         0    
-# 6 Firmicutes                            745      18.9       7.79 
+# 1 Actinobacteria                        797       1.88      0
+# 2 Aquificae                               1       0         0
+# 3 Bacteroidetes/Chlorobi group           76       2.63      0
+# 4 Cyanobacteria/Melainabacteria group   102      64.7       3.92
+# 5 Deinococcus-Thermus                     8       0         0
+# 6 Firmicutes                            745      18.9       7.79
 # 7 Proteobacteria                       1683      14.7       0.713
-# 8 PVC group                               6       0         0    
-# 9 Spirochaetes                            3       0         0    
-# 10 Tenericutes                             9       0         0    
-# 11 NA                                      3       0         0   
-  
+# 8 PVC group                               6       0         0
+# 9 Spirochaetes                            3       0         0
+# 10 Tenericutes                             9       0         0
+# 11 NA                                      3       0         0
+
 
 d.sp%>%
   filter(n.sigma>0) %>%
@@ -197,7 +197,187 @@ d.sp%>%
             perc_single = sum(n.sigma==1)/n())
 
 
-# Plot by phylum ----------------------------------------------------------
+# _____________--------------------
+# Sigma presence plots ----------------------------------------------------
+
+# summarise by viral family
+d.presence <- d.sp%>%
+  # phylum name adjust
+  mutate(phylum =
+           case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
+                     str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
+                     TRUE ~ phylum)) %>% 
+  # extract viral family
+  mutate(viral.family=str_extract(`virus lineage`,
+                                  regex("caudovirales;.*", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex("caudovirales; ", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex(";.*", ignore_case = T)))%>%
+  mutate(viral.family = if_else(is.na(viral.family), "non-Caudovirales*", viral.family)) %>% 
+  mutate(viral.family = fct_relevel(viral.family, "non-Caudovirales*", after = 0)) %>% 
+  filter(! is.na(viral.family))  %>%
+  filter(! is.na(phylum))
+
+
+# > plot by host phyla ----------------------------------------------------
+
+p.phylum <-  d.presence %>% 
+  group_by(phylum)%>%
+  mutate(has_sigma = n.sigma >0,
+         multi_sigma = n.sigma >1) %>% 
+  summarise(n=n(),
+            w.sigma=sum(has_sigma),
+            perc_sigma=100*sum(has_sigma)/n(),
+            w.multi=sum(multi_sigma),
+            perc_multi=100*sum(multi_sigma)/n()) %>% 
+  
+  filter(n>1) %>% 
+  ggplot(aes(phylum))+
+  geom_col(aes(y=n), position=position_dodge(preserve = "single"), alpha=0.5, color="grey80")+
+  # geom_col(aes(y=w.multi, fill=viral.family), position=position_dodge(preserve = "single"))+
+  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"), alpha=1, color="black")+
+  ylab("No. Phage Genomes") +
+  scale_y_log10(limits = c(1,2000))+
+  xlab("Host Phylum")+
+  theme_classic(base_size = 12)+
+  panel_border(color = "black")+
+  coord_flip(expand = F)+
+  scale_fill_viridis_d()+
+  scale_x_discrete()
+
+# > plot by viral family -------------------------------------------------
+
+p.Vfam <-  d.presence %>% 
+  group_by(viral.family)%>%
+  mutate(has_sigma = n.sigma >0,
+         multi_sigma = n.sigma >1) %>% 
+  summarise(n=n(),
+            w.sigma=sum(has_sigma),
+            perc_sigma=100*sum(has_sigma)/n(),
+            w.multi=sum(multi_sigma),
+            perc_multi=100*sum(multi_sigma)/n()) %>% 
+  
+  filter(n>1) %>% 
+  ggplot(aes(viral.family))+
+  geom_col(aes(y=n), position=position_dodge(preserve = "single"), alpha=0.5, color="grey80")+
+  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"), alpha=1, color="black")+
+  ylab("No. Phage Genomes") +
+  scale_y_log10(limits = c(1,2000))+
+  xlab("Viral Family")+
+  theme_classic(base_size = 12)+
+  panel_border(color = "black")+
+  coord_flip(expand = F)+
+  scale_fill_viridis_d()
+
+# > plot by host phyla AND viral family --------------------------------
+
+
+p.both <-  d.presence %>% 
+  group_by(viral.family, phylum)%>%
+  mutate(has_sigma = n.sigma >0,
+         multi_sigma = n.sigma >1) %>% 
+  summarise(n=n(),
+            w.sigma=sum(has_sigma),
+            perc_sigma=100*sum(has_sigma)/n(),
+            w.multi=sum(multi_sigma),
+            perc_multi=100*sum(multi_sigma)/n()) %>% 
+  
+  filter(n>1) %>% 
+  mutate(viral.family = fct_infreq(viral.family) ) %>% 
+  ggplot(aes(viral.family))+
+  geom_col(aes(y=n, fill=viral.family), position=position_dodge(preserve = "single"), alpha=0.5, color="grey80")+
+  # geom_col(aes(y=w.multi, fill=viral.family), position=position_dodge(preserve = "single"))+
+  geom_col(aes(y=w.sigma, fill=viral.family), position=position_dodge(preserve = "single"), alpha=1, color="black")+
+  ylab("No. Phage Genomes") +
+  scale_y_log10(limits = c(1,2000))+
+  xlab("Viral Family")+
+  theme_classic(base_size = 12)+
+  panel_border(color = "black")+
+  facet_wrap(~phylum, nrow = 2)+
+  coord_flip(expand = F)+
+  scale_fill_viridis_d()+
+  theme(axis.text.y = element_blank(),
+        legend.position = c(0.9,0.22),
+        legend.text = element_text(size = 8),
+        legend.key.height = unit(1,"mm"))+
+  guides(fill =  guide_legend(title = "Viral Family", 
+                              reverse = TRUE,
+                              override.aes = list(alpha = 1)))
+
+
+
+# > combine plots ----------------------------------------------------------
+
+
+top_row <- plot_grid(p.phylum, NULL, p.Vfam, nrow = 1,
+                     labels = c("A","","B"),rel_widths = c(1,0.1,1))
+all.3 <- plot_grid(top_row, p.both, ncol = 1, labels = c("","C"), 
+                   rel_heights = c(1,1.5)) 
+
+ggsave2(here("vogdb","figures","viral_family_host_phylum.png"),
+        plot = ggdraw(all.3) +
+          theme(plot.background = element_rect(fill="white", color = NA)),
+        width = 8,height = 6)
+
+# > stats for sigma presence --------------------------------------------
+
+# >> Host phyla -----------------------------------------------------------
+
+
+# make contingency table 
+contin.t1 <- 
+  d.sp%>%
+  # name adjust
+  mutate(phylum =
+           case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
+                     str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
+                     TRUE ~ phylum)) %>% 
+  # remove singeltons
+  group_by(phylum) %>% filter( n() > 1 ) %>% ungroup() %>% 
+  mutate(has.sigma = n.sigma>0) %>% 
+  select(phylum, has.sigma)%>%
+  table()
+
+m1 <- chisq.test(contin.t1, simulate.p.value = TRUE, B = 1e6)
+m2 <- fisher.test(contin.t1, simulate.p.value = TRUE, B = 1e6)
+
+write.csv(contin.t1, here("vogdb/data/","Hphyla_sigma_contingency.csv"))
+
+# >> viral family -------------------------------------------------------------
+
+
+
+# make contingency table 
+contin.t2 <- 
+  d.sp%>%
+  #extract viral family
+  mutate(viral.family=str_extract(`virus lineage`,
+                                  regex("caudovirales;.*", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex("caudovirales; ", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex(";.*", ignore_case = T))) %>%
+  mutate(viral.family = if_else(is.na(viral.family), "non-Caudovirales", viral.family)) %>% 
+  # remove singeltons
+  group_by(viral.family) %>% filter( n() > 1 ) %>% ungroup() %>%
+  
+  mutate(has.sigma = n.sigma>0) %>% 
+  select(viral.family, has.sigma)%>%
+  table()
+
+m1 <- chisq.test(contin.t2, simulate.p.value = TRUE, B = 1e6)
+m2 <- fisher.test(contin.t2, simulate.p.value = TRUE, B = 1e6)
+
+write.csv(contin.t2, here("vogdb/data/","VIRfam_sigma_contingency.csv"))
+
+# _____________--------------------
+
+
+# Sigma number plots ------------------------------------------------------
+
+
+# > Plot by phylum ----------------------------------------------------------
 
 
 # filter for phyla with less than 20 phages
@@ -248,55 +428,23 @@ p.phylum <-
           # plot = p.phylum, width = 4,height = 8)
 
 
-# make contingency table 
-contin.t <- 
-  d.sp%>%
-  filter(! phylum %in% phyla_rm) %>%
-  # name adjust
-  mutate(phylum =
-           case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
-                     str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
-                     TRUE ~ phylum)) %>% 
-  select(phylum, n.sigma)%>%
-  table()
-
-m1 <- chisq.test(contin.t, simulate.p.value = TRUE, B = 1e6)
-m2 <- fisher.test(contin.t, simulate.p.value = TRUE, B = 1e6)
-
-
-# Plot by order -----------------------------------------------------------
-
-# # summary table for N by order
-# n.labs <- d.sp%>%
+# # make contingency table 
+# contin.t <- 
+#   d.sp%>%
 #   filter(! phylum %in% phyla_rm) %>%
-#   filter (!is.na(order)) %>% 
-#   group_by(order)%>%
-#   summarise(n=n())%>%
-#   mutate(lab=paste0("n=",n))%>%
-#   mutate(order=str_replace(order,"/","\n"))%>%
-#   mutate(order=fct_reorder(order,n))
+#   # name adjust
+#   mutate(phylum =
+#            case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
+#                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
+#                      TRUE ~ phylum)) %>% 
+#   select(phylum, n.sigma)%>%
+#   table()
 # 
-# 
-# 
-# p.sp <-  d.sp %>%
-#   filter(! phylum %in% phyla_rm) %>%
-#   filter (!is.na(order)) %>% 
-#   ggplot( aes(n.sigma, group = order)) + 
-#   geom_bar(aes(y = ..prop..), stat="count") + 
-#   geom_text(data=n.labs, aes(label=lab), x=2.75,y=.9)+
-#   scale_y_continuous(labels=scales::percent) +
-#   ylab("Phage genomes") +
-#   xlab("Sigma factors per genome")+
-#   facet_wrap(~order)+
-#   theme_classic()+
-#   panel_border()+
-#   ggtitle("phage sigma factor content by host order")
-# 
-#   ggsave2(here("vogdb","figures","sigma_HostOrder.png"),
-#           plot = p.sp, width = 10,height = 6)
+# m1 <- chisq.test(contin.t, simulate.p.value = TRUE, B = 1e6)
+# m2 <- fisher.test(contin.t, simulate.p.value = TRUE, B = 1e6)
 
 
-# Plot by Firmicute genera ------------------------------------------------
+# > Plot by Firmicute genera ------------------------------------------------
 
 
 # extracting genus data for  firmicutes
@@ -374,7 +522,7 @@ firmi%>%
 
 
 
-# Plot by viral type ------------------------------------------------------
+# > Plot by viral type ------------------------------------------------------
 
 
 
@@ -490,7 +638,7 @@ firmi%>%
 # with 2 sigmas there are other hosts
 
 
-# combine plots -----------------------------------------------------------
+# >> combine plots -----------------------------------------------------------
 
 
 # right_col <- 
@@ -505,7 +653,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
           plot = p, width = 12,height = 10)
 
 
-# Herelle host genera -----------------------------------------------------
+# > Herelle host genera -----------------------------------------------------
   d.herelle <- filter(firmi, phage.nonphage == "phage") %>% 
     filter(str_detect(`virus lineage`, "Herelle"))
   
@@ -549,7 +697,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
   #           ggtitle("phage sigma factor content by viral family"),
   #         width = 10,height = 6)
   
-  # sipho host genera -----------------------------------------------------
+  # > sipho host genera -----------------------------------------------------
   d.sipho <- filter(firmi, phage.nonphage == "phage") %>% 
     filter(str_detect(`virus lineage`, "Sipho")) %>% 
     # merge Clostridium and Clostridioides host genera
@@ -598,7 +746,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
   #           ggtitle("phage sigma factor content by viral family"),
   #         width = 10,height = 6)
   
-  # combine plots -----------------------------------------------------------
+  # >> combine plots -----------------------------------------------------------
   
   right_col <-
     plot_grid(p.herelle, NULL,
@@ -616,7 +764,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
           plot = p, width = 7,height = 8)
   
   
-# Viruses of all phyla ----------------------------------------------------
+# > Viruses of all phyla ----------------------------------------------------
   d.phage <- filter(d.sp, phage.nonphage == "phage")
   # First I will break up the virus lineage data so
   # the host lineage is not uniform having 2-9 levels
@@ -697,7 +845,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
   #           ggtitle("phage sigma factor content by viral family"),
   #         width = 10,height = 6)
   
-# Summary plot ------------------------------------------------------------
+# > Summary plot - MAIN ------------------------------------------------------
 
 # Phylum independent summary of sigma factors/genome
   nsig_all <- d.sp%>%
@@ -721,29 +869,7 @@ p <-  plot_grid(p.phylum,p.genus,#right_col,
     mutate(perc=n.genomes/sum(n.genomes)) 
   
   
-  
-  nsig_all %>% 
-    ggplot(aes(n.sigma, perc))+
-    geom_col(color = "grey30", fill = "white")+
-    geom_col(data = nsig_firmi,fill = "grey", color ="black",
-             alpha=.5, width = 0.6, position = position_nudge(x=0.15))+
-    geom_col(data = nsig_bacil, fill = "black", color ="black",
-             alpha=.8, width = 0.3, position = position_nudge(x=0.3))+
-    geom_label(label = paste0("All phages: n=", sum(nsig_all$n.genomes)),
-               x=2,y=.9, color = "black", fill = "white", hjust = 0)+
-    geom_label(label = paste0("Firmicute phages: n=", sum(nsig_firmi$n.genomes)), 
-               x=2,y=.85, fill = "grey80", color = "black",hjust = 0)+
-    geom_label(label = paste0("Bacillus phages: n=", sum(nsig_bacil$n.genomes)), 
-               x=2,y=.8, fill = "grey20", color = "white",hjust = 0)+
-    scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
-    ylab("Phage genomes") +
-    xlab("Sigma factors per genome")+
-    theme_classic()+
-    panel_border(color = "black")
-  # ggsave(here("vogdb","figures","nSigma_allVbacil.png"),
-  #        width = 6,height = 6)
-  
-  dplot <- 
+ dplot <- 
     bind_rows(
       nsig_all %>% mutate(host_tax = "Bacteria"),
       nsig_firmi %>% mutate(host_tax = "Firmicutes"),
