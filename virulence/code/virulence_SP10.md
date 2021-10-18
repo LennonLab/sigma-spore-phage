@@ -5,7 +5,7 @@ Virulence index
 library(here)
 ```
 
-    ## here() starts at C:/Users/danschw/GitHub/spore-phage-sigma
+    ## here() starts at C:/Users/danschw/GitHub/sigma-spore-phage
 
 ``` r
 library(tidyverse)
@@ -64,6 +64,13 @@ library(scales)
 library(growthcurver)
 library(caTools) #needed for trapezoids
 source(here("virulence/code/virulence_functions.R"))
+```
+
+``` r
+init.host <- 1e8 #CFU/ml
+host.vol <- 0.1 #ml
+init.titer <- 1e9 #PFU/ml
+phage.vol <- 0.1 #ml
 ```
 
 # The virulence index
@@ -332,8 +339,6 @@ Looks OK to me.
 Need to make sure to use only dilutions in which all wells got phage.
 
 ``` r
-phage.vol <- 0.1 #ml
-init.titer <- 1e9 #PFU/ml
 max.dilut <- 1/(init.titer*phage.vol)
 #-# verify visualy
 d%>%
@@ -419,7 +424,9 @@ sum.noPHI <-
 
 vindex <- merge(meta, sum.noPHI)
 vindex$Vi <- 1-(vindex$auc/vindex$A0)
-vindex$log.moi <- log10(vindex$dilution*100)
+vindex$moi <- (init.titer * phage.vol * vindex$dilution) /
+                              (init.host * host.vol)
+vindex$log.moi <- log10(vindex$moi)
 
 vindex%>%
   filter(phage != "noPHI") %>% 
@@ -523,13 +530,14 @@ t.test(Vp~phage, sum.phi)
 
 ``` r
 library(ggsignif)
-sum.phi%>%
+p.final <- sum.phi%>%
   group_by(phage)%>%
   summarise(n=n(), sd=sd(Vp), Vp=mean(Vp), se=sd/sqrt(n))%>%
   # filter(host=="wt")%>%
   ggplot(aes(x=phage, y=Vp))+
   geom_crossbar(aes(ymin=Vp-se,ymax=Vp+se), width=0.3)+
-  geom_jitter(data=sum.phi,aes(x=phage, y=Vp, shape=host),height=0, width=0.15,size=3, fill="grey")+
+  geom_jitter(data=sum.phi,aes(x=phage, y=Vp), shape = 21,
+              height=0, width=0.15,size=3, fill=alpha("grey", 0.5))+
     geom_signif(comparisons = list(c("del120", "wt")), 
                 y_position = 0.4, tip_length = 0.3,
                 annotations ="NS")+
@@ -537,11 +545,199 @@ sum.phi%>%
   ylim(0,0.5)+
   ylab("phage virulence (Vp)")+
   theme_classic()+
-  panel_border(color = "black")+
-  theme(legend.position = "bottom")+
-  labs(caption =  "mean±SE (n=8)")+
-  ggsave(here("virulence/plots/virulence_SP10.png"),
-         width = 3, height = 3)
+  panel_border(color = "black")
+  # ggsave(here("virulence/plots/virulence_SP10.png"),
+  #        width = 3, height = 3)
+p.final
 ```
 
 ![](virulence_SP10_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+``` r
+# plot of MOI dependent lysis
+
+
+d.plot <- d %>%
+  filter(host != "blank")%>%
+  filter(dilution>=max.dilut)%>%
+  mutate(dilution = if_else(phage == "noPHI", 0, dilution)) %>% 
+  mutate(moi = (init.titer * phage.vol * dilution) /
+                              (init.host * host.vol)) %>% 
+  group_by(Time, phage, moi) %>% 
+  summarise(n = n(), m = mean(OD600), v = sd(OD600)/sqrt(n), .groups = "drop") %>% 
+   mutate(moi = as_factor(moi) %>% fct_inseq()) 
+
+# duplicate no phage data to each of the panels
+d.plot <- bind_rows(
+  filter(d.plot, phage=="noPHI") %>% mutate(phage = "wt"),
+  filter(d.plot, phage=="noPHI") %>% mutate(phage = "del120"),
+  filter(d.plot, phage!="noPHI")
+)
+
+p.lysis <- d.plot %>% 
+  filter(Time <= 10) %>% 
+  ggplot(aes(x=Time, y=m, color=moi))+
+  geom_vline(xintercept = int.limit, color = "grey")+
+  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5)+
+  geom_line(size=1)+
+  #highlight no phage
+   geom_line(data = filter(d.plot, moi=="0" & Time <= 10), size=1.5)+
+  facet_wrap(~ phage)+
+  theme_classic()+
+  panel_border(color = "black")+
+  scale_color_viridis_d()+
+  guides(color = guide_legend("MOI", ncol =2))+
+  ylab("Bacterial Density (OD600)")+
+  xlab("Time Post Infection (h)")+
+  scale_x_continuous(breaks = seq(0,10,2))+
+  theme(panel.spacing = unit(2, "lines"),
+        plot.margin = unit(c(0.5,1,0.5,1), "cm"))
+
+p.lysis 
+```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+Showing virulence index calculation
+
+``` r
+# dunction to adjust facet labels
+f_labeller <- function(string){return(paste0("MOI = ", string))}
+
+# duplicate no phage data to each of the panels
+mois <- levels(d.plot$moi)
+d.plot2 <- 
+  filter(d.plot, moi != "0") %>% 
+  mutate(moi_panel = moi)  
+  
+for (i in mois){
+  
+  if(i == "0") next
+  
+  d.plot2 <- 
+    bind_rows(
+      d.plot2,
+      filter(d.plot, moi == "0") %>% mutate( moi_panel = i),
+    )
+}
+
+#panel order
+d.plot2 <- d.plot2%>% 
+  mutate(moi_panel = as_factor(moi_panel) %>% fct_inseq()) %>% 
+  # only plotting part of the curved used for index
+  filter(Time <= int.limit)
+
+
+#separate plotting data sets
+d.plot2.wtInf <- d.plot2 %>% 
+  filter(moi != "0") %>% 
+  filter(phage == "wt") 
+
+d.plot2.wtCtrl <- d.plot2 %>% 
+  filter(moi == "0") %>% 
+  filter(phage == "wt") 
+
+d.plot2.mutInf <- d.plot2 %>% 
+  filter(moi != "0") %>% 
+  filter(phage == "del120") 
+
+d.plot2.mutCtrl <- d.plot2 %>% 
+  filter(moi == "0") %>% 
+  filter(phage == "del120") 
+
+p.wt <- d.plot2.wtCtrl %>% 
+  ggplot(aes(x=Time, y=m))+
+  geom_area(fill = "grey70")+
+  geom_area(data = d.plot2.wtInf, fill = "white" )+
+  geom_line(linetype=2)+
+  geom_line(data = d.plot2.wtInf)+
+  facet_wrap(~ moi_panel, labeller = labeller(moi_panel = f_labeller))+
+  theme_classic()+
+  panel_border(color = "black")+
+   theme(panel.spacing = unit(2, "lines"))+
+  scale_color_viridis_d()+
+  guides(color = guide_legend("multiplicity\nof\ninfection"))+
+  ylab("Bacterial Density (OD600)")+
+  xlab("Time Post Infection (h)")+
+  scale_x_continuous(breaks = seq(0,10,2))+
+  ggtitle("SP10 WT")
+
+p.mut <- d.plot2.mutCtrl %>% 
+  ggplot(aes(x=Time, y=m))+
+  geom_area(fill = "grey70")+
+  geom_area(data = d.plot2.mutInf, fill = "white" )+
+  geom_line(linetype=2)+
+  geom_line(data = d.plot2.mutInf)+
+  facet_wrap(~ moi_panel, labeller = labeller(moi_panel = f_labeller))+
+  theme_classic()+
+  panel_border(color = "black")+
+   theme(panel.spacing = unit(2, "lines"))+
+  scale_color_viridis_d()+
+  guides(color = guide_legend("multiplicity\nof\ninfection"))+
+  ylab("Bacterial Density (OD600)")+
+  xlab("Time Post Infection (h)")+
+  scale_x_continuous(breaks = seq(0,10,2))+
+  ggtitle("SP10 del120")
+
+p.auc <- plot_grid(p.mut, NULL,p.wt, rel_widths = c(1,0.1,1), nrow = 1)
+p.auc
+```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+``` r
+p.vi <- vindex%>%
+  filter(phage != "noPHI") %>% 
+  filter(dilution>=max.dilut)%>%
+  group_by(phage, moi)%>%
+  summarise( Virulence=mean(Vi), mn=min(Vi), mx=max(Vi), n=n())%>%
+    ggplot(aes(moi, Virulence))+
+  geom_area(fill = "grey70")+
+      geom_line(size=1)+
+      geom_pointrange(aes(ymin=mn, ymax=mx ), shape=21, size=.5, fill = "white")+
+      facet_wrap(~phage, nrow=1,labeller = "label_both")+
+      theme_classic()+
+      panel_border(color="black")+
+      scale_colour_viridis_d()+
+  scale_x_log10()+
+  ylab("local virulence\n(area between curves)")+
+  ylim(NA,1)
+```
+
+    ## `summarise()` has grouped output by 'phage'. You can override using the `.groups` argument.
+
+``` r
+p.vi
+```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+\#\#\#combine plots
+
+``` r
+p.bottom <- plot_grid(p.vi, NULL, p.final, rel_widths = c(1,0.05,1), nrow = 1,
+                      labels = c("", "d"))
+p.all <- plot_grid(p.lysis,NULL,p.auc,NULL,p.bottom, ncol = 1,
+          rel_heights = c(1,0.05,2,0.05,1), labels = c("a","","b","","c"))
+
+#add white background
+p.all <-ggdraw(p.all) + 
+  theme(plot.background = element_rect(fill="white", color = NA))
+
+ggsave(here("virulence/plots", "virulence_steps.png"), p.all,
+      width = 8, height = 8)
+
+    # #export to pptx using officer and rvg
+    # library (officer)
+    # library(rvg)
+    # 
+    # read_pptx() %>%
+    #   add_slide(layout = "Blank", master = "Office Theme" ) %>%
+    #   ph_with(dml(ggobj = p.all),
+    #           location = ph_location(type = "body",
+    #                                  left = 0, top = 0,
+    #                                  width = 8, height = 8)) %>%
+    #   print(target = here("virulence/plots", "virulence_steps.pptx"))
+p.all
+```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->

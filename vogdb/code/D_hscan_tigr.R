@@ -11,26 +11,25 @@ hmm <- "TIGR/data/tigr_sigma_hmm/sigma.fam"
 
 faa <- dir("vogdb/data/vog_sigma_clean", full.names = T, pattern = ".faa.gz")
 
+# create output directory
+if (! dir.exists(here("vogdb/data/hscan_vogXtigr/"))){
+  dir.create("vogdb/data/hscan_vogXtigr/")
+}
 
-for (h in hmm){
-  for (f in faa){
+
+for (f in faa){
     
     faa.name <- 
       str_remove(f,".faa.gz")%>%
       str_remove(".*/")
     
-    # hmm.name <- 
-    #   str_remove(h,".HMM")%>%
-    #   str_remove(".*/")
     
     filename <- paste0("vogdb/data/hscan_vogXtigr/",faa.name,".txt")
     
-    # wsl <- paste("wsl hmmsearch --noali -T 20 --tblout", filename, h, f)
-    # wsl <- paste("wsl hmmscan --noali -T 20 --tblout", filename, h, f)
     #no threshold
-    wsl <- paste("wsl hmmscan --noali --tblout", filename, h, f)
+    wsl <- paste("wsl hmmscan --noali --tblout", filename, hmm, f)
     shell(wsl)
-  }
+  
 }
 
 
