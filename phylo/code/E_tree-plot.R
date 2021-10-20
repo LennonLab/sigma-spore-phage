@@ -146,6 +146,7 @@ d.rax %>%
 
 
 
+# ____________-------------------
 # prepare plot layers -----------------------------------------------------
 
 
@@ -207,7 +208,7 @@ for (i in internal){
 # >> tigr -----------------------------------------------------------------
 
 
-#################
+
 # add tigr classification
 tigr.spore=c("spore_sigmaK","spore_sigmaE","spore_sigF","spore_sigG")
 d.rax <- d.rax %>% 
@@ -242,11 +243,8 @@ d.rax$phage_lab  <-  str_replace_na(d.rax$phage_lab, replacement = "")
   
 d.rax <- d.rax %>% 
   mutate(tbe = if_else(is.na(tip.label), label.tbe %>% parse_number(), NULL)) %>%
-  mutate(support = case_when( #is.na(UFboot) ~ "NA",
-                              100*tbe>= 90 ~ ">90%",
-                              # 100*tbe>= 80 ~ ">80%",
+  mutate(support = case_when( 100*tbe>= 90 ~ ">90%",
                               100*tbe>= 70 ~ ">70%",
-                              # 100*tbe>= 50 ~ ">50%",
                               TRUE ~ NA_character_)) %>%
   mutate(support = fct_rev(support))
 
@@ -273,7 +271,18 @@ mrca.sigSPORE <- d.rax %>%
   pull(node) %>% 
   MRCA(d.rax, .) %>% pull(node)
 
-# base tree
+# Save plot tree---------------
+# # xport_tree <-
+#   d.rax %>% 
+#   # mutate(label = paste0(label,"[",sp,"]")) %>% 
+#   select(parent, node, branch.length, label) %>% 
+#   as.treedata() %>% 
+#   as.phylo() %>%  
+#   write.tree(phy = ., here("phylo/data/PlotPhylogeny_wData.tree"))
+# ____________-------------------
+# Plot tree ---------------------------------------------------------------
+
+# >> base tree----------------
 p1 <-  
   d.rax %>% 
   mutate(host_phylum = str_replace(host_phylum, 
@@ -285,7 +294,7 @@ p1 <-
   scale_color_manual(values = c("grey20", "blue"), 
                      guide = "none")
 
-# clade annotations
+# >> clade annotations ---------------------
 p2 <- p1 +
   new_scale_fill()+
   new_scale_color()+
@@ -310,7 +319,7 @@ p2 <- p1 +
 geom_hilight(node = mrca.sigSPORE, color = "grey70", fill=alpha("transparent", 0),
              extend = 4, size=0.2) 
   
-# redraw tree on top of wedges  
+# >> redraw tree on top of wedges  -----------------
 p3 <- p2 + 
   geom_tree(aes(color = clade), layout = "fan", size = 0.05)+
   scale_color_manual(values = c("grey20", "blue"), 
@@ -324,8 +333,8 @@ p3 <- p2 +
                     guide = guide_legend(override.aes = list(size=2),
                                          nrow =  2, title = "Bootstrap (%)"))
 
+ # >> plot circles -------------
  
-
 p4 <- p3 +
   # circle 1 :phage vs bacteria
   new_scale_fill()+
@@ -370,7 +379,7 @@ p4 <- p3 +
         legend.position = "bottom",legend.direction = "vertical")
 
   
-
+ # >> save plot ---------------------
 
 ggsave(filename = here("phylo","plots","sigma_circle_rooted.pdf"),
        plot = p4,#+theme(legend.position = "none"),
