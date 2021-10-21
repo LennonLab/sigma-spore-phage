@@ -20,13 +20,13 @@
     * Substitution model test with modeltest-NG. Software installed from Docker image using Singularity (v3.6.4), as described in the code. Not sure about version. When run I got "modeltest x.y.z". Thcontainer naming suggests it is v.0.1.6.
     
 * D_tree.sh
-  This code relies on helper script [*batch_raxML-ng.sh*](../phylo/code/batch_raxML-ng.sh) for batch job submission
+  This code relies on helper script [*batch_raxML-ng.sh*](code/batch_raxML-ng.sh) for batch job submission
     * check MSA with raxml-ng --check
     (swapped suplicate sequence headers using helper script *duplicated-seqs.R* )
     * phylogeny with  RAxML-NG (v0.9.0).
     
 * E_bootstrap_tree.sh
-  This code relies on helper script [*batch_bootstrap.sh*](phylo/code/batch_bootstrap.sh) for batch job submission
+  This code relies on helper script [*batch_bootstrap.sh*](code/batch_bootstrap.sh) for batch job submission
     * bootstrapping phylogeny from previous step with  RAxML-NG (raxml-ng --bootstrap). Ran 500 bootstraps.
     * check for convergence of bootstraps (raxml-ng --bsconverge). Bootstrapping test converged after 350 trees.
     
@@ -46,5 +46,5 @@ Finally, plotting with ggtreeExtra:
     * F4_tree-plot.R
     The tree in Newick format with Transfer Bootstrap estimates is saved as **phylo/data/PlotPhylogeny_wData.tree**
   
-    Fianl tweaks to the plot as shown in the manuscript was done on exported [pptx file](plots/sigma_circle_rooted.pptx).
+Final tweaks to the plot as shown in the manuscript was done on exported [pptx file](plots/sigma_circle_rooted.pptx).
 
