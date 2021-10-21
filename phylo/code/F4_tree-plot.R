@@ -60,7 +60,7 @@ d.bact <- d.bact %>%
   select(-check_sp)
 
 
-# add bacterial taxonomy data. collected by phylo/code/get_taxa.R
+# add bacterial taxonomy data. collected by phylo/code/F3_get_bact_taxa.R
 d.bac_tax <- read_csv(here("phylo","data","bacterial_taxonomy.csv"))
 
 #add bacteria tigr classification
@@ -272,13 +272,17 @@ mrca.sigSPORE <- d.rax %>%
   MRCA(d.rax, .) %>% pull(node)
 
 # Save plot tree---------------
-# # xport_tree <-
-#   d.rax %>% 
-#   # mutate(label = paste0(label,"[",sp,"]")) %>% 
-#   select(parent, node, branch.length, label) %>% 
-#   as.treedata() %>% 
-#   as.phylo() %>%  
-#   write.tree(phy = ., here("phylo/data/PlotPhylogeny_wData.tree"))
+
+  d.rax %>%
+  mutate(tip = isTip(.,node)) %>% 
+  mutate(label.xport = if_else(tip, 
+                               paste0(label,"[",sp,"]"),
+                               label.tbe)) %>%
+  select(parent, node, branch.length, label = label.xport) %>%
+  as.treedata() %>%
+  as.phylo() %>%
+  write.tree(phy = ., here("phylo/data/PlotPhylogeny_wData.tree"))
+
 # ____________-------------------
 # Plot tree ---------------------------------------------------------------
 

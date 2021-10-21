@@ -22,6 +22,7 @@
 * D_tree.sh
   This code relies on helper script [*batch_raxML-ng.sh*](../phylo/code/batch_raxML-ng.sh) for batch job submission
     * check MSA with raxml-ng --check
+    (swapped suplicate sequence headers using helper script *duplicated-seqs.R* )
     * phylogeny with  RAxML-NG (v0.9.0).
     
 * E_bootstrap_tree.sh
@@ -29,15 +30,21 @@
     * bootstrapping phylogeny from previous step with  RAxML-NG (raxml-ng --bootstrap). Ran 500 bootstraps.
     * check for convergence of bootstraps (raxml-ng --bsconverge). Bootstrapping test converged after 350 trees.
     
-batch_bootstrap.sh
-batch_parallel_bootstrap.sh
-batch_raxML-ng.sh
-C_model-selection.sh
-D_tree.sh
-D2_bootstrap_tree.sh
-duplicated-seqs.R
-E_tree-plot.R
-F_ditances.R
-get_taxa.R
-sup_bact_hscan_tigr.R
-sup_bact_parse-hscan_tigr.R
+* Plot tree
+This required first collecting some data on bacterial genes  
+
+    * F1_bact_hscan_tigr.R - classify bacterial sigmas in the same way done for phage sigmas in "vogdb/D_hscan_tigr.R/"
+    Relies on the windows subsytem for Linux (wsl) on which hmmer has been installed  
+  
+    * F2_bact_parse-hscan_tigr.R - parse data from previous script  
+    Requires function from "vogdb/code/parse_hmmer_tbl.R"  
+  
+    * F3_get_bact_taxa.R - retrieve taxonomy data on bacterial strains in tree.
+    Relies on the windows subsytem for Linux (wsl) on which [Entrez Direct](https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/) has been installed  
+  
+Finally, plotting with ggtreeExtra:  
+    * F4_tree-plot.R
+    The tree in Newick format with Transfer Bootstrap estimates is saved as **phylo/data/PlotPhylogeny_wData.tree**
+  
+    Fianl tweaks to the plot as shown in the manuscript was done on exported [pptx file](plots/sigma_circle_rooted.pptx).
+
