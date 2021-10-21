@@ -1,9 +1,9 @@
 library(here)
 library(tidyverse)
 library(seqinr)
-# This code runs blast using a wsl linuxx system on windows
+# This code runs blast using a wsl linux system on windows
 
-# This code collects the bacterial sigma factors as described by Burton et al. 2019
+# This code collects the bacterial sigma factors as described by Burton et al. 2019:
 # > Sigma homologs to SigA, SigH, and SigM were identified in the genomes of
 # > 24 model organisms (listed in Table S6) using BLAST version 2.2.31 and an 
 # > E value threshold of 1E-2 and compared to all SigN homologs found in the database.
@@ -36,8 +36,8 @@ for (i in 1:nrow(d.burton)){
   download.file(ftp, destfile = paste0(d.burton$organism_name[i],".faa.gz"))
 }
 
-##############
-# make blast database of 
+
+# make blast database ------------------------------------------------------ 
 setwd(here("phylo","data", "bacteria_faa/"))
 
 # wsl <- "gunzip -c *.gz | makeblastdb -dbtype prot -in -"
@@ -140,11 +140,9 @@ bact.fa <- read.fasta(here("phylo","data","bacterial_sigma.faa"))
 
 # load viral sigmas from vog HMM analysis
 load(here("vogdb/data/vog_sigma_clean_Whost.RData"))
+# rename
+phage.fa <- d.faa 
 
-# # keep only viral sigmas of bacillus phages
-phage.fa <- d.faa # %>%
-  # filter(phylum == "Firmicutes") %>%
-  # filter(str_detect(family.etc, regex("bacillus", ignore_case = T)))
 
 
 # check for duplicates ----------------------------------------------------
@@ -170,7 +168,7 @@ anyDuplicated(bact.fa)
 #no duplicates
 
 
-# combine bact and phage fastas --------------------------------------------
+# save data --------------------------------------------
 
 
 
