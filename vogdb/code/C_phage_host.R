@@ -316,7 +316,8 @@ p.both <-
   xlab("Viral Family")+
   theme_classic(base_size = 12)+
   panel_border(color = "black", size = 0.7)+
-  facet_wrap(~phylum, nrow = 1)+
+  # facet_wrap(~phylum, nrow = 1)+
+  facet_nested_wrap("Host Phylum" + phylum~., nest_line = TRUE, nrow = 1)+
   coord_flip(expand = F)+
   scale_fill_viridis_d()+
   scale_color_viridis_d()+
@@ -325,12 +326,58 @@ p.both <-
         legend.position = c(0.9,0.22),
         legend.text = element_text(size = 8),
         legend.key.height = unit(1,"mm"),
-        strip.background = element_rect(size = 0.7))+
+        strip.background = element_blank())+
+        # strip.background = element_rect(size = 0.7))+
   guides(fill =  guide_legend(title = "Viral Family", 
                               reverse = TRUE),
          color =  guide_legend(title = "Viral Family", 
                               reverse = TRUE))
 
+
+# n sigma panel -----------------------------------------------------------
+
+#summarise data
+n.sig.data <- 
+  d.sp %>% 
+  # name adjust
+  mutate(phylum =
+           case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
+                     str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
+                     TRUE ~ phylum)) %>% 
+  group_by(phylum, n.sigma) %>% 
+  summarise(n=n(), .groups = "drop") %>% 
+  group_by(phylum) %>% 
+  summarise( n.sigma= n.sigma, n = n, total = sum(n), .groups = "drop") %>% 
+  mutate(pnl = "Host Phylum")
+
+n.sig.all <-   d.sp %>% 
+  group_by(n.sigma) %>% 
+  summarise(n=n(), .groups = "drop", ) %>% 
+  summarise( n.sigma= n.sigma, n = n, total = sum(n), .groups = "drop") %>% 
+  mutate(pnl = "All Hosts", phylum = "Bacteria") %>% 
+  bind_rows(.,filter(n.sig.data, phylum %in% phyla.keep)) %>% 
+  mutate(perc = n/total)
+
+
+
+n.labs <- n.sig.all %>% 
+  group_by(pnl,phylum) %>% 
+  summarise(n=sum(n)) %>% 
+  mutate(lab = paste("n=", n))
+
+
+p.multi <-  
+  n.sig.all %>% 
+  ggplot( aes(n.sigma, group = phylum)) + 
+  geom_col(aes(y = perc),  fill = "grey10", color="black", size = 0.7, width=0.6) + 
+  geom_text(data = n.labs, aes(label=lab), x=2,y=0.9)+
+  scale_y_continuous(labels=scales::percent) +
+  ylab("Phage genomes") +
+  xlab("Sigma factors per genome")+
+  facet_nested_wrap(pnl + phylum~., nest_line = TRUE, nrow = 1)+
+  theme_classic(base_size = 13)+
+  panel_border(color = "black")+
+  theme(strip.background = element_blank())
 
 
 # > combine plots ----------------------------------------------------------
@@ -338,13 +385,16 @@ p.both <-
 
 top_row <- plot_grid(p.phylum, NULL, p.Vfam, nrow = 1,
                      labels = c("a","","b"),rel_widths = c(1,0.2,1))
-all.3 <- plot_grid(top_row, NULL, p.both, ncol = 1, labels = c("","c"), 
-                   rel_heights = c(1,0.1,1)) 
+# all.3 <- plot_grid(top_row, NULL, p.both, ncol = 1, labels = c("","c"), 
+#                    rel_heights = c(1,0.1,1)) 
+middle_row <- plot_grid(NULL, p.both, nrow = 1,rel_widths = c(0.1,1))
+
+all.4 <- plot_grid(top_row, middle_row,p.multi, ncol = 1, labels = c("","c", "d")) 
 
 ggsave2(here("vogdb","figures","viral_family_host_phylum.png"),
-        plot = ggdraw(all.3) +
+        plot = ggdraw(all.4) +
           theme(plot.background = element_rect(fill="white", color = NA)),
-        width = 8,height = 6)
+        width = 8,height = 8)
 
 # > stats for sigma presence --------------------------------------------
 
@@ -431,6 +481,8 @@ n.labs <- d.sp%>%
   summarise(n=n())%>%
   mutate(lab=paste0("n=",n))
 
+
+
 p.phylum <- 
   d.sp%>%
   filter(! phylum %in% phyla_rm) %>%
@@ -448,27 +500,6 @@ p.phylum <-
   facet_nested_wrap("Host Phylum" + phylum~., nest_line = TRUE, ncol = 1)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")
-
-
-  # ggsave2(filename = here("vogdb","figures","sigma_HostPhylum.png"),
-          # plot = p.phylum, width = 4,height = 8)
-
-
-# # make contingency table 
-# contin.t <- 
-#   d.sp%>%
-#   filter(! phylum %in% phyla_rm) %>%
-#   # name adjust
-#   mutate(phylum =
-#            case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
-#                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
-#                      TRUE ~ phylum)) %>% 
-#   select(phylum, n.sigma)%>%
-#   table()
-# 
-# m1 <- chisq.test(contin.t, simulate.p.value = TRUE, B = 1e6)
-# m2 <- fisher.test(contin.t, simulate.p.value = TRUE, B = 1e6)
-
 
 # > Plot by Firmicute genera ------------------------------------------------
 
