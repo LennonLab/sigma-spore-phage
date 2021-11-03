@@ -3,38 +3,53 @@
 #=GS WP_000350729.1 DE SigF [Bacillus_cereus]
 #=GS WP_003230458.1 DE SigF [Bacillus_subtilis]
 #=GS WP_011860953.1 DE SigF [Clostridioides_difficile]
+#=GS WP_000197755.1 DE SigG [Bacillus_cereus]
+#=GS WP_009967190.1 DE SigG [Bacillus_subtilis]
+#=GS WP_003416101.1 DE SigG [Clostridioides_difficile]
 
-YP_007003377.1         ------------FDKFIEEHSGLVKHIV.NKgFRTKlkylqAETSDDLLQIGYIGLIHAYNRYDPNKNTKFSSFAYSTIRGFIAKYLRDTSSyasgIKFSSATNEIFFKLQKME-------DAEIT.VD..FVKEKF.GCGER.LAKRVIE....R.SwfQRLDDVNVRL...GeDEE...GERLgSLIERIADE--.A.
-#=GR YP_007003377.1 PP ............5899***********9.88443322111144579*******************************************9872333566666666655555554.......46889.99..999999.98755.4444444....4.3113444444444...41456...77765699999999...3.
-YP_009274876.1         LIKKSHAGDMDARELIVEKNMRLVWNVV.HR.FINR.....GYLPEDLFQIGCIGLLKSIDKFDLDYDVAFSTYAVPMIIGEIQRFIRDDGT....VKVPRTIKELANKIRHA--DLVKEE-PAAI.IKalELGDVSeDYIKL.AVKYIRE....N.G..GKPLSTDETV...Y.END...GDPI.TIGDQMGGD-I.N.
-#=GR YP_009274876.1 PP 89**************************.**.****.....***************************************************....**************864..455542.2222.3311444433134455.5666678....8.9..9999******...*.***...****.******999.7.8.
-YP_009274875.1         LVLQAQAGSEDAENAIIGNCVKIIAQHI.RG.WAGG.....GHDLEDLQQVAYIGLLQAIRAFDTSRDVKFLSYALPCAKGAVKRFIRDNGP....VKVPRTLKEIAGKIKREK--LE-----ELS.VE..EIMFQL.GIERAhHVTDALEfiqlK.S..GKPMSLDTTV...V.TDRsaaDREL.SLGDTLSGDIN.Eg
-#=GR YP_009274875.1 PP 67799***********************.**.****.....***************************************************....**************8766..32.....446.77..888888.887641455676622222.3..4566788888...7.7651213467.88899976655.41
-YP_009832138.1         LVAEAKNGSEEAKERLVKNYTRVIRWIVrKR.FINA.....EHSVEDLVNIGMEGLLKAIYNFDEDAGVRFSTYMTRAVSLCISRFCNSNGV....VSITEKTRRLAFWIKNQ--DLE---GKSPEvII..EMLGLE.KKQLD.RVCIALS....FlG..NGLHPLSTDIprkA.EEG...RDPDgRLEDHRRNNDL.N.
-#=GR YP_009832138.1 PP 7899*******************97776378.****.....**************************************99***********....*********99887643..343...45554134..554444.44555.6666665....413..44555555552213.344...4565156666677777.8.
-WP_000350729.1         LIQKSQDGDQQARDTIVQSNMRLVWSVV.QR.FLNR.....GYEPDDLFQIGCIGLLKSVDKFDLSFDVKFSTYAVPMIIGEIQRFLRDDGS....VKVSRSLKETGNKIRKMRDELSKEFGRAPT.IN..EVAEAL.ELTPE.EVVLAQE....A.S..RAPSSIHETV...Y.END...GDPI.TILDQIADQ--.S.
-#=GR WP_000350729.1 PP 89**************************.**.****.....***************************************************....******************************.**..******.*****.*******....*.*..**********...*.***...****.********9...9.
-WP_003230458.1         LIKQSQNGDQQARDLLIEKNMRLVWSVV.QR.FLNR.....GYEPDDLFQIGCIGLLKSVDKFDLTYDVRFSTYAVPMIIGEIQRFIRDDGT....VKVSRSLKELGNKIRRAKDELSKTLGRVPT.VQ..EIADHL.EIEAE.DVVLAQE....A.V..RAPSSIHETV...Y.END...GDPI.TLLDQIADN--.S.
-#=GR WP_003230458.1 PP 89**************************.**.****.....***************************************************....******************************.**..******.*****.*******....*.*..**********...*.***...****.*********...8.
-WP_011860953.1         LIEKVQNGDEEAKEILISSNLGLVRSVV.SR.FLNI.....GYDREDLFQLGSIGLIKSIYKFDPKFNVKFSTYAVPMILGEIKRYLRDDGM....IKVSRSLKQIAIKAKMESEALTKKLGREPS.IE..ELAKAI.DVEKE.DLVMAME....A.N..FNVEYLQGVI...H.EEE...GSPI.CLIDKISMKGEsE.
-#=GR WP_011860953.1 PP 89**************************.**.****.....***************************************************....******************************.**..******.*****.*******....*.*..**********...*.***...****.******8887527.
-#=GC PP_cons           799*********9************999.99.9999.....999************************************************....999999999999998878*77798887777.88..888888.88877.7777888....7.7..7788888888...8.888...8888.89999998866.7.
-#=GC RF                xxxxxxxxxxxxxxxxxxxxxxxxxxxx.xx.xxxx.....xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx....xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xx..xxxxxx.xxxxx.xxxxxxx....x.x..xxxxxxxxxx...x.xxx...xxxx.xxxxxxxxxxx.x.
+YP_007003377.1         -----DKFIEEHSGLVKHIVN.KgFRTKlkylqAETSDDLLQIGYIGLIHAYNRYDPNKNTKFSSFAYSTIRGFIAKYLRDTS-SYASGIK---FSSATNEIFFKLQKMEDAEIT.VDFVKEKFGCGER.LAKRVIER....SW..FQ..RLDDVNVRLG...EDEEGErlGSLIERIAD.......E.ADY-----SVV
+#=GR YP_007003377.1 PP .....6899999******998.767765333326779********************************************99.3322222...333344444556666677889.99999****9999.99999988....88..77..7888888888...33332211356666665.......5.443.....467
+YP_009274876.1         --DARELIVEKNMRLVWNVVH.R.FINR.....GYLPEDLFQIGCIGLLKSIDKFDLDYDVAFSTYAVPMIIGEIQRFIRDDG-TVKVPRTIKELANKIRHA--DLVKE---EPAaIIKALELGDVSED.YIKLAVKY....IR..ENggKPLSTDETVY...ENDGDP..ITIGDQMGG.......D.ING-SNWLDSI
+#=GR YP_009274876.1 PP ..68999**************.*.****.....**************************************************.***************975..45554...44313333344567888.77777776....55..4322799*******...******..********9.......7.766.59*****
+YP_009274875.1         -EDAENAIIGNCVKIIAQHIR.G.WAGG.....GHDLEDLQQVAYIGLLQAIRAFDTSRDVKFLSYALPCAKGAVKRFIRDNG-PVKVPRTLKEIAGKIKREK--LE-----ELS.VEEIMFQLGIERAhHVTDALEF....IQlkSG..KPMSLDTTVVtdrSAADRE..LSLGDTLSGdineginG.EDWLTAYVNNE
+#=GR YP_009274875.1 PP .568899**************.*.****.....**************************************************.***************9754..32.....336.8999999999875268888876....541156..899***9987423346789..99*****8745444434.555677899**
+YP_009832138.1         -EEAKERLVKNYTRVIRWIVRkR.FINA.....EHSVEDLVNIGMEGLLKAIYNFDEDAGVRFSTYMTRAVSLCISRFCNSNG-VVSITEKTRRLAFWIKNQD--L---EGKSPE.V--IIEMLGLEKK.QLDRVCIAlsflGN..GL..HPLSTDIPRKa.eEGRDPD..GRLEDHRRN.......N.DLNGDHWLDRI
+#=GR YP_009832138.1 PP .689************9988538.*999.....99*********************************************999.9999999999999998753..3...5999*9.8..6777877776.65444443111256..77..88887766553.2666777..8999*****.......*.***********
+WP_000350729.1         DQQARDTIVQSNMRLVWSVVQ.R.FLNR.....GYEPDDLFQIGCIGLLKSVDKFDLSFDVKFSTYAVPMIIGEIQRFLRDDG-SVKVSRSLKETGNKIRKMRDELSKEFGRAPT.INEVAEALELTPE.EVVLAQEA....SR..A-..-PSSIHETVY...ENDGDP..ITILDQIAD.......Q.SET--KWFDKI
+#=GR WP_000350729.1 PP 5799*****************.*.****.....**************************************************.*******************************.*************.********....**..*....*********...******..*******97.......6.655..7*****
+WP_003230458.1         DQQARDLLIEKNMRLVWSVVQ.R.FLNR.....GYEPDDLFQIGCIGLLKSVDKFDLTYDVRFSTYAVPMIIGEIQRFIRDDG-TVKVSRSLKELGNKIRRAKDELSKTLGRVPT.VQEIADHLEIEAE.DVVLAQEA....VR..A-..-PSSIHETVY...ENDGDP..ITLLDQIAD.......N.--SEEKWFDKI
+#=GR WP_003230458.1 PP 5799*****************.*.****.....**************************************************.*******************************.*************.********....**..*....*********...******..*******86.......5...5568*****
+WP_011860953.1         -EEAKEILISSNLGLVRSVVS.R.FLNI.....GYDREDLFQLGSIGLIKSIYKFDPKFNVKFSTYAVPMILGEIKRYLRDDG-MIKVSRSLKQIAIKAKMESEALTKKLGREPS.IEELAKAIDVEKE.DLVMAMEA....NF..N-..-VEYLQGVIH...EEEGSP..ICLIDKISM.......KgESEEEKVVDNI
+#=GR WP_011860953.1 PP .7899****************.*.****.....**************************************************.*******************************.*************.******99....75..5....*********...******..*******98.......62667889*****
+WP_000197755.1         --SAREKLVNGNLRLVLSVIQ.R.FNNR.....GEYVDDLFQVGCIGLMKSIDNFDLGQNVKFSTYAVPMIIGEIRRYLRDNN-PIRVSRSLRDIAYKALQVREKLIAENSKEPT.AMDIAKVLEVTHE.EIVFALDA....IQ..D-..-PVSLFEPIY...NDGGDP..IFVMDQLSD.......E.KQKDEQWVEEL
+#=GR WP_000197755.1 PP ..689****************.*.****.....**************************************************.*******************************.*************.********....**..*....*********...******..*********.......*.***********
+WP_009967190.1         -DSAREKLVNGNLRLVLSVIQ.R.FNNR.....GEYVDDLFQVGCIGLMKSIDNFDLSHNVKFSTYAVPMIIGEIRRYLRDNN-PIRVSRSLRDIAYKALQVRERLISETSKEPT.AEDIAKVLEVPHE.EIVFALDA....IQ..D-..-PVSLFEPIY...NDGGDP..IYVMDQISD.......E.RNTDSQWIEEL
+#=GR WP_009967190.1 PP .689*****************.*.****.....**************************************************.*******************************.*************.********....**..*....*********...******..*********.......*.***********
+WP_003416101.1         -EEARQQFVRGNLRLVLSVIK.K.FNNR.....GENIDDLFQIGCIGLIKAIDNFDLSQNVRFSTYAVPMIIGEIRRYLRDNN-PIRVSRSLKDIAYKALQVRERLIRTNSKEPT.VSEIAKELELEVE.SVVMALDA....IQ..D-..-PISLFDPVY...QDNGDA..IFVMDQVQD.......K.KDTDENWLQEI
+#=GR WP_003416101.1 PP .799*****************.*.****.....**************************************************.*******************************.*************.********....**..*....*********...******..*********.......*.***********
+#=GC PP_cons           578999**************9.9.***9.....**************************************************.9999999***99999998899889999*899.9999999999999.99999988....88..86..8999999999...888999..99****998.......7.777889**9**
+#=GC RF                xxxxxxxxxxxxxxxxxxxxx.x.xxxx.....xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxx.xxxxxxxx....xx..xx..xxxxxxxxxx...xxxxxx..xxxxxxxxx.......x.xxxxxxxxxxx
 
-YP_007003377.1         ..DY--....-SVVHVSEFMNYLSDFERSVLKLRM-EEKTQEEIARQLGVYQMKISRALETI--------
-#=GR YP_007003377.1 PP ..33.......3467899****************5.89******************954443........
-YP_009274876.1         ..GSNW....LDSIALRQAIDKLDDREKTIVYLRYYQDKTQTETAEALGVSQVQVSRLEKRIVAKMKD--
-#=GR YP_009274876.1 PP ..99**....********************************************************97..
-YP_009274875.1         inGEDWltayVNNEALIQALRVLDKQERQVINFRYFDLLNQTDTGKMMGVSQMHVSRLERRALDKLAEYM
-#=GR YP_009274875.1 PP 2134441222688899*************************************************98875
-YP_009832138.1         ..GDHW....LDRIALKREVEKLPKIQQRILRLNYEVGLSYPEIGKVLGITAAQVGTRNRAAIATLRE--
-#=GR YP_009832138.1 PP ..899*....*********************************************9999999998886..
-WP_000350729.1         ..ETKW....FDKIALKEAIRELDERERLIVYLRYYKDQTQSEVAERIGISQVQVSRLEKKILKQMKDRI
-#=GR WP_000350729.1 PP ..9***....*********************************************************975
-WP_003230458.1         ..EEKW....FDKIALKEAISDLEEREKLIVYLRYYKDQTQSEVAERLGISQVQVSRLEKKILKQIKVQ-
-#=GR WP_003230458.1 PP ..99**....********************************************************976.
-WP_011860953.1         ..EEKV....VDNILLKDILGRLDKRERQIIVLRYFEDMTQSEIGEMLNISQVQVSRIEKKVLSKLKEYI
-#=GR WP_011860953.1 PP ..789*....*********************************************************986
-#=GC PP_cons           ..7799....99999*******************9**********************99999***99875
-#=GC RF                ..xxxx....xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+YP_007003377.1         HVSEFMNYLSDFERSVLKLR-MEEKTQEEIARQLGVYQMKISRALETIAKK------
+#=GR YP_007003377.1 PP 899*****************.689*******************98877665......
+YP_009274876.1         ALRQAIDKLDDREKTIVYLRYYQDKTQTETAEALGVSQVQVSRLEKRIVAKMKDG--
+#=GR YP_009274876.1 PP ****************************************************985..
+YP_009274875.1         ALIQALRVLDKQERQVINFRYFDLLNQTDTGKMMGVSQMHVSRLERRALDKLAEYM-
+#=GR YP_009274875.1 PP ****************************************************8865.
+YP_009832138.1         ALKREVEKLPKIQQRILRLNYEVGLSYPEIGKVLGITAAQVGTRNRAAIATLRE---
+#=GR YP_009832138.1 PP *****************************************************8...
+WP_000350729.1         ALKEAIRELDERERLIVYLRYYKDQTQSEVAERIGISQVQVSRLEKKILKQMKDRI-
+#=GR WP_000350729.1 PP *****************************************************975.
+WP_003230458.1         ALKEAISDLEEREKLIVYLRYYKDQTQSEVAERLGISQVQVSRLEKKILKQIKVQM-
+#=GR WP_003230458.1 PP ****************************************************9876.
+WP_011860953.1         LLKDILGRLDKRERQIIVLRYFEDMTQSEIGEMLNISQVQVSRIEKKVLSKLKEYI-
+#=GR WP_011860953.1 PP *****************************************************976.
+WP_000197755.1         ALKEGMKRLNDREKMIIRKRFFQGKTQMEVAEEIGISQAQVSRLEKSAIKQMNKTI-
+#=GR WP_000197755.1 PP ****************************************************9986.
+WP_009967190.1         ALKEGMRRLNDREKMILRKRFFQGKTQMEVAEEIGISQAQVSRLEKAAIKQMNKNI-
+#=GR WP_009967190.1 PP ****************************************************9876.
+WP_003416101.1         SLKEAIKKLNSREKLVLDLRFYKGRTQIEVADEIGISQAQVSRIEKNALKNMRKY--
+#=GR WP_003416101.1 PP *****************************************************86..
+#=GC PP_cons           *************************************************99*9876.
+#=GC RF                xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 //
