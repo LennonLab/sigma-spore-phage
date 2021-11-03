@@ -334,7 +334,7 @@ p.both <-
                               reverse = TRUE))
 
 
-# n sigma panel -----------------------------------------------------------
+# > n sigma panel -----------------------------------------------------------
 
 #summarise data
 n.sig.data <- 
@@ -363,14 +363,14 @@ n.sig.all <-   d.sp %>%
 n.labs <- n.sig.all %>% 
   group_by(pnl,phylum) %>% 
   summarise(n=sum(n)) %>% 
-  mutate(lab = paste("n=", n))
+  mutate(lab = paste0("n=", n))
 
 
 p.multi <-  
   n.sig.all %>% 
   ggplot( aes(n.sigma, group = phylum)) + 
-  geom_col(aes(y = perc),  fill = "grey10", color="black", size = 0.7, width=0.6) + 
-  geom_text(data = n.labs, aes(label=lab), x=2,y=0.9)+
+  geom_col(aes(y = perc),  fill = "grey80", color="black", size = 0.7, width=0.6) + 
+  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+
   scale_y_continuous(labels=scales::percent) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
@@ -385,11 +385,9 @@ p.multi <-
 
 top_row <- plot_grid(p.phylum, NULL, p.Vfam, nrow = 1,
                      labels = c("a","","b"),rel_widths = c(1,0.2,1))
-# all.3 <- plot_grid(top_row, NULL, p.both, ncol = 1, labels = c("","c"), 
-#                    rel_heights = c(1,0.1,1)) 
-middle_row <- plot_grid(NULL, p.both, nrow = 1,rel_widths = c(0.1,1))
 
-all.4 <- plot_grid(top_row, middle_row,p.multi, ncol = 1, labels = c("","c", "d")) 
+
+all.4 <- plot_grid(top_row, p.both,p.multi, ncol = 1, labels = c("","c", "d")) 
 
 ggsave2(here("vogdb","figures","viral_family_host_phylum.png"),
         plot = ggdraw(all.4) +
