@@ -6,8 +6,8 @@ library(seqinr)
 
 #will use hmmalign installed in wsl
 
-if (! dir.exists(here("vogdb/data/hmm_align"))){
-  dir.create(here("vogdb/data/hmm_align"))
+if (! dir.exists(here("synthesis/data/hmm_align"))){
+  dir.create(here("synthesis/data/hmm_align"))
 }
 
 # load and select phage sequences ----------------------------------------------
@@ -23,7 +23,7 @@ seq_select <- d.faa %>%
 
 write.fasta(sequences = seq_select$seq,
             names = seq_select$protein, 
-            file.out = here("vogdb/data/hmm_align","viral_sporulation_sigmas.faa"),
+            file.out = here("synthesis/data/hmm_align","viral_sporulation_sigmas.faa"),
             open = "w")  
 
 
@@ -41,14 +41,14 @@ sig_bfg.hmm <-
   str_subset(list.files(here("TIGR/data","tigr_hmm"), full.names = T),
              sig_bfg.AC) 
 # copy hmm profile to wd
-file.copy(from = sig_bfg.hmm, to = here("vogdb/data/hmm_align"), overwrite = T)
+file.copy(from = sig_bfg.hmm, to = here("synthesis/data/hmm_align"), overwrite = T)
 
 sig_bfg.hmm <- 
   str_subset(list.files(here("TIGR/data","tigr_hmm")),
              sig_bfg.AC) 
 
 # align to hmm ----------------------------------------------  
-setwd(here("vogdb/data/hmm_align"))
+setwd(here("synthesis/data/hmm_align"))
 
 # full alignment
 
@@ -70,7 +70,7 @@ wsl <- paste(" wsl cat ",
 system(wsl)
 
 # names of proteins
-protein.names <- read_csv(here("vogdb/data/hmm_align","seq_names.csv"))
+protein.names <- read_csv(here("synthesis/data/hmm_align","seq_names.csv"))
 x <- readLines("SporeSigma_X_sigBFGProfile_full.aln")
 x1 <- x
 for(i in 1:nrow(protein.names)){
@@ -95,12 +95,12 @@ system(wsl)
 # parse results -----------------------------------------------------------
 
 
-pid_sigBFG <- read.table(here("vogdb/data/hmm_align", "pid_sigBFG.tsv")) %>% 
+pid_sigBFG <- read.table(here("synthesis/data/hmm_align", "pid_sigBFG.tsv")) %>% 
   as_tibble()
 colnames(pid_sigBFG) <- c("seqname1","seqname2","perc_id","nid","denomid","perc_match","nmatch","denommatch")
 
 # names of proteins
-protein.names <- read_csv(here("vogdb/data/hmm_align","seq_names.csv"))
+protein.names <- read_csv(here("synthesis/data/hmm_align","seq_names.csv"))
 
 # replace names
 pid_sigBFG <- left_join(pid_sigBFG, protein.names, by = c("seqname1" = "protein")) %>% 
@@ -117,21 +117,23 @@ pid_sigBFG <- left_join(pid_sigBFG, protein.names, by = c("seqname1" = "protein"
 
 # remove phage-phage comparisons
 pid_sigBFG <- pid_sigBFG %>% 
-  filter(! (phage2 & phage1))
+  filter(! (phage2 & phage1)) 
 
 # Plot --------------
 p <- pid_sigBFG%>% 
-  # mutate(perc_id = paste0(perc_id,"%")) %>% 
+  mutate(text_col = perc_id > 40)  %>%
   ggplot(aes(seqname1, seqname2))+
   geom_tile(aes(fill = perc_id), color = "white")+
-  geom_text(aes(label = paste0(perc_id,"%")))+
+  geom_text(aes(label = paste0(perc_id,"%"), color = text_col), show.legend = F)+
   scale_fill_viridis_c()+
+  scale_color_manual(values = c("white", "black"))+
   ylab(NULL)+
   xlab(NULL)+
   theme_classic()+
-  panel_border(color = "black")
+  panel_border(color = "black")+
+  guides(fill = guide_legend(title = "%ID"))
 
-save_plot(here("vogdb/figures","percID_align2profile.png"),p,
-          base_height = 2,base_width = 4)
+save_plot(here("synthesis/plots","percID_align2profile.png"),p,
+          base_height = 1.6,base_width = 4)
 
 
