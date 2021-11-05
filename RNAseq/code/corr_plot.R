@@ -118,8 +118,7 @@ for (cur.sig.host in sig.host.v){
       
       # get r for plot
       r <- cor(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "spearman") %>% 
-        signif(3) %>% 
-        paste("\n  r =",.)
+        signif(3) 
       
       # plot
       l.plots[[plot.name]] <- 
@@ -132,7 +131,8 @@ for (cur.sig.host in sig.host.v){
         geom_point(aes(color = signifcance),alpha = 0.5)+
         geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
         # add cor test result
-        geom_text(label = r, x = -Inf, y = Inf, hjust = 0, vjust = 1, lineheight = .5 )+
+        geom_text(label = paste('rho', "==",r), parse = TRUE,
+                  x = -Inf, y = Inf, hjust = -0.1, vjust = 1.5, lineheight = .5 )+
         scale_y_continuous(breaks = brx,
                            limits = c(min.fc.log2,max.fc.log2))+
         scale_x_continuous(breaks = brx,

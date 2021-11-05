@@ -55,20 +55,26 @@ d.both <- pid_sigBFG %>%
 
 
 # linear model
-linearMod <- lm(yield ~ perc_id, data = d.both)
-sum.lm <- summary(linearMod)
-rsq <- sum.lm$adj.r.squared %>% signif(2)
-pval <- sum.lm$coefficients["perc_id","Pr(>|t|)"]%>% signif(2)
+# linearMod <- lm(yield ~ perc_id, data = d.both)
+# sum.lm <- summary(linearMod)
+# rsq <- sum.lm$adj.r.squared %>% signif(2)
+# pval <- sum.lm$coefficients["perc_id","Pr(>|t|)"]%>% signif(2)
+
+# get r for plot
+r <- cor(d.both$perc_id, d.both$yield, method = "spearman") %>% 
+  signif(3) 
 
 p1 <- d.both %>% 
   ggplot(aes(perc_id, yield)) +
-  geom_abline(intercept = linearMod$coefficients[1],
-              slope = linearMod$coefficients[2],
-              linetype = 2)+
+  # geom_abline(intercept = linearMod$coefficients[1],
+  #             slope = linearMod$coefficients[2],
+  #             linetype = 2)+
+  geom_smooth(method = 'lm', formula = 'y ~ x', color = "black", 
+              se = F, linetype = 2)+
   geom_errorbar(aes(ymin  = yield-v, ymax = yield + v))+
   geom_point(aes(fill  = strain),shape=21, size = 2)+
-  geom_text(label = paste0("R2=", rsq, "\nP = ",pval ),
-            x=Inf, y = Inf, hjust = 1.2, vjust =1.2)+
+  geom_text(label = paste('rho', "==",r), parse = TRUE,#paste0("R2=", rsq, "\nP = ",pval ),
+            x=Inf, y = Inf, hjust = 1.1, vjust =1.5)+
   theme_classic()+
   panel_border(color = "black")+
   scale_shape_manual(values = 21:25)+
@@ -91,20 +97,26 @@ d.both2 <- pid_sigBFG %>%
   right_join(.,deg, by = c("strain" = "gene")) %>% 
   mutate(perc_id = if_else(strain == "sigF", 100, perc_id))
 
-# linear model
-linearMod <- lm(spor.DEG ~ perc_id, data = d.both2)
-sum.lm <- summary(linearMod)
-rsq <- sum.lm$adj.r.squared %>% signif(2)
-pval <- sum.lm$coefficients["perc_id","Pr(>|t|)"]%>% signif(2)
+# # linear model
+# linearMod <- lm(spor.DEG ~ perc_id, data = d.both2)
+# sum.lm <- summary(linearMod)
+# rsq <- sum.lm$adj.r.squared %>% signif(2)
+# pval <- sum.lm$coefficients["perc_id","Pr(>|t|)"]%>% signif(2)
+
+# get r for plot
+r <- cor(d.both2$perc_id, d.both2$spor.DEG, method = "spearman") %>% 
+  signif(3)
 
 p2 <- d.both2 %>% 
   ggplot(aes(perc_id, spor.DEG)) +
-  geom_abline(intercept = linearMod$coefficients[1],
-              slope = linearMod$coefficients[2],
-              linetype = 2)+
+  geom_smooth(method = 'lm', formula = 'y ~ x', color = "black", 
+              se = F, linetype = 2)+
+  # geom_abline(intercept = linearMod$coefficients[1],
+  #             slope = linearMod$coefficients[2],
+  #             linetype = 2)+
   geom_point(aes(fill  = strain),shape=21, size = 2)+
-  geom_text(label = paste0("R2=", rsq, "\nP = ",pval ),
-            x=35, y = 360)+
+  geom_text(label = paste('rho', "==",r), parse = TRUE, #paste0("R2=", rsq, "\nP = ",pval ),
+            x=-Inf, hjust = -0.1, y = Inf, vjust = 1.5)+
   theme_classic()+
   panel_border(color = "black")+
   scale_shape_manual(values = 21:25)+
