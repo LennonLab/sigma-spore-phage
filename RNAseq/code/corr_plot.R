@@ -110,14 +110,14 @@ for (cur.sig.host in sig.host.v){
       
       #test correlation
       d.cor.test <- 
-        cor.test(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "pearson") %>%
+        cor.test(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "spearman") %>%
         tidy() %>% 
         mutate(pair = plot.name) %>% 
         relocate(pair) %>% 
         bind_rows(d.cor.test,.)
       
       # get r for plot
-      r <- cor(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "pearson") %>% 
+      r <- cor(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "spearman") %>% 
         signif(3) %>% 
         paste("\n  r =",.)
       
@@ -154,7 +154,7 @@ d.cor.test <- d.cor.test %>%
   mutate(adj.p.BH = p.adjust(p.value, method = "BH")) %>% 
   relocate(adj.p.BH, .after = "p.value")
 
-write_csv(d.cor.test, here("RNAseq/data/FC_pearson.csv"))
+write_csv(d.cor.test, here("RNAseq/data/FC_spearman.csv"))
 
 # main figure -------------------------------------------------------------
 
