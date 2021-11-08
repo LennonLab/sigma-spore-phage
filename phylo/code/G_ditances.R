@@ -174,3 +174,35 @@ p <- dist.tips%>%
   panel_border(color = "black")
 
 save_plot(here("phylo/plots","distance_clonedGenes.png"),p)
+
+
+# sporulation vs distance -------------------------------------------------
+
+# import sporulation data
+d.spor <- read_csv(here("phylo/data/FCM_sporulation_induction.csv")) %>% 
+  filter(strain != "Empty Vector")
+
+
+d.both <- dist.tips %>% 
+  filter(str_detect(bacterial_gene, "Bsub_sigG")) %>% 
+  left_join(d.spor, . , by = c("strain" = "phage_gene")) %>% 
+  filter(! str_detect(strain, "sigF")) %>% 
+  mutate(distance = if_else(strain == "sigG", 0, distance))
+
+
+p <- d.both %>% 
+  ggplot(aes(distance, induction.ratio)) +
+  geom_smooth(method  = "lm")+
+  geom_point(aes(fill  = pnl),shape=21, size = 2)+
+  theme_classic()+
+  panel_border(color = "black")+
+  scale_shape_manual(values = 21:25)+
+  scale_y_continuous(labels = scales::percent, trans = "log10")+
+  scale_fill_manual(values = c("grey","white"))+
+  xlab("Phylogenetic distance (from B. subtilis sigG)")+
+  ylab("Spore yield")+
+  guides(fill = guide_legend(title = "source"))
+
+save_plot(here("phylo/plots","distance_yield.png"),p)
+
+cor.test(x = d.both$distance, d.both$induction.ratio)
