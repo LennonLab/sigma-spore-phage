@@ -11,14 +11,16 @@ This repository contains several different analyses all related to the pulicatio
 This analysis spans over three interconnected folders. Analysis was run in the following order:  
 1. TIGR - Retrieving profiles of bacterial-encoded sigma-factor families from TIGRfams.  
 2. vogdb -  Retrieval and analysis of phage-encoded sigma factors from the  Virus Orthologous Groups (VOG) database.  
-3. phylo -   
-
+3. phylo -   Phylogenetic analysis of VOG and bacterial sigma factors
 
 
 ## Phage virulence
- * virulence
+ * Virulence  - Growth curve based assay comparing phages SP10 WT and g120 knockout
 
 ## Expression with induccible sigma factors
- * RNAseq
+ * RNAseq - Expression analysis following induced expression in *Bacillus subtilis* in exponential growth
+
+## Combining bioinformatinc and functiona responses
+ * synthesis
 
 Within each folder a more detailed description is given in the readme file.
