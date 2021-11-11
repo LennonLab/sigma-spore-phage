@@ -63,6 +63,9 @@ d.both <- pid_sigBFG %>%
 # get r for plot
 r <- cor(d.both$perc_id, d.both$yield, method = "spearman") %>% 
   signif(3) 
+p <- cor.test(d.both$perc_id, d.both$yield, 
+              method = "spearman")$p.value %>% 
+  signif(3)
 
 p1 <- d.both %>% 
   ggplot(aes(perc_id, yield)) +
@@ -73,8 +76,10 @@ p1 <- d.both %>%
               se = F, linetype = 2)+
   geom_errorbar(aes(ymin  = yield-v, ymax = yield + v))+
   geom_point(aes(fill  = strain),shape=21, size = 2)+
-  geom_text(label = paste('rho', "==",r), parse = TRUE,#paste0("R2=", rsq, "\nP = ",pval ),
+  geom_text(label = paste('rho', "==",r), parse = TRUE,
             x=Inf, y = Inf, hjust = 1.1, vjust =1.5)+
+  geom_text(label = paste("\nP =",p), parse = FALSE,
+           x=Inf, y = Inf, hjust = 1.1, vjust =1.5)+
   theme_classic()+
   panel_border(color = "black")+
   scale_shape_manual(values = 21:25)+
@@ -106,6 +111,9 @@ d.both2 <- pid_sigBFG %>%
 # get r for plot
 r <- cor(d.both2$perc_id, d.both2$spor.DEG, method = "spearman") %>% 
   signif(3)
+p <- cor.test(d.both2$perc_id, d.both2$spor.DEG, 
+              method = "spearman")$p.value %>% 
+  signif(3)
 
 p2 <- d.both2 %>% 
   ggplot(aes(perc_id, spor.DEG)) +
@@ -116,6 +124,8 @@ p2 <- d.both2 %>%
   #             linetype = 2)+
   geom_point(aes(fill  = strain),shape=21, size = 2)+
   geom_text(label = paste('rho', "==",r), parse = TRUE, #paste0("R2=", rsq, "\nP = ",pval ),
+            x=-Inf, hjust = -0.1, y = Inf, vjust = 1.5)+
+  geom_text(label = paste("\nP =",p), parse = FALSE,
             x=-Inf, hjust = -0.1, y = Inf, vjust = 1.5)+
   theme_classic()+
   panel_border(color = "black")+
