@@ -353,7 +353,7 @@ d.faa%>%
           strip.text = element_blank(),
           axis.title.y = element_blank())+
     xlab("Sigma Factor Gene")+
-    guides(fill = guide_legend("Sigma\nFactor\nType", reverse = T))
+    guides(fill = guide_legend("TIGRfam", reverse = T))
   
 
   
