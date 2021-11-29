@@ -230,6 +230,7 @@ legend <- get_legend(
 p <- plot_grid(prow, legend, rel_heights = c(4, .4), ncol = 1)
 
 
-ggsave(here("RNAseq/plots/correlations-supl.png"),plot = p, width = 6, height = 8)
+ggsave(here("RNAseq/plots/correlations-supl.png"),
+       plot = plot_grid(p, labels = "c"), width = 6, height = 8)
 
 
