@@ -384,7 +384,7 @@ d.faa%>%
 p <- plot_grid(pB, pA, rel_widths = c(1,1.4))  
   
 ggsave2(here("vogdb/figures/","sigma_TIGR_content_Firmi.png"),
-        plot = p, width = 8, height = 11.5)
+        plot = plot_grid(p, labels = "e"), width = 8, height = 11.5)
 
 
 # 

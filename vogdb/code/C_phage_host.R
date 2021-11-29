@@ -519,7 +519,7 @@ p.genus <-
   theme(strip.background = element_blank())
 
 ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
-        plot = p.genus, width = 7,height = 8)
+        plot = plot_grid(p.genus, labels = "a"), width = 7,height = 8)
 
 # > Plot by viral type ------------------------------------------------------
 
@@ -691,12 +691,12 @@ p.sipho <- d.vir %>%
 
 # > combine plots -----------------------------------------------------------
 
-row1 <-  plot_grid(p.vir2,NULL, p.herelle,labels = c("a","","b"),
+row1 <-  plot_grid(p.vir2,NULL, p.herelle,labels = c("b","","c"),
                    rel_widths =  c(1.1,0.1, 1),nrow = 1)
 # row2 <-  plot_grid(p.herelle,NULL,
 #                    rel_widths =  c(1, 0.5),nrow = 1)
 
-p <- plot_grid(row1, NULL, p.sipho, labels = c("","","c"),
+p <- plot_grid(row1, NULL, p.sipho, labels = c("","","d"),
                ncol = 1, rel_heights =  c(1,0.05,1.5))
 
 ggsave2(here("vogdb","figures","viral_family_Nsig.png"),
