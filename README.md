@@ -18,10 +18,10 @@ This analysis spans over three interconnected folders. Analysis was run in the f
 ## Phage virulence
  * Virulence  - Growth curve based assay comparing phages SP10 WT and g120 knockout
 
-## Expression with induccible sigma factors
+## Expression with inducible sigma factors
  * RNAseq - Expression analysis following induced expression in *Bacillus subtilis* in exponential growth
 
-## Combining bioinformatinc and functiona responses
+## Combining bioinformatic and functional responses
  * synthesis
 
 Within each folder a more detailed description is given in the readme file.
