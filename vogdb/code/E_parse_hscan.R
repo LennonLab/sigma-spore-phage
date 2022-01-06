@@ -61,8 +61,8 @@ best3 <- hits.all%>%
 
 # find the top most specific hit
 # if best hit is a genral term:
-# "sigma70-ECF"
-                # "SigBFG"
+  # "sigma70-ECF"
+  # "SigBFG"
 # look down the list to find a more specific one.
 # if a more specific one does is not present use the general one
 # in case the 2 general terms are listed and no 3rd term than use "SigBFG" as it is more specific
@@ -136,7 +136,7 @@ best3.evalue%>%
   theme_cowplot()
 
 
-# all have an e-value lower than 1e-3 expect for a single sigH hit
+# all have an e-value lower than 1e-3 expect for a few sigH hits
 # I don't think there is a problem
 
 
@@ -154,7 +154,8 @@ load(here("vogdb","data","vog_sigma_clean_Whost.RData"))
 #leaving protein id that starts with letter
 
 best3 <- best3%>%
-  mutate(protein=str_remove(best3$query_name, regex("^[0-9]*\\.?")))
+  mutate(protein=str_remove(best3$query_name,".faa") %>% 
+         str_remove(regex("^[0-9]*\\.?")))
 
 ##QC
 # anyDuplicated(best3$protein) # 0
@@ -169,6 +170,15 @@ d.faa <-
   full_join(d.faa, ., by="protein")
 
 
+# crASS phages ------------------------------------------------------------
+
+#assign crASS phages to Bacteroidetes
+# based on Koonin and Yutin 2020
+# https://doi.org/10.1016/j.tim.2020.01.010
+d.faa <- d.faa %>% 
+  mutate(phylum = 
+           if_else(str_detect(sp, regex("crAssphage")),
+                   "Bacteroidetes/Chlorobi group", phylum))
 
 # _________________----------------------------------------------
 # parsing sigma factor type by number of sigma factors in phage --------
@@ -338,29 +348,14 @@ d.faa%>%
   
     
   #plot
-  pA <-   d.nsig %>% 
-      filter(genus.plot == "Bacillus") %>% 
-  # arrange phage by n.sigmas
-  mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
-  ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-  geom_tile(aes(fill=sigma), color="black")+
-  theme_classic()+
-  panel_border(color = "black")+
-  scale_fill_viridis_d(direction = -1)+
-  facet_grid(genus.plot~., scales = "free", space = "free")+
-    geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
-    theme(strip.background = element_blank(),
-          strip.text = element_blank(),
-          axis.title.y = element_blank())+
-    xlab("Sigma Factor Gene")+
-    guides(fill = guide_legend("TIGRfam", reverse = T))
-  
+    lab_text_size=3
+    
 
-  
-  pB <-   d.nsig %>% 
+  pA <-   d.nsig %>% 
     mutate(genus.plot = fct_infreq(genus.plot)) %>% 
     filter(phylum == "Firmicutes") %>% 
-    filter(genus.plot != "Bacillus") %>% 
+    filter(! genus.plot %in% c("Bacillus", "Priestia")) %>% 
+    # filter(! genus.plot %in% c("Staphylococcus", "Enterococcus")) %>% 
     mutate(sigma = fct_relevel(sigma, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
              fct_rev()) %>% 
    
@@ -369,22 +364,43 @@ d.faa%>%
     ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
     geom_tile(aes(fill=sigma), color="black")+
     theme_classic()+
-    panel_border(color = "black")+
+    panel_border(color = "black", size=0.2)+
     scale_fill_viridis_d(direction = -1, drop = FALSE)+
     facet_grid(genus.plot~., scales = "free", space = "free")+
-    geom_text(aes(label = genus.plot), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5) +
+    geom_text(aes(label = genus.plot), size=lab_text_size,
+              x = Inf, y = Inf, hjust = 1.1, vjust = 1.05) +
     theme(strip.background = element_blank(),
           strip.text = element_blank(),
           legend.position = "none",
-          axis.title.y = element_blank())+
+          axis.title.y = element_blank(),
+          panel.spacing = unit(0, "lines"))+
     xlab("Sigma Factor Gene")+
-    xlim(NA,3)
+    expand_limits(x=3)
   
+  pB <-   d.nsig %>% 
+    filter(genus.plot %in% c("Bacillus", "Priestia")) %>% 
+    # arrange phage by n.sigmas
+    mutate(`virus name` = fct_reorder(`virus name`, n.sig)) %>% 
+    ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
+    geom_tile(aes(fill=sigma), color="black")+
+    theme_classic()+
+    panel_border(color = "black", size=0.2)+
+    scale_fill_viridis_d(direction = -1)+
+    facet_grid(genus.plot~., scales = "free", space = "free")+
+    geom_text(aes(label = genus.plot), size=lab_text_size,
+              x = Inf, y = Inf, hjust = 1.1, vjust = 1.05) +
+    theme(strip.background = element_blank(),
+          strip.text = element_blank(),
+          axis.title.y = element_blank(),
+          panel.spacing = unit(0, "lines"))+
+    xlab("Sigma Factor Gene")+
+    guides(fill = guide_legend("TIGRfam", reverse = T))+
+    expand_limits(x=3)
 
-p <- plot_grid(pB, pA, rel_widths = c(1,1.4))  
+p <- plot_grid( pA, pB, rel_widths = c(1,1.4), nrow = 1)  
   
 ggsave2(here("vogdb/figures/","sigma_TIGR_content_Firmi.png"),
-        plot = plot_grid(p, labels = "e"), width = 8, height = 11.5)
+        plot = plot_grid(p, labels = "e"), width = 8, height = 11)
 
 
 # 
