@@ -43,19 +43,19 @@ threads=4
 boots=5
  
 
-# 250 bootstrap trees with parsimony starts (50 runs x 5 per run)
-seeds=($(seq 1 50))
+# 500 bootstrap trees with parsimony starts (100 runs x 5 per run)
+seeds=($(seq 1 100))
 trees="pars{5}"
 for i in ${seeds[@]}; do
 sbatch --job-name="bs$i" --time=4:59:00 --cpus-per-task=4 \
 $PARENT/code/batch_bootstrap.sh $i $threads $trees $MODEL $ALN $ODIR $boots
 done
 
-# 250 bootstrap trees with random starts (50 runs x 5 per run)
-seeds=($(seq 51 100))
+# 500 bootstrap trees with random starts (100 runs x 5 per run)
+seeds=($(seq 101 200))
 trees="rand{5}"
 for i in ${seeds[@]}; do
-sbatch --job-name="bs$i" --time=2:59:00 --cpus-per-task=4 \
+sbatch --job-name="bs$i" --time=4:59:00 --cpus-per-task=4 \
 $PARENT/code/batch_bootstrap.sh $i $threads $trees $MODEL $ALN $ODIR $boots
 done
 
@@ -99,14 +99,19 @@ raxml-ng --support \
 
 
 # #reruns to complete time out
-# seeds=( $( ls $ODIR |grep "ckp" | sed 's/n.*//' | egrep -o [0-9]+ | sort -u ) )
-# echo ${seeds[@]}
+seeds=( $( ls $ODIR |grep "ckp" | sed 's/n.*//' | egrep -o [0-9]+ | sort -u ) )
+echo ${seeds[@]}
 # # seeds=($(seq 55 57))
 # # seeds=( 59 60 62 65 68 69 70 )
-# # seeds=( 65 69 70 71 73 74 80 )
-# seeds=( 69 81 82 )
-# trees="rand{5}"
-# for i in ${seeds[@]}; do
-# sbatch --job-name="bs$i" --time=0:45:00 --cpus-per-task=4 \
-# $PARENT/code/batch_bootstrap.sh $i $threads $trees $MODEL $ALN $ODIR $boots
-# done
+seeds=( 101 102  )
+trees="rand{5}"
+
+seeds=( 100 11 48 49 50 51 79 98 99 )
+trees="pars{5}"
+
+
+for i in ${seeds[@]}; do
+sbatch --job-name="bs$i" --time=1:59:00 --cpus-per-task=4 \
+$PARENT/code/batch_bootstrap.sh $i $threads $trees $MODEL $ALN $ODIR $boots
+done
+squeue -u danschw 

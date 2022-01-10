@@ -27,7 +27,7 @@ raxml-ng --check --msa $ALN  \
 --model $MODEL --data-type AA \
 --prefix check-msa 
 
-# WARNING: Duplicate sequences found: 44
+# WARNING: Duplicate sequences found: 41
 # 
 # NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
 # NOTE: was saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy
@@ -45,7 +45,7 @@ raxml-ng --parse --msa $ALN --data-type AA --model $MODEL --prefix parse-msa
 # Binary MSA file created: parse-msa.raxml.rba
 ALN=$ODIR/parse-msa.raxml.rba
 
-# * Estimated memory requirements                : 134 MB
+# * Estimated memory requirements                : 153 MB
 # 
 # * Recommended number of threads / MPI processes: 4
 
@@ -81,13 +81,40 @@ sbatch --job-name=MLrand$i --time=5:30:00 --cpus-per-task=4 \
 $PARENT/code/batch_raxML-ng.sh $i 4 "rand{10}" $MODEL $ALN "$ODIR/ml_search"
 done
 
+
 grep "Final LogLikelihood:" *.raxml.log | sort -k 3 
 cat *.raxml.mlTrees > mltrees
 raxml-ng --rfdist --tree mltrees --redo --prefix RF
-# Loaded 200 trees with 608 taxa
-# Average absolute RF distance in this tree set: 306.958492
-# Average relative RF distance in this tree set: 0.253685
+# Loaded 200 trees with 661 taxa.
+# Average absolute RF distance in this tree set: 289.487739
+# Average relative RF distance in this tree set: 0.219975
 # Number of unique topologies in this tree set: 200
+#does not seem to converge
+
+
+
+# Adding more trees to reach 500
+# 150  ML searches starting with parsimony trees (10 runs x 10 per run)
+seeds=($(seq 311 10 451))
+for i in ${seeds[@]}; do
+sbatch --job-name=MLpars$i --time=5:59:00 --cpus-per-task=4 \
+$PARENT/code/batch_raxML-ng.sh $i 4 "pars{10}" $MODEL $ALN "$ODIR/ml_search"
+done
+
+# 150  ML searches starting with random trees (10 runs x 10 per run)
+seeds=($(seq 313 10 453))
+for i in ${seeds[@]}; do
+sbatch --job-name=MLrand$i --time=5:59:00 --cpus-per-task=4 \
+$PARENT/code/batch_raxML-ng.sh $i 4 "rand{10}" $MODEL $ALN "$ODIR/ml_search"
+done
+
+grep "Final LogLikelihood:" *.raxml.log | sort -k 3 
+cat *.raxml.mlTrees > mltrees
+raxml-ng --rfdist --tree mltrees --redo --prefix RF
+# Loaded 500 trees with 661 taxa.
+# Average absolute RF distance in this tree set: 290.622012
+# Average relative RF distance in this tree set: 0.220837
+# Number of unique topologies in this tree set: 500
 #does not seem to converge
 
 best_trees=($( grep "Final LogLikelihood:" *.raxml.log | sort -k 3 | head -n 5 | cut -c-8| tr -d . ))
@@ -95,17 +122,22 @@ best_trees=($( grep "Final LogLikelihood:" *.raxml.log | sort -k 3 | head -n 5 |
 best_trees=( "${best_trees[@]/%/.raxml.bestTree}" )
 cat ${best_trees[@]} > mltrees_top
 raxml-ng --rfdist --tree mltrees_top --redo --prefix RF_top
-# Loaded 5 trees with 608 taxa.
-# Average absolute RF distance in this tree set: 247.600000
-# Average relative RF distance in this tree set: 0.204628
+# Loaded 5 trees with 661 taxa.
+# Average absolute RF distance in this tree set: 230.600000
+# Average relative RF distance in this tree set: 0.175228
 # Number of unique topologies in this tree set: 5
-
-
+    
 # using Best scoring ML tree
 BEST=( $(grep "Final LogLikelihood:" *.raxml.log | sort -k 3 | head -n 1 | grep -o ".*.raxml")) 
 cat "$BEST.bestTree" > ../bestScoreML.tree
 
 # #reruns to complete time out
-# i=91
-# sbatch --job-name=MLpars$i --time=0:59:00 --cpus-per-task=4 \
+# i=391
+# sbatch --job-name=MLpars$i --time=2:59:00 --cpus-per-task=4 \
 # $PARENT/code/batch_raxML-ng.sh $i 4 "pars{10}" $MODEL $ALN "$ODIR/ml_search"
+# 
+# i=343
+# sbatch --job-name=MLrand$i --time=0:59:00 --cpus-per-task=4 \
+# $PARENT/code/batch_raxML-ng.sh $i 4 "rand{10}" $MODEL $ALN "$ODIR/ml_search"
+# 
+# cat *.raxml.mlTrees | wc -l
