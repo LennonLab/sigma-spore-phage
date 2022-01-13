@@ -12,17 +12,21 @@ d.faa <- d.faa%>%
 
 
 # import all viruses used to assemble VOGs
-vog.sp <-  read_tsv(here("vogdb","vogdb_downloads","vog.species.list"), trim_ws = T) %>% 
-  as_tibble( .name_repair = "universal")
+vog.sp <-  read_tsv(here("vogdb/data","vogdb_downloads","vog.species.list"), trim_ws = T) %>% 
+  as_tibble( .name_repair = "universal") %>% 
+  # keep only phages
+  filter(phage.nonphage == "phage")
 
 #import virus-host data
-# downloaded from ftp://ftp.genome.jp/pub/db/virushostdb/ (24/Nov/2020)
-vh.db <- read_tsv(here("vogdb","vogdb_downloads","virushostdb.tsv"))
+download.file(url = "ftp://ftp.genome.jp/pub/db/virushostdb/virushostdb.tsv",
+              destfile = here("vogdb/data", "virushostdb.tsv"))
+# downloaded on (6/JAN/2022)
+vh.db <- read_tsv(here("vogdb/data","virushostdb.tsv"))
 
 
 # virus duplicates in VHDB data -------------------------------------------
 # These reflect multiple hosts
-duplicated(vh.db$`virus tax id`)%>%sum() # 3461
+duplicated(vh.db$`virus tax id`)%>%sum() # 4042
 vh.db%>%
   filter(str_detect(`host lineage`,regex("bacteria",ignore_case = T)))%>%
   group_by(`virus tax id`, `virus name`)%>%
@@ -35,7 +39,7 @@ vh.db%>%
 
 # match hosts to vog spp
 d.sp <- left_join(vog.sp, vh.db, by = c("tax.id" = "virus tax id")) %>% 
-  # focus on viruses of bacteria
+  # focus on viruses of bacteria (remove Archaea)
   filter(str_detect(`host lineage`, "Bacteria"))
 
 
@@ -81,7 +85,7 @@ dup <- d.sp%>%
   summarise(n.host=n())%>%
   filter(n.host>1)
 
-#there are 246 phages with duplicate hosts
+#there are 275 phages with duplicate hosts
 # how different are the hosts?
 # Are they from different orders?
 
@@ -93,7 +97,8 @@ dup.order <- d.sp%>%
   summarise(n.host.order=n())%>%
   filter(n.host.order>1)
 
-#there is only one such phage: PRD1. This has also hosts from different orders within the gammaproteobacteria.
+#there is only one such phage: PRD1. 
+# This has also hosts from different orders within the gammaproteobacteria.
 # otherwise, all hosts for each phage are the same down to order
 
 # Look at host species
@@ -108,7 +113,12 @@ dup.hosts <-
   pivot_wider(names_from = host.num, values_from = `host name`)
 # in Firmicutes phages multiple hosts are mostly from the same species or 
 # species complex (antracis, cereus). 
-# SPbeta infects subtilis and pumilus, in same genus.
+# In many cases hosts are differen species within genus.
+# E.g. SPbeta infects subtilis and pumilus, in same genus of Bacillus.
+# An exception I noted is 'Thermus phage phi OH2' that has listed 
+# hosts from two different phyla:  Deinococcus-Thermus and Firmicutes.
+
+
 
 #remove host duplicate
 #add host number to assist and to remember
@@ -128,8 +138,8 @@ d.faa <- left_join(d.faa,d.sp,by=c("taxon"="tax.id"))
 
 
 # # save data
-# write.csv(here("vogdb","data","vog_sigma_clean_Whost.csv"))
-# save(d.faa,file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
+write_csv(select(d.faa,-seq), here("vogdb","data","vog_sigma_clean_Whost.csv"))
+save(d.faa,file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
 # # load(file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
 
 
@@ -149,7 +159,7 @@ d.sp$n.sigma[is.na(d.sp$n.sigma)] <- 0
 
 #How many unique viruses have sigma factors?
 length(unique(d.faa$taxon))
-#471
+#617
 
 # Phylum independent summary of sigma factors/genome
 d.sp%>%
@@ -159,10 +169,10 @@ d.sp%>%
   mutate(perc=100*n.genomes/sum(n.genomes))
 
 # n.sigma n.genomes   perc
-# 0      2962   86.3
-# 1       397   11.6
-# 2        50    1.46
-# 3        24     0.699
+# 0       3770        86.4  
+# 1        518        11.9  
+# 2         47         1.08 
+# 3         30         0.687
 
 
 # summarise by phylum
@@ -174,19 +184,20 @@ d.sp%>%
             perc_sigma=100*sum(has_sigma)/n(),
             perc_multi=100*sum(multi_sigma)/n())
 
-#   phylum                                  n perc_sigma perc_multi
-#   <chr>                               <int>      <dbl>      <dbl>
-# 1 Actinobacteria                        797       1.88      0
-# 2 Aquificae                               1       0         0
-# 3 Bacteroidetes/Chlorobi group           76       2.63      0
-# 4 Cyanobacteria/Melainabacteria group   102      64.7       3.92
-# 5 Deinococcus-Thermus                     8       0         0
-# 6 Firmicutes                            745      18.9       7.79
-# 7 Proteobacteria                       1683      14.7       0.713
-# 8 PVC group                               6       0         0
-# 9 Spirochaetes                            3       0         0
-# 10 Tenericutes                             9       0         0
-# 11 NA                                      3       0         0
+# phylum                                  n perc_sigma perc_multi
+# <chr>                               <int>      <dbl>      <dbl>
+# 1 Actinobacteria                       1314      0.609      0    
+# 2 Aquificae                               1      0          0    
+# 3 Bacteroidetes/Chlorobi group           83      2.41       0    
+# 4 Cyanobacteria/Melainabacteria group   101     65.3        1.98 
+# 5 Deinococcus-Thermus                     5      0          0    
+# 6 Firmicutes                            865     21.6        7.28 
+# 7 Fusobacteria                            1      0          0    
+# 8 Proteobacteria                       1980     16.8        0.606
+# 9 PVC group                               6      0          0    
+# 10 Spirochaetes                            3      0          0    
+# 11 Tenericutes                             3      0          0    
+# 12 NA                                      3      0          0 
 
 
 d.sp%>%
@@ -238,7 +249,7 @@ p.phylum <-  d.presence %>%
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
            fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
   ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,2000))+
+  scale_y_log10(limits = c(1,3000))+
   xlab("Host Phylum")+
   theme_classic(base_size = 12)+
   panel_border(color = "black", size = 1)+
@@ -264,7 +275,7 @@ p.Vfam <-  d.presence %>%
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
            fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
   ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,2000))+
+  scale_y_log10(limits = c(1,3000))+
   xlab("Viral Family")+
   theme_classic(base_size = 12)+
   panel_border(color = "black", size = 1)+
@@ -302,7 +313,7 @@ viral.keep <- p.both.data %>%
 #plot
 p.both <- 
   p.both.data %>% 
-  filter(phylum %in% phyla.keep) %>% 
+  filter(phylum %in% phyla.keep) %>%
   filter(viral.family %in% viral.keep) %>% 
   #removing a single phage that is unclassified
   filter(viral.family != "unclassified Caudovirales") %>% 
@@ -312,7 +323,7 @@ p.both <-
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
            fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
   ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,2000))+
+  scale_y_log10(limits = c(1,3000))+
   xlab("Viral Family")+
   theme_classic(base_size = 12)+
   panel_border(color = "black", size = 0.7)+
@@ -519,7 +530,7 @@ p.genus <-
   theme(strip.background = element_blank())
 
 ggsave2(here("vogdb","figures","sigma_taxonomy.png"),
-        plot = p.genus, width = 7,height = 8)
+        plot = plot_grid(p.genus, labels = "a"), width = 7,height = 8)
 
 # > Plot by viral type ------------------------------------------------------
 
@@ -547,8 +558,8 @@ firmi <- firmi%>%
   mutate(viral.family=str_remove(viral.family,
                                  regex(";.*", ignore_case = T)))
 
-# d.sp$`virus name`[is.na(d.sp$viral.family)]
-# 110/3433 left without family assignments
+# firmi$`virus name`[is.na(firmi$viral.family)]
+# 5/865 left without family assignments
 
 # all Firmicutes phages ---------------------------------------------------
 
@@ -623,8 +634,9 @@ d.vir <-
 
 p.herelle <- d.vir %>% 
   ggplot( aes(n.sigma,perc)) + 
-  geom_col(fill = viridis(4)[4], color = "black") + 
-  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+  scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+  geom_col(fill = viridis(7)[4], color = "black") + 
+  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+  
+  scale_y_continuous(labels=scales::percent, limits = c(0,1),  breaks = c(0,.5,1)) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
   facet_wrap(~ genus.plot,ncol = 2 )+
@@ -677,8 +689,9 @@ d.vir <-
 
 p.sipho <- d.vir %>% 
   ggplot( aes(n.sigma,perc)) + 
-  geom_col(fill = viridis(4)[3], color = "black") + 
-  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+  scale_y_continuous(labels=scales::percent, limits = c(0,1)) +
+  geom_col(fill = viridis(7)[3], color = "black") + 
+  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+  
+  scale_y_continuous(labels=scales::percent, limits = c(0,1), breaks = c(0,.5,1)) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
   facet_wrap(~ genus.plot )+
@@ -691,13 +704,13 @@ p.sipho <- d.vir %>%
 
 # > combine plots -----------------------------------------------------------
 
-row1 <-  plot_grid(p.vir2,NULL, p.herelle,labels = c("a","","b"),
+row1 <-  plot_grid(p.vir2,NULL, p.herelle,labels = c("b","","c"),
                    rel_widths =  c(1.1,0.1, 1),nrow = 1)
 # row2 <-  plot_grid(p.herelle,NULL,
 #                    rel_widths =  c(1, 0.5),nrow = 1)
 
-p <- plot_grid(row1, NULL, p.sipho, labels = c("","","c"),
-               ncol = 1, rel_heights =  c(1,0.05,1.5))
+p <- plot_grid(row1, NULL, p.sipho, labels = c("","","d"),
+               ncol = 1, rel_heights =  c(1,0.05,1.1))
 
 ggsave2(here("vogdb","figures","viral_family_Nsig.png"),
         plot = p, width = 7,height = 8)

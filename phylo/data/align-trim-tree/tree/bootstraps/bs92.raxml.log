@@ -5,13 +5,13 @@ Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Be
 Latest version: https://github.com/amkozlov/raxml-ng
 Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
 
-RAxML-NG was called at 04-Sep-2021 20:20:40 as follows:
+RAxML-NG was called at 08-Jan-2022 17:58:34 as follows:
 
-raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs92 --seed 929292 --threads 4 --tree rand{5} --bs-trees 5
+raxml-ng --bootstrap --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba --model LG+G4 --prefix /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs92 --seed 929292 --threads 4 --tree pars{5} --bs-trees 5
 
 Analysis options:
   run mode: Bootstrapping
-  start tree(s): random (5)
+  start tree(s): parsimony (5)
   bootstrap replicates: 5
   random seed: 929292
   tip-inner: OFF
@@ -27,30 +27,30 @@ WARNING: The model you specified on the command line (LG+G4) will be ignored
          If you want to change the model, please re-run RAxML-NG 
          with the original PHYLIP/FASTA alignment and --redo option.
 
-[00:00:00] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
-[00:00:00] Alignment comprises 608 taxa, 1 partitions and 180 patterns
+[00:00:01] Loading binary alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/check_msa/parse-msa.raxml.rba
+[00:00:01] Alignment comprises 661 taxa, 1 partitions and 189 patterns
 
 Partition 0: noname
 Model: LG+G4m
-Alignment sites / patterns: 180 / 180
-Gaps: 12.00 %
+Alignment sites / patterns: 189 / 189
+Gaps: 15.93 %
 Invariant sites: 0.00 %
 
 
-[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 45 / 3600
-[00:00:00] Starting bootstrapping analysis with 5 replicates.
+[00:00:01] Data distribution: max. partitions/sites/weight per thread: 1 / 48 / 3840
+[00:00:01] Starting bootstrapping analysis with 5 replicates.
 
-[00:25:33] Bootstrap tree #1, logLikelihood: -126523.482936
-[01:01:31] Bootstrap tree #2, logLikelihood: -124483.985459
-[01:32:56] Bootstrap tree #3, logLikelihood: -122398.725806
-[02:04:21] Bootstrap tree #4, logLikelihood: -124247.513231
-[02:20:02] Bootstrap tree #5, logLikelihood: -122359.928753
+[00:32:47] Bootstrap tree #1, logLikelihood: -129900.651765
+[01:08:50] Bootstrap tree #2, logLikelihood: -129050.468289
+[01:41:56] Bootstrap tree #3, logLikelihood: -135342.796621
+[02:22:38] Bootstrap tree #4, logLikelihood: -131005.934329
+[02:53:29] Bootstrap tree #5, logLikelihood: -129799.161799
 
 Bootstrap trees saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs92.raxml.bootstraps
 
 Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/bootstraps/bs92.raxml.log
 
-Analysis started: 04-Sep-2021 20:20:40 / finished: 04-Sep-2021 22:40:43
+Analysis started: 08-Jan-2022 17:58:34 / finished: 08-Jan-2022 20:52:04
 
-Elapsed time: 8402.866 seconds
+Elapsed time: 10409.914 seconds
 

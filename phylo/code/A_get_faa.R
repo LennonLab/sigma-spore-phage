@@ -149,15 +149,21 @@ phage.fa <- d.faa
 
 # in phage data
 # mark sequences that are duplicates 
-phage.fa$seq.group <- phage.fa %>%   group_indices(seq)
+phage.fa <- phage.fa %>% 
+  group_by(seq) %>% 
+  mutate(seq.group = cur_group_id())
+
 # get the duplicates
-phage.dups <-phage.fa %>% filter(duplicated(seq.group)) %>% 
+phage.dups <- phage.fa %>% filter(duplicated(seq.group)) %>% 
   relocate(seq.group, .after = sp)
-# In manual inspection of dups to be removed I found two phages that I would like to retain
-# coliphage T4 (gp55 has duplicate in Shigella phage Shfl2)
-# and Bacillus phage Bastille. (two gene have duplicate in Bacillus phage Evoli)
+# In manual inspection of dups to be removed I found a few phages that I would like to retain
+# # coliphage T4 (gp55 has duplicate in Shigella phage Shfl2)
+# # Bacillus phage Bastille. (two gene have duplicate in Bacillus phage Evoli)
+# # Bacillus phage Fah has duplicates in Wbeta and Gamma.
+# # SPO1 gp34 has a duplicate in phage CampHawk
 # swapping them with their duplicates by placing them on top and removing duplicates
-keepers <- c("Escherichia virus T4 (T4)", "Bacillus phage Bastille")
+keepers <- c("Escherichia virus T4 (T4)", "Bacillus phage Bastille", 
+             "Bacillus phage Fah", "SPO1")
 phage.keep  <-
   bind_rows(phage.dups %>% filter(sp %in% keepers), 
             phage.fa %>% filter(! duplicated(seq.group))) %>% 

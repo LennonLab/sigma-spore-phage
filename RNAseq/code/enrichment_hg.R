@@ -202,14 +202,15 @@ p <- d.hyp %>%
              nrow = 2, dir = 'v', labeller = label_parsed)+
   theme_classic()+
   panel_border(color = "black")+
-  labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
+  # labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
   theme(plot.caption = element_text(colour = "grey40"))+
   scale_y_continuous(expand = c(0, 0))+
   xlab("shared differentially expressed genes")+
   ylab("hypergeometric PDF")
 
 p
-ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = p, width = 8, height = 4)
+ggsave(here("RNAseq/plots/enrichment_hostBG.png"),plot = 
+         plot_grid(p, labels = "a"), width = 8, height = 4)
 
 # export analysis test results
 write_csv(p.val.hostBG.cds,
@@ -351,14 +352,15 @@ p <- d.hyp %>%
   facet_wrap(~paste0(pnl,": ",gene), scales = "free", nrow = 3, dir = 'h', labeller = label_parsed)+
   theme_classic()+
   panel_border(color = "black")+
-  labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
+  # labs(caption = paste ("BH adj. P-value:",attr(stars.pval(1),"legend")))+
   theme(plot.caption = element_text(colour = "grey40"))+
   scale_y_continuous(expand = c(0, 0))+
   xlab("upregulated sporulation genes")+
   ylab("hypergeometric PDF")
 
 p
-ggsave(here("RNAseq/plots/enrichment_sporulation.png"),plot = p, width = 4, height = 4)
+ggsave(here("RNAseq/plots/enrichment_sporulation.png"),
+       plot = plot_grid(p, labels = "b"), width = 4, height = 4)
 
 # export analysis test results
 write_csv(p.val.spore,

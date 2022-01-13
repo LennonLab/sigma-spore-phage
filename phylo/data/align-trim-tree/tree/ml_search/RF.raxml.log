@@ -5,31 +5,31 @@ Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Be
 Latest version: https://github.com/amkozlov/raxml-ng
 Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
 
-RAxML-NG was called at 03-Sep-2021 13:37:40 as follows:
+RAxML-NG was called at 08-Jan-2022 21:11:55 as follows:
 
 raxml-ng --rfdist --tree mltrees --redo --prefix RF
 
 Analysis options:
   run mode: RF distance computation
   start tree(s): user
-  random seed: 1630690660
+  random seed: 1641694315
   SIMD kernels: AVX2
-  parallelization: PTHREADS (24 threads), thread pinning: OFF
+  parallelization: NONE/sequential
 
 WARNING: Running in REDO mode: existing checkpoints are ignored, and all result files will be overwritten!
 
 Reading input trees from file: mltrees
-Loaded 200 trees with 608 taxa.
+Loaded 500 trees with 661 taxa.
 
-Average absolute RF distance in this tree set: 306.958492
-Average relative RF distance in this tree set: 0.253685
-Number of unique topologies in this tree set: 200
+Average absolute RF distance in this tree set: 290.622012
+Average relative RF distance in this tree set: 0.220837
+Number of unique topologies in this tree set: 500
 
 Pairwise RF distances saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/RF.raxml.rfDistances
 
 Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo/data/align-trim-tree/tree/ml_search/RF.raxml.log
 
-Analysis started: 03-Sep-2021 13:37:40 / finished: 03-Sep-2021 13:37:46
+Analysis started: 08-Jan-2022 21:11:55 / finished: 08-Jan-2022 21:12:38
 
-Elapsed time: 6.070 seconds
+Elapsed time: 42.306 seconds
 

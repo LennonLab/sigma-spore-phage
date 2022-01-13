@@ -9,7 +9,7 @@ setwd(here())
 # Bacterial sigma HMM data base
 hmm <- "TIGR/data/tigr_sigma_hmm/sigma.fam"
 
-faa <- dir("vogdb/data/vog_sigma_clean", full.names = T, pattern = ".faa.gz")
+faa <- dir("vogdb/data/vog_sigma_clean", full.names = T, pattern = ".faa")
 
 # create output directory
 if (! dir.exists(here("vogdb/data/hscan_vogXtigr/"))){

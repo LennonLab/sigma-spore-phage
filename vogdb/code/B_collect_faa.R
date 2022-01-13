@@ -23,10 +23,10 @@ for(i in f){
 }
 
 
-#test for uniqness of protein
+#test for uniqeness of protein
 anyDuplicated(d.faa$protein)
 # yes. how many?
-duplicated(d.faa$protein)%>%sum() #11
+duplicated(d.faa$protein)%>%sum() #12
 
 #lets have a look
 dup <- duplicated(d.faa$protein)%>%which()
@@ -37,7 +37,7 @@ d.faa%>%
   select(protein,vog)%>%
   table()
 
-#all but 1 are duplicates found in the same vog (VOG00048)
+#most are duplicates found in the same vog ( VOG00050, VOG02363, VOG28223 )
 #are they completely identical rows?
 d.faa%>%
   filter(protein %in% dup)%>%
@@ -46,7 +46,7 @@ d.faa%>%
 # remove duplicated row from main table
 d.faa <- d.faa%>%distinct()
 
-#still leaves 1 protein (YP_003084147.1) that is a member of 2 vogs (VOG00048, VOG26037)
+#still leaves 1 protein (YP_003084147.1) that is a member of 2 vogs (VOG00050 , VOG28223)
 # Cyanophage PSS2,	 type III RNAP sigma factor
 dup <- duplicated(d.faa$protein)%>%which()
 dup <- d.faa$protein[dup]
@@ -55,11 +55,11 @@ d.faa%>%
   select(protein,vog)%>%
   table()
 
-# I will keep the row from the smaller vog (VOG26037) has only 2 sequences 
+# I will keep the row from the smaller vog (VOG28223) has only 2 sequences 
 n.rm <- d.faa%>%
   mutate(n=row_number())%>%
   filter(protein %in% dup)%>%
-  filter(vog=="VOG00048")%>%
+  filter(vog=="VOG00050")%>%
   pull(n)%>%
   as.numeric()
 
@@ -67,31 +67,49 @@ d.faa <- d.faa[-n.rm,]
 
 #test for uniqness of sequence
 anyDuplicated(d.faa$seq) # yes. how many?
-duplicated(d.faa$seq)%>%sum() #160
+duplicated(d.faa$seq)%>%sum() #266
 # are they from the same phage?
 d.faa%>%
   select(sp, seq)%>%
   duplicated()%>%
   sum()
-#no
+# One is
+
+# which one?
+d.faa%>%
+  select(sp, seq)%>%
+  filter(duplicated(.))
+
+# a protein from Synechococcus phage S-CAM22. 
+# The reason is that there are multiple, near identical isolates of this phage 
+# with genome sequences. See Crummet et al. 2016 - Table 1
+# https://doi.org/10.1016/j.virol.2016.09.016
+# keeping only one
+dup.rm <- 
+  d.faa%>%
+  select(sp, seq)%>%
+  duplicated() %>% which()
+
+d.faa <- d.faa[-dup.rm,]
 
 # export fasta
-
-setwd(here("vogdb","data","vog_sigma_clean"))
+if (!dir.exists(here("vogdb","data","vog_sigma_clean"))){
+  dir.create(here("vogdb","data","vog_sigma_clean"))
+}
+# setwd(here("vogdb","data","vog_sigma_clean"))
 for(i in 1:nrow(d.faa)){
   file.name <- paste0(d.faa$protein[i],".faa")
   write.fasta(sequences = d.faa$seq[i],
               names =d.faa$header[i],
-              file.out = file.name)
+              file.out = here("vogdb","data","vog_sigma_clean", file.name))
   
-  #compress
-  system(paste("wsl gzip",file.name))
+  # #compress
+  # system(paste("wsl gzip",file.name))
 }
 
 # write table of sequences
 write_csv(select(d.faa,-seq), here("vogdb","data","vog_sigma_clean.csv"))
 
 # also save table as R data to maintain sequence
-setwd( here("vogdb","data"))
-save(d.faa,file="vog_sigma_clean.RData")
+save(d.faa,file=here("vogdb","data","vog_sigma_clean.RData"))
 # load( here("vogdb","data","vog_sigma_clean.RData"))
