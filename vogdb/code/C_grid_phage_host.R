@@ -3,6 +3,10 @@ library(here)
 library(cowplot)
 library(ggh4x)
 library(viridisLite)
+library(grid)
+library(gridExtra)
+library(egg)
+
 
 #load data frame of phage sigma factors generated in (B)
 load(file=here("vogdb","data","vog_sigma_clean.RData"))
@@ -260,10 +264,21 @@ d.presence <- d.sp%>%
                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
                      TRUE ~ phylum)) 
 
+vir_fct <- d.presence %>% 
+  group_by(viral.family,) %>% 
+  summarise(n=n()) %>% 
+  arrange(n) %>% pull(viral.family)
 
+
+
+phyl_fct <- d.presence %>% 
+  group_by(phylum) %>% 
+  summarise(n=n()) %>% 
+  arrange(n) %>% pull(phylum)
 # > plot by host phyla ----------------------------------------------------
 
-p.phylum <-  d.presence %>% 
+p.phylum <-
+  d.presence %>% 
   group_by(phylum)%>%
   mutate(has_sigma = n.sigma >0,
          multi_sigma = n.sigma >1) %>% 
@@ -273,19 +288,24 @@ p.phylum <-  d.presence %>%
             w.multi=sum(multi_sigma),
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
-  filter(n>1) %>% 
+  # filter(n>1) %>% 
+  # mutate(phylum = fct_reorder(phylum, n)) %>% 
+  mutate(phylum = as_factor(phylum)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyl_fct)) %>% 
   ggplot(aes(phylum))+
-  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
-           fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
-  ylab("No. Phage Genomes") +
+           fill = "grey80", color="grey20", size = 0.7, width=0.6)+
+  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, 
+           fill= "grey20")+
+  ylab("Phage Genomes") +
   scale_y_log10(limits = c(1,3000))+
   xlab("Host Phylum")+
   theme_classic(base_size = 12)+
-  panel_border(color = "black", size = 1)+
+  # panel_border(color = "black", size = 1)+
   coord_flip(expand = F)+
-  scale_fill_viridis_d()+
-  scale_x_discrete()
+  theme(axis.title.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
 
 # > plot by viral family -------------------------------------------------
 
@@ -299,82 +319,71 @@ p.Vfam <-  d.presence %>%
             w.multi=sum(multi_sigma),
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
-  filter(n>1) %>% 
+  # filter(n>1) %>%
+  mutate(viral.family = as_factor(viral.family)) %>% 
+  mutate(viral.family = fct_relevel(viral.family, vir_fct) %>% fct_rev()) %>% 
+  # mutate(viral.family = fct_reorder(viral.family, n) %>% fct_rev()) %>% 
   ggplot(aes(viral.family))+
-  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
-           fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
-  ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,3000))+
-  xlab("Viral Family")+
+           fill = "grey80", color="grey20", size = 0.7, width=0.6)+
+  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill= "grey20")+
+  ylab("Phage Genomes") +
+  scale_y_log10(limits = c(1,3000), expand = c(1,NA))+
   theme_classic(base_size = 12)+
-  panel_border(color = "black", size = 1)+
-  coord_flip(expand = F)+
-  scale_fill_viridis_d()
+  # panel_border(color = "black", size = 1)+
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+p.Vfam
+# > host- virus grid -----------------------------------------------------------------
+# # > plot by host phyla AND viral family 
 
-# > plot by host phyla AND viral family --------------------------------
 
-
-p.both.data <-  d.presence %>% 
-  mutate(phylum = str_replace(phylum, "Deinococcus-Thermus","Deino.-Thermus")) %>% 
-  group_by(viral.family, phylum,)%>%
-  mutate(has_sigma = n.sigma >0,
-         multi_sigma = n.sigma >1) %>% 
-  summarise(n=n(),
-            w.sigma=sum(has_sigma),
-            perc_sigma=100*sum(has_sigma)/n(),
-            w.multi=sum(multi_sigma),
-            perc_multi=100*sum(multi_sigma)/n())
-  
-# phyla that have any sigma factor
-phyla.keep <- p.both.data %>%
-  group_by(phylum) %>%
-  summarise(sig=sum(w.sigma)) %>% 
-  filter(sig>2) %>% 
-  pull(phylum)
-
-# viral families that have any sigma factor
-viral.keep <- p.both.data %>%
-  group_by(viral.family) %>%
-  summarise(sig=sum(w.sigma)) %>% 
-  filter(sig>1) %>% 
-  pull(viral.family) %>% as.character()
-
-#plot
-p.both <- 
-  p.both.data %>% 
-  filter(phylum %in% phyla.keep) %>%
-  filter(viral.family %in% viral.keep) %>% 
-  #removing a single phage that is unclassified
-  filter(viral.family != "unclassified Caudovirales") %>% 
-  mutate(viral.family = fct_infreq(viral.family) ) %>% 
-  ggplot(aes(viral.family))+
-  geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
-  geom_col(aes(y=n), position=position_dodge(preserve = "single"),
-           fill = alpha("grey20", 0.2), color="black", size = 0.7, width=0.6)+
-  ylab("No. Phage Genomes") +
-  scale_y_log10(limits = c(1,3000))+
+p.grid <- d.presence %>% 
+  group_by(phylum, viral.family) %>% 
+  summarise(n=n(), w.sigma = sum(n.sigma>0)) %>% 
+  mutate(perc.sigma = round(100*w.sigma/n)) %>% 
+  mutate(phylum = as_factor(phylum), 
+         viral.family = as_factor(viral.family)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyl_fct), 
+         viral.family = fct_relevel(viral.family, vir_fct) %>% fct_rev()) %>% 
+  mutate(n.lab = paste("frac(",w.sigma,",",n,")")) %>%
+  # mutate(n.lab = paste("phantom()^",w.sigma,"/phantom()[",n,"]")) %>% 
+  #plot
+  ggplot(aes(y = phylum, x = viral.family),color="white" ,size=0.5, show.legend = F)+
+  # geom_tile(aes(fill = w.sigma>0),color="white" ,size=0.5, show.legend = F)+
+  geom_tile(aes(fill = perc.sigma),color="grey80" ,size=0.5, show.legend = F)+
+  geom_text(aes(label=n.lab, color = perc.sigma<50), parse = T, size=2, show.legend = F)+
+  # geom_point(aes( size = n), shape = 21, fill = viridis(3)[2], stroke = 0.2)+ #viridis(2)[2])+
+  # geom_point(aes( size = w.sigma), shape = 21, fill = viridis(3)[1] , stroke =0, show.legend = F)+ #viridis(2)[1])+
+  # scale_size_area(max_size = 10)+
+  # scale_fill_manual(values = c("grey80", "grey20"))+
+  scale_fill_gradient(low = "white", high = "grey20")+
+  scale_color_manual(values = c("white", "grey20"))+
+  # scale_color_manual(values = viridis(4, direction = -1)[c(2,4)])+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 35, hjust = 1, vjust = 1))+
   xlab("Viral Family")+
-  theme_classic(base_size = 12)+
-  panel_border(color = "black", size = 0.7)+
-  # facet_wrap(~phylum, nrow = 1)+
-  facet_nested_wrap("Host Phylum" + phylum~., nest_line = TRUE, nrow = 1)+
-  coord_flip(expand = F)+
-  scale_fill_viridis_d()+
-  scale_color_viridis_d()+
-
-  theme(#axis.text.y = element_blank(),
-        legend.position = c(0.9,0.22),
-        legend.text = element_text(size = 8),
-        legend.key.height = unit(1,"mm"),
-        strip.background = element_blank())+
-        # strip.background = element_rect(size = 0.7))+
-  guides(fill =  guide_legend(title = "Viral Family", 
-                              reverse = TRUE),
-         color =  guide_legend(title = "Viral Family", 
-                              reverse = TRUE))
+  ylab("Host Phylum")
+# p.grid
+# ggsave2(here("vogdb","figures","viral_family_host_phylum_3.png"),
+#         plot = ggdraw(p.both3) +
+#           theme(plot.background = element_rect(fill="white", color = NA)),
+#         width =8,height = 5)
 
 
+# combine -----------------------------------------------------------------
+
+p.comb <- ggarrange(p.Vfam, ggplot()+ theme_void(), 
+          p.grid+theme(legend.position = "bottom"), p.phylum, 
+          nrow = 2, widths = c(3,1), heights = c(1,3))
+
+# ggsave2(here("vogdb","figures","viral_family_host_phylum_3.png"),
+#         plot = ggdraw(p.comb) +
+#           theme(plot.background = element_rect(fill="white", color = NA)),
+#         width =8,height = 7)
+
+ 
 # > n sigma panel -----------------------------------------------------------
 
 #summarise data
@@ -390,6 +399,15 @@ n.sig.data <-
   group_by(phylum) %>% 
   summarise( n.sigma= n.sigma, n = n, total = sum(n), .groups = "drop") %>% 
   mutate(pnl = "Host Phylum")
+
+# keep phyla with multiple sigma-encoding phages
+phyla.keep <- n.sig.data %>% 
+  # mutate(w.sigma = n.sigma>0) %>% 
+  filter(n.sigma>0) %>% 
+  group_by(phylum) %>% 
+  summarise(n = sum(n)) %>% 
+  filter(n>2) %>% pull(phylum)
+  
 
 n.sig.all <-   d.sp %>% 
   group_by(n.sigma) %>% 
@@ -422,18 +440,14 @@ p.multi <-
 
 
 # > combine plots ----------------------------------------------------------
+p.all <- plot_grid(p.comb, p.multi, ncol = 1, labels = c("a","b"), rel_heights = c(3,1)) 
 
-
-top_row <- plot_grid(p.phylum, NULL, p.Vfam, nrow = 1,
-                     labels = c("a","","b"),rel_widths = c(1,0.2,1))
-
-
-all.4 <- plot_grid(top_row, p.both,p.multi, ncol = 1, labels = c("","c", "d")) 
-
-ggsave2(here("vogdb","figures","viral_family_host_phylum.png"),
-        plot = ggdraw(all.4) +
+ggsave2(here("vogdb","figures","viral_family_host_phylum_NEW.png"),
+        plot = ggdraw(p.all) +
           theme(plot.background = element_rect(fill="white", color = NA)),
         width = 8,height = 8)
+
+
 
 # > stats for sigma presence --------------------------------------------
 
