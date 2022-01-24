@@ -260,6 +260,20 @@ d.presence <- d.sp%>%
                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
                      TRUE ~ phylum)) 
 
+vir_fct <- d.presence %>% 
+  group_by(viral.family,) %>% 
+  summarise(n=n()) %>% 
+  filter(n>1) %>% 
+  arrange(n) %>% pull(viral.family)
+
+
+
+phyl_fct <- d.presence %>% 
+  group_by(phylum) %>% 
+  summarise(n=n()) %>% 
+  filter(n>1) %>% 
+  arrange(n) %>% pull(phylum)
+
 
 # > plot by host phyla ----------------------------------------------------
 
@@ -274,6 +288,8 @@ p.phylum <-  d.presence %>%
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
   filter(n>1) %>% 
+  mutate(phylum = as_factor(phylum)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyl_fct)) %>% 
   ggplot(aes(phylum))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -300,6 +316,8 @@ p.Vfam <-  d.presence %>%
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
   filter(n>1) %>% 
+  mutate(viral.family = as_factor(viral.family)) %>% 
+  mutate(viral.family = fct_relevel(viral.family, vir_fct)) %>% 
   ggplot(aes(viral.family))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -329,15 +347,17 @@ p.both.data <-  d.presence %>%
 # phyla that have any sigma factor
 phyla.keep <- p.both.data %>%
   group_by(phylum) %>%
-  summarise(sig=sum(w.sigma)) %>% 
+  summarise(n = sum(n),sig=sum(w.sigma)) %>% 
   filter(sig>2) %>% 
+  arrange(desc(n)) %>% 
   pull(phylum)
 
 # viral families that have any sigma factor
 viral.keep <- p.both.data %>%
   group_by(viral.family) %>%
-  summarise(sig=sum(w.sigma)) %>% 
+  summarise(n = sum(n), sig=sum(w.sigma)) %>% 
   filter(sig>1) %>% 
+  arrange(n) %>% 
   pull(viral.family) %>% as.character()
 
 #plot
@@ -347,7 +367,11 @@ p.both <-
   filter(viral.family %in% viral.keep) %>% 
   #removing a single phage that is unclassified
   filter(viral.family != "unclassified Caudovirales") %>% 
-  mutate(viral.family = fct_infreq(viral.family) ) %>% 
+  # mutate(viral.family = fct_infreq(viral.family) ) %>% 
+  mutate(phylum = as_factor(phylum), 
+         viral.family = as_factor(viral.family)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyla.keep), 
+         viral.family = fct_relevel(viral.family, viral.keep)) %>% 
   ggplot(aes(viral.family))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -403,24 +427,29 @@ n.sig.all <-   d.sp %>%
 
 n.labs <- n.sig.all %>% 
   group_by(pnl,phylum) %>% 
-  summarise(n=sum(n)) %>% 
-  mutate(lab = paste0("n=", n))
+  summarise(n=sum(n), .groups = "drop") %>% 
+  mutate(lab = paste0("n=", n)) %>% 
+  mutate(pnl = as_factor(pnl) ) %>%
+  mutate(phylum = as_factor(phylum) %>% 
+           fct_relevel(c("Bacteria",phyla.keep)))
 
 
 p.multi <-  
   n.sig.all %>% 
-  ggplot( aes(n.sigma, group = phylum)) + 
+  mutate(pnl = as_factor(pnl) ) %>%
+  mutate(phylum = fct_relevel(phylum, c("Bacteria",phyla.keep))) %>%
+  ggplot( aes(n.sigma)) + 
   geom_col(aes(y = perc),  fill = "grey80", color="black", size = 0.7, width=0.6) + 
-  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+
+  # geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+
   scale_y_continuous(labels=scales::percent) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
-  facet_nested_wrap(pnl + phylum~., nest_line = TRUE, nrow = 1)+
+  facet_nested_wrap(.~ pnl + phylum, nest_line = TRUE, nrow = 1)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")+
   theme(strip.background = element_blank())
 
-
+# p.multi
 # > combine plots ----------------------------------------------------------
 
 

@@ -2,7 +2,9 @@ library(here)
 library(tidyverse)
 library(cowplot)
 library(scales)
-source(here("vogdb/code/parse_hmmer_tbl.R"))
+library(foreach)
+# source(here("vogdb/code/parse_hmmer_tbl.R"))
+
 
 # parse hmmserch results -----------------------------------------
 
@@ -11,8 +13,11 @@ l.res <- list.files(here("vogdb/data/hscan_vogXtigr/"), full.names = T)
 hits.all <- tibble()
 
 
-for (i in 1:length(l.res)){
-  cur.hits <- read_tblout(l.res[i])
+foreach (i = 1:length(l.res)) %do%
+  {
+    
+    source(here("vogdb/code/parse_hmmer_tbl.R"))
+    cur.hits <- read_tblout(l.res[i])
   
   # make row for 0 hits
   if(nrow(cur.hits)==0){
@@ -36,7 +41,8 @@ for (i in 1:length(l.res)){
 }
 
 # separate TIGR descriptions
-hits.all <- hits.all%>%
+hits.all <-
+  hits.all%>%
   separate(description,into = c("id","description"),sep = ":" )
 
 

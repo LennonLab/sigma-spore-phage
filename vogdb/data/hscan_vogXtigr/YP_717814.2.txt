@@ -6,9 +6,9 @@ TIGR02937            TIGR02937  382359.YP_717814.2   -            2.6e-07   21.3
 # Program:         hmmscan
 # Version:         3.3 (Nov 2019)
 # Pipeline mode:   SCAN
-# Query file:      vogdb/data/vog_sigma_clean/YP_717814.2.faa.gz
-# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
-# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_717814.2.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_717814.2.faa.gz 
-# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
-# Date:            Tue Nov 24 13:08:20 2020
+# Query file:      vogdb/data/vog_sigma_clean/YP_717814.2.faa
+# Target file:     TIGR/data/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_717814.2.txt --noali TIGR/data/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_717814.2.faa 
+# Current dir:     /mnt/c/Users/danschw/GitHub/sigma-spore-phage
+# Date:            Mon Jan 24 17:06:09 2022
 # [ok]

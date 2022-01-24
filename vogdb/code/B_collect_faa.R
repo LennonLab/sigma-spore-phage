@@ -2,6 +2,12 @@ library(tidyverse)
 library(here)
 library(seqinr)
 
+
+# clustering data ---------------------------------------------------------
+
+d.vog <- read_csv (here("vogdb/data", "vog-members_cd-clstr.csv"))
+
+
 f <- list.files(here("vogdb","data","vog_sigma_faa"),".faa$",full.names = T)
 
 d.faa <- tibble()
@@ -22,6 +28,13 @@ for(i in f){
     bind_rows(d.faa)
 }
 
+# remove proteins of cluster replicates -------------------
+tax.keep <- d.vog %>% 
+  filter(is_rep) %>% 
+  pull(tax.id)
+
+d.faa <- d.faa %>% 
+  filter(taxon %in% tax.keep)
 
 #test for uniqeness of protein
 anyDuplicated(d.faa$protein)
@@ -67,30 +80,13 @@ d.faa <- d.faa[-n.rm,]
 
 #test for uniqness of sequence
 anyDuplicated(d.faa$seq) # yes. how many?
-duplicated(d.faa$seq)%>%sum() #266
+duplicated(d.faa$seq)%>%sum() #252
 # are they from the same phage?
 d.faa%>%
   select(sp, seq)%>%
   duplicated()%>%
   sum()
-# One is
-
-# which one?
-d.faa%>%
-  select(sp, seq)%>%
-  filter(duplicated(.))
-
-# a protein from Synechococcus phage S-CAM22. 
-# The reason is that there are multiple, near identical isolates of this phage 
-# with genome sequences. See Crummet et al. 2016 - Table 1
-# https://doi.org/10.1016/j.virol.2016.09.016
-# keeping only one
-dup.rm <- 
-  d.faa%>%
-  select(sp, seq)%>%
-  duplicated() %>% which()
-
-d.faa <- d.faa[-dup.rm,]
+# NO
 
 # export fasta
 if (!dir.exists(here("vogdb","data","vog_sigma_clean"))){
