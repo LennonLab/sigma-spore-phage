@@ -1,0 +1,177 @@
+--------------------------------------------------------------------------------
+ModelTest-NG vx.y.z
+
+Input data:
+  MSA:        /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            542
+  #sites:           193
+  #patterns:        193
+  Max. thread mem:  255 MB
+
+Output:
+  Log:           /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/model_test/model_test.log
+  Starting tree: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/model_test/model_test.tree
+  Results:       /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/model_test/model_test.out
+
+Selection options:
+  # protein matrices: 19
+  # protein models:   76
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      false
+    gamma (+G):      true
+    both (+I+G):     false
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: false
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/12
+  RNG seed:         123
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG+G4              1   -134340.0489    274374.3286         0.0000    1.0000
+       2  LG+G4+F           20   -134328.8301    274451.8820        77.5534    0.0000
+       3  RTREV+G4+F        20   -134683.9541    275162.1301       787.8014    0.0000
+       4  VT+G4+F           20   -134820.3366    275434.8950      1060.5664    0.0000
+       5  WAG+G4+F          20   -135025.2953    275844.8125      1470.4839    0.0000
+       6  VT+G4              1   -135138.0620    275970.3547      1596.0261    0.0000
+       7  WAG+G4             1   -135246.8565    276187.9438      1813.6152    0.0000
+       8  BLOSUM62+G4        1   -135508.8508    276711.9324      2337.6038    0.0000
+       9  JTT+G4+F          20   -135502.1756    276798.5730      2424.2444    0.0000
+      10  JTT-DCMUT+G4+F    20   -135527.1882    276848.5983      2474.2697    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              LG+G4
+lnL:                -134340.0489
+Frequencies:        0.0791 0.0559 0.0420 0.0531 0.0129 0.0408 0.0716 0.0573 0.0224 0.0622 0.0991 0.0646 0.0230 0.0423 0.0440 0.0612 0.0533 0.0121 0.0342 0.0691
+Inv. sites prop:    -
+Gamma shape:        3.0670
+Score:              274374.3286
+Weight:             1.0000
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              1.0000
+Gamma-Inv:          -
+Frequencies:        0.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              3.0670
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        0.0737 0.0798 0.0432 0.0673 0.0068 0.0423 0.0933 0.0425 0.0197 0.0666 0.0992 0.0743 0.0271 0.0367 0.0216 0.0536 0.0463 0.0087 0.0400 0.0574 
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -d aa -m LG -f m -v 0 -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m PROTGAMMALG -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim --model LG+G4
+  > paup -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m LG+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG+G4              1   -134340.0489    270844.0978         0.0000    0.9996
+       2  LG+G4+F           20   -134328.8301    270859.6601        15.5623    0.0004
+       3  RTREV+G4+F        20   -134683.9541    271569.9082       725.8103    0.0000
+       4  VT+G4+F           20   -134820.3366    271842.6731       998.5753    0.0000
+       5  WAG+G4+F          20   -135025.2953    272252.5906      1408.4928    0.0000
+       6  VT+G4              1   -135138.0620    272440.1239      1596.0261    0.0000
+       7  WAG+G4             1   -135246.8565    272657.7130      1813.6152    0.0000
+       8  BLOSUM62+G4        1   -135508.8508    273181.7016      2337.6038    0.0000
+       9  JTT+G4+F          20   -135502.1756    273206.3511      2362.2533    0.0000
+      10  JTT-DCMUT+G4+F    20   -135527.1882    273256.3764      2412.2786    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              LG+G4
+lnL:                -134340.0489
+Frequencies:        0.0791 0.0559 0.0420 0.0531 0.0129 0.0408 0.0716 0.0573 0.0224 0.0622 0.0991 0.0646 0.0230 0.0423 0.0440 0.0612 0.0533 0.0121 0.0342 0.0691
+Inv. sites prop:    -
+Gamma shape:        3.0670
+Score:              270844.0978
+Weight:             0.9996
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              1.0000
+Gamma-Inv:          -
+Frequencies:        0.0004
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              3.0670
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        0.0737 0.0798 0.0432 0.0673 0.0068 0.0423 0.0933 0.0425 0.0197 0.0666 0.0992 0.0743 0.0271 0.0367 0.0216 0.0536 0.0463 0.0087 0.0400 0.0574 
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -d aa -m LG -f m -v 0 -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m PROTGAMMALG -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim --model LG+G4
+  > paup -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m LG+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  LG+G4              1   -134340.0489   2614456.0978         0.0000    1.0000
+       2  LG                 0   -137101.0136   2615648.0271      1191.9293    0.0000
+       3  VT                 0   -137181.1419   2615808.2839      1352.1861    0.0000
+       4  WAG                0   -137231.1052   2615908.2105      1452.1127    0.0000
+       5  VT+G4              1   -135138.0620   2616052.1239      1596.0261    0.0000
+       6  WAG+G4             1   -135246.8565   2616269.7130      1813.6152    0.0000
+       7  BLOSUM62           0   -137532.1389   2616510.2779      2054.1801    0.0000
+       8  BLOSUM62+G4        1   -135508.8508   2616793.7016      2337.6038    0.0000
+       9  PMB                0   -137859.8743   2617165.7485      2709.6507    0.0000
+      10  PMB+G4             1   -135782.1267   2617340.2533      2884.1555    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              LG+G4
+lnL:                -134340.0489
+Frequencies:        0.0791 0.0559 0.0420 0.0531 0.0129 0.0408 0.0716 0.0573 0.0224 0.0622 0.0991 0.0646 0.0230 0.0423 0.0440 0.0612 0.0533 0.0121 0.0342 0.0691
+Inv. sites prop:    -
+Gamma shape:        3.0670
+Score:              2614456.0978
+Weight:             1.0000
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              1.0000
+Gamma-Inv:          -
+Frequencies:        -
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              3.0670
+Alpha-P.Inv:        -
+P.Inv-Alpha:        -
+Frequencies:        -
+
+Commands:
+  > phyml  -i /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -d aa -m LG -f m -v 0 -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m PROTGAMMALG -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim --model LG+G4
+  > paup -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim
+  > iqtree -s /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim -m LG+G4
+Done
