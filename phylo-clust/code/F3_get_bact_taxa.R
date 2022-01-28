@@ -7,7 +7,7 @@ library(seqinr)
 d.burton <- read_csv(here("phylo-clust","data","Burton_S6.csv"), trim_ws = T) %>% 
   rename( assembly_accession = `# assembly_accession`)
 
-#use eutilitied installed locally on carbonate
+#use e-utilities installed locally on carbonate
 #sh -c "$(curl -fsSL ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
 eutils="/N/u/danschw/Carbonate/my_tools/edirect"
 d <- tibble()
