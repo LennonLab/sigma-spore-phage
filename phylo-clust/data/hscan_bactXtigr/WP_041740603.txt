@@ -1,0 +1,30 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+TIGR02950            TIGR02950  WP_041740603.1       -            1.5e-21   67.8   0.0   3.4e-21   66.7   0.0   1.5   1   1   0   1   1   1   1 SigM_subfam: RNA polymerase sigma factor, SigM family
+TIGR02937            TIGR02937  WP_041740603.1       -            1.4e-20   64.5   0.3   2.9e-20   63.5   0.3   1.5   1   1   0   1   1   1   1 sigma70-ECF: RNA polymerase sigma factor, sigma-70 family
+TIGR02939            TIGR02939  WP_041740603.1       -            2.9e-20   64.0   1.2   5.9e-19   59.7   1.2   2.0   1   1   0   1   1   1   1 RpoE_Sigma70: RNA polymerase sigma factor RpoE
+TIGR02959            TIGR02959  WP_041740603.1       -            1.5e-18   58.1   0.0   1.9e-18   57.8   0.0   1.1   1   0   0   1   1   1   1 SigZ: RNA polymerase sigma factor, SigZ family
+TIGR02983            TIGR02983  WP_041740603.1       -            1.3e-17   55.1   6.2   1.6e-17   54.8   6.2   1.0   1   0   0   1   1   1   1 SigE-fam_strep: RNA polymerase sigma-70 factor, sigma-E family
+TIGR02947            TIGR02947  WP_041740603.1       -            1.2e-15   48.6   0.3   2.5e-10   31.3   0.1   2.1   1   1   1   2   2   2   2 SigH_actino: RNA polymerase sigma-70 factor, TIGR02947 family
+TIGR02960            TIGR02960  WP_041740603.1       -            1.3e-15   48.3   7.1     6e-10   29.7   0.7   2.1   1   1   1   2   2   2   2 SigX5: RNA polymerase sigma-70 factor, TIGR02960 family
+TIGR02948            TIGR02948  WP_041740603.1       -            1.5e-13   42.2   0.1   7.6e-11   33.3   0.1   2.0   1   1   0   1   1   1   1 SigW_bacill: RNA polymerase sigma-W factor
+TIGR02985            TIGR02985  WP_041740603.1       -            7.5e-12   36.7   0.0   1.6e-11   35.6   0.0   1.5   1   1   0   1   1   1   1 Sig70_bacteroi1: RNA polymerase sigma-70 factor, Bacteroides expansion family 1
+TIGR02943            TIGR02943  WP_041740603.1       -            1.9e-11   35.1   0.1   1.4e-09   28.9   0.0   2.1   1   1   1   2   2   2   1 Sig70_famx1: RNA polymerase sigma-70 factor, TIGR02943 family
+TIGR02989            TIGR02989  WP_041740603.1       -            2.7e-10   31.3   1.3   4.7e-10   30.6   1.3   1.3   1   1   0   1   1   1   1 Sig-70_gvs1: RNA polymerase sigma-70 factor, Rhodopirellula/Verrucomicrobium family
+TIGR02952            TIGR02952  WP_041740603.1       -            4.8e-10   30.5   0.0   7.1e-10   30.0   0.0   1.3   1   1   0   1   1   1   1 Sig70_famx2: RNA polymerase sigma-70 factor, TIGR02952 family
+TIGR02957            TIGR02957  WP_041740603.1       -            5.7e-10   29.7   1.1   9.8e-09   25.7   1.1   2.1   1   1   0   1   1   1   1 SigX4: RNA polymerase sigma-70 factor, TIGR02957 family
+TIGR02984            TIGR02984  WP_041740603.1       -            1.7e-07   21.9   3.1   2.3e-05   15.0   0.2   2.1   1   1   1   2   2   2   2 Sig-70_plancto1: RNA polymerase sigma-70 factor, Planctomycetaceae-specific subfamily 1
+TIGR02954            TIGR02954  WP_041740603.1       -            3.8e-07   20.9   0.0   4.9e-07   20.6   0.0   1.1   1   0   0   1   1   1   1 Sig70_famx3: RNA polymerase sigma-70 factor, TIGR02954 family
+TIGR02999            TIGR02999  WP_041740603.1       -            1.5e-06   19.2   1.1     2e-06   18.7   1.1   1.2   1   0   0   1   1   1   1 Sig-70_X6: RNA polymerase sigma factor, TIGR02999 family
+TIGR02479            TIGR02479  WP_041740603.1       -            0.00016   12.3   0.1   0.00027   11.6   0.1   1.3   1   0   0   1   1   1   1 FliA_WhiG: RNA polymerase sigma factor, FliA/WhiG family
+#
+# Program:         hmmscan
+# Version:         3.3 (Nov 2019)
+# Pipeline mode:   SCAN
+# Query file:      phylo-clust/data/tmp_sigma/WP_041740603.faa
+# Target file:     TIGR/data/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout phylo-clust/data/hscan_bactXtigr/WP_041740603.txt --noali TIGR/data/tigr_sigma_hmm/sigma.fam phylo-clust/data/tmp_sigma/WP_041740603.faa 
+# Current dir:     /mnt/c/Users/danschw/GitHub/sigma-spore-phage
+# Date:            Fri Jan 28 10:21:48 2022
+# [ok]
