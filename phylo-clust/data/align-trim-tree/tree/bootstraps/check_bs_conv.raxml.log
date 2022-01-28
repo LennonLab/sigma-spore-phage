@@ -1,0 +1,42 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 27-Jan-2022 08:18:06 as follows:
+
+raxml-ng --bsconverge --bs-trees allbootstraps --prefix check_bs_conv --seed 123 --threads 4 --bs-cutoff 0.03
+
+Analysis options:
+  run mode: A posteriori bootstrap convergence test
+  start tree(s): 
+  random seed: 123
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (4 threads), thread pinning: OFF
+
+Reading bootstrap trees from file: allbootstraps
+Loaded 1000 trees with 540 taxa.
+
+Performing bootstrap convergence assessment using autoMRE criterion
+
+ # trees        avg WRF       avg WRF in %       # perms: wrf <= 3.00 %     converged?  
+      50       1974.725              7.955                            0        NO
+     100       2784.483              5.522                            0        NO
+     150       3374.655              4.429                            0        NO
+     200       3862.125              3.783                            1        NO
+     250       4065.621              3.173                          253        NO
+     300       4496.193              2.922                          611        NO
+     350       5019.986              2.790                          851        NO
+     400       5472.242              2.656                          951        NO
+     450       5475.150              2.359                          999        YES
+Bootstopping test converged after 450 trees
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/tree/bootstraps/check_bs_conv.raxml.log
+
+Analysis started: 27-Jan-2022 08:18:06 / finished: 27-Jan-2022 08:28:44
+
+Elapsed time: 638.169 seconds
+
