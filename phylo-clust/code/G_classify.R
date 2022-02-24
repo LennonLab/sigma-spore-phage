@@ -165,7 +165,7 @@ p.phylum <- d.plot %>%
   geom_bar(position="fill", stat="identity", color = "transparent", size = 0,width = 0.5) +
   
   xlab("Host Phylum") +
-  ylab(NULL)+
+  ylab("Phage-encoded Sigma Factor Genes")+
   guides(fill = guide_legend("Predicted\nSporulation\nSigma\nFactor", reverse = T))+
   
   scale_y_continuous(labels=scales::percent, position = "left") +
@@ -176,7 +176,7 @@ p.phylum <- d.plot %>%
 
 ggsave2(here("phylo-clust","plots","spor_sigma_HostPhylum.png"),
         p.phylum,#+theme(legend.position = "none"),
-        width = 4,height = 1.7)
+        width = 4,height = 2)
 
 
 # _________________----------------------------------------------
