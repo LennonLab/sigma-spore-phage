@@ -137,108 +137,11 @@ d.new <-
            )) %>% 
   mutate(pred_spor = fct_relevel(pred_spor, "neither"))
 
-# _________________----------------------------------------------
-# Plot by phylum ---------------------------------------------
 
-
-# summarize for labels
-n.gene.phylum <- d.new %>%
-  mutate(phylum=str_remove(phylum,"/.*"))%>%
-  group_by(phylum)%>%
-  summarise(n=n(),.groups = "drop") %>% 
-  mutate(phyl.lab = paste0(phylum,"\n(n=",n,")"))
-
-# summarize by spore prediction and host phylum
-d.plot <- 
-  d.new%>%
-  group_by(phylum,pred_spor)%>%
-  summarise(n=n(), .groups = "drop") %>% 
-  group_by(phylum)%>%
-  mutate(perc=n/sum(n)) %>% 
-  
-  mutate(phylum=str_remove(phylum,"/.*"))%>%
-  mutate(phylum=fct_reorder(phylum,n)) %>% 
-  left_join(., n.gene.phylum, by = "phylum")
-
-p.phylum <- d.plot %>% 
-  ggplot(aes(x=phyl.lab, y = perc,fill = pred_spor)) + 
-  geom_bar(position="fill", stat="identity", color = "transparent", size = 0,width = 0.5) +
-  
-  xlab("Host Phylum") +
-  ylab("Phage-encoded Sigma Factor Genes")+
-  guides(fill = guide_legend("Predicted\nSporulation\nSigma\nFactor", reverse = T))+
-  
-  scale_y_continuous(labels=scales::percent, position = "left") +
-  scale_fill_viridis_d(direction = -1) + 
-  theme_classic(base_size = 8)+
-  panel_border(color = "black")+
-  coord_flip()
-
-# ggsave2(here("phylo-clust","plots","spor_sigma_HostPhylum.png"),
-#         p.phylum,#+theme(legend.position = "none"),
-#         width = 4,height = 2)
-
-
-
-# try plot ----------------------------------------------------------------
-
-# # index sigma by phage
-# d.nsig <-
-#   d.new %>%
-#   mutate(phylum=str_remove(phylum,"/.*"))%>%
-#   # arrange phage by n.sigmas
-#   mutate(`virus name` = fct_infreq(`virus name`)) %>%
-#   # assign a positional index to each sigma factor (ordered by prediction)
-#   group_by(taxon)%>%
-#   arrange(pred_spor)%>%
-#   mutate(sig.position=row_number())
-# 
-# 
-# l.plot <- list()
-# for (phyl in unique(d.nsig$phylum)){
-#   l.plot[[phyl]] <- 
-#     d.nsig %>% 
-#     #retain all levels
-#     mutate(pred_spor = as_factor(pred_spor)) %>% 
-#     filter(phylum == phyl) %>% 
-#     ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-#     geom_tile(aes(fill=pred_spor))+
-#     # geom_text(aes(label = phylum), size=2,
-#     #           x = Inf, y = -Inf, vjust=-1, hjust = 1.1) +
-#     scale_fill_viridis_d(drop=F, direction = -1)+
-#     theme_classic()+
-#     theme(axis.text.y = element_blank(),
-#           legend.position = "none",
-#           axis.text = element_blank(),
-#           axis.title = element_blank())+
-#     facet_wrap(~phylum)+
-#     panel_border(color = "black")+
-#     expand_limits(x=3)
-#   
-# }
-# 
-# n.phages <- 
-#   d.nsig %>% 
-#   group_by(phylum, `virus name`) %>% 
-#   summarise() %>% 
-#   ungroup() %>% 
-#   group_by(phylum) %>% 
-#   summarise(n_phages = n())
-# 
-# p2 <- plot_grid(l.plot$Firmicutes,NULL,
-#                 ncol = 1,rel_heights =  c(179,51)+10)
-# 
-# p3 <- plot_grid(l.plot$Cyanobacteria,l.plot$Actinobacteria,
-#                  l.plot$Bacteroidetes, NULL,
-#                 ncol = 1,rel_heights =  c(63,8,2, 20)+10)
-# 
-# ggsave2(here("phylo-clust","plots","spor_sigma_HostPhylum.png"),
-#         plot_grid(l.plot$Proteobacteria,p2,p3, nrow = 1),
-#         width = 6,height = 10)
-
-# plot for all VOG phages -------------------------------------------------
+# plot  sigmas all VOG phages -------------------------------------------------
 
 # d.sp from vogdb/C_phage host
+vog.sp <- read_csv(here("vogdb","data","vog_phages_Whost.csv"))
  
 
   
@@ -250,48 +153,69 @@ new.sp <-
   summarise(n_sigma = n(), pred_spor = str_c(pred_spor, collapse = ";")) %>% 
   mutate(has_sigma = TRUE, spor_sigma = str_detect(pred_spor,"phylo\\+HMM")) %>% 
   #remove genome cluster duplicates from spp list and add sigma data
-  right_join(., filter(d.sp, is_rep),by = c("taxon" = "tax.id" )) %>% 
+  right_join(., filter(vog.sp, is_rep),by = c("taxon" = "tax.id" )) %>% 
   # mark phages without sigma as such
   mutate(has_sigma = if_else(is.na(has_sigma), FALSE, has_sigma),
          sigma = case_when(
            spor_sigma ~ "spore-like sigma",
            has_sigma ~ "w. sigma",
            TRUE ~ "no sigma"
-         ))
+         )) %>% 
+  # phylum name adjust
+  mutate(phylum =
+           case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
+                     str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
+                     TRUE ~ phylum)) 
 
 
-
+# sum phages by host phylum
 d.plot <- new.sp %>% 
   group_by(phylum, sigma) %>% 
-  summarise(n_phages = n()) %>% 
-  mutate(phylum=str_remove(phylum,"/.*"))
-  
+  summarise(n_phages = n()) 
+
 # add total of phages
-p <- 
+d.plot <-
   d.plot %>% 
   group_by(phylum) %>% 
   summarise(n_total = sum(n_phages)) %>% 
-  ungroup() %>%
-  left_join(d.plot,.) %>% 
-  #organize for plotting
-  filter(n_total>10) %>% 
-  arrange(n_total %>% desc()) %>%
-  mutate(host_phylum = fct_inorder(phylum)) %>%
-  # mutate(sigma =
-  #          fct_relevel(sigma, "no sigma","w. sigma","spore-like sigma") %>%
-  #          fct_rev()) %>%
+  left_join(d.plot,.)
+
+
+#organize for plotting
+d.plot <- d.plot %>% 
+  filter(n_total>10)
   
+
+# order of phyla by phage number
+phyl_fct <- d.plot %>% 
+  select(phylum, n_total) %>% 
+  distinct() %>% 
+  arrange(n_total) %>% 
+   pull(phylum)
+
+#plotting order for sigmas
+sig_fct <- c("no sigma","w. sigma","spore-like sigma")
+
+p <- 
+  d.plot %>% 
+  mutate(phylum = factor(phylum, levels=phyl_fct)) %>% 
+  mutate(sigma = factor(sigma, levels=sig_fct)) %>% 
   # plot
-  ggplot(aes(host_phylum, n_phages ,fill = sigma %>% fct_rev() ))+
+  ggplot(aes(phylum, n_phages ,fill = sigma %>% fct_rev() ))+
   geom_col()+
-  theme_classic()+
   coord_flip()+
   scale_fill_viridis_d()+
-  guides(fill = guide_legend(title = "Sigmas"))
+  theme_classic()+
+  theme(legend.position = c(0.8,0.25),
+        legend.key.size = unit(0.2, "cm"),
+        legend.background = element_blank())+
+  guides(fill = guide_legend(title = "Sigmas"))+
+  xlab ("Host Phylum")+
+  ylab ("No. phage genomes")
 
 ggsave2(here("phylo-clust","plots","spor_sigma_HostPhylum.png"),
         p, #+theme(legend.position = "none"),
-        width = 6,height = 2)
+        width = 4,height = 2)
 
 # _________________----------------------------------------------
 # Focus on phages of Firmicutes --------------------------
