@@ -6,6 +6,7 @@ library(treeio)
 library(ggtreeExtra) #https://bioconductor.org/packages/devel/bioc/vignettes/ggtreeExtra/inst/doc/ggtreeExtra.html
 library(ggnewscale)
 library(cowplot)
+library(viridisLite)
 
 
 # load data ---------------------------------------------------------------
@@ -219,9 +220,11 @@ ggsave2(here("phylo-clust","plots","spor_sigma_HostPhylum.png"),
 
 # _________________----------------------------------------------
 # Focus on phages of Firmicutes --------------------------
+
 d.nsig <-
 d.new %>%
   filter(phylum == "Firmicutes" ) %>% 
+  mutate(spor_sigma = str_detect(pred_spor,"phylo\\+HMM")) %>% 
   # arrange phage by n.sigmas
   mutate(`virus name` = fct_infreq(`virus name`)) %>%
   # assign a positional index to each sigma factor (ordered by prediction)
@@ -238,13 +241,13 @@ d.new %>%
     # genus is also in viral sp name as first word
   mutate(genus2=str_extract(sp,regex(".*? ")) %>% trimws()) %>%
   mutate(genus = trimws(genus)) %>%
-  mutate(genus.plot = if_else(is.na(genus), genus2, genus))
+  mutate(genus.plot = if_else(is.na(genus), genus2, genus)) 
+  
+  
 
 
 
-# > Plot ---------------------------------------------------------------
-    # extract viral family
-    # d.sp <-
+# extract viral family
     d.nsig <- d.nsig %>%
       mutate(viral.family=str_extract(`virus lineage`,
                                       regex("caudovirales;.*", ignore_case = T)))%>%
@@ -252,7 +255,19 @@ d.new %>%
                                      regex("caudovirales; ", ignore_case = T)))%>%
       mutate(viral.family=str_remove(viral.family,
                                      regex(";.*", ignore_case = T))) 
-    lab_text_size=3
+    
+# spore forming genera by Bergey's
+    bergey_spore <- read_csv(here("phylo-clust/data/genus_spore.csv"))
+    
+  d.nsig <- 
+    bergey_spore %>% 
+      select(genus.plot = genus, host_spore_former = spore_former) %>% 
+      left_join(d.nsig, .)
+    
+# > Plot ---------------------------------------------------------------
+  
+  
+  lab_text_size=2.5
 
     l.plot <- list()
 
@@ -261,25 +276,29 @@ l.plot[[vfam]] <-
       d.nsig %>%
 
       filter(viral.family ==vfam) %>%
-      mutate(genus.plot = fct_infreq(genus.plot)) %>%
-      # filter(! genus.plot %in% c("Bacillus", "Priestia")) %>%
-      # filter(! genus.plot %in% c("Staphylococcus", "Enterococcus")) %>%
-
-      
+      #order phages
+      arrange(desc(host_spore_former), desc(sig.position),  genus.plot) %>% 
+      mutate(genus.plot = fct_inorder(genus.plot)) %>%
+      mutate(host_spore_former = 
+               factor(host_spore_former, levels = c(TRUE,FALSE))) %>% 
+  
       ggplot(aes(x=sig.position, y=fct_rev(`virus name`)))+
-      geom_tile(aes(fill=pred_spor), color="black")+
+      geom_tile(aes(fill=spor_sigma), color="black")+
       theme_classic()+
       panel_border(color = "black", size=0.1)+
-      scale_fill_viridis_d(direction = -1, drop = FALSE)+
+      scale_fill_manual(values = viridis(2)[2:1])+
       facet_grid(genus.plot~., scales = "free", space = "free")+
-      geom_text(aes(label = genus.plot), size=lab_text_size,
+      geom_text(aes(label = genus.plot, color = host_spore_former),
+                size=lab_text_size, show.legend = F,
                 x = Inf, y = Inf, hjust = 1.1, vjust = 1.05) +
+      scale_color_manual(values = c("blue","red"))+
       theme(strip.background = element_blank(),
             strip.text = element_blank(),
             legend.position = "none",
             axis.title.y = element_blank(),
             panel.spacing = unit(0, "lines"),
-            plot.title = element_text(hjust = 0.5))+
+            plot.title = element_text(hjust = 0.5),
+            axis.text.y = element_text(size = 8))+
       xlab("Sigma Factor Gene")+
       expand_limits(x=5)+
   scale_x_continuous(breaks = c(1:3))+
@@ -289,20 +308,21 @@ l.plot[[vfam]] <-
 #count viral families for proportional plotting
 n.fams <- d.nsig %>% group_by(viral.family) %>% summarise(n=n())
 
-pA <- egg::ggarrange(l.plot$Myoviridae+
+pA <- egg::ggarrange(l.plot$Siphoviridae+
                        theme(axis.title.x = element_blank(),axis.text.x = element_blank()),
-               # ggplot()+ theme_void(),
-               l.plot$Podoviridae+
-                 theme(axis.title.x = element_blank(),axis.text.x = element_blank()),
-               # ggplot()+ theme_void(),
-               l.plot$Siphoviridae,
-          ncol = 1,heights = c(7,6,61))
+                     l.plot$Podoviridae+
+                       theme(axis.title.x = element_blank(),axis.text.x = element_blank()),
+                     l.plot$Myoviridae+
+                       theme(legend.position = "bottom"),
+
+   
+          ncol = 1,heights = c(61,6,10))
 
 
 
 ggsave2(here("phylo-clust/plots/","sigma_TIGR_content_Firmi.png"),
         plot = plot_grid(l.plot$Herelleviridae, pA , ncol = 2),
-        width = 8, height = 11)
+        width = 8, height = 10)
 
 # summary -----------------------------------------------------------------
 
