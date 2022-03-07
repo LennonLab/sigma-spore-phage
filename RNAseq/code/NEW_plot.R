@@ -3,7 +3,7 @@ library(tidyverse)
 library(cowplot)
 library(gtools)
 
-
+# Import data -------------------------------------------------------------
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
 f <- 
@@ -29,7 +29,7 @@ fc <- d2
 rm(de,d,d2)
 
 
-#------------------
+# * arrange data -------------------------------------------------
 # locus tags
 # list matching delta6 locus_tags with 168:  
 
@@ -57,6 +57,75 @@ d.all <-
   # change genes that were not assigned a p-value for DE to 1 (no change)
   mutate(p=if_else(is.na(p),1,p))%>%
   filter(induced != "pDR110")
+
+# sporulation gene enrich ---------------------
+# Are sporulation genes enriched in the sample of deferentially expressed genes?
+# the FDR corrected p-values for indicating significantly DExd genes.
+
+# sporulation genes by subtiwiki
+d6.spor.cds <- d6.spor.cds %>% 
+  mutate(sw.spore  = str_detect(replace_na(category2," "), regex("sporulation", ignore_case = T)))
+
+
+# define up/sown regulated
+d.all <- d.all %>%
+  mutate(up.down = case_when(
+    (p<0.05) & (fc > 2) ~ "up", 
+    (p<0.05) & (fc < 0.5)~ "down",
+    TRUE ~ "unchanged"))
+
+# record p values
+p.val.spore <- tibble()
+
+# summarize by induced gene
+p.val.spore <-
+  d.all %>% 
+  group_by(induced, up.down, sw.spore) %>% 
+  summarise(n = n()) %>% 
+  # mutate(total = sum(n)) %>% 
+  ungroup() %>% 
+  mutate(sw.spore = if_else(sw.spore, "spor", "other"),
+         gene_cat = paste(sw.spore, up.down, sep = ".")) %>% 
+  select(-up.down, -sw.spore) %>% 
+  pivot_wider(names_from = gene_cat, values_from = n, values_fill = 0) %>% 
+  # define hg parameters
+  mutate(
+    # total sporulation genes
+    m = spor.down + spor.up + spor.unchanged,
+    # non-sporulation genes
+    n = other.down + other.up + other.unchanged,
+    # total number of upregulated genes
+    k.up = spor.up + other.up,
+    # total number of downregulated genes
+    k.down = spor.down + other.down
+  ) %>%
+  # hg test
+  mutate(
+    hg.up = signif(phyper(spor.up, m, n, k.up, lower.tail =F),5),
+    hg.down = signif(phyper(spor.down, m, n, k.down, lower.tail =F),5) 
+  )
+
+# Adjust Pvalue for multiple testing
+p.val.spore <- 
+  p.val.spore %>% 
+  # get single column of al P values
+  pivot_longer(cols = starts_with("hg."), 
+               names_to = "direction",
+               values_to = "p") %>% 
+    mutate(direction = str_replace(direction, "hg", "Padj")) %>% 
+  # P adjustment
+    mutate(p.adj = p.adjust(p, method = "BH")) %>% 
+  # add back to main table of stats
+    select(induced, direction, p.adj) %>% 
+    pivot_wider(names_from = direction, values_from = p.adj) %>% 
+    left_join(p.val.spore, ., by = "induced")
+
+# export analysis test results
+write_csv(p.val.spore,
+          here("RNAseq/data/sporulation_gene_enrichment.csv"))
+# end of HG --------------------------------------------------------------
+
+
 
 # label 20 most significant genes of each treatment
 gene_labs <- d.all %>%
@@ -88,9 +157,6 @@ mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>%
                            TRUE ~ 150))
 
 
-# # triangle characters
-# c.up <- sprintf("\u25B3")
-# c.down <- sprintf("\u25BD")
 
 p <-  d.all %>%
   mutate(up.down = case_when(
