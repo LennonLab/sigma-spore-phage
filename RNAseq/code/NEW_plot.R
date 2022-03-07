@@ -123,79 +123,79 @@ p.val.spore <-
 # export analysis test results
 write_csv(p.val.spore,
           here("RNAseq/data/sporulation_gene_enrichment.csv"))
-# end of HG --------------------------------------------------------------
 
+# Plotting --------------------------------------------------------------
 
+# gene count summary and stats
+gene_dexed <- 
+  p.val.spore %>% 
+  select(induced, starts_with("spor"),starts_with("other"), starts_with("Padj")) %>% 
+  pivot_longer(cols = c(starts_with("spor"),starts_with("other")), 
+               names_to = "g_cat", values_to = "n") %>% 
+  separate(g_cat, into = c("sw.spore", "up.down"), sep = "\\.") %>% 
+  # label for plot with n and adjusted P-value
+  mutate(n_lab = case_when(
+    (sw.spore == "spor" & 
+       up.down == "up") ~ paste(n, stars.pval(Padj.up), sep = " "),
+    (sw.spore == "spor" & 
+       up.down == "down") ~ paste(n, stars.pval(Padj.down), sep = " "),
+    TRUE ~ as.character(n)
+  )) %>% 
 
-# label 20 most significant genes of each treatment
-gene_labs <- d.all %>%
-  # mutate(induced = paste0("P[IPTG]-", induced)) %>% 
-  filter(p<0.05) %>% 
-  group_by(induced) %>%
-  slice_max( n = 10, order_by =  fc)
-
-# sum Dexed
-gene_dexed <- d.all %>%
-  # define logical vector of DE based on p-value
-  mutate(up.down = case_when(
-    (p<0.05) & (fc > 2) ~ "up", 
-    (p<0.05) & (fc < 0.5)~ "down",
-    TRUE ~ "unchaged")) %>%
-  group_by(induced, sw.spore, up.down) %>%
-  summarise(n_changed = n()) %>%
+# adjustments for plotting
   mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
                        TRUE ~ "phage") )  %>% 
   mutate(strip = paste0(pnl,": ",induced)) %>% 
-mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>% 
-  mutate(sw.spore = if_else(sw.spore, "spor. genes", "other") %>% 
+  mutate(sw.spore = str_replace(sw.spore, "spor", "spor. genes") %>% 
            as_factor() %>% fct_rev()) %>% 
+  mutate(up.down = as_factor(up.down) %>% fct_relevel("up","down")) %>% 
   mutate(x_pos = case_when(up.down=="up"~ 7,
                            up.down=="down"~ -7,
                            TRUE ~ 0)) %>% 
-  mutate(y_pos = case_when(up.down=="up"~ 200,
-                           up.down=="down"~ 200,
-                           TRUE ~ 150))
+  mutate(y_pos = case_when(up.down=="up"~ 275,
+                           up.down=="down"~ 275,
+                           TRUE ~ 215)) %>% 
+  mutate(induced = fct_relevel(induced, "ELDg169"))
 
-
-
+# prep for plot
 p <-  d.all %>%
   mutate(up.down = case_when(
     (p<0.05) & (fc > 2) ~ "up", 
     (p<0.05) & (fc < 0.5)~ "down",
-    TRUE ~ "unchaged") %>% 
+    TRUE ~ "unchanged") %>% 
       as_factor() %>% fct_relevel("up","down")) %>%
   mutate(pnl=case_when(induced %in% c("sigF","sigG") ~ "host",
                        TRUE ~ "phage") ) %>%  
-  mutate(strip = paste0(pnl,": ",induced)) %>% 
-  mutate(strip = fct_relevel(strip, "phage: ELDg169", after = 2)) %>%
+  mutate(induced = fct_relevel(induced, "ELDg169")) %>%
   mutate(sw.spore = if_else(sw.spore, "spor. genes", "other") %>% 
            as_factor() %>% fct_rev()) %>% 
-  
+  # plot
   ggplot(aes(log2(fc), -log10(p)))+
-  geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=50,
-            fill = "grey90", alpha = 0.5)+
-  geom_hline(yintercept = -log10(0.05), color = "grey", linetype = 2)+
-  # geom_text(data = gene_dexed, aes(label = paste0("\n ",c.up,up,"\n ",c.down ,down)), 
-            # x= -Inf, y=Inf, vjust= 1, hjust = 0, size = 3)+
+  geom_rect(xmin=-log2(2), xmax=log2(2), ymin=-Inf, ymax=210,
+            fill = "transparent", color = "grey90", alpha = 0.5)+
+  geom_hline(yintercept = -log10(0.05), color = "grey90", linetype = 2)+
   geom_point(aes(color = up.down), size=.5, alpha = 0.5, shape = 20)+
-  geom_text(data = gene_dexed, 
-            aes(label = n_changed, color = up.down, x= x_pos, y = y_pos), 
-            vjust= 0.5, hjust = 0.5, size = 2.5,  show.legend = F)+
-  # ggrepel::geom_text_repel(data = gene_labs, aes(label = gene), max.overlaps = 20)+
-  facet_grid(sw.spore~strip)+
+  geom_label(data = gene_dexed, 
+            aes(label = n_lab, color = up.down, x= x_pos, y = y_pos), 
+            vjust= 0.5, hjust = 0.5, size = 2.5,  show.legend = F,
+            fill = "white", label.size = NA)+
+  facet_grid(sw.spore~pnl + induced)+
   scale_colour_viridis_d(direction = 1)+
   theme_classic()+
   panel_border(color = "black")+
   xlab(expression(log[2]~FC)) + 
   ylab(expression(-log[10]~P~value)) + 
+  ylim(0,280)+
+  # scale_x_continuous(breaks = c(-10,-1,1,10), labels = c(-10,-2,2,10))+
   theme(legend.position = "bottom",
         legend.text = element_text(size=12),
-        legend.title = element_text(size = 12))+
+        legend.title = element_text(size = 12),
+        strip.background = element_blank())+
   labs(color = "expression change")+
-  guides(color = guide_legend(nrow = 2, override.aes = list(size = 4, alpha = 1)))
+  guides(color = guide_legend(nrow = 1, override.aes = list(size = 4, alpha = 1)))
 
-ggsave(here("RNAseq/plots/volcano_plot2.png"), plot = p,
-       width = 7, height = 4)
+ggsave(here("RNAseq/plots/volcano_plot.png"), plot = p,
+       width = 6, height = 4)
 
 save(p, file = here("RNAseq/plots/volcano-plot.Rdata"))
 
