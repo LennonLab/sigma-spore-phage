@@ -36,7 +36,7 @@ d.rax <- d.rax.tbe %>%
 # Add metadata ------------------------------------------------------------
 
 # load viral sigmas data from vog HMM analysis
-load(here("vogdb/data/vog_sigma_clean_tigr.RData"))# d.faa <- read_csv(here("data/sigmas_to_align.csv"))
+load(here("TIGR/data/vog_sigma_clean_tigr.RData"))# d.faa <- read_csv(here("data/sigmas_to_align.csv"))
 d.phage <- d.faa %>%
   filter(protein %in% d.rax$protein.id) %>% 
   rename(protein.id = protein) %>% 
