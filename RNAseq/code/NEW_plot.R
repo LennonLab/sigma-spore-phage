@@ -121,7 +121,21 @@ p.val.spore <-
     left_join(p.val.spore, ., by = "induced")
 
 # export analysis test results
-write_csv(p.val.spore,
+# write_csv(p.val.spore,
+#           here("RNAseq/data/sporulation_gene_enrichment.csv"))
+
+# format for sul. data
+p.down <- select(p.val.spore, -ends_with("up")) %>% mutate(direction = "down")
+p.up <- select(p.val.spore, -ends_with("down")) %>% mutate(direction = "up")
+
+colnames(p.up) <-  str_replace (colnames(p.up), ".up", "\\.DExed")
+colnames(p.down) <-  str_replace (colnames(p.down), ".down", "\\.DExed")
+
+p.sup <- bind_rows(p.up, p.down) %>%
+  arrange(induced) %>%
+  relocate(direction, .after = 1)
+
+write_csv(p.sup,
           here("RNAseq/data/sporulation_gene_enrichment.csv"))
 
 # Plotting --------------------------------------------------------------
