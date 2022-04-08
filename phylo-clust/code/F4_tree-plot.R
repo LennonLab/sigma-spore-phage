@@ -518,8 +518,9 @@ p.zoom2 <-
   geom_fruit(geom = "geom_tile",
              # mapping=aes(fill=tigr.type, color=tigr.type),
              mapping=aes(fill=tigr.type), color="white",
-             width = 0.2, offset = .1, show.legend = F)+
-  scale_fill_viridis_d(direction = -1, drop=FALSE)+ #guide = "none",
+             width = 0.2, offset = .1, show.legend = T)+
+  scale_fill_manual(values = viridisLite::viridis(3)[2:1], guide = "none") +
+  # scale_fill_viridis_d(direction = -1, drop=FALSE)+ #guide = "none",
   layout_rectangular()+
   
   new_scale_fill()+
