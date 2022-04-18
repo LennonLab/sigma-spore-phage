@@ -158,9 +158,9 @@ new.sp <-
   # mark phages without sigma as such
   mutate(has_sigma = if_else(is.na(has_sigma), FALSE, has_sigma),
          sigma = case_when(
-           spor_sigma ~ "spore-like sigma",
-           has_sigma ~ "w. sigma",
-           TRUE ~ "no sigma"
+           spor_sigma ~ "spore-like",
+           has_sigma ~ "non-spore-like",
+           TRUE ~ "none encoded"
          )) %>% 
   # phylum name adjust
   mutate(phylum =
@@ -195,7 +195,7 @@ phyl_fct <- d.plot %>%
    pull(phylum)
 
 #plotting order for sigmas
-sig_fct <- c("no sigma","w. sigma","spore-like sigma")
+sig_fct <- c("none encoded","non-spore-like","spore-like")
 
 p <- 
   d.plot %>% 
@@ -207,10 +207,11 @@ p <-
   coord_flip()+
   scale_fill_viridis_d()+
   theme_classic()+
-  theme(legend.position = c(0.8,0.25),
+  theme(legend.position = c(0.77,0.26),
         legend.key.size = unit(0.2, "cm"),
-        legend.background = element_blank())+
-  guides(fill = guide_legend(title = "Sigmas"))+
+        legend.background = element_blank(),
+        plot.margin = margin(0.1, 0.4, 0.1, 0.1, "cm"),)+
+  guides(fill = guide_legend(title = "sigma factors\nin genome", reverse = T))+
   xlab ("Host Phylum")+
   ylab ("No. phage genomes")
 

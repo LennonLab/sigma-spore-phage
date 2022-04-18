@@ -408,7 +408,7 @@ p.lysis <- d.plot %>%
   filter(Time <= 10) %>% 
   ggplot(aes(x=Time, y=m, color=moi))+
   geom_vline(xintercept = int.limit, color = "grey")+
-  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5)+
+  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5, show.legend = F)+
   geom_line(size=1)+
   #highlight no phage
    geom_line(data = filter(d.plot, moi=="0" & Time <= 10), size=1.5)+
@@ -559,4 +559,29 @@ ggsave(here("virulence/plots", "virulence_steps.png"), p.all,
     #   print(target = here("virulence/plots", "virulence_steps.pptx"))
 p.all
 ```
+# main figure
+```{r}
+p.bottom <- plot_grid(NULL, p.final,NULL, rel_widths = c(0.2,1,1.5), nrow = 1)
+p.all <-  plot_grid(p.lysis,p.bottom, ncol = 1, labels = c("a", "b"))
 
+#add white background
+p.all <-ggdraw(p.all) + 
+  theme(plot.background = element_rect(fill="white", color = NA))
+
+ggsave(here("virulence/plots", "virulence_main2.png"), 
+      p.all,
+      width = 6, height = 4)
+
+    #export to pptx using officer and rvg
+    library (officer)
+    library(rvg)
+
+    read_pptx() %>%
+      add_slide(layout = "Blank", master = "Office Theme" ) %>%
+      ph_with(dml(ggobj = p.all),
+              location = ph_location(type = "body",
+                                     left = 0, top = 0,
+                                     width = 6, height = 4)) %>%
+      print(target = here("virulence/plots", "virulence_main.pptx"))
+p.all
+```

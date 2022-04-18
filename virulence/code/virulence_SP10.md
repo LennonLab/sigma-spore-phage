@@ -11,12 +11,12 @@ library(here)
 library(tidyverse)
 ```
 
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 
-    ## v ggplot2 3.3.3     v purrr   0.3.4
-    ## v tibble  3.1.0     v dplyr   1.0.5
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   1.4.0     v forcats 0.5.1
+    ## v ggplot2 3.3.5     v purrr   0.3.4
+    ## v tibble  3.1.6     v dplyr   1.0.8
+    ## v tidyr   1.2.0     v stringr 1.4.0
+    ## v readr   2.1.2     v forcats 0.5.1
 
     ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
     ## x dplyr::filter() masks stats::filter()
@@ -78,13 +78,19 @@ phage.vol <- 0.1 #ml
 Based on paper *Storms, Zachary J., et al. “The Virulence Index: A
 Metric for Quantitative Analysis of Phage Virulence.” PHAGE 2019*
 
-I want to commpare SP10 WT to the *Δ**g*120 on both the WT host (*Δ*6)
-anf its *Δ*6*Δ**s**i**g**F* derivative.
+I want to commpare SP10 WT to the
+![\\Delta g120](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5CDelta%20g120 "\Delta g120")
+on both the WT host
+(![\\Delta 6](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5CDelta%206 "\Delta 6"))
+anf its
+![\\Delta 6\\Delta sigF](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5CDelta%206%5CDelta%20sigF "\Delta 6\Delta sigF")
+derivative.
 
 I ran the experiments twice. In the first run I made a mistake in the
 columns to which the phages were added. This resulted in having complete
-data from that experiment only for SP10 *Δ**g*120. Below I analyze the
-data from both experiments.
+data from that experiment only for SP10
+![\\Delta g120](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5CDelta%20g120 "\Delta g120").
+Below I analyze the data from both experiments.
 
 ## load and organize data
 
@@ -106,17 +112,14 @@ d <- gather(input, key="well", value = "OD600", colnames(input)[-c(1:2)])
 meta <- read_csv(here("virulence/data/20190823_meta.csv"))
 ```
 
-    ## 
+    ## Rows: 96 Columns: 7
     ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   well = col_character(),
-    ##   row = col_character(),
-    ##   col = col_double(),
-    ##   host = col_character(),
-    ##   colony = col_double(),
-    ##   phage = col_character(),
-    ##   dilution = col_double()
-    ## )
+    ## Delimiter: ","
+    ## chr (4): well, row, host, phage
+    ## dbl (3): col, colony, dilution
+    ## 
+    ## i Use `spec()` to retrieve the full column specification for this data.
+    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
 d <-merge(d, meta, by = "well")
@@ -132,17 +135,14 @@ input <-
 meta <- read_csv(here("virulence/data/20190826_meta.csv"))
 ```
 
-    ## 
+    ## Rows: 96 Columns: 7
     ## -- Column specification --------------------------------------------------------
-    ## cols(
-    ##   well = col_character(),
-    ##   row = col_character(),
-    ##   col = col_double(),
-    ##   host = col_character(),
-    ##   colony = col_double(),
-    ##   phage = col_character(),
-    ##   dilution = col_double()
-    ## )
+    ## Delimiter: ","
+    ## chr (4): well, row, host, phage
+    ## dbl (3): col, colony, dilution
+    ## 
+    ## i Use `spec()` to retrieve the full column specification for this data.
+    ## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 
 ``` r
 #transform to long format
@@ -414,7 +414,8 @@ sum.noPHI <-
     summarise( A0=mean(auc), sd=sd(auc))
 ```
 
-    ## `summarise()` has grouped output by 'host'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'host'. You can override using the
+    ## `.groups` argument.
 
 ``` r
 # sum.noPHI %>%
@@ -443,7 +444,8 @@ vindex%>%
       scale_colour_viridis_d()
 ```
 
-    ## `summarise()` has grouped output by 'host', 'colony', 'phage'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'host', 'colony', 'phage'. You can override
+    ## using the `.groups` argument.
 
 ![](virulence_SP10_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
@@ -460,7 +462,8 @@ sum.phi <- vindex%>%
   summarise(  n=n())
 ```
 
-    ## `summarise()` has grouped output by 'host', 'colony'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'host', 'colony'. You can override using
+    ## the `.groups` argument.
 
 ``` r
 sum.phi$Ap <- NA
@@ -517,7 +520,7 @@ t.test(Vp~phage, sum.phi)
     ## 
     ## data:  Vp by phage
     ## t = 1.2194, df = 12.886, p-value = 0.2446
-    ## alternative hypothesis: true difference in means is not equal to 0
+    ## alternative hypothesis: true difference in means between group del120 and group wt is not equal to 0
     ## 95 percent confidence interval:
     ##  -0.01609505  0.05772004
     ## sample estimates:
@@ -578,7 +581,7 @@ p.lysis <- d.plot %>%
   filter(Time <= 10) %>% 
   ggplot(aes(x=Time, y=m, color=moi))+
   geom_vline(xintercept = int.limit, color = "grey")+
-  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5)+
+  geom_linerange(aes(ymin = m-v, ymax = m+v), alpha = 0.5, show.legend = F)+
   geom_line(size=1)+
   #highlight no phage
    geom_line(data = filter(d.plot, moi=="0" & Time <= 10), size=1.5)+
@@ -703,7 +706,8 @@ p.vi <- vindex%>%
   ylim(NA,1)
 ```
 
-    ## `summarise()` has grouped output by 'phage'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'phage'. You can override using the
+    ## `.groups` argument.
 
 ``` r
 p.vi
@@ -740,4 +744,33 @@ ggsave(here("virulence/plots", "virulence_steps.png"), p.all,
 p.all
 ```
 
-![](virulence_SP10_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-18-1.png)<!-- --> \#
+main figure
+
+``` r
+p.bottom <- plot_grid(NULL, p.final,NULL, rel_widths = c(0.2,1,1.5), nrow = 1)
+p.all <-  plot_grid(p.lysis,p.bottom, ncol = 1, labels = c("a", "b"))
+
+#add white background
+p.all <-ggdraw(p.all) + 
+  theme(plot.background = element_rect(fill="white", color = NA))
+
+ggsave(here("virulence/plots", "virulence_main2.png"), 
+      p.all,
+      width = 6, height = 4)
+
+    #export to pptx using officer and rvg
+    library (officer)
+    library(rvg)
+
+    read_pptx() %>%
+      add_slide(layout = "Blank", master = "Office Theme" ) %>%
+      ph_with(dml(ggobj = p.all),
+              location = ph_location(type = "body",
+                                     left = 0, top = 0,
+                                     width = 6, height = 4)) %>%
+      print(target = here("virulence/plots", "virulence_main.pptx"))
+p.all
+```
+
+![](virulence_SP10_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
