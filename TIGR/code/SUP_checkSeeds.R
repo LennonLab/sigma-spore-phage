@@ -139,6 +139,9 @@ for(i in which(!is.na(d.seeds$nuc.acc))){
 write_csv(d.seeds, here("TIGR/data/seed_genomic.csv"))
 write_csv(d.phaster, here("TIGR/data/seed_phaster.csv"))
 
+d.seeds <- read_csv(here("TIGR/data/seed_genomic.csv"))
+d.phaster <- read_csv(here("TIGR/data/seed_phaster.csv"))
+
 # how well did we do?
 table(d.seeds$in_prophage, useNA = "a")
 # FALSE  TRUE  <NA> 
