@@ -1,0 +1,18 @@
+﻿class,order,family,genus,spore_former,Bergey's source,note
+Bacilli,Bacillales,Bacillaceae,Bacillus,TRUE,https://doi.org/10.1002/9781118960608.gbm00530,
+Bacilli,Bacillales,Bacillaceae,Geobacillus,TRUE,https://doi.org/10.1002/9781118960608.gbm00533,
+Bacilli,Bacillales,Bacillaceae,Peribacillus,TRUE,https://doi.org/10.1002/9781118960608.fbm00112,
+Bacilli,Bacillales,Bacillaceae,Priestia,TRUE,https://doi.org/10.1002/9781118960608.gbm00530,formerly Bacillus megaterium
+Bacilli,Bacillales,Listeriaceae,Brochothrix,FALSE,https://doi.org/10.1002/9781118960608.gbm00546,
+Bacilli,Bacillales,Listeriaceae,Listeria,FALSE,https://doi.org/10.1002/9781118960608.gbm00547,
+Bacilli,Bacillales,Paenibacillaceae,Brevibacillus,TRUE,https://doi.org/10.1002/9781118960608.gbm00550,
+Bacilli,Bacillales,Paenibacillaceae,Paenibacillus,TRUE,https://doi.org/10.1002/9781118960608.gbm00553,
+Bacilli,Bacillales,Staphylococcaceae,Staphylococcus,FALSE,https://doi.org/10.1002/9781118960608.gbm00569,
+Bacilli,Lactobacillales,Enterococcaceae,Enterococcus,FALSE,https://doi.org/10.1002/9781118960608.gbm00600,
+Bacilli,Lactobacillales,Lactobacillaceae,Lacticaseibacillus,FALSE,https://doi.org/10.1002/9781118960608.fbm00126,
+Bacilli,Lactobacillales,Lactobacillaceae,Lactiplantibacillus,FALSE,https://doi.org/10.1002/9781118960608.fbm00126,
+Bacilli,Lactobacillales,Lactobacillaceae,Levilactobacillus,FALSE,https://doi.org/10.1002/9781118960608.fbm00126,
+Bacilli,Lactobacillales,Lactobacillaceae,Limosilactobacillus,FALSE,https://doi.org/10.1002/9781118960608.fbm00126,
+Bacilli,Lactobacillales,Streptococcaceae,Lactococcus,FALSE,https://doi.org/10.1002/9781118960608.fbm00128,
+Bacilli,Lactobacillales,Streptococcaceae,Streptococcus,FALSE,https://doi.org/10.1002/9781118960608.fbm00128,
+Clostridia,Eubacteriales,Clostridiaceae,Clostridium,TRUE,https://doi.org/10.1002/9781118960608.gbm00619,

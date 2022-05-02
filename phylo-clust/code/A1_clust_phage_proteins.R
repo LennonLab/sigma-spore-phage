@@ -3,7 +3,7 @@ library(tidyverse)
 library(seqinr)
 library(foreach)
 
-# load viral sigmas from vog HMM analysis
+# load viral sigmas from VOG
 load(here("vogdb/data/vog_sigma_clean_Whost.RData"))
 
 

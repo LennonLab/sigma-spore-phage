@@ -37,7 +37,7 @@ pid_sigBFG <- pid_sigBFG %>%
 # sporulation vs PID -------------------------------------------------
 
 # import sporulation data
-d.spor <- read_csv(here("phylo/data/FCM_sporulation_induction.csv")) %>% 
+d.spor <- read_csv(here("synthesis/data/FCM_sporulation_induction.csv")) %>% 
   filter(strain != "Empty Vector")
 
 # summarise 
@@ -99,7 +99,8 @@ deg <- read_csv("RNAseq/data/sporulation_gene_enrichment.csv")
 d.both2 <- pid_sigBFG %>% 
   rename(strain = seqname2) %>% 
   mutate(strain = str_remove(strain, "Bsub_")) %>% 
-  right_join(.,deg, by = c("strain" = "gene")) %>% 
+  right_join(.,deg %>% filter(direction=="up"),
+             by = c("strain" = "induced")) %>% 
   mutate(perc_id = if_else(strain == "sigF", 100, perc_id))
 
 # # linear model
@@ -109,14 +110,14 @@ d.both2 <- pid_sigBFG %>%
 # pval <- sum.lm$coefficients["perc_id","Pr(>|t|)"]%>% signif(2)
 
 # get r for plot
-r <- cor(d.both2$perc_id, d.both2$spor.DEG, method = "spearman") %>% 
+r <- cor(d.both2$perc_id, d.both2$spor.DExed, method = "spearman") %>% 
   signif(3)
-p <- cor.test(d.both2$perc_id, d.both2$spor.DEG, 
+p <- cor.test(d.both2$perc_id, d.both2$spor.DExed, 
               method = "spearman")$p.value %>% 
   signif(3)
 
 p2 <- d.both2 %>% 
-  ggplot(aes(perc_id, spor.DEG)) +
+  ggplot(aes(perc_id, spor.DExed)) +
   geom_smooth(method = 'lm', formula = 'y ~ x', color = "black", 
               se = F, linetype = 2)+
   # geom_abline(intercept = linearMod$coefficients[1],
@@ -141,5 +142,5 @@ save_plot(here("synthesis/plots","ID_yield_DEG.png"),
           plot_grid(p1+theme(legend.position = "none"),
                     NULL, p2,
                     rel_widths = c(1,0.1,1.4),
-                    labels = c("a","","b"), nrow = 1),
+                    labels = c("c","","d"), nrow = 1),
           base_height = 3, base_width = 7)

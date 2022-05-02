@@ -36,7 +36,7 @@ d.rax <- d.rax.tbe %>%
 # Add metadata ------------------------------------------------------------
 
 # load viral sigmas data from vog HMM analysis
-load(here("vogdb/data/vog_sigma_clean_tigr.RData"))# d.faa <- read_csv(here("data/sigmas_to_align.csv"))
+load(here("TIGR/data/vog_sigma_clean_tigr.RData"))# d.faa <- read_csv(here("data/sigmas_to_align.csv"))
 d.phage <- d.faa %>%
   filter(protein %in% d.rax$protein.id) %>% 
   rename(protein.id = protein) %>% 
@@ -219,13 +219,13 @@ for (i in internal){
 tigr.spore=c("spore_sigmaK","spore_sigmaE","spore_sigF","spore_sigG")
 d.rax <- d.rax %>% 
   #classify by spore function
-  mutate(tigr.type = case_when(tigr.hit %in% tigr.spore ~ tigr.hit,
+  mutate(tigr.type = case_when(tigr.hit %in% tigr.spore ~ "spore-like sigma",
                                tigr.hit == "no_hit" ~ "no hit",
-                               TRUE ~ "other")) %>% 
-  mutate(tigr.type = str_remove(tigr.type, "spore_")) %>% 
-  mutate(tigr.type = str_replace(tigr.type, "sigma", "sig")) %>% 
-  mutate(tigr.type = str_replace(tigr.type, "Sig", "sig")) %>% 
-  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit")) 
+                               TRUE ~ "other"))
+  # mutate(tigr.type = str_remove(tigr.type, "spore_")) %>% 
+  # mutate(tigr.type = str_replace(tigr.type, "sigma", "sig")) %>% 
+  # mutate(tigr.type = str_replace(tigr.type, "Sig", "sig")) %>% 
+  # mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit")) 
   
 
 # >> add phage labels -----------------------------------------------------
@@ -325,6 +325,10 @@ d.rax <-
   write.tree(phy = ., here("phylo-clust/data/PlotPhylogeny_wData.tree"))
 
 # ____________-------------------
+
+
+
+
 # Plot tree ---------------------------------------------------------------
 
 # >> base tree----------------
@@ -333,6 +337,8 @@ p1 <-
   mutate(host_phylum = str_replace(host_phylum, 
                                    "Deinococcus-Thermus",
                                    "Deinococcus\n-Thermus")) %>% 
+# Arrange host levels
+  mutate(host_phylum = fct_relevel(host_phylum, "Firmicutes", "Actinobacteria", "Cyanobacteria")) %>% 
   as.treedata() %>% 
   ggtree(aes(color = clade), #branch.length = "none",
          layout = "fan", open.angle=5, size=0.001)+
@@ -385,7 +391,7 @@ p3 <- p2 +
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
              mapping=aes( fill=host_phylum, color = host_phylum),
-             width = 0.3)+
+             width = 0.3, offset = 0.1)+
   scale_fill_discrete(guide = guide_legend(nrow =  3, title = "C2: Host Phyla"))+
   scale_color_discrete(guide = guide_legend(nrow = 3, title = "C2: Host Phyla"))+
   
@@ -402,8 +408,8 @@ p3 <- p2 +
   # # phage labels
   # geom_fruit(geom = "geom_text", size=2,
   #            mapping = aes(label=phage_lab), color="blue")+
-  scale_fill_viridis_d(guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
-  scale_color_viridis_d(guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
+  scale_fill_viridis_d(direction = -1, guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
+  scale_color_viridis_d(direction = -1,guide = guide_legend(nrow = 3, title = "C3: TIGRfam"))+
   theme(legend.key.height = unit(.1, "points"),
         legend.key.width = unit(4, "points"),
         legend.text = element_text(size = 5), 
@@ -432,16 +438,37 @@ ggsave(filename = here("phylo-clust","plots","sigma_circle_rooted.pdf"),
        plot = p4,#+theme(legend.position = "none"),
        height=6, width = 8)
 
+# _________________________________----------------------------------------
 # zoom into sigF/G ---------------------------------------------------------
-p.zoom <- 
+# helper functions to match colors between panels
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+} #https://stackoverflow.com/questions/8197559/emulate-ggplot2-default-color-palette
+
+# subset tree
+d.zoom <- 
   d.rax %>% 
-  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
-           fct_rev()) %>%
+  # mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
+  #          fct_rev()) %>%
   as.treedata() %>% 
   tree_subset(node = mrca.sigSPORE, levels_back = 0) %>% 
+  as_tibble()
+
+# define sigB sub-clade
+mrca.sigB <- 
+  d.zoom %>% 
+  filter(tip.label %in% c("Bacillus_subtilis_sigB", 
+                          "Mycobacterium_tuberculosis_sigF",
+                          "Clostridium phage phi3626")) %>%
+  pull(node) %>% 
+  MRCA(d.zoom, .) %>% pull(node)
   
+p.zoom <-   
+  d.zoom %>% 
+  as.treedata() %>% 
   ggtree(aes(color = clade), size=0.01)+
-  geom_rootedge(size=0.01, rootedge = .1)+
+  geom_rootedge(size=0.01, rootedge = .1)+  
   scale_color_manual(values = c("grey20", "blue"), 
                      guide = "none")+
   geom_tiplab(aes(label = str_remove(tip.label,"_NA"), color = clade), size =  1)+
@@ -454,7 +481,8 @@ p.zoom <-
   #                   guide = "none")
 
 p.zoom2 <- 
-  p.zoom + 
+  p.zoom +
+
   # B. subtilis tip labels
   geom_fruit(geom = "geom_text", size=2,
              mapping = aes(label=bs.label), color="grey20", offset = 0.2)+
@@ -467,7 +495,7 @@ p.zoom2 <-
   geom_fruit(geom = "geom_tile",
              # mapping=aes( fill=clade, color = clade),
              mapping=aes( fill=clade), color = "white",
-             width = 0.2, offset = .2)+
+             width = 0.2, offset = .5)+
   # scale_color_manual(values = c("grey20", "blue"), guide = "none")+
   scale_fill_manual(values = c("grey20", "blue"), guide = "none") +
   
@@ -479,9 +507,9 @@ p.zoom2 <-
              # mapping=aes( fill=host_phylum, color = host_phylum),
              mapping=aes(fill=host_phylum), color="white",
              width = 0.2, offset = .1)+
-  scale_fill_discrete()+
-  # scale_fill_discrete(guide = "none")+
-  # scale_color_discrete(guide = "none")+
+  # scale_fill_discrete()+
+  scale_fill_manual(values = gg_color_hue(8)[1:3],guide = "none")+
+  scale_color_manual(values = gg_color_hue(8)[1:3],guide = "none")+
   
   # circle 3: TIGR
   
@@ -489,17 +517,25 @@ p.zoom2 <-
   new_scale_color()+
   geom_fruit(geom = "geom_tile",
              # mapping=aes(fill=tigr.type, color=tigr.type),
-             mapping=aes(fill=tigr.hit), color="white",
-             width = 0.2, offset = .1)+
-  scale_fill_viridis_d(direction = -1, drop=FALSE)+ #guide = "none",
-  layout_rectangular()
+             mapping=aes(fill=tigr.type), color="white",
+             width = 0.2, offset = .1, show.legend = T)+
+  scale_fill_manual(values = viridisLite::viridis(3)[2:1], guide = "none") +
+  # scale_fill_viridis_d(direction = -1, drop=FALSE)+ #guide = "none",
+  layout_rectangular()+
+  
+  new_scale_fill()+
+  new_scale_color()+
+  # geom_cladelabel(node=mrca.sigB, label = "sigB", fontsize = 2.5,color = "grey",
+  #                 offset = 5, extend = 8, offset.text = 0.8)+
+  geom_hilight(node = mrca.sigB, color = "grey70", fill=alpha(NA, 0),
+               extend = 5, size=0.2) 
 
 
 
 
 ggsave(filename = here("phylo-clust","plots","zoom.pdf"),
        plot = p.zoom2,
-       height=6, width = 4)
+       height=6, width = 3)
   
 
 # export  to ppt ----------------------------------------------------------
@@ -527,93 +563,93 @@ read_pptx() %>%
                                  left = 0, top = 0, width = 3.1, height = 5.6)) %>%
   print(target = here("phylo-clust","plots","sigma_circle_rooted.pptx"))
 
-#########___________----------
-# zoom into sigA/D/H ---------------------------------------------------------
-mrca_adh <- 
-  MRCA(d.rax, c(372,500)) %>% pull(node)
-
-
-p.new_zoom <- 
-  d.rax %>% 
-  as.treedata() %>% 
-  tree_subset(node = mrca_adh, levels_back = 0) %>% 
-  as_tibble()
-
-mrca.sigSPORE_new <- p.new_zoom %>% 
-  filter(bs.label %in% c("sigF", "sigG", "sigE")) %>%
-  pull(node) %>% 
-  MRCA(p.new_zoom, .) %>% pull(node)
-  
-p.new_zoom <- 
-  p.new_zoom %>% 
-  mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
-           fct_rev()) %>%
-  as.treedata() %>% 
-  ggtree(aes(color = clade), size=0.01)+
-  geom_rootedge(size=0.01, rootedge = .1)+
-  scale_color_manual(values = c("grey20", "blue"), 
-                     guide = "none")+
-  geom_tiplab(aes(label = str_remove(tip.label,"_NA"), color = clade), size =  1)+
-  # geom_tiplab(aes(label = phage_lab), color = "navyblue", size =  2, offset = 1)+
-  # geom_tiplab(aes(label = bs.label), color = "red", size =  2, offset = 1 )+
-  # bootstrap support
-  geom_text(aes(x=branch, label=round(tbe*100)), vjust=-.5, color='black', size=1) 
-
-p.new_zoom <- 
-  p.new_zoom%>% 
-  collapse(node=mrca.sigSPORE_new)  +
-  # geom_tiplab(aes(x=(node==mrca.sigSPORE_new)), label = "Sporulation\nsigma")
-  geom_point2(aes(subset=(node==mrca.sigSPORE_new)), shape=24, size=5, fill='green')
-
-p.new_zoom2 <- 
-  p.new_zoom + 
-  # B. subtilis tip labels
-  geom_fruit(geom = "geom_text", size=2,
-             mapping = aes(label=bs.label), color="grey20", offset = 0.2)+
-  # phage labels
-  geom_fruit(geom = "geom_text", size=2,
-             mapping = aes(label=phage_lab), color="blue", offset = 0)+
-  # circle 1 :phage vs bacteria
-  new_scale_fill()+
-  new_scale_color()+
-  geom_fruit(geom = "geom_tile",
-             # mapping=aes( fill=clade, color = clade),
-             mapping=aes( fill=clade), color = "white",
-             width = 0.2, offset = .2)+
-  # scale_color_manual(values = c("grey20", "blue"), guide = "none")+
-  scale_fill_manual(values = c("grey20", "blue"), guide = "none") +
-  
-  # circle 2: Bacterial/ host taxonomy
-  
-  new_scale_fill()+
-  new_scale_color()+
-  geom_fruit(geom = "geom_tile",
-             # mapping=aes( fill=host_phylum, color = host_phylum),
-             mapping=aes(fill=host_phylum), color="white",
-             width = 0.2, offset = .1)+
-  scale_fill_discrete(guide = "none")+
-  # scale_color_discrete(guide = "none")+
-  
-  # circle 3: TIGR
-  
-  new_scale_fill()+
-  new_scale_color()+
-  geom_fruit(geom = "geom_tile",
-             # mapping=aes(fill=tigr.type, color=tigr.type),
-             mapping=aes(fill=tigr.type), color="white",
-             width = 0.2, offset = .1)+
-  
-  scale_fill_viridis_d( drop=FALSE, direction = -1)+
-  # scale_color_viridis_d(guide = "none")+
-  layout_rectangular()
-
-
-
-
-ggsave(filename = here("phylo-clust","plots","zoom_ADH.pdf"),
-       plot = p.new_zoom2,
-       height=6, width = 4)
-
+# #########___________----------
+# # zoom into sigA/D/H ---------------------------------------------------------
+# mrca_adh <- 
+#   MRCA(d.rax, c(372,500)) %>% pull(node)
+# 
+# 
+# p.new_zoom <- 
+#   d.rax %>% 
+#   as.treedata() %>% 
+#   tree_subset(node = mrca_adh, levels_back = 0) %>% 
+#   as_tibble()
+# 
+# mrca.sigSPORE_new <- p.new_zoom %>% 
+#   filter(bs.label %in% c("sigF", "sigG", "sigE")) %>%
+#   pull(node) %>% 
+#   MRCA(p.new_zoom, .) %>% pull(node)
+#   
+# p.new_zoom <- 
+#   p.new_zoom %>% 
+#   mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
+#            fct_rev()) %>%
+#   as.treedata() %>% 
+#   ggtree(aes(color = clade), size=0.01)+
+#   geom_rootedge(size=0.01, rootedge = .1)+
+#   scale_color_manual(values = c("grey20", "blue"), 
+#                      guide = "none")+
+#   geom_tiplab(aes(label = str_remove(tip.label,"_NA"), color = clade), size =  1)+
+#   # geom_tiplab(aes(label = phage_lab), color = "navyblue", size =  2, offset = 1)+
+#   # geom_tiplab(aes(label = bs.label), color = "red", size =  2, offset = 1 )+
+#   # bootstrap support
+#   geom_text(aes(x=branch, label=round(tbe*100)), vjust=-.5, color='black', size=1) 
+# 
+# p.new_zoom <- 
+#   p.new_zoom%>% 
+#   collapse(node=mrca.sigSPORE_new)  +
+#   # geom_tiplab(aes(x=(node==mrca.sigSPORE_new)), label = "Sporulation\nsigma")
+#   geom_point2(aes(subset=(node==mrca.sigSPORE_new)), shape=24, size=5, fill='green')
+# 
+# p.new_zoom2 <- 
+#   p.new_zoom + 
+#   # B. subtilis tip labels
+#   geom_fruit(geom = "geom_text", size=2,
+#              mapping = aes(label=bs.label), color="grey20", offset = 0.2)+
+#   # phage labels
+#   geom_fruit(geom = "geom_text", size=2,
+#              mapping = aes(label=phage_lab), color="blue", offset = 0)+
+#   # circle 1 :phage vs bacteria
+#   new_scale_fill()+
+#   new_scale_color()+
+#   geom_fruit(geom = "geom_tile",
+#              # mapping=aes( fill=clade, color = clade),
+#              mapping=aes( fill=clade), color = "white",
+#              width = 0.2, offset = .2)+
+#   # scale_color_manual(values = c("grey20", "blue"), guide = "none")+
+#   scale_fill_manual(values = c("grey20", "blue"), guide = "none") +
+#   
+#   # circle 2: Bacterial/ host taxonomy
+#   
+#   new_scale_fill()+
+#   new_scale_color()+
+#   geom_fruit(geom = "geom_tile",
+#              # mapping=aes( fill=host_phylum, color = host_phylum),
+#              mapping=aes(fill=host_phylum), color="white",
+#              width = 0.2, offset = .1)+
+#   scale_fill_discrete(guide = "none")+
+#   # scale_color_discrete(guide = "none")+
+#   
+#   # circle 3: TIGR
+#   
+#   new_scale_fill()+
+#   new_scale_color()+
+#   geom_fruit(geom = "geom_tile",
+#              # mapping=aes(fill=tigr.type, color=tigr.type),
+#              mapping=aes(fill=tigr.type), color="white",
+#              width = 0.2, offset = .1)+
+#   
+#   scale_fill_viridis_d( drop=FALSE, direction = -1)+
+#   # scale_color_viridis_d(guide = "none")+
+#   layout_rectangular()
+# 
+# 
+# 
+# 
+# ggsave(filename = here("phylo-clust","plots","zoom_ADH.pdf"),
+#        plot = p.new_zoom2,
+#        height=6, width = 4)
+# 
 
 # trim margins ------------------------------------------------------------
 # https://yulab-smu.top/treedata-book/faq.html#circular-blank

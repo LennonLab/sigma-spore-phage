@@ -5,6 +5,7 @@ phylo/data/tmp_sigma/*
 /*.pptx
 vogdb/data/vog_all.fna
 vogdb/data/cd-clusts/vog_cd-clust_MIUViG
+*.pptx
 # History files
 .Rhistory
 .Rapp.history

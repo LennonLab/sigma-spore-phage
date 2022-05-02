@@ -248,6 +248,14 @@ d.sp%>%
             perc_multi = sum(n.sigma>1)/n(),
             perc_single = sum(n.sigma==1)/n())
 
+# clean to remove columns with no information (all NA)
+d.sp <- d.sp %>% 
+  select(where(~!all(is.na(.x))))
+# removed : `KEGG GENOME` `KEGG DISEASE` DISEASE `sample type` `source organism`
+
+# # save data
+write_csv(d.sp, here("vogdb","data","vog_phages_Whost.csv"))
+
 
 # _____________--------------------
 # Sigma presence plots ----------------------------------------------------
