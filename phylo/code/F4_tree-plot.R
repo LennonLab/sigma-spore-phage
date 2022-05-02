@@ -102,7 +102,7 @@ ecf.nodes <- d.rax %>%
   c(., ecf.nodes) %>% 
   unique()
 
-# as.treedata(d.rax) %>% 
+# as.treedata(d.rax) %>%
 #   ggtree()+
 #   geom_point2(aes(subset = (node %in% ecf.nodes)), size=2, color = "red")+
 #   geom_point2(aes(subset = (node %in% root_ecf)), size=2, color = "blue")+
@@ -262,10 +262,10 @@ d.rax %>%
              mapping = aes(label=bs.label), color="grey20", offset = 0.1)
 ggsave(here("phylo","plots","sigma_circle_NODES.pdf"), height=15, width = 15)
 
-mrca.sigA <- MRCA(d.rax, c(409,440,380)) %>% pull(node)
-mrca.gp55 <- MRCA(d.rax, c(469,566)) %>% pull(node)
-mrca.gp34 <- MRCA(d.rax, c(185,205)) %>% pull(node)
-mrca.ecf <- MRCA(d.rax, c(177,54)) %>% pull(node)
+mrca.sigA <- MRCA(d.rax, c(587,633)) %>% pull(node)
+mrca.gp55 <- MRCA(d.rax, c(190,209)) %>% pull(node)
+mrca.gp34 <- MRCA(d.rax, c(333,314,266)) %>% pull(node)
+mrca.ecf <- MRCA(d.rax, c(448,388)) %>% pull(node)
 mrca.sigSPORE <- d.rax %>% 
   filter(bs.label %in% c("sigF", "sigG", "sigE")) %>%
   pull(node) %>% 
@@ -395,7 +395,7 @@ p.zoom <-
   mutate(tigr.type = fct_relevel(tigr.type, "sigF", "sigG", "sigK", "sigE", "other", "no hit") %>% 
            fct_rev()) %>%
   as.treedata() %>% 
-  tree_subset(node = mrca.sigSPORE, levels_back = 1) %>% 
+  tree_subset(node = mrca.sigSPORE, levels_back = 0) %>% 
   
   ggtree(aes(color = clade), size=0.01)+
   geom_rootedge(size=0.01, rootedge = .1)+

@@ -12,14 +12,15 @@ d.faa <- d.faa%>%
 
 
 # import all viruses used to assemble VOGs
-vog.sp <-  read_tsv(here("vogdb/data","vogdb_downloads","vog.species.list"), trim_ws = T) %>% 
-  as_tibble( .name_repair = "universal") %>% 
-  # keep only phages
-  filter(phage.nonphage == "phage")
+# vog.sp <-  read_tsv(here("vogdb/data","vogdb_downloads","vog.species.list"), trim_ws = T) %>% 
+#   as_tibble( .name_repair = "universal") %>% 
+#   # keep only phages
+#   filter(phage.nonphage == "phage")
+vog.sp <- read_csv(here("vogdb/data/vog-members_cd-clstr.csv"))
 
 #import virus-host data
-download.file(url = "ftp://ftp.genome.jp/pub/db/virushostdb/virushostdb.tsv",
-              destfile = here("vogdb/data", "virushostdb.tsv"))
+# download.file(url = "ftp://ftp.genome.jp/pub/db/virushostdb/virushostdb.tsv",
+#               destfile = here("vogdb/data", "virushostdb.tsv"))
 # downloaded on (6/JAN/2022)
 vh.db <- read_tsv(here("vogdb/data","virushostdb.tsv"))
 
@@ -131,12 +132,54 @@ d.sp$n.host[is.na(d.sp$n.host)] <- 1
 d.sp <- d.sp%>%
    filter(!duplicated(tax.id))
 
+# remove phages with no host at phylum level (there are 3 such rows)
+d.sp <-
+  d.sp %>% filter(!is.na(phylum))
+
+# extract viral family
+d.sp <- 
+  d.sp %>% 
+  mutate(viral.family=str_extract(`virus lineage`,
+                                  regex("caudovirales;.*", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex("caudovirales; ", ignore_case = T)))%>%
+  mutate(viral.family=str_remove(viral.family,
+                                 regex(";.*", ignore_case = T)))%>%
+  mutate(viral.family = if_else(is.na(viral.family), "non-Caudovirales*", viral.family)) %>% 
+  mutate(viral.family = fct_relevel(viral.family, "non-Caudovirales*", after = 0)) %>% 
+  filter(! is.na(viral.family))  %>%
+  filter(! is.na(phylum))
+
+# there are three phages with ciral family "unclassified"
+d.sp %>% filter(str_detect(viral.family,"unclassified"))
+# Nitrincola phage 1M3-16 - excluding, no information beside genome sequence
+# Streptococcus phage 315.5 - excluding ("putative prophage ...There is no evidence that it can be propagated as a functional phage.")
+# Escherichia phage Henu7 - NCBI taxonomy now ahs this :    Viruses; Duplodnaviria; Heunggongvirae; Uroviricota; Caudoviricetes; Caudovirales; Drexlerviridae; Tempevirinae; Henuseptimavirus; Escherichia virus Henu7
+  # do assigning family Drexlerviridae
+d.sp <- d.sp %>% 
+  mutate(viral.family = if_else(str_detect(.species.name,"Henu7"),
+                                "Drexlerviridae",viral.family %>% as.character())) %>% 
+  # filter(str_detect(.species.name,"Henu7")) %>% view()
+  filter(!str_detect(viral.family,"unclassified"))
 
 # add host to sigma factor data
 
 d.faa <- left_join(d.faa,d.sp,by=c("taxon"="tax.id"))
 
+# filter out sequences from phages that were excluded above
+# (clustering analysis and host matching)
+# these are mostly crAss phages (no host)
+d.faa <-
+  d.faa %>% 
+  filter(!is.na(phylum)) %>% 
+  filter(!is.na(n_clstr))
 
+# for the rest of the analysis we will also remove vOTU clustering duplicates
+clstr_dups <- 
+  d.faa %>% filter (!is_rep)
+# this removes 14 sigma factor genes
+d.faa <- 
+  d.faa %>% filter (is_rep)
 # # save data
 write_csv(select(d.faa,-seq), here("vogdb","data","vog_sigma_clean_Whost.csv"))
 save(d.faa,file = here("vogdb","data","vog_sigma_clean_Whost.RData"))
@@ -159,7 +202,7 @@ d.sp$n.sigma[is.na(d.sp$n.sigma)] <- 0
 
 #How many unique viruses have sigma factors?
 length(unique(d.faa$taxon))
-#617
+#582
 
 # Phylum independent summary of sigma factors/genome
 d.sp%>%
@@ -169,10 +212,10 @@ d.sp%>%
   mutate(perc=100*n.genomes/sum(n.genomes))
 
 # n.sigma n.genomes   perc
-# 0       3770        86.4  
-# 1        518        11.9  
-# 2         47         1.08 
-# 3         30         0.687
+# 1       0      3768 86.6  
+# 2       1       507 11.7  
+# 3       2        46  1.06 
+# 4       3        29  0.667
 
 
 # summarise by phylum
@@ -185,19 +228,17 @@ d.sp%>%
             perc_multi=100*sum(multi_sigma)/n())
 
 # phylum                                  n perc_sigma perc_multi
-# <chr>                               <int>      <dbl>      <dbl>
 # 1 Actinobacteria                       1314      0.609      0    
 # 2 Aquificae                               1      0          0    
 # 3 Bacteroidetes/Chlorobi group           83      2.41       0    
-# 4 Cyanobacteria/Melainabacteria group   101     65.3        1.98 
+# 4 Cyanobacteria/Melainabacteria group   100     63          2    
 # 5 Deinococcus-Thermus                     5      0          0    
-# 6 Firmicutes                            865     21.6        7.28 
+# 6 Firmicutes                            864     20.7        7.06 
 # 7 Fusobacteria                            1      0          0    
-# 8 Proteobacteria                       1980     16.8        0.606
+# 8 Proteobacteria                       1970     16.8        0.609
 # 9 PVC group                               6      0          0    
 # 10 Spirochaetes                            3      0          0    
-# 11 Tenericutes                             3      0          0    
-# 12 NA                                      3      0          0 
+# 11 Tenericutes                             3      0          0 
 
 
 d.sp%>%
@@ -217,18 +258,21 @@ d.presence <- d.sp%>%
   mutate(phylum =
            case_when(str_detect(phylum, "Cyanobacteria") ~ "Cyanobacteria",
                      str_detect(phylum, "Bacteroidetes") ~ "Bacteroidetes",
-                     TRUE ~ phylum)) %>% 
-  # extract viral family
-  mutate(viral.family=str_extract(`virus lineage`,
-                                  regex("caudovirales;.*", ignore_case = T)))%>%
-  mutate(viral.family=str_remove(viral.family,
-                                 regex("caudovirales; ", ignore_case = T)))%>%
-  mutate(viral.family=str_remove(viral.family,
-                                 regex(";.*", ignore_case = T)))%>%
-  mutate(viral.family = if_else(is.na(viral.family), "non-Caudovirales*", viral.family)) %>% 
-  mutate(viral.family = fct_relevel(viral.family, "non-Caudovirales*", after = 0)) %>% 
-  filter(! is.na(viral.family))  %>%
-  filter(! is.na(phylum))
+                     TRUE ~ phylum)) 
+
+vir_fct <- d.presence %>% 
+  group_by(viral.family,) %>% 
+  summarise(n=n()) %>% 
+  filter(n>1) %>% 
+  arrange(n) %>% pull(viral.family)
+
+
+
+phyl_fct <- d.presence %>% 
+  group_by(phylum) %>% 
+  summarise(n=n()) %>% 
+  filter(n>1) %>% 
+  arrange(n) %>% pull(phylum)
 
 
 # > plot by host phyla ----------------------------------------------------
@@ -244,6 +288,8 @@ p.phylum <-  d.presence %>%
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
   filter(n>1) %>% 
+  mutate(phylum = as_factor(phylum)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyl_fct)) %>% 
   ggplot(aes(phylum))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -270,6 +316,8 @@ p.Vfam <-  d.presence %>%
             perc_multi=100*sum(multi_sigma)/n()) %>% 
   
   filter(n>1) %>% 
+  mutate(viral.family = as_factor(viral.family)) %>% 
+  mutate(viral.family = fct_relevel(viral.family, vir_fct)) %>% 
   ggplot(aes(viral.family))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -299,15 +347,17 @@ p.both.data <-  d.presence %>%
 # phyla that have any sigma factor
 phyla.keep <- p.both.data %>%
   group_by(phylum) %>%
-  summarise(sig=sum(w.sigma)) %>% 
+  summarise(n = sum(n),sig=sum(w.sigma)) %>% 
   filter(sig>2) %>% 
+  arrange(desc(n)) %>% 
   pull(phylum)
 
 # viral families that have any sigma factor
 viral.keep <- p.both.data %>%
   group_by(viral.family) %>%
-  summarise(sig=sum(w.sigma)) %>% 
+  summarise(n = sum(n), sig=sum(w.sigma)) %>% 
   filter(sig>1) %>% 
+  arrange(n) %>% 
   pull(viral.family) %>% as.character()
 
 #plot
@@ -317,7 +367,11 @@ p.both <-
   filter(viral.family %in% viral.keep) %>% 
   #removing a single phage that is unclassified
   filter(viral.family != "unclassified Caudovirales") %>% 
-  mutate(viral.family = fct_infreq(viral.family) ) %>% 
+  # mutate(viral.family = fct_infreq(viral.family) ) %>% 
+  mutate(phylum = as_factor(phylum), 
+         viral.family = as_factor(viral.family)) %>% 
+  mutate(phylum = fct_relevel(phylum, phyla.keep), 
+         viral.family = fct_relevel(viral.family, viral.keep)) %>% 
   ggplot(aes(viral.family))+
   geom_col(aes(y=w.sigma), position=position_dodge(preserve = "single"),size=0, width = 0.6, fill="grey10")+
   geom_col(aes(y=n), position=position_dodge(preserve = "single"),
@@ -373,24 +427,29 @@ n.sig.all <-   d.sp %>%
 
 n.labs <- n.sig.all %>% 
   group_by(pnl,phylum) %>% 
-  summarise(n=sum(n)) %>% 
-  mutate(lab = paste0("n=", n))
+  summarise(n=sum(n), .groups = "drop") %>% 
+  mutate(lab = paste0("n=", n)) %>% 
+  mutate(pnl = as_factor(pnl) ) %>%
+  mutate(phylum = as_factor(phylum) %>% 
+           fct_relevel(c("Bacteria",phyla.keep)))
 
 
 p.multi <-  
   n.sig.all %>% 
-  ggplot( aes(n.sigma, group = phylum)) + 
+  mutate(pnl = as_factor(pnl) ) %>%
+  mutate(phylum = fct_relevel(phylum, c("Bacteria",phyla.keep))) %>%
+  ggplot( aes(n.sigma)) + 
   geom_col(aes(y = perc),  fill = "grey80", color="black", size = 0.7, width=0.6) + 
-  geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+
+  # geom_text(data = n.labs, aes(label=lab), x = Inf, y = Inf, hjust = 1.1, vjust = 1.5)+
   scale_y_continuous(labels=scales::percent) +
   ylab("Phage genomes") +
   xlab("Sigma factors per genome")+
-  facet_nested_wrap(pnl + phylum~., nest_line = TRUE, nrow = 1)+
+  facet_nested_wrap(.~ pnl + phylum, nest_line = TRUE, nrow = 1)+
   theme_classic(base_size = 13)+
   panel_border(color = "black")+
   theme(strip.background = element_blank())
 
-
+# p.multi
 # > combine plots ----------------------------------------------------------
 
 

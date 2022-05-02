@@ -1,5 +1,6 @@
 library(here)
 library(tidyverse)
+library(foreach)
 
 
 # this script relies on the windows subsytem for Linux (wsl)
@@ -17,10 +18,11 @@ if (! dir.exists(here("vogdb/data/hscan_vogXtigr/"))){
 }
 
 
-for (f in faa){
+foreach (f = faa) %do%{
     
     faa.name <- 
       str_remove(f,".faa.gz")%>%
+      str_remove(".faa")%>%
       str_remove(".*/")
     
     
@@ -32,4 +34,18 @@ for (f in faa){
   
 }
 
-
+# for (f in faa){
+#   
+#   faa.name <- 
+#     str_remove(f,".faa.gz")%>%
+#     str_remove(".*/")
+#   
+#   
+#   filename <- paste0("vogdb/data/hscan_vogXtigr/",faa.name,".txt")
+#   
+#   #no threshold
+#   wsl <- paste("wsl hmmscan --noali --tblout", filename, hmm, f)
+#   shell(wsl)
+#   
+# }
+# 

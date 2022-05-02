@@ -1,0 +1,17 @@
+sp,protein.id,description,tigr.type,label
+Bacillus phage Bcp1,YP_009031424.1, putative RNA polymerase sigma factor,no hit,Bcp1_143
+Bacillus phage Bcp1,YP_009031482.1," RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",sigF,Bcp1 gp199
+Bacillus phage Bcp1,YP_009031481.1," RNA polymerase sigma-70 factor, sigma-B/F/G subfamily",sigF,Bcp1 gp200
+Bacillus phage Eldridge,YP_009274835.1, RNA polymerase sigma factor,other,ELD gp128
+Bacillus phage Eldridge,YP_009274876.1, sporulation sigma factor SigF,sigF,ELD gp169
+Bacillus phage Eldridge,YP_009274875.1, RNA polymerase sigma factor,sigF,ELD gp168
+Bacillus phage Fah,YP_512346.1, sigma-70 family RNA polymerase sigma factor,sigF,Fah gp34
+Bacillus phage SP-10,YP_007003440.1, hypothetical protein,other,SP10 gp183
+Bacillus phage SP-10,YP_007003457.1, sigma factor,other,SP10 gp200
+Bacillus phage SP-10,YP_007003377.1, RNA polymerase sigma factor,sigF,SP10 gp120
+Bacillus phage vB_BsuM-Goe3,YP_009832112.1, RNA polymerase sigma factor,no hit,Goe3 gp131
+Bacillus phage vB_BsuM-Goe3,YP_009832138.1, RNA polymerase sigma factor,sigG,Goe3 gp157
+Bacillus virus SPO1,YP_002300398.1, gp28,other,SPO1 gp28
+Bacillus virus SPO1,YP_002300430.1, gp34,other,SPO1 gp34
+Bacillus virus SPO1,YP_002300332.1, gp2.21,sigK,SPO1 gp2.21
+Escherichia virus T4 (T4),NP_049679.1, RNA polymerase sigma factor,no hit,T4 gp55

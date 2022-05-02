@@ -18,9 +18,9 @@ TIGR02895            TIGR02895  2267403.YP_009838385.1 -            2.6e-05   15
 # Program:         hmmscan
 # Version:         3.3 (Nov 2019)
 # Pipeline mode:   SCAN
-# Query file:      vogdb/data/vog_sigma_clean/YP_009838385.1.faa.gz
-# Target file:     TIGR/tigr_sigma_hmm/sigma.fam
-# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009838385.1.txt --noali TIGR/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009838385.1.faa.gz 
-# Current dir:     /mnt/c/Users/danschw/OneDrive - Indiana University/FromBox/Lab/research/Bacillus phage/ADGs/sigF/phylo_sigma/interpro
-# Date:            Tue Nov 24 13:08:07 2020
+# Query file:      vogdb/data/vog_sigma_clean/YP_009838385.1.faa
+# Target file:     TIGR/data/tigr_sigma_hmm/sigma.fam
+# Option settings: hmmscan --tblout vogdb/data/hscan_vogXtigr/YP_009838385.1.txt --noali TIGR/data/tigr_sigma_hmm/sigma.fam vogdb/data/vog_sigma_clean/YP_009838385.1.faa 
+# Current dir:     /mnt/c/Users/danschw/GitHub/sigma-spore-phage
+# Date:            Mon Jan 24 17:05:38 2022
 # [ok]

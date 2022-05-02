@@ -1,0 +1,46 @@
+
+RAxML-NG v. 0.9.0git released on 24.05.2019 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+RAxML-NG was called at 26-Jan-2022 09:06:09 as follows:
+
+raxml-ng --check --msa /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim --model LG+G4 --data-type AA --prefix check-msa
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1643205969
+  SIMD kernels: AVX2
+  parallelization: PTHREADS (24 threads), thread pinning: OFF
+
+[00:00:00] Reading alignment from file: /N/u/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/sigmas_MafftEinsi.trim
+[00:00:00] Loaded alignment with 542 taxa and 193 sites
+
+WARNING: Sequences YP_006987343.1-phage and YP_009594784.1-phage are exactly identical!
+WARNING: Sequences YP_009036624.1-phage and YP_009036248.1-phage are exactly identical!
+WARNING: Duplicate sequences found: 2
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/check_msa/check-msa.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 193 patterns
+
+Partition 0: noname
+Model: LG+G4m
+Alignment sites / patterns: 193 / 193
+Gaps: 14.79 %
+Invariant sites: 0.00 %
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /geode2/home/u020/danschw/Carbonate/GitHub/sigma-spore-phage/phylo-clust/data/align-trim-tree/check_msa/check-msa.raxml.log
+
+Analysis started: 26-Jan-2022 09:06:09 / finished: 26-Jan-2022 09:06:09
+
+Elapsed time: 0.185 seconds
+
