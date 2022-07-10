@@ -10,9 +10,11 @@ A second repo containing analysis of sporulation by flow-cytometry is at https:/
 ## Bioinformatic analysis of phage sigma factors
 
 This analysis spans over three interconnected folders. Analysis was run in the following order:  
-1. TIGR - Retrieving profiles of bacterial-encoded sigma-factor families from TIGRfams.  
-2. vogdb -  Retrieval and analysis of phage-encoded sigma factors from the  Virus Orthologous Groups (VOG) database.  
-3. phylo -   Phylogenetic analysis of VOG and bacterial sigma factors
+1. vogdb -  Retrieval and analysis of phage-encoded sigma factors from the  Virus Orthologous Groups (VOG) database. This includes genomic clustering of phages and matching phages to host.
+
+2. TIGR - Retrieving profiles of bacterial-encoded sigma-factor families from TIGRfams, and using these profiles to classify phage sigma factors. 
+  
+3. phylo-clust -   Phylogenetic analysis of (clustered) VOG genes along with bacterial sigma factors. This folder also includes the merging of TIGR and phylogeny classifications.
 
 
 ## Phage virulence
