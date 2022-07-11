@@ -7,7 +7,6 @@ library(broom)
 
 
 # Import data -------------------------------------------------------------
-
 # Collecting DE data for all loci in all treatments
 # reading in the FDR corrected p-values for indicating significantly DEx'ed genes.
 f <- 
@@ -33,14 +32,12 @@ fc <- d2
 rm(de,d,d2)
 
 
-
 # * arrange data -------------------------------------------------
-
-
 # locus tags
 # list matching delta6 locus_tags with 168:  
 
-d6.spor.genes <- read_csv(here("RNAseq/data/annotations/delta6_Spor_Annot.csv"))
+d6.spor.genes <- 
+  read_csv(here("RNAseq/data/annotations/delta6_Spor_Annot.csv"))
 
 #removing RNA genes
 d6.spor.cds <- 
@@ -48,189 +45,142 @@ d6.spor.cds <-
   filter(str_detect(locus_tag.168,"BSU"))%>%
   filter(!str_detect(locus_tag.168,"RNA"))
 
-# Hypergeometric enrichment ------------------
-# The Hypergeometric Distribution   
-# Using the example given by R stats package:
-# This distribution decribes the probability of sampling, without replacment, 
-# of X white balls from a (finite) urn containing M white and K black balls. 
-# Sample size is N.
-
-# * overlap -----------------------------------------------------------------
+# sporulation genes by subtiwiki
+d6.spor.cds <- d6.spor.cds %>% 
+  mutate(sw.spore  = str_detect(replace_na(category2," "), regex("sporulation", ignore_case = T)))
 
 
-# The question we pose here is:
-# Are DExed genes when inducing the host sigF and sigG 
-# enriched in DExed genes seen when phage genes were induced?
-# The match we consider accounts for the direction of change being the same.
+d.all <- 
+  full_join(fc, p.val, by = "id", suffix = c("_fc", "_p")) %>% 
+  # filter only cds
+  right_join(., d6.spor.cds, by=c("id"="locus_tag.d6")) %>% 
+  pivot_longer(cols = (ends_with("_fc") | ends_with("_p"))) %>% 
+  separate(name, into = c("induced","val")) %>% 
+  pivot_wider(names_from = "val", values_from = "value" ) %>% 
+  # change genes that were not assigned a p-value for DE to 1 (no change)
+  mutate(p=if_else(is.na(p),1,p))%>%
+  filter(induced != "pDR110")
+
+
+# compare phage- to host- derived genes  ----------------------------------
 
 sig.host.v <- c("sigF","sigG")
-sig.phage.v <- c("ELDg168","ELDg169","Goe3","SP10")#,"sigF","sigG")
+sig.phage.v <- c("ELDg168","ELDg169","Goe3","SP10")
 
-max.fc.log2 <- max(fc[-1], na.rm = T) %>% log2() %>% round()
-min.fc.log2 <- min(fc[-1], na.rm = T) %>% log2() %>% round()
-# brx <- c(-15, -10,-5,0,5,10,15)
-brx <- c( -10,0,10)
-
-# save plots
-l.plots <- list()
-#save correlations
-d.cor.test <- tibble()
-
-for (cur.sig.host in sig.host.v){ 
-  for (cur.sig.phage in sig.phage.v){
+#organize data for host-phage comparisons
+d.hp <- d.all %>% 
+  filter(!is.na(fc)) %>% 
+  select(id, sw.spore, induced,fc) %>% 
+  pivot_wider(names_from = induced, values_from = fc) %>% 
+  pivot_longer(cols = sig.phage.v, names_to = "induced.phage", values_to = "fc.phage")  
+  
+#test correlation
+d.cor.test <-
+  bind_rows(
     
-    if(cur.sig.host == cur.sig.phage) next
-    plot.name <- paste(cur.sig.phage,cur.sig.host, sep=" vs. ")
+    d.hp %>% 
+      group_by(induced.phage) %>% 
+      summarise(
+        cor.test(log2(sigF), log2(fc.phage), method = "spearman") %>%
+          tidy() %>% mutate(induced.host = "sigF")),
     
-    # get loci DExed in both strains
-    d.sig <- p.val%>%
-      #filter only cds
-      filter(str_detect(id, "A8O17"))%>%
-      # select the data for the current genes
-      select(id,sig.host=all_of(cur.sig.host),sig.phage=all_of(cur.sig.phage))%>%
-      # change genes that were not assigned a p-value for DE to 1 (no change)
-      mutate(sig.host=if_else(is.na(sig.host),1,sig.host))%>%
-      mutate(sig.phage=if_else(is.na(sig.phage),1,sig.phage))%>%
-      # define logical vector of DE based on p-value
-      mutate(sig.host = sig.host <0.05)%>%
-      mutate(sig.phage = sig.phage <0.05) %>% 
-      mutate(signifcance  =  case_when(sig.host & sig.phage ~ "both",
-                                    sig.host ~ "host only",
-                                    sig.phage ~ "phage only",
-                                    TRUE ~ "neither")) %>% 
-      mutate(signifcance = fct_relevel(signifcance, "host only","phage only","both", "neither"))
-      
-      d.plot <- 
-      # based on list of loci get fold-change data for this pair
-        fc %>% 
-        select(id,fc.host=all_of(cur.sig.host), fc.phage=all_of(cur.sig.phage)) %>% 
-        filter(!is.na(fc.host)) %>% 
-        filter(!is.na(fc.phage)) %>% 
-        left_join(d.sig, ., by="id")
-      
-      #test correlation
-      d.cor.test <- 
-        cor.test(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "spearman") %>%
-        tidy() %>% 
-        mutate(pair = plot.name) %>% 
-        relocate(pair) %>% 
-        bind_rows(d.cor.test,.)
-      
-      # get r for plot
-      r <- cor(log2(d.plot$fc.host), log2(d.plot$fc.phage), method = "spearman") %>% 
-        signif(3) 
-      
-      # plot
-      l.plots[[plot.name]] <- 
-      d.plot %>% 
-        mutate(pnl = plot.name) %>% 
-        ggplot(aes(x=log2(fc.host), y=log2(fc.phage)))+
-        geom_hline(yintercept = 0, color="grey40")+
-        geom_vline(xintercept = 0, color="grey40")+
-        # geom_abline(slope = 1, intercept = 0, linetype=2, color="lightsteelblue")+
-        geom_point(aes(color = signifcance),alpha = 0.5)+
-        geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
-        # add cor test result
-        geom_text(label = paste('rho', "==",r), parse = TRUE,
-                  x = -Inf, y = Inf, hjust = -0.1, vjust = 1.5, lineheight = .5 )+
-        scale_y_continuous(breaks = brx,
-                           limits = c(min.fc.log2,max.fc.log2))+
-        scale_x_continuous(breaks = brx,
-                           limits = c(min.fc.log2,max.fc.log2))+
-        
-        xlab(bquote(.(cur.sig.host)~(log[2]~FC))) +
-        ylab(bquote(.(cur.sig.phage)~(log[2]~FC))) +
-        
-        facet_wrap(~pnl)+
-        theme_classic(base_size = 12)+
-        panel_border(color = "black")+
-        scale_color_viridis_d()+
-        theme(legend.position="right")
-  }
-}
-
+    d.hp %>% 
+      group_by(induced.phage) %>% 
+      summarise(
+        cor.test(log2(sigG), log2(fc.phage), method = "spearman") %>%
+          tidy() %>% mutate(induced.host = "sigG"))
+  )
 # adjust correlation p value for multiple testing
 d.cor.test <- d.cor.test %>% 
   mutate(adj.p.BH = p.adjust(p.value, method = "BH")) %>% 
-  relocate(adj.p.BH, .after = "p.value")
+  relocate(adj.p.BH, .after = "p.value") %>% 
+  relocate(induced.host)
 
 write_csv(d.cor.test, here("RNAseq/data/FC_spearman.csv"))
 
-# main figure -------------------------------------------------------------
-
-
-# From: https://wilkelab.org/cowplot/articles/shared_legends.html
-# arrange the two plots in a single row
-to.plot <- names(l.plots)[str_detect(names(l.plots), "169")]
-prow <- plot_grid(
-  l.plots[[to.plot[1]]] + theme(legend.position="none"),
-  l.plots[[to.plot[2]]] + theme(legend.position="none"),
-  align = 'vh',
-  # labels = c("A", "B"),
-  hjust = -1,
-  nrow = 2
-)
-
-# extract the legend from one of the plots
-legend <- get_legend(
-  # create some space to the left of the legend
-  l.plots[[1]] + theme(plot.margin = unit(c(0, 0, 0, 0), "cm"),
-                       legend.position = "bottom",
-                       legend.text = element_text(size=12),
-                       legend.title = element_text(size = 12))+
-    labs(colour="differential\nexpression\nsignificance") +
-    guides(color = guide_legend(nrow = 4,
-                                override.aes = list(size = 4, alpha = 1)))
-)
-
-# add the legend to the row we made earlier. Give it one-third of 
-# the width of one plot (via rel_widths).
-p <- plot_grid(prow, legend, rel_heights =  c(1, .25), ncol = 1,scale = c(1,.1))
-
-ggsave(here("RNAseq/plots/correlations.png"),plot = p, width = 3, height = 6)
-
-save(p, file = here("RNAseq/plots/correlations-plot.Rdata"))
-
-# supl. figure -------------------------------------------------------------
-
-
-# From: https://wilkelab.org/cowplot/articles/shared_legends.html
-# arrange the two plots in a single row
-to.plot <- names(l.plots)[!str_detect(names(l.plots), "169")]
-prow <- plot_grid(
-  l.plots[[to.plot[1]]] + theme(legend.position="none"),
-  l.plots[[to.plot[2]]] + theme(legend.position="none"),
-  l.plots[[to.plot[3]]] + theme(legend.position="none"),
-  l.plots[[to.plot[4]]] + theme(legend.position="none"),
-  l.plots[[to.plot[5]]] + theme(legend.position="none"),
-  l.plots[[to.plot[6]]] + theme(legend.position="none"),
-  align = 'vh',
-  hjust = -1,
-  nrow = 3, byrow = F
-)
 
 
 
-# extract the legend from one of the plots
 
-# extract the legend from one of the plots
-legend <- get_legend(
-  # create some space to the left of the legend
-  l.plots[[1]] + theme(plot.margin = unit(c(0, 0, 0, 0), "cm"),
-                       legend.position = "bottom",
-                       legend.text = element_text(size=12),
-                       legend.title = element_text(size = 12))+
-    labs(colour="differential\nexpression\nsignificance") +
-    guides(color = guide_legend(nrow = 2,
-                                override.aes = list(size = 4, alpha = 1)))
-)
+# Plot --------------------------------------------------------------------
+
+# arrangements for plotting
+brx <- c( -10,0,10)
+
+d.cor.test <- 
+  d.cor.test %>% 
+  mutate(p.lab = paste('rho', "==",signif(estimate,3))) %>% 
+  mutate(induced.phage = fct_relevel(induced.phage,"ELDg169","ELDg168","Goe3","SP10"))
+
+# plot
+p <- d.hp %>% 
+  # arrangements for plotting
+  mutate(induced.phage = fct_relevel(induced.phage,"ELDg169","ELDg168","Goe3","SP10"),
+         sw.spore = if_else(sw.spore, "spor. genes", "other") %>% fct_rev()) %>% 
+  #plot
+  ggplot(aes(x=log2(sigF), y=log2(fc.phage)))+
+  geom_hline(yintercept = 0, color="grey40")+
+  geom_vline(xintercept = 0, color="grey40")+
+  geom_point(aes(color = sw.spore),shape=20, alpha = 0.5, size = 0.8)+
+  geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
+  # add cor test result
+  geom_text(data = d.cor.test %>% filter(induced.host=="sigF"),
+            aes(label = p.lab),  parse = TRUE,
+            x = Inf, y = -Inf, hjust = 1.1, vjust = -0.2, lineheight = .5 )+
+  scale_y_continuous(breaks = brx)+
+  scale_x_continuous(breaks = brx)+
+
+  xlab(bquote(log[2]~FC~(italic("sigF")))) +
+  ylab(bquote(log[2]~FC~("phage gene"))) +
+  
+  facet_wrap(~induced.phage, ncol = 1)+
+  theme_classic(base_size = 12)+
+  panel_border(color = "black")+
+  scale_color_grey()+
+  theme(legend.position="bottom",
+        legend.direction = "vertical",
+        strip.background = element_blank(),
+        strip.text = element_text(margin = margin(b=2)))+
+  guides(color = guide_legend(title = NULL, override.aes = list(size=5, alpha = 1)))
+
+ggsave(here("RNAseq/plots/correlations-sigF.png"),
+       plot = p, width = 2, height = 6)
 
 
-# add the legend to the row we made earlier.
-p <- plot_grid(prow, legend, rel_heights = c(4, .4), ncol = 1)
 
+# sigG --------------------------------------------------------------------
 
-ggsave(here("RNAseq/plots/correlations-supl.png"),
-       plot = plot_grid(p, labels = "c"), width = 6, height = 8)
+# plot
+p <- d.hp %>% 
+  # arrangements for plotting
+  mutate(induced.phage = fct_relevel(induced.phage,"ELDg169","ELDg168","Goe3","SP10"),
+         sw.spore = if_else(sw.spore, "spor. genes", "other") %>% fct_rev()) %>% 
+  #plot
+  ggplot(aes(x=log2(sigF), y=log2(fc.phage)))+
+  geom_hline(yintercept = 0, color="grey40")+
+  geom_vline(xintercept = 0, color="grey40")+
+  geom_point(aes(color = sw.spore),shape=20, alpha = 0.5, size = 0.8)+
+  geom_smooth(method = 'lm', formula = 'y ~ x', color = "black")+
+  # add cor test result
+  geom_text(data = d.cor.test %>% filter(induced.host=="sigG"),
+            aes(label = p.lab),  parse = TRUE,
+            x = Inf, y = -Inf, hjust = 1.1, vjust = -0.2, lineheight = .5 )+
+  scale_y_continuous(breaks = brx)+
+  scale_x_continuous(breaks = brx)+
+  
+  xlab(bquote(log[2]~FC~(italic("sigG")))) +
+  ylab(bquote(log[2]~FC~("phage gene"))) +
+  
+  facet_wrap(~induced.phage, ncol = 1)+
+  theme_classic(base_size = 12)+
+  panel_border(color = "black")+
+  scale_color_grey()+
+  theme(legend.position="bottom",
+        legend.direction = "vertical",
+        strip.background = element_blank(),
+        strip.text = element_text(margin = margin(b=2)))+
+  guides(color = guide_legend(title = NULL, override.aes = list(size=5, alpha = 1)))
 
+ggsave(here("RNAseq/plots/correlations-sigG.png"),
+       plot = p, width = 2, height = 6)
 

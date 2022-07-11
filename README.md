@@ -1,10 +1,10 @@
 # sigma-spore-phage
 Analysis of sporulation-like sigma factors in phages
 
-This repository contains several different analyses all related to the pulication **TBA**.
+This repository contains several different analyses all related to the publication **Phage-encoded sigma factors alter bacterial dormancy** (DOI:10.1128/msphere.00297-22).
 A second repo containing analysis of sporulation by flow-cytometry is at https://github.com/LennonLab/sigma-spore-phage-flow
 
-* All the analyses were done in Rstudio. I used the ["here"](https://here.r-lib.org/) package throughout the repo to call files using relative paths. To start up Rstusio at the right local directory I created an empty start.R file that can be used if you have .R files asociated with Rstudio. 
+* All the analyses were done in Rstudio. I used the ["here"](https://here.r-lib.org/) package throughout the repo to call files using relative paths. To start up Rstusio at the right local directory I created an empty start.R file that can be used if you have .R files associated with Rstudio. 
 
 
 ## Bioinformatic analysis of phage sigma factors
