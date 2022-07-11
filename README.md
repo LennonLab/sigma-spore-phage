@@ -1,4 +1,7 @@
 # sigma-spore-phage
+
+[![DOI](https://zenodo.org/badge/401144296.svg)](https://zenodo.org/badge/latestdoi/401144296)
+
 Analysis of sporulation-like sigma factors in phages
 
 This repository contains several different analyses all related to the publication **Phage-encoded sigma factors alter bacterial dormancy** (DOI:10.1128/msphere.00297-22).
