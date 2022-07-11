@@ -3,7 +3,7 @@ Expression analysis following induced expression in *Bacillus subtilis* in expon
 
 The raw sequencing data was deposited at NCBI's Gene Expression Omnibus under accession number [GSE187004](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE187004).
 
-Sequencing data was processed by the Center for Genomics and Bioinformatics at Indiana University, as described in the manuscript. The results of that analysis are differential expression (DE) values which are the strating point for the analysis here. DE data can be found in [RNAseq/data/DEseq](RNAseq/data/DEseq).
+Sequencing data was processed by the Center for Genomics and Bioinformatics at Indiana University, as described in the manuscript. The results of that analysis are differential expression (DE) values which are the strating point for the analysis here. DE data can be found in [RNAseq/data/DEseq](data/DEseq).
 
 This analysis had two, independent parts
 
