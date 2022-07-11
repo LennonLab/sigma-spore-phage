@@ -10,6 +10,6 @@ The final step of this code is making an HMM database. The code for this uses HM
 
 Main analysis is in *B_hscan_tigr.R*, comparing each phage protein to the profile database.
 
-Finaly, analysis results are parse in *C_parse_hscan.R*.
+Finally, analysis results are parse in *C_parse_hscan.R*.
 
 
